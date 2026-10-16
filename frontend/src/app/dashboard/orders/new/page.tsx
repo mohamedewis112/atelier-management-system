@@ -42,7 +42,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/components/ui/use-toast";
-import { customersApi, dressesApi, ordersApi, agreementsApi } from "@/lib/api";
+import { customersApi, dressesApi, ordersApi, agreementsApi, usersApi, authApi } from "@/lib/api";
 import { cn, formatCurrency, formatDateShort, normalizePhoneInput } from "@/lib/utils";
 import { DressSelector } from "@/components/dashboard/dress-selector";
 import { ContactPicker } from "@/components/dashboard/contact-picker";
@@ -83,6 +83,14 @@ interface DepositPayment {
   };
 }
 
+interface TeamUser {
+  id: number;
+  name: string;
+  email: string;
+  role: string;
+  is_active?: boolean;
+}
+
 interface Dress {
   id: number;
   name: string;
@@ -103,6 +111,14 @@ interface Dress {
 function normalizeDateOnly(value: string | null | undefined) {
   if (!value) return "";
   return value.split("T")[0];
+}
+
+function isDateInsideBookingBuffer(targetDate: string, bookedDate: string) {
+  if (!targetDate || !bookedDate) return false;
+  const target = new Date(`${targetDate}T00:00:00Z`).getTime();
+  const booked = new Date(`${bookedDate}T00:00:00Z`).getTime();
+  const diffDays = Math.abs(Math.round((target - booked) / 86400000));
+  return diffDays <= 1;
 }
 
 function isDressMatchingItemType(dress: Dress | undefined, itemType: string) {
@@ -127,6 +143,8 @@ export default function NewOrderPage() {
   // Data lists
   const [customers, setCustomers] = useState<{ id: number; name: string; phone: string }[]>([]);
   const [dresses, setDresses] = useState<Dress[]>([]);
+  const [teamUsers, setTeamUsers] = useState<TeamUser[]>([]);
+  const [selectedSalesUserId, setSelectedSalesUserId] = useState("");
 
   // Form State
   const [customerMode, setCustomerMode] = useState<"search" | "new">("search");
@@ -166,6 +184,22 @@ export default function NewOrderPage() {
           toast({ title: "خطأ", description: dresRes.message || "تعذر تحميل قائمة القطع", variant: "destructive" });
         }
         if (custRes.success) setCustomers((custRes.data as any).customers);
+
+        try {
+          const [usersRes, meRes] = await Promise.all([usersApi.list(), authApi.me()]);
+          const currentUser = meRes.data?.user;
+          const staff = (usersRes.data?.users || []).filter((user: TeamUser) => user.is_active !== false);
+          setTeamUsers(staff);
+
+          if (currentUser?.role === "sales") {
+            setSelectedSalesUserId(String(currentUser.id));
+          } else {
+            const firstSales = staff.find((user: TeamUser) => user.role === "sales");
+            if (firstSales) setSelectedSalesUserId(String(firstSales.id));
+          }
+        } catch (staffError) {
+          console.warn("Could not load staff list:", staffError);
+        }
       } catch (e) {
         console.error("Error loading initial data:", e);
         toast({ title: "تعذر الاتصال", description: "تعذر الاتصال بالخادم. حاول مرة أخرى.", variant: "destructive" });
@@ -443,6 +477,21 @@ export default function NewOrderPage() {
       toast({ title: "خطأ", description: "أدخل تاريخ المناسبة", variant: "destructive" });
       return;
     }
+    const conflictingItem = items.find((item) => {
+      if (item.item_type !== "rental" || !item.dress_id) return false;
+      return getDressBookedDates(item.dress_id).some((bookedDate) =>
+        isDateInsideBookingBuffer(eventDate, bookedDate)
+      );
+    });
+    if (conflictingItem) {
+      toast({
+        title: "القطعة غير متاحة في هذا التاريخ",
+        description: "يوجد حجز للقطعة في نفس اليوم أو اليوم السابق أو التالي. اختر تاريخًا أو قطعة أخرى.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     if (depositPayments.some(p => parseFloat(p.amount) > 0 && !p.method)) {
       toast({ title: "خطأ", description: "اختر طريقة دفع الدفعة المقدمة", variant: "destructive" });
       return;
@@ -482,6 +531,10 @@ export default function NewOrderPage() {
         })),
         notes: notes || undefined,
         items: processedItems,
+        sales_user_id: selectedSalesUserId ? parseInt(selectedSalesUserId) : undefined,
+        sales_user_name: selectedSalesUserId
+          ? teamUsers.find((user) => user.id.toString() === selectedSalesUserId)?.name
+          : undefined,
       };
 
       if (customerMode === "new") {
@@ -549,7 +602,7 @@ export default function NewOrderPage() {
       <div className="min-h-screen bg-background flex items-center justify-center p-4">
         <Card className="w-full max-w-2xl border-2">
           <CardHeader>
-            <CardTitle className="text-2xl font-black text-green-700">تم حفظ الطلب بنجاح</CardTitle>
+            <CardTitle className="text-2xl font-black text-green-700">تم حفظ الحجز بنجاح</CardTitle>
             <p className="text-sm text-muted-foreground">حجز #{createdOrderId}</p>
           </CardHeader>
           <CardContent className="space-y-5">
@@ -601,14 +654,14 @@ export default function NewOrderPage() {
                 variant="outline"
                 onClick={() => router.push(`/dashboard/orders/${createdOrderId}/edit`)}
               >
-                التحرير حسب الطلب
+                تعديل الحجز
               </Button>
               <Button
                 type="button"
                 onClick={() => router.push("/dashboard/orders")}
                 className="bg-green-600 hover:bg-green-700"
               >
-                العودة إلى قائمة الطلب
+                العودة إلى الحجوزات
               </Button>
             </div>
           </CardContent>
@@ -626,7 +679,7 @@ export default function NewOrderPage() {
             <Button variant="ghost" size="icon" onClick={() => router.back()} className="rounded-full">
               <ArrowRight className="h-6 w-6" />
             </Button>
-            <h1 className="text-xl font-black">طلب جديد</h1>
+            <h1 className="text-xl font-black">حجز جديد</h1>
           </div>
           <div className="hidden sm:block text-sm font-medium text-muted-foreground">
             سا&quot;أما بالنسبة للدفع: <span className="text-green-600 font-bold text-lg">{formatCurrency(totalPrice)}</span>
@@ -793,7 +846,7 @@ export default function NewOrderPage() {
             <div className="flex flex-row items-center justify-between gap-4">
               <div className="flex items-center gap-2 text-green-600 shrink-0">
                 <Calendar className="h-5 w-5" />
-                <h2 className="font-bold text-base sm:text-lg">تاريخ الحدث</h2>
+                <h2 className="font-bold text-base sm:text-lg">تاريخ المناسبة</h2>
               </div>
               <Input
                 type="date"
@@ -803,6 +856,29 @@ export default function NewOrderPage() {
                 required
               />
             </div>
+
+            <div className="h-px w-full bg-border" />
+
+            <div className="grid grid-cols-1 gap-2 sm:grid-cols-[180px_1fr] sm:items-center">
+              <div>
+                <h2 className="font-bold text-base">موظف المبيعات المسؤول</h2>
+                <p className="text-xs text-muted-foreground">يظهر اسم السيلز على الحجز للمتابعة.</p>
+              </div>
+              <select
+                value={selectedSalesUserId}
+                onChange={(e) => setSelectedSalesUserId(e.target.value)}
+                className="h-12 w-full rounded-xl border bg-white px-3 text-sm font-semibold"
+              >
+                <option value="">بدون تحديد</option>
+                {teamUsers
+                  .filter((user) => user.role === "sales")
+                  .map((user) => (
+                    <option key={user.id} value={user.id}>
+                      {user.name}
+                    </option>
+                  ))}
+              </select>
+            </div>
           </CardContent>
         </Card>
 
@@ -811,10 +887,10 @@ export default function NewOrderPage() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 text-green-600 mb-2 px-1">
               <ShoppingBag className="h-5 w-5" />
-              <h2 className="font-bold text-base sm:text-lg">قطع وأشياء</h2>
+              <h2 className="font-bold text-base sm:text-lg">القطع والخدمات</h2>
             </div>
             <Button type="button" variant="outline" onClick={addItem} className="rounded-xl border-green-600 text-green-600 hover:bg-green-50 h-10 px-3">
-              <Plus className="h-4 w-4 ml-1" /> عنصر آخر
+              <Plus className="h-4 w-4 ml-1" /> إضافة عنصر
             </Button>
           </div>
 
@@ -824,7 +900,10 @@ export default function NewOrderPage() {
               const bookedDates = getDressBookedDates(item.dress_id);
               const upcomingOrders = getDressUpcomingOrders(item.dress_id);
               const normalizedEventDate = normalizeDateOnly(eventDate);
-              const hasExactConflict = Boolean(normalizedEventDate && bookedDates.includes(normalizedEventDate));
+              const hasBookingConflict = Boolean(
+                normalizedEventDate &&
+                bookedDates.some((bookedDate) => isDateInsideBookingBuffer(normalizedEventDate, bookedDate))
+              );
 
               return (
                 <div key={index} className="relative pt-3">
@@ -868,7 +947,7 @@ export default function NewOrderPage() {
                         </div>
 
                         <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">اختيار اللباس</label>
+                          <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">اختيار القطعة</label>
                           {(item.item_type === "rental" || item.item_type === "sale") ? (
                             <div className="space-y-3">
                               <DressSelector
@@ -881,16 +960,16 @@ export default function NewOrderPage() {
                                 <div
                                   className={cn(
                                     "rounded-xl border p-3 space-y-2",
-                                    hasExactConflict
+                                    hasBookingConflict
                                       ? "bg-red-50 border-red-300"
                                       : bookedDates.length > 0
                                         ? "bg-amber-50 border-amber-300"
                                         : "bg-emerald-50 border-emerald-300"
                                   )}
                                 >
-                                  <p className="text-[11px] font-black text-gray-900">مذكرات الحجز للقطعة</p>
+                                  <p className="text-[11px] font-black text-gray-900">توفر القطعة</p>
                                   <p className="text-[11px] text-muted-foreground">
-                                    تاريخ الطلب الحالي:{" "}
+                                    تاريخ المناسبة:{" "}
                                     <span className="font-black text-gray-900">
                                       {eventDate ? formatDateShort(eventDate) : "غير محدد"}
                                     </span>
@@ -898,7 +977,7 @@ export default function NewOrderPage() {
 
                                   {bookedDates.length > 0 ? (
                                     <div className="space-y-2">
-                                      <p className="text-[11px] font-bold text-gray-800">تم حجز القطعة بالفعل للتواريخ:</p>
+                                      <p className="text-[11px] font-bold text-gray-800">الحجوزات المسجلة للقطعة:</p>
                                       <div className="flex flex-wrap gap-1.5">
                                         {bookedDates.map((date) => (
                                           <span key={date} className="px-2 py-1 rounded-full bg-white border text-[10px] font-bold">
@@ -917,12 +996,12 @@ export default function NewOrderPage() {
                                       </div>
                                     </div>
                                   ) : (
-                                    <p className="text-[11px] text-green-700 font-medium">لا يوجد حاليا أي أوامر القادمة لهذا اللباس.</p>
+                                    <p className="text-[11px] text-green-700 font-medium">لا توجد حجوزات قادمة لهذه القطعة.</p>
                                   )}
 
-                                  {hasExactConflict && (
+                                  {hasBookingConflict && (
                                     <p className="text-[11px] font-bold text-red-700">
-                                      هناك تداخل مع تاريخ الطلب الحالي. يمكنك الاستمرار حسب تقدير المدير.
+                                      هذه القطعة غير متاحة: النظام يمنع الحجز في يوم المناسبة واليوم السابق واليوم التالي.
                                     </p>
                                   )}
                                 </div>
