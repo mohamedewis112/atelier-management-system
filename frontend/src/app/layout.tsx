@@ -13,8 +13,8 @@ import { ErrorBoundary } from '@/components/error-boundary';
 import { GlobalErrorReporter } from '@/components/global-error-reporter';
 
 export const metadata: Metadata = {
-  title: 'ישראל ישראלי - ניהול עסק',
-  description: 'מערכת ניהול עסק להשכרת ותפירת שמלות ערב',
+  title: 'نظام إدارة الأتيليه - Smart Media',
+  description: 'نظام عربي لإدارة الأتيليه والحجوزات والعملاء والمدفوعات',
   manifest: '/manifest.json',
   icons: {
     icon: '/icon.png',
@@ -28,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="he" dir="rtl">
+    <html lang="ar" dir="rtl">
       <body className="min-h-screen bg-background antialiased">
         <GlobalErrorReporter />
         <ServiceWorkerRegister />
