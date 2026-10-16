@@ -51,7 +51,7 @@ import { reportClientError } from "@/lib/error-reporter";
 
 const ORDER_TYPES = [
   { value: "rental", label: "إيجار" },
-  { value: "sewing_for_rental", label: "الخياطة التي تبقى في الإيجار" },
+  { value: "sewing_for_rental", label: "تفصيل للإيجار" },
   { value: "sewing", label: "تفصيل" },
   { value: "sale", label: "بيع" },
 ];
@@ -160,15 +160,15 @@ export default function NewOrderPage() {
           console.log("Dresses loaded:", data?.length);
           setDresses(data || []);
           if (!data || data.length === 0) {
-            toast({ title: "انتبه", description: "لم يتم العثور على قطع نشطة في المخزون", variant: "default" });
+            toast({ title: "انتبه", description: "لا توجد قطع متاحة في المخزون حاليًا", variant: "default" });
           }
         } else {
-          toast({ title: "خطأ", description: dresRes.message || "غير قادر على تحميل قائمة اللباس", variant: "destructive" });
+          toast({ title: "خطأ", description: dresRes.message || "تعذر تحميل قائمة القطع", variant: "destructive" });
         }
         if (custRes.success) setCustomers((custRes.data as any).customers);
       } catch (e) {
         console.error("Error loading initial data:", e);
-        toast({ title: "خطأ في الاتصال", description: "غير قادر على الاتصال بالخادم", variant: "destructive" });
+        toast({ title: "تعذر الاتصال", description: "تعذر الاتصال بالخادم. حاول مرة أخرى.", variant: "destructive" });
       }
     };
     loadInitialData();
@@ -198,7 +198,7 @@ export default function NewOrderPage() {
 
     clearSharedUploadPayload();
     setSharedApplied(true);
-    toast({ title: "تم تحميل ملف الشريك", description: "تم إرفاق المرجع بالدفعة الأولى." });
+    toast({ title: "تم إرفاق الملف", description: "تم إرفاق المستند بالدفعة الأولى." });
   }, [searchParams, sharedApplied, toast]);
 
   useEffect(() => {
@@ -308,7 +308,7 @@ export default function NewOrderPage() {
     if (!file) return;
 
     if (file.size > 20 * 1024 * 1024) {
-      toast({ title: "الملف كبير جدًا", description: "الحد الأقصى للحجم هو 20MB. حاول التصوير مرة أخرى بدقة أقل.", variant: "destructive" });
+      toast({ title: "الملف كبير جدًا", description: "الحد الأقصى لحجم الملف 20MB. جرّب رفع صورة بدقة أقل.", variant: "destructive" });
       return;
     }
 
@@ -322,12 +322,12 @@ export default function NewOrderPage() {
       setDepositPayments(newPayments);
     } catch (err) {
       console.error('File read/compress error:', err);
-      toast({ title: "خطأ في قراءة الملف", description: "لا يمكن قراءة الملف. حاول إطلاق النار مرة أخرى.", variant: "destructive" });
+      toast({ title: "خطأ في قراءة الملف", description: "تعذر قراءة الملف. جرّب رفع ملف آخر.", variant: "destructive" });
       reportClientError({
         message: err instanceof Error ? err.message : String(err),
         stack: err instanceof Error ? err.stack : undefined,
         component: 'NewOrder',
-        action: 'قراءة ملف مرجعي (يتقدم)'
+        action: 'قراءة مستند الدفعة المقدمة'
       });
     }
   };
@@ -351,7 +351,7 @@ export default function NewOrderPage() {
       reportClientError({
         message: compressionError instanceof Error ? compressionError.message : String(compressionError),
         component: 'NewOrder',
-        action: 'ضغط مرفقات قائمة الانتظار'
+        action: 'تجهيز المرفقات للرفع'
       });
     }
   };
@@ -432,19 +432,19 @@ export default function NewOrderPage() {
     e.preventDefault();
 
     if (customerMode === "new" && !newCustomer.name.trim()) {
-      toast({ title: "خطأ", description: "برجاء إدخال اسم العميل الجديد", variant: "destructive" });
+      toast({ title: "خطأ", description: "أدخل اسم العميل الجديد", variant: "destructive" });
       return;
     }
     if (customerMode === "search" && !selectedCustomerId) {
-      toast({ title: "خطأ", description: "الرجاء اختيار عميل من القائمة", variant: "destructive" });
+      toast({ title: "خطأ", description: "اختر عميلًا من القائمة", variant: "destructive" });
       return;
     }
     if (!eventDate) {
-      toast({ title: "خطأ", description: "الرجاء إدخال تاريخ الحدث", variant: "destructive" });
+      toast({ title: "خطأ", description: "أدخل تاريخ المناسبة", variant: "destructive" });
       return;
     }
     if (depositPayments.some(p => parseFloat(p.amount) > 0 && !p.method)) {
-      toast({ title: "خطأ", description: "الرجاء اختيار طريقة الدفع للدفعة المقدمة", variant: "destructive" });
+      toast({ title: "خطأ", description: "اختر طريقة دفع الدفعة المقدمة", variant: "destructive" });
       return;
     }
 
@@ -493,7 +493,7 @@ export default function NewOrderPage() {
       const response = await ordersApi.create(payload);
       const newOrderId = Number((response.data as any)?.order?.id);
 
-      toast({ title: "تم بنجاح!", description: "تم إنشاء الطلب بنجاح 🎉" });
+      toast({ title: "تم بنجاح!", description: "تم إنشاء الحجز بنجاح" });
 
       if (!Number.isNaN(newOrderId) && newOrderId > 0) {
         setCreatedOrderId(newOrderId);
@@ -507,17 +507,17 @@ export default function NewOrderPage() {
             await ordersApi.uploadAttachment(newOrderId, pendingAttachments);
             setPendingAttachments([]);
           } catch (uploadError) {
-            const uploadMessage = uploadError instanceof Error ? uploadError.message : "حدث خطأ أثناء تحميل المرفقات";
+            const uploadMessage = uploadError instanceof Error ? uploadError.message : "تعذر رفع بعض المرفقات";
             toast({
-              title: "حدث خطأ أثناء تحميل المرفقات",
-              description: `${uploadMessage}. تم إنشاء الطلب. يمكنك إضافتها من خلال شاشة تعديل الطلب.`,
+              title: "تعذر رفع بعض المرفقات",
+              description: `${uploadMessage}. تم إنشاء الحجز. يمكنك إضافة المرفقات لاحقًا من شاشة تعديل الحجز.`,
               variant: "destructive",
             });
             reportClientError({
               message: uploadMessage,
               stack: uploadError instanceof Error ? uploadError.stack : undefined,
               component: 'NewOrder',
-              action: 'تحميل المرفقات لطلب جديد'
+              action: 'رفع مرفقات الحجز الجديد'
             });
           }
         }
@@ -527,13 +527,13 @@ export default function NewOrderPage() {
         router.push("/dashboard/orders");
       }
     } catch (error) {
-      const message = error instanceof Error ? error.message : "خطأ في حفظ الطلب";
+      const message = error instanceof Error ? error.message : "تعذر حفظ الحجز";
       toast({ title: "خطأ", description: message, variant: "destructive" });
       reportClientError({
         message,
         stack: error instanceof Error ? error.stack : undefined,
         component: 'NewOrder',
-        action: 'حجز أمر'
+        action: 'إنشاء حجز'
       });
     } finally {
       setSaving(false);
@@ -562,7 +562,7 @@ export default function NewOrderPage() {
                 value={createdOrderSignLink}
                 readOnly
                 className="mb-3 text-xs"
-                placeholder={creatingSignLink ? "يقوم بإنشاء رابط..." : "لم يتم إنشاء أي رابط حتى الآن"}
+                placeholder={creatingSignLink ? "جاري إنشاء الرابط..." : "لم يتم إنشاء رابط توقيع بعد."}
               />
               <div className="flex flex-col sm:flex-row gap-3">
                 <Button
@@ -572,7 +572,7 @@ export default function NewOrderPage() {
                   disabled={creatingSignLink}
                 >
                   <Copy className="h-4 w-4 ml-2" />
-                  {creatingSignLink ? "يقوم بإنشاء رابط..." : "انسخ مرة أخرى"}
+                  {creatingSignLink ? "جاري إنشاء الرابط..." : "نسخ الرابط"}
                 </Button>
                 <Button
                   type="button"
@@ -778,7 +778,7 @@ export default function NewOrderPage() {
                       <Input
                         value={newCustomer.source}
                         onChange={(e) => setNewCustomer({ ...newCustomer, source: e.target.value })}
-                        placeholder="من أين أتت؟?"
+                        placeholder="مصدر العميل"
                         className="h-12 focus:border-green-600 rounded-xl"
                       />
                     </div>
@@ -892,7 +892,7 @@ export default function NewOrderPage() {
                                   <p className="text-[11px] text-muted-foreground">
                                     تاريخ الطلب الحالي:{" "}
                                     <span className="font-black text-gray-900">
-                                      {eventDate ? formatDateShort(eventDate) : "لم يتم التحديد بعد"}
+                                      {eventDate ? formatDateShort(eventDate) : "غير محدد"}
                                     </span>
                                   </p>
 
@@ -911,7 +911,7 @@ export default function NewOrderPage() {
                                           <p key={`${order.order_id}-${order.event_date}`} className="text-[10px] text-muted-foreground">
                                             حجز #{order.order_id} • {formatDateShort(order.event_date)}
                                             {order.customer_name ? ` • ${order.customer_name}` : ""}
-                                            {order.wearer_name ? ` • يرتدي: ${order.wearer_name}` : ""}
+                                            {order.wearer_name ? ` • اسم المرتدي: ${order.wearer_name}` : ""}
                                           </p>
                                         ))}
                                       </div>
@@ -932,7 +932,7 @@ export default function NewOrderPage() {
                             <Input
                               value={item.dress_name}
                               onChange={(e) => updateItem(index, "dress_name", e.target.value)}
-                              placeholder="اسم القطعة الجديد"
+                              placeholder="اسم القطعة"
                               className="h-10 rounded-xl border-2"
                             />
                           )}
@@ -943,7 +943,7 @@ export default function NewOrderPage() {
                           <Input
                             value={item.wearer_name}
                             onChange={(e) => updateItem(index, "wearer_name", e.target.value)}
-                            placeholder="الاسم الكامل (خياري)"
+                            placeholder="اسم المرتدي (اختياري)"
                             className="h-10 rounded-xl border-2"
                           />
                         </div>
@@ -987,13 +987,13 @@ export default function NewOrderPage() {
                         <div className="sm:col-span-2 mt-1">
                           <details className="group">
                             <summary className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest cursor-pointer select-none hover:text-green-600 transition-colors">
-                              تعليقات البند {item.notes ? "📝" : "(انقر للإضافة)"}
+                              تعليقات البند {item.notes ? "📝" : "(اضغط للإضافة)"}
                             </summary>
                             <div className="mt-2">
                               <Input
                                 value={item.notes}
                                 onChange={(e) => updateItem(index, "notes", e.target.value)}
-                                placeholder="ملاحظة خاصة بهذا البند..."
+                                placeholder="ملاحظات على هذه القطعة..."
                                 className="h-10 rounded-xl border-2"
                               />
                             </div>
@@ -1085,7 +1085,7 @@ export default function NewOrderPage() {
                             next[index].confirmation_number = e.target.value;
                             setDepositPayments(next);
                           }}
-                          placeholder="رقم التأكيد..."
+                          placeholder="رقم المرجع..."
                           className="focus:border-green-600"
                         />
                       </div>
@@ -1131,7 +1131,7 @@ export default function NewOrderPage() {
                           next[index].confirmation_number = e.target.value;
                           setDepositPayments(next);
                         }}
-                        placeholder="رقم التأكيد..."
+                        placeholder="رقم المرجع..."
                         className="focus:border-green-600"
                       />
                     </div>
@@ -1261,7 +1261,7 @@ export default function NewOrderPage() {
           <textarea
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
-            placeholder="أي تفاصيل إضافية من المهم أن نتذكرها..."
+            placeholder="ملاحظات إضافية على الحجز..."
             className="w-full h-32 p-4 border-b-2 border-input bg-transparent focus:border-green-600 outline-none resize-none transition-all shadow-inner"
           />
         </section>
@@ -1350,7 +1350,7 @@ export default function NewOrderPage() {
               onClick={handleSubmit}
               disabled={saving}
             >
-              {saving ? "يخلق أمرا..." : "اطلب دعوة 🎉"}
+              {saving ? "جاري إنشاء الحجز..." : "إنشاء الحجز"}
             </Button>
           </div>
         </div>
