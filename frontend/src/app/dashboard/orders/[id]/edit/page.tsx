@@ -37,7 +37,7 @@ import { DressSelector } from "@/components/dashboard/dress-selector";
 
 const ORDER_TYPES = [
   { value: "rental", label: "إيجار" },
-  { value: "sewing_for_rental", label: "الخياطة التي تبقى في الإيجار" },
+  { value: "sewing_for_rental", label: "تفصيل للإيجار" },
   { value: "sewing", label: "تفصيل" },
   { value: "sale", label: "بيع" },
 ];
@@ -197,13 +197,13 @@ export default function EditOrderPage() {
             })));
           }
         } else {
-          toast({ title: "خطأ", description: orderRes.message || "لم يتم العثور على الطلب", variant: "destructive" });
+          toast({ title: "خطأ", description: orderRes.message || "الحجز غير موجود", variant: "destructive" });
         }
 
         setDresses(availableDresses);
       } catch (e) {
         console.error("Error loading order for edit:", e);
-        toast({ title: "خطأ", description: "لا يمكن تحميل تفاصيل الطلب. تحقق من الاتصال بالخادم.", variant: "destructive" });
+        toast({ title: "خطأ", description: "تعذر تحميل تفاصيل الحجز. تحقق من الاتصال وحاول مرة أخرى.", variant: "destructive" });
       } finally {
         setLoading(false);
       }
@@ -236,15 +236,15 @@ export default function EditOrderPage() {
       if (res.success && res.data) {
         setAttachments(prev => [...((res.data as any).attachments || []), ...prev]);
       }
-      toast({ title: "تم بنجاح", description: `${prepared.length} تم تحميل الملفات` });
+      toast({ title: "تم بنجاح", description: `تم رفع ${prepared.length} ملفات` });
     } catch (err) {
-      const message = err instanceof Error ? err.message : "حدث خطأ أثناء التحميل";
+      const message = err instanceof Error ? err.message : "تعذر رفع الملفات";
       toast({ title: "خطأ", description: message, variant: "destructive" });
       reportClientError({
         message,
         stack: err instanceof Error ? err.stack : undefined,
         component: 'EditOrder',
-        action: 'تحميل مرفق'
+        action: 'رفع مرفق'
       });
     } finally {
       setUploadingFiles(false);
@@ -252,12 +252,12 @@ export default function EditOrderPage() {
   };
 
   const handleDeleteAttachment = async (attachmentId: number) => {
-    if (!confirm("احذف هذا الملف?")) return;
+    if (!confirm("هل تريد حذف هذا الملف؟")) return;
     try {
       await ordersApi.deleteAttachment(parseInt(orderId), attachmentId);
       setAttachments(prev => prev.filter(a => a.id !== attachmentId));
     } catch {
-      toast({ title: "خطأ", description: "حدث خطأ أثناء الحذف", variant: "destructive" });
+      toast({ title: "خطأ", description: "تعذر حذف الملف", variant: "destructive" });
     }
   };
 
@@ -267,7 +267,7 @@ export default function EditOrderPage() {
       setAttachments(prev => prev.map(a => a.id === attachmentId ? { ...a, description: editingDescText } : a));
       setEditingDescId(null);
     } catch {
-      toast({ title: "خطأ", description: "حدث خطأ أثناء التحديث", variant: "destructive" });
+      toast({ title: "خطأ", description: "تعذر تحديث البيانات", variant: "destructive" });
     }
   };
 
@@ -332,7 +332,7 @@ export default function EditOrderPage() {
     try {
       const response = await agreementsApi.createSignLink(parseInt(orderId));
       if (!response.success || !response.data) {
-        throw new Error(response.message || "غير قادر على إنشاء رابط التوقيع");
+        throw new Error(response.message || "تعذر إنشاء رابط التوقيع");
       }
 
       const data = response.data as {
@@ -345,9 +345,9 @@ export default function EditOrderPage() {
       if (shouldCopyToClipboard) {
         try {
           await navigator.clipboard.writeText(data.link);
-          toast({ title: "تم إنشاء رابط التوقيع", description: "تم نسخ الرابط إلى الحافظة." });
+          toast({ title: "تم إنشاء رابط التوقيع بنجاح", description: "تم نسخ الرابط إلى الحافظة." });
         } catch {
-          toast({ title: "تم إنشاء رابط التوقيع", description: data.link });
+          toast({ title: "تم إنشاء رابط التوقيع بنجاح", description: data.link });
         }
       }
 
@@ -358,7 +358,7 @@ export default function EditOrderPage() {
     } catch (error) {
       toast({
         title: "خطأ",
-        description: error instanceof Error ? error.message : "غير قادر على إنشاء رابط التوقيع",
+        description: error instanceof Error ? error.message : "تعذر إنشاء رابط التوقيع",
         variant: "destructive"
       });
       return null;
@@ -427,7 +427,7 @@ export default function EditOrderPage() {
     e.preventDefault();
 
     if (!eventDate) {
-      toast({ title: "خطأ", description: "الرجاء إدخال تاريخ الحدث", variant: "destructive" });
+      toast({ title: "خطأ", description: "أدخل تاريخ المناسبة", variant: "destructive" });
       return;
     }
 
@@ -456,16 +456,16 @@ export default function EditOrderPage() {
       };
 
       await ordersApi.update(parseInt(orderId), payload);
-      toast({ title: "تم بنجاح!", description: "تم تحديث الطلب بنجاح 🎉" });
+      toast({ title: "تم بنجاح!", description: "تم تحديث الحجز بنجاح" });
       router.push("/dashboard/orders");
     } catch (error) {
-      const message = error instanceof Error ? error.message : "حدث خطأ أثناء تحديث الطلب";
+      const message = error instanceof Error ? error.message : "تعذر تحديث الحجز";
       toast({ title: "خطأ", description: message, variant: "destructive" });
       reportClientError({
         message,
         stack: error instanceof Error ? error.stack : undefined,
         component: 'EditOrder',
-        action: 'تحديث الطلب'
+        action: 'تحديث الحجز'
       });
     } finally {
       setSaving(false);
@@ -558,7 +558,7 @@ export default function EditOrderPage() {
                       className="flex-1 border-green-600 text-green-700 h-10 px-2 text-[10px] sm:text-xs font-bold"
                     >
                       <Copy className="h-3 w-3 sm:h-4 sm:w-4 ml-1.5" />
-                      {sendingSignLink ? "ينتج..." : "نسخ الوصلة"}
+                      {sendingSignLink ? "جاري الإنشاء..." : "نسخ الرابط"}
                     </Button>
                     <Button
                       type="button"
@@ -677,7 +677,7 @@ export default function EditOrderPage() {
                                 <p className="text-[11px] text-muted-foreground">
                                   تاريخ الطلب الحالي:{" "}
                                   <span className="font-black text-gray-900">
-                                    {eventDate ? formatDateShort(eventDate) : "لم يتم التحديد بعد"}
+                                    {eventDate ? formatDateShort(eventDate) : "غير محدد"}
                                   </span>
                                 </p>
 
@@ -696,7 +696,7 @@ export default function EditOrderPage() {
                                         <p key={`${order.order_id}-${order.event_date}`} className="text-[10px] text-muted-foreground">
                                           حجز #{order.order_id} • {formatDateShort(order.event_date)}
                                           {order.customer_name ? ` • ${order.customer_name}` : ""}
-                                          {order.wearer_name ? ` • يرتدي: ${order.wearer_name}` : ""}
+                                          {order.wearer_name ? ` • اسم المرتدي: ${order.wearer_name}` : ""}
                                         </p>
                                       ))}
                                     </div>
@@ -717,7 +717,7 @@ export default function EditOrderPage() {
                           <Input
                             value={item.dress_name}
                             onChange={(e) => updateItem(index, "dress_name", e.target.value)}
-                            placeholder="اسم القطعة الجديد"
+                            placeholder="اسم القطعة"
                             className="h-10 rounded-xl border-2"
                           />
                         )}
@@ -728,7 +728,7 @@ export default function EditOrderPage() {
                         <Input
                           value={item.wearer_name}
                           onChange={(e) => updateItem(index, "wearer_name", e.target.value)}
-                          placeholder="الاسم الكامل (خياري)"
+                          placeholder="اسم المرتدي (اختياري)"
                           className="h-10 rounded-xl border-2"
                         />
                       </div>
@@ -759,13 +759,13 @@ export default function EditOrderPage() {
                       <div className="sm:col-span-2">
                         <details className="group">
                           <summary className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest cursor-pointer select-none hover:text-green-600">
-                            ملاحظات {item.notes ? "📝" : "(انقر للإضافة)"}
+                            ملاحظات {item.notes ? "📝" : "(اضغط للإضافة)"}
                           </summary>
                           <div className="mt-2">
                             <Input
                               value={item.notes}
                               onChange={(e) => updateItem(index, "notes", e.target.value)}
-                              placeholder="ملاحظة خاصة بهذا البند..."
+                              placeholder="ملاحظات على هذه القطعة..."
                               className="h-10 rounded-xl border-2"
                             />
                           </div>
@@ -791,7 +791,7 @@ export default function EditOrderPage() {
           <textarea
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
-            placeholder="أي تفاصيل إضافية من المهم أن نتذكرها..."
+            placeholder="ملاحظات إضافية على الحجز..."
             className="w-full h-32 p-4 rounded-2xl border-2 bg-background focus:border-green-600 outline-none resize-none shadow-inner"
           />
         </section>
@@ -811,7 +811,7 @@ export default function EditOrderPage() {
               uploadingFiles ? "opacity-50 cursor-wait" : "border-green-600 text-green-600 hover:bg-green-50"
             )}>
               <Plus className="h-3.5 w-3.5" />
-              {uploadingFiles ? "أعلى..." : "إضافة ملف"}
+              {uploadingFiles ? "جاري الرفع..." : "إضافة ملف"}
               <input type="file" multiple className="hidden" onChange={handleFileUpload} disabled={uploadingFiles} />
             </label>
           </div>
@@ -843,7 +843,7 @@ export default function EditOrderPage() {
                             onChange={(e) => setEditingDescText(e.target.value)}
                             onKeyDown={(e) => { if (e.key === "Enter") handleSaveDescription(att.id); if (e.key === "Escape") setEditingDescId(null); }}
                             className="flex-1 h-8 px-2 text-sm border rounded-lg"
-                            placeholder="وصف..."
+                            placeholder="وصف الملف..."
                           />
                           <Button size="icon" variant="ghost" className="h-7 w-7" type="button" onClick={() => handleSaveDescription(att.id)}><Check className="h-3.5 w-3.5" /></Button>
                           <Button size="icon" variant="ghost" className="h-7 w-7" type="button" onClick={() => setEditingDescId(null)}><X className="h-3.5 w-3.5" /></Button>
@@ -898,7 +898,7 @@ export default function EditOrderPage() {
               onClick={handleSubmit}
               disabled={saving}
             >
-              {saving ? "تحديث..." : "حفظ التغييرات ✨"}
+              {saving ? "جاري التحديث..." : "حفظ التغييرات"}
             </Button>
           </div>
         </div>
