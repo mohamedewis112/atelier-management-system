@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "التوقيع الرقمي على الاتفاقية",
+  title: "التوقيع الإلكتروني على العقد",
   description: "التوقيع الرقمي على الاتفاقية",
 };
 
