@@ -29,13 +29,13 @@ interface SidebarProps {
 }
 
 const menuItems = [
-  { href: "/dashboard", label: "לוח בקרה", icon: LayoutDashboard },
-  { href: "/dashboard/customers", label: "לקוחות", icon: Users },
-  { href: "/dashboard/dresses", label: "שמלות", icon: ShoppingBag },
-  { href: "/dashboard/transactions", label: "תזרים מזומנים", icon: Wallet },
-  { href: "/dashboard/orders", label: "הזמנות", icon: FileText },
-  { href: "/dashboard/agreements", label: "הסכמים", icon: ScrollText },
-  { href: "/dashboard/export", label: "ייצוא נתונים", icon: FileDown },
+  { href: "/dashboard", label: "لوحة التحكم", icon: LayoutDashboard },
+  { href: "/dashboard/customers", label: "العملاء", icon: Users },
+  { href: "/dashboard/dresses", label: "القطع", icon: ShoppingBag },
+  { href: "/dashboard/transactions", label: "الحسابات", icon: Wallet },
+  { href: "/dashboard/orders", label: "الحجوزات", icon: FileText },
+  { href: "/dashboard/agreements", label: "العقود", icon: ScrollText },
+  { href: "/dashboard/export", label: "تصدير البيانات", icon: FileDown },
 ];
 
 export function Sidebar({ onItemClick }: SidebarProps) {
@@ -64,8 +64,8 @@ export function Sidebar({ onItemClick }: SidebarProps) {
               <span className="text-2xl text-white">👗</span>
             </div>
             <div>
-              <h1 className="font-bold text-xl tracking-tight text-primary">ניהול עסק שמלות</h1>
-              <p className="text-xs font-medium text-muted-foreground uppercase tracking-widest">שמלות ערב</p>
+              <h1 className="font-bold text-xl tracking-tight text-primary">ניהול עסק القطع</h1>
+              <p className="text-xs font-medium text-muted-foreground uppercase tracking-widest">القطع ערב</p>
             </div>
           </div>
         </div>
@@ -102,7 +102,7 @@ export function Sidebar({ onItemClick }: SidebarProps) {
             className="flex w-full items-center gap-4 rounded-2xl px-4 py-3 text-sm font-semibold text-muted-foreground hover:bg-destructive/10 hover:text-destructive transition-all"
           >
             <LogOut className="h-5 w-5 text-muted-foreground/60" />
-            התנתקי
+            تسجيل الخروج
           </button>
         </div>
       </div>
