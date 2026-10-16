@@ -1,0 +1,5402 @@
+[
+  {
+    "file": "frontend/src/components/error-boundary.tsx",
+    "line": 47,
+    "text": "<h1 className=\"text-3xl font-black mb-4 text-gray-900\">אופס! משהו השתבש...</h1>"
+  },
+  {
+    "file": "frontend/src/components/error-boundary.tsx",
+    "line": 49,
+    "text": "קרתה שגיאה לא צפויה במערכת. הבעיה דווחה אוטומטית לצוות הפיתוח לטיפול מהיר."
+  },
+  {
+    "file": "frontend/src/components/error-boundary.tsx",
+    "line": 56,
+    "text": "רענון העמוד"
+  },
+  {
+    "file": "frontend/src/lib/api.ts",
+    "line": 102,
+    "text": "throw new Error('הבקשה גדולה מדי. נסי להקטין את הקובץ המצורף.');"
+  },
+  {
+    "file": "frontend/src/lib/api.ts",
+    "line": 105,
+    "text": "throw new Error('השרת לא זמין כרגע. נסי שוב בעוד רגע.');"
+  },
+  {
+    "file": "frontend/src/lib/api.ts",
+    "line": 107,
+    "text": "throw new Error(`שגיאת שרת (${response.status}). נסי שוב.`);"
+  },
+  {
+    "file": "frontend/src/lib/api.ts",
+    "line": 113,
+    "text": "throw new Error('תשובה לא צפויה מהשרת. נסי שוב.');"
+  },
+  {
+    "file": "frontend/src/lib/api.ts",
+    "line": 125,
+    "text": "throw new Error(data.message || 'שגיאה בבקשה');"
+  },
+  {
+    "file": "frontend/src/lib/api.ts",
+    "line": 132,
+    "text": "if (!error.message.includes('API') && !error.message.includes('שגיאה') && !error.message.includes('התחברות')) {"
+  },
+  {
+    "file": "frontend/src/lib/api.ts",
+    "line": 143,
+    "text": "const genericMsg = 'שגיאת רשת - בדקי את החיבור לאינטרנט.';"
+  },
+  {
+    "file": "frontend/src/lib/api.ts",
+    "line": 442,
+    "text": "return { success: true, message: 'אין קבצים', data: { attachments: [] } } as any;"
+  },
+  {
+    "file": "frontend/src/lib/api.ts",
+    "line": 477,
+    "text": "message: lastMessage || `${aggregated.length} קבצים הועלו בהצלחה`,"
+  },
+  {
+    "file": "frontend/src/lib/api.ts",
+    "line": 550,
+    "text": "throw new Error('פג תוקף ההתחברות - נא להתחבר מחדש');"
+  },
+  {
+    "file": "frontend/src/lib/api.ts",
+    "line": 554,
+    "text": "let message = 'שגיאה בייצוא נתונים';"
+  },
+  {
+    "file": "frontend/src/lib/utils.ts",
+    "line": 128,
+    "text": "* Get relative time description (e.g., \"היום\", \"מחר\", \"בעוד 3 ימים\")"
+  },
+  {
+    "file": "frontend/src/lib/utils.ts",
+    "line": 205,
+    "text": "* either 'open' (פתוחה) or 'completed' (הושלמה) based on two conditions:"
+  },
+  {
+    "file": "frontend/src/app/page.tsx",
+    "line": 28,
+    "text": "<p className=\"mt-4 text-muted-foreground\">טוען...</p>"
+  },
+  {
+    "file": "frontend/src/components/dashboard/dress-selector.tsx",
+    "line": 38,
+    "text": "if (value === \"sale\") return \"למכירה\";"
+  },
+  {
+    "file": "frontend/src/components/dashboard/dress-selector.tsx",
+    "line": 39,
+    "text": "if (value === \"rental\") return \"להשכרה\";"
+  },
+  {
+    "file": "frontend/src/components/dashboard/dress-selector.tsx",
+    "line": 40,
+    "text": "return \"ללא ייעוד\";"
+  },
+  {
+    "file": "frontend/src/components/dashboard/dress-selector.tsx",
+    "line": 62,
+    "text": "placeholder = \"בחרי שמלה מהמלאי...\","
+  },
+  {
+    "file": "frontend/src/components/dashboard/dress-selector.tsx",
+    "line": 91,
+    "text": "? \"מכירה\""
+  },
+  {
+    "file": "frontend/src/components/dashboard/dress-selector.tsx",
+    "line": 93,
+    "text": "? \"השכרה\""
+  },
+  {
+    "file": "frontend/src/components/dashboard/dress-selector.tsx",
+    "line": 94,
+    "text": ": \"הכל\";"
+  },
+  {
+    "file": "frontend/src/components/dashboard/dress-selector.tsx",
+    "line": 128,
+    "text": "מק״ט: {selectedDress.id} • {getIntendedUseLabel(selectedDress.intended_use)} • {formatCurrency(selectedDress.base_price || 0)}"
+  },
+  {
+    "file": "frontend/src/components/dashboard/dress-selector.tsx",
+    "line": 154,
+    "text": "<h2 className=\"font-black text-xl\">בחירת שמלה מהמלאי</h2>"
+  },
+  {
+    "file": "frontend/src/components/dashboard/dress-selector.tsx",
+    "line": 156,
+    "text": "{dressesByIntendedUse.length} שמלות לבחירה • סינון: {intendedUseFilterLabel}"
+  },
+  {
+    "file": "frontend/src/components/dashboard/dress-selector.tsx",
+    "line": 172,
+    "text": "placeholder=\"חפשי לפי שם או מק״ט...\""
+  },
+  {
+    "file": "frontend/src/components/dashboard/dress-selector.tsx",
+    "line": 188,
+    "text": "רשימה"
+  },
+  {
+    "file": "frontend/src/components/dashboard/dress-selector.tsx",
+    "line": 199,
+    "text": "תמונות"
+  },
+  {
+    "file": "frontend/src/components/dashboard/dress-selector.tsx",
+    "line": 211,
+    "text": "להשכרה"
+  },
+  {
+    "file": "frontend/src/components/dashboard/dress-selector.tsx",
+    "line": 221,
+    "text": "למכירה"
+  },
+  {
+    "file": "frontend/src/components/dashboard/dress-selector.tsx",
+    "line": 231,
+    "text": "הכל"
+  },
+  {
+    "file": "frontend/src/components/dashboard/dress-selector.tsx",
+    "line": 270,
+    "text": "מק״ט {dress.id} • {getIntendedUseLabel(dress.intended_use)} • {formatCurrency(dress.base_price || 0)}"
+  },
+  {
+    "file": "frontend/src/components/dashboard/dress-selector.tsx",
+    "line": 310,
+    "text": "<span className=\"text-[10px] font-black uppercase tracking-widest\">ללא תמונה</span>"
+  },
+  {
+    "file": "frontend/src/components/dashboard/dress-selector.tsx",
+    "line": 350,
+    "text": "<p className=\"font-bold text-muted-foreground\">לא נמצאו שמלות תואמות</p>"
+  },
+  {
+    "file": "frontend/src/components/dashboard/contact-picker.tsx",
+    "line": 35,
+    "text": "label = \"ייבוא מאנשי קשר\","
+  },
+  {
+    "file": "frontend/src/components/dashboard/contact-picker.tsx",
+    "line": 75,
+    "text": "title: \"ייבוא הושלם\","
+  },
+  {
+    "file": "frontend/src/components/dashboard/contact-picker.tsx",
+    "line": 76,
+    "text": "description: `הפרטים של ${name} הוכנסו בהצלחה (ללא אימייל)`,"
+  },
+  {
+    "file": "frontend/src/components/dashboard/contact-picker.tsx",
+    "line": 84,
+    "text": "title: \"שגיאה\","
+  },
+  {
+    "file": "frontend/src/components/dashboard/contact-picker.tsx",
+    "line": 85,
+    "text": "description: \"לא ניתן לגשת לאנשי הקשר\","
+  },
+  {
+    "file": "frontend/src/components/ui/date-range-filter.tsx",
+    "line": 10,
+    "text": "* Preset options: היום, השבוע, החודש, חודש קודם, רבעון, רבעון קודם, השנה, שנה שעברה, טווח מותאם."
+  },
+  {
+    "file": "frontend/src/components/ui/date-range-filter.tsx",
+    "line": 15,
+    "text": "*   'רבעון'       → start of current quarter .. today (inclusive)."
+  },
+  {
+    "file": "frontend/src/components/ui/date-range-filter.tsx",
+    "line": 16,
+    "text": "*   'רבעון קודם' → full previous quarter (first day .. last day)."
+  },
+  {
+    "file": "frontend/src/components/ui/date-range-filter.tsx",
+    "line": 17,
+    "text": "*   'השנה'        → Jan 1 of current year .. today (inclusive)."
+  },
+  {
+    "file": "frontend/src/components/ui/date-range-filter.tsx",
+    "line": 18,
+    "text": "*   'שנה שעברה'  → Jan 1 .. Dec 31 of the previous year."
+  },
+  {
+    "file": "frontend/src/components/ui/date-range-filter.tsx",
+    "line": 35,
+    "text": "{ label: \"היום\", getValue: () => getToday() },"
+  },
+  {
+    "file": "frontend/src/components/ui/date-range-filter.tsx",
+    "line": 36,
+    "text": "{ label: \"השבוע\", getValue: () => getThisWeek() },"
+  },
+  {
+    "file": "frontend/src/components/ui/date-range-filter.tsx",
+    "line": 37,
+    "text": "{ label: \"החודש\", getValue: () => getThisMonth() },"
+  },
+  {
+    "file": "frontend/src/components/ui/date-range-filter.tsx",
+    "line": 38,
+    "text": "{ label: \"חודש קודם\", getValue: () => getLastMonth() },"
+  },
+  {
+    "file": "frontend/src/components/ui/date-range-filter.tsx",
+    "line": 39,
+    "text": "{ label: \"רבעון\", getValue: () => getThisQuarter() },"
+  },
+  {
+    "file": "frontend/src/components/ui/date-range-filter.tsx",
+    "line": 40,
+    "text": "{ label: \"רבעון קודם\", getValue: () => getLastQuarter() },"
+  },
+  {
+    "file": "frontend/src/components/ui/date-range-filter.tsx",
+    "line": 41,
+    "text": "{ label: \"השנה\", getValue: () => getThisYear() },"
+  },
+  {
+    "file": "frontend/src/components/ui/date-range-filter.tsx",
+    "line": 42,
+    "text": "{ label: \"שנה שעברה\", getValue: () => getLastYear() },"
+  },
+  {
+    "file": "frontend/src/components/ui/date-range-filter.tsx",
+    "line": 197,
+    "text": "טווח מותאם"
+  },
+  {
+    "file": "frontend/src/components/ui/date-range-filter.tsx",
+    "line": 209,
+    "text": "placeholder=\"מתאריך\""
+  },
+  {
+    "file": "frontend/src/components/ui/date-range-filter.tsx",
+    "line": 211,
+    "text": "<span className=\"text-xs text-muted-foreground\">עד</span>"
+  },
+  {
+    "file": "frontend/src/components/ui/date-range-filter.tsx",
+    "line": 218,
+    "text": "placeholder=\"עד תאריך\""
+  },
+  {
+    "file": "frontend/src/components/ui/date-range-filter.tsx",
+    "line": 233,
+    "text": "נקה"
+  },
+  {
+    "file": "frontend/src/components/layout/sidebar.tsx",
+    "line": 67,
+    "text": "<h1 className=\"font-bold text-xl tracking-tight text-primary\">ניהול עסק القطع</h1>"
+  },
+  {
+    "file": "frontend/src/components/layout/sidebar.tsx",
+    "line": 68,
+    "text": "<p className=\"text-xs font-medium text-muted-foreground uppercase tracking-widest\">القطع ערב</p>"
+  },
+  {
+    "file": "frontend/src/components/layout/global-search.tsx",
+    "line": 128,
+    "text": "title: `הזמנה #${o.id} - ${o.customer_name}`,"
+  },
+  {
+    "file": "frontend/src/components/layout/global-search.tsx",
+    "line": 190,
+    "text": "return \"לקוחה\";"
+  },
+  {
+    "file": "frontend/src/components/layout/global-search.tsx",
+    "line": 192,
+    "text": "return \"שמלה\";"
+  },
+  {
+    "file": "frontend/src/components/layout/global-search.tsx",
+    "line": 194,
+    "text": "return \"הזמנה\";"
+  },
+  {
+    "file": "frontend/src/components/layout/global-search.tsx",
+    "line": 209,
+    "text": "<span>חיפוש</span>"
+  },
+  {
+    "file": "frontend/src/components/layout/global-search.tsx",
+    "line": 236,
+    "text": "placeholder=\"חיפוש לקוחות, שמלות, הזמנות...\""
+  },
+  {
+    "file": "frontend/src/components/layout/global-search.tsx",
+    "line": 258,
+    "text": "לא נמצאו תוצאות עבור &quot;{search}&quot;"
+  },
+  {
+    "file": "frontend/src/components/layout/global-search.tsx",
+    "line": 307,
+    "text": "הקלידי לפחות 2 תווים לחיפוש"
+  },
+  {
+    "file": "frontend/src/components/layout/global-search.tsx",
+    "line": 316,
+    "text": "<span>לניווט</span>"
+  },
+  {
+    "file": "frontend/src/components/layout/global-search.tsx",
+    "line": 320,
+    "text": "<span>לבחירה</span>"
+  },
+  {
+    "file": "frontend/src/components/layout/global-search.tsx",
+    "line": 324,
+    "text": "<span>לסגירה</span>"
+  },
+  {
+    "file": "frontend/src/components/layout/mobile-actions.tsx",
+    "line": 26,
+    "text": "<span className=\"text-[10px] font-bold\">הוצאה</span>"
+  },
+  {
+    "file": "frontend/src/components/layout/mobile-actions.tsx",
+    "line": 34,
+    "text": "<span className=\"text-xs font-bold\">הזמנה חדשה</span>"
+  },
+  {
+    "file": "frontend/src/components/layout/mobile-actions.tsx",
+    "line": 44,
+    "text": "<span className=\"text-[10px] font-bold\">הכנסה</span>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/page.tsx",
+    "line": 133,
+    "text": "<p className=\"text-white/70 text-xs\">תיעוד مصروف</p>"
+  },
+  {
+    "file": "frontend/src/app/share-target/page.tsx",
+    "line": 8,
+    "text": "<p className=\"text-sm text-muted-foreground\">טוען נתוני שיתוף...</p>"
+  },
+  {
+    "file": "frontend/src/app/share-target/share-target-client.tsx",
+    "line": 19,
+    "text": "title: \"אסמכתא להזמנה חדשה\","
+  },
+  {
+    "file": "frontend/src/app/share-target/share-target-client.tsx",
+    "line": 20,
+    "text": "description: \"יפתח טופס הזמנה חדשה עם הקובץ מצורף לתשלום מקדמה.\","
+  },
+  {
+    "file": "frontend/src/app/share-target/share-target-client.tsx",
+    "line": 25,
+    "text": "title: \"אסמכתא להכנסה חדשה\","
+  },
+  {
+    "file": "frontend/src/app/share-target/share-target-client.tsx",
+    "line": 26,
+    "text": "description: \"יפתח טופס תנועה חדשה כהכנסה עם הקובץ טעון מראש.\","
+  },
+  {
+    "file": "frontend/src/app/share-target/share-target-client.tsx",
+    "line": 31,
+    "text": "title: \"אסמכתא להוצאה חדשה\","
+  },
+  {
+    "file": "frontend/src/app/share-target/share-target-client.tsx",
+    "line": 32,
+    "text": "description: \"יפתח טופס תנועה חדשה כהוצאה עם הקובץ טעון מראש.\","
+  },
+  {
+    "file": "frontend/src/app/share-target/share-target-client.tsx",
+    "line": 37,
+    "text": "title: \"הוספת שמלה חדשה\","
+  },
+  {
+    "file": "frontend/src/app/share-target/share-target-client.tsx",
+    "line": 38,
+    "text": "description: \"יפתח טופס שמלה חדשה ויטען את התמונה אוטומטית.\","
+  },
+  {
+    "file": "frontend/src/app/share-target/share-target-client.tsx",
+    "line": 43,
+    "text": "title: \"עדכון תמונת שמלה קיימת\","
+  },
+  {
+    "file": "frontend/src/app/share-target/share-target-client.tsx",
+    "line": 44,
+    "text": "description: \"יפתח מלאי שמלות לבחירת שמלה לעדכון התמונה.\","
+  },
+  {
+    "file": "frontend/src/app/share-target/share-target-client.tsx",
+    "line": 88,
+    "text": "title: \"שיתוף לא הושלם\","
+  },
+  {
+    "file": "frontend/src/app/share-target/share-target-client.tsx",
+    "line": 89,
+    "text": "description: \"לא התקבל קובץ תקין מתפריט השיתוף.\","
+  },
+  {
+    "file": "frontend/src/app/share-target/share-target-client.tsx",
+    "line": 130,
+    "text": "title: \"שגיאה בטעינת הקובץ\","
+  },
+  {
+    "file": "frontend/src/app/share-target/share-target-client.tsx",
+    "line": 131,
+    "text": "description: \"לא הצלחנו לטעון את הקובץ מהשיתוף.\","
+  },
+  {
+    "file": "frontend/src/app/share-target/share-target-client.tsx",
+    "line": 155,
+    "text": "<h1 className=\"font-black text-xl\">שיתוף קובץ למערכת</h1>"
+  },
+  {
+    "file": "frontend/src/app/share-target/share-target-client.tsx",
+    "line": 158,
+    "text": "{loading && <p className=\"text-sm text-muted-foreground\">טוען את הקובץ מתפריט השיתוף...</p>}"
+  },
+  {
+    "file": "frontend/src/app/share-target/share-target-client.tsx",
+    "line": 161,
+    "text": "<p className=\"text-sm text-destructive\">לא זוהה קובץ לשיוך. נסי לשתף מחדש.</p>"
+  },
+  {
+    "file": "frontend/src/app/share-target/share-target-client.tsx",
+    "line": 166,
+    "text": "<p className=\"text-sm font-bold\">הקובץ מוכן לשיוך:</p>"
+  },
+  {
+    "file": "frontend/src/app/share-target/share-target-client.tsx",
+    "line": 173,
+    "text": "<img src={filePreviewUrl} alt=\"תצוגה מקדימה\" className=\"w-full max-h-72 object-cover\" />"
+  },
+  {
+    "file": "frontend/src/app/share-target/share-target-client.tsx",
+    "line": 183,
+    "text": "<h2 className=\"font-black text-lg\">לאן לשייך את הקובץ?</h2>"
+  },
+  {
+    "file": "frontend/src/app/share-target/share-target-client.tsx",
+    "line": 206,
+    "text": "מעבר ללוח הבקרה"
+  },
+  {
+    "file": "frontend/src/app/agreement/page.tsx",
+    "line": 48,
+    "text": "rental: \"השכרה\","
+  },
+  {
+    "file": "frontend/src/app/agreement/page.tsx",
+    "line": 49,
+    "text": "sewing_for_rental: \"תפירה שנשארת בהשכרה\","
+  },
+  {
+    "file": "frontend/src/app/agreement/page.tsx",
+    "line": 50,
+    "text": "sewing: \"תפירה\","
+  },
+  {
+    "file": "frontend/src/app/agreement/page.tsx",
+    "line": 51,
+    "text": "sale: \"מכירה\","
+  },
+  {
+    "file": "frontend/src/app/agreement/page.tsx",
+    "line": 55,
+    "text": "return ITEM_TYPE_LABELS[type] || type || \"פריט\";"
+  },
+  {
+    "file": "frontend/src/app/agreement/page.tsx",
+    "line": 108,
+    "text": "throw new Error(response.message || \"לא ניתן לטעון פרטי הזמנה לחתימה\");"
+  },
+  {
+    "file": "frontend/src/app/agreement/page.tsx",
+    "line": 121,
+    "text": "const message = error instanceof Error ? error.message : \"קישור חתימה לא תקין\";"
+  },
+  {
+    "file": "frontend/src/app/agreement/page.tsx",
+    "line": 124,
+    "text": "title: \"שגיאה\","
+  },
+  {
+    "file": "frontend/src/app/agreement/page.tsx",
+    "line": 218,
+    "text": "title: \"שגיאה\","
+  },
+  {
+    "file": "frontend/src/app/agreement/page.tsx",
+    "line": 219,
+    "text": "description: \"נא למלא את כל השדות הנדרשים\","
+  },
+  {
+    "file": "frontend/src/app/agreement/page.tsx",
+    "line": 227,
+    "text": "title: \"שגיאה\","
+  },
+  {
+    "file": "frontend/src/app/agreement/page.tsx",
+    "line": 228,
+    "text": "description: \"נא לאשר את תנאי ההסכם\","
+  },
+  {
+    "file": "frontend/src/app/agreement/page.tsx",
+    "line": 236,
+    "text": "title: \"שגיאה\","
+  },
+  {
+    "file": "frontend/src/app/agreement/page.tsx",
+    "line": 237,
+    "text": "description: \"נא לחתום על ההסכם\","
+  },
+  {
+    "file": "frontend/src/app/agreement/page.tsx",
+    "line": 260,
+    "text": "title: \"שגיאה\","
+  },
+  {
+    "file": "frontend/src/app/agreement/page.tsx",
+    "line": 261,
+    "text": "description: error instanceof Error ? error.message : \"שגיאה בחתימה על ההסכם\","
+  },
+  {
+    "file": "frontend/src/app/agreement/page.tsx",
+    "line": 277,
+    "text": "<h2 className=\"text-2xl font-bold mb-2\">ההסכם נחתם בהצלחה!</h2>"
+  },
+  {
+    "file": "frontend/src/app/agreement/page.tsx",
+    "line": 279,
+    "text": "תודה, {fullName}. ההסכם נשמר במערכת."
+  },
+  {
+    "file": "frontend/src/app/agreement/page.tsx",
+    "line": 282,
+    "text": "העתק של ההסכם יישלח לאימייל שלך (אם צוין)."
+  },
+  {
+    "file": "frontend/src/app/agreement/page.tsx",
+    "line": 298,
+    "text": "<CardTitle className=\"text-2xl\">הסכם</CardTitle>"
+  },
+  {
+    "file": "frontend/src/app/agreement/page.tsx",
+    "line": 300,
+    "text": "{terms?.businessName || \"השכרת שמלות - דמו\"}"
+  },
+  {
+    "file": "frontend/src/app/agreement/page.tsx",
+    "line": 307,
+    "text": "<h3 className=\"font-medium\">פרטים אישיים</h3>"
+  },
+  {
+    "file": "frontend/src/app/agreement/page.tsx",
+    "line": 309,
+    "text": "<label className=\"text-sm font-medium\">שם מלא *</label>"
+  },
+  {
+    "file": "frontend/src/app/agreement/page.tsx",
+    "line": 313,
+    "text": "placeholder=\"שם פרטי ומשפחה\""
+  },
+  {
+    "file": "frontend/src/app/agreement/page.tsx",
+    "line": 317,
+    "text": "<label className=\"text-sm font-medium\">טלפון *</label>"
+  },
+  {
+    "file": "frontend/src/app/agreement/page.tsx",
+    "line": 326,
+    "text": "<label className=\"text-sm font-medium\">אימייל</label>"
+  },
+  {
+    "file": "frontend/src/app/agreement/page.tsx",
+    "line": 336,
+    "text": "<label className=\"text-sm font-medium\">תאריך האירוע</label>"
+  },
+  {
+    "file": "frontend/src/app/agreement/page.tsx",
+    "line": 349,
+    "text": "<h3 className=\"font-medium\">פרטי ההזמנה</h3>"
+  },
+  {
+    "file": "frontend/src/app/agreement/page.tsx",
+    "line": 353,
+    "text": "<p className=\"text-sm font-semibold mb-1\">סיכום קצר</p>"
+  },
+  {
+    "file": "frontend/src/app/agreement/page.tsx",
+    "line": 373,
+    "text": "מחיר: ₪{(item.finalPrice || 0).toLocaleString(\"he-IL\")}"
+  },
+  {
+    "file": "frontend/src/app/agreement/page.tsx",
+    "line": 385,
+    "text": "<h3 className=\"font-medium\">תנאים</h3>"
+  },
+  {
+    "file": "frontend/src/app/agreement/page.tsx",
+    "line": 393,
+    "text": "<p className=\"font-medium mb-2\">מדיניות ביטול עסקה:</p>"
+  },
+  {
+    "file": "frontend/src/app/agreement/page.tsx",
+    "line": 409,
+    "text": "קרמנהל את התנאים לעיל ואני מסכימה להם"
+  },
+  {
+    "file": "frontend/src/app/agreement/page.tsx",
+    "line": 418,
+    "text": "<h3 className=\"font-medium\">חתימה</h3>"
+  },
+  {
+    "file": "frontend/src/app/agreement/page.tsx",
+    "line": 428,
+    "text": "נקה"
+  },
+  {
+    "file": "frontend/src/app/agreement/page.tsx",
+    "line": 448,
+    "text": "חתמי כאן באמצעות העכבר או האצבע"
+  },
+  {
+    "file": "frontend/src/app/agreement/page.tsx",
+    "line": 459,
+    "text": "{loading ? \"שולחת...\" : \"חתמי על ההסכם\"}"
+  },
+  {
+    "file": "frontend/src/app/agreement/page.tsx",
+    "line": 462,
+    "text": "<p className=\"text-xs text-muted-foreground text-center\">טוען פרטי הזמנה...</p>"
+  },
+  {
+    "file": "frontend/src/app/agreement/layout.tsx",
+    "line": 4,
+    "text": "title: \"חתימה דיגיטלית על הסכם\","
+  },
+  {
+    "file": "frontend/src/app/agreement/layout.tsx",
+    "line": 5,
+    "text": "description: \"חתימה דיגיטלית על הסכם\","
+  },
+  {
+    "file": "frontend/src/app/dashboard/export/page.tsx",
+    "line": 61,
+    "text": "description: error instanceof Error ? error.message : \"خطأ בטעינת נתוני ייצוא\","
+  },
+  {
+    "file": "frontend/src/app/dashboard/export/page.tsx",
+    "line": 130,
+    "text": "description: error instanceof Error ? error.message : \"خطأ בייצוא הקובץ\","
+  },
+  {
+    "file": "frontend/src/app/dashboard/export/page.tsx",
+    "line": 152,
+    "text": "description: `יוצאו ${datasets.length} ملفات CSV`,"
+  },
+  {
+    "file": "frontend/src/app/dashboard/export/page.tsx",
+    "line": 157,
+    "text": "description: error instanceof Error ? error.message : \"خطأ בייצוא כל הנתונים\","
+  },
+  {
+    "file": "frontend/src/app/dashboard/export/page.tsx",
+    "line": 235,
+    "text": "ייצוא נתונים"
+  },
+  {
+    "file": "frontend/src/app/dashboard/export/page.tsx",
+    "line": 246,
+    "text": "ייצוא כל הדאטה"
+  },
+  {
+    "file": "frontend/src/app/dashboard/export/page.tsx",
+    "line": 263,
+    "text": "{dataset.label} ({dataset.totalRows.toLocaleString()} רשומות)"
+  },
+  {
+    "file": "frontend/src/app/dashboard/export/page.tsx",
+    "line": 303,
+    "text": "ייצוא CSV"
+  },
+  {
+    "file": "frontend/src/app/dashboard/export/page.tsx",
+    "line": 310,
+    "text": "איפוס מסננים"
+  },
+  {
+    "file": "frontend/src/app/dashboard/customers/page.tsx",
+    "line": 134,
+    "text": "action: `טעינת פרטי לקוח (ID: ${editId})`"
+  },
+  {
+    "file": "frontend/src/app/dashboard/customers/page.tsx",
+    "line": 172,
+    "text": "toast({ title: \"تم بنجاح\", description: \"عملاء אוחדו בتم بنجاح\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/customers/page.tsx",
+    "line": 178,
+    "text": "const message = error instanceof Error ? error.message : \"خطأ בدمج\";"
+  },
+  {
+    "file": "frontend/src/app/dashboard/customers/page.tsx",
+    "line": 222,
+    "text": "toast({ title: \"تم بنجاح\", description: \"عميل עודכנה בتم بنجاح\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/customers/page.tsx",
+    "line": 225,
+    "text": "toast({ title: \"تم بنجاح\", description: \"عميل נוספה בتم بنجاح\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/customers/page.tsx",
+    "line": 229,
+    "text": "const message = error instanceof Error ? error.message : \"خطأ בשמירת לקוח\";"
+  },
+  {
+    "file": "frontend/src/app/dashboard/customers/page.tsx",
+    "line": 401,
+    "text": "נוספה: {formatDateShort(customer.created_at)}"
+  },
+  {
+    "file": "frontend/src/app/dashboard/customers/page.tsx",
+    "line": 431,
+    "text": "دمج 2 عملاء שנבחרו"
+  },
+  {
+    "file": "frontend/src/app/dashboard/customers/page.tsx",
+    "line": 439,
+    "text": "<h3 className=\"text-xl font-bold text-gray-900\">לא נמצאו عملاء</h3>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/customers/page.tsx",
+    "line": 456,
+    "text": "שימי לב: פעולה זו תאחד את כל ההזמנות, התשלומים וההיסטוריה של שתי הعملاء לعميل אחת. הعميل השנייה תימחק."
+  },
+  {
+    "file": "frontend/src/app/dashboard/customers/page.tsx",
+    "line": 484,
+    "text": "הعميل הראשית (תישמר)"
+  },
+  {
+    "file": "frontend/src/app/dashboard/customers/page.tsx",
+    "line": 616,
+    "text": "placeholder=\"ملاحظات אישיות, העדפות וכו'...\""
+  },
+  {
+    "file": "frontend/src/app/dashboard/agreements/page.tsx",
+    "line": 71,
+    "text": "description: `אין ${label} עבור ההסכם הזה`,"
+  },
+  {
+    "file": "frontend/src/app/dashboard/agreements/page.tsx",
+    "line": 93,
+    "text": "הסכמים חתומים"
+  },
+  {
+    "file": "frontend/src/app/dashboard/agreements/page.tsx",
+    "line": 142,
+    "text": "הזמנה: {agreement.order_id || \"بدون\"} | נחתם: {agreement.agreed_at ? formatDateTime(agreement.agreed_at) : \"-\"}"
+  },
+  {
+    "file": "frontend/src/app/dashboard/agreements/page.tsx",
+    "line": 145,
+    "text": "אירוע: {agreement.event_date || \"-\"} | الهاتف: {agreement.customer_phone || \"-\"}"
+  },
+  {
+    "file": "frontend/src/app/dashboard/agreements/page.tsx",
+    "line": 157,
+    "text": "צפייה בالتوقيع"
+  },
+  {
+    "file": "frontend/src/app/dashboard/agreements/page.tsx",
+    "line": 166,
+    "text": "צפייה ב-PDF"
+  },
+  {
+    "file": "frontend/src/app/dashboard/agreements/page.tsx",
+    "line": 175,
+    "text": "פתיחת הזמנה"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/page.tsx",
+    "line": 220,
+    "text": "toast({ title: \"تم بنجاح\", description: \"القطع אוחדו בتم بنجاح\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/page.tsx",
+    "line": 228,
+    "text": "description: error instanceof Error ? error.message : \"خطأ בدمج\","
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/page.tsx",
+    "line": 258,
+    "text": "{dresses.length} القطع במערכת • {bookableCount} פעילות בالمخزون"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/page.tsx",
+    "line": 271,
+    "text": "שמלה"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/page.tsx",
+    "line": 296,
+    "text": "<option value=\"retired\">הוצאה מהالمخزون</option>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/page.tsx",
+    "line": 341,
+    "text": "רשימה"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/page.tsx",
+    "line": 352,
+    "text": "תמונות"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/page.tsx",
+    "line": 405,
+    "text": "מק&quot;ט: {dress.id} • {dress.rental_count} إيجارات • {getIntendedUseShortLabel(dress.intended_use)}"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/page.tsx",
+    "line": 408,
+    "text": "מחיר: {formatCurrency(dress.base_price)} • הכנסות: {formatCurrency(dress.total_income)}"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/page.tsx",
+    "line": 474,
+    "text": "מק&quot;ט: {dress.id} • {dress.rental_count} إيجارات • {getIntendedUseLabel(dress.intended_use)}"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/page.tsx",
+    "line": 513,
+    "text": "<h3 className=\"text-xl font-bold text-gray-900\">לא נמצאו القطع</h3>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/page.tsx",
+    "line": 526,
+    "text": "دمج 2 القطع שנבחרו"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/page.tsx",
+    "line": 539,
+    "text": "<h2 className=\"text-2xl font-black text-purple-700\">איחוד القطع</h2>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/page.tsx",
+    "line": 546,
+    "text": "שימי לב: פעולה זו תאחד את כל ההיסטוריה של שתי הالقطع לשמלה אחת. השמלה השנייה תימחק לצמיתות."
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/page.tsx",
+    "line": 571,
+    "text": "שמלה ראשית (תישמר)"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/page.tsx",
+    "line": 578,
+    "text": "<p className=\"text-xs text-muted-foreground\">מק&quot;ט {d.id} • {d.rental_count} إيجارات</p>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/page.tsx",
+    "line": 641,
+    "text": "מק״ט {viewingDress.dress.id} • {getStatusLabel(viewingDress.dress.status)} • {getIntendedUseLabel(viewingDress.dress.intended_use)}"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/page.tsx",
+    "line": 657,
+    "text": "<span className=\"text-white font-bold\">{viewingDress.dress.notes || \"אין ملاحظات מיוחדות\"}</span>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/page.tsx",
+    "line": 689,
+    "text": "הזמנות עתידיות לשמלה"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/page.tsx",
+    "line": 693,
+    "text": "אין כרגע הזמנות עתידיות רשומות לשמלה זו"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/page.tsx",
+    "line": 705,
+    "text": "{formatDateShort(booking.event_date)} • הזמנה #{booking.order_id}"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/page.tsx",
+    "line": 708,
+    "text": "{booking.wearer_name ? `לובשת: ${booking.wearer_name}` : booking.customer_name || \"عميل غير معروف\"}"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/page.tsx",
+    "line": 721,
+    "text": "היסטוריית אירועים"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/page.tsx",
+    "line": 725,
+    "text": "<p className=\"text-center py-8 text-muted-foreground bg-muted/10 rounded-2xl italic\">טרם בוצעו إيجارات לשמלה זו</p>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/page.tsx",
+    "line": 744,
+    "text": "{rental.wearer_name || rental.customer_name || rental.customer_full_name || \"عميل غير معروف\"} (לובשת)"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/page.tsx",
+    "line": 769,
+    "text": "<Edit className=\"h-5 w-5 ml-2\" /> עריכת פרטי שמלה"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/page.tsx",
+    "line": 216,
+    "text": "toast({ title: \"تم بنجاح\", description: \"עסקה נמחקה בتم بنجاح\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/page.tsx",
+    "line": 221,
+    "text": "description: error instanceof Error ? error.message : \"خطأ במחיקת עסקה\","
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/page.tsx",
+    "line": 241,
+    "text": "תזרים מזומנים"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/page.tsx",
+    "line": 406,
+    "text": "ניקוי"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/page.tsx",
+    "line": 498,
+    "text": "מתוך {formatCurrency(transaction.amount)}"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/page.tsx",
+    "line": 547,
+    "text": "<ChevronRight className=\"h-4 w-4\" /> הקודם"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/page.tsx",
+    "line": 550,
+    "text": "עמוד {currentPage} מתוך {totalPages}"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/page.tsx",
+    "line": 559,
+    "text": "הבא <ChevronLeft className=\"h-4 w-4\" />"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/page.tsx",
+    "line": 568,
+    "text": "<p className=\"text-muted-foreground\">אין حركات להצגה</p>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/page.tsx",
+    "line": 100,
+    "text": "'sewing_for_rental': 'تفصيل שנשארת בإيجار',"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/page.tsx",
+    "line": 191,
+    "text": "toast({ title: \"تم بنجاح\", description: \"حجوزات אוחדו בتم بنجاح\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/page.tsx",
+    "line": 199,
+    "text": "description: error instanceof Error ? error.message : \"خطأ בدمج\","
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/page.tsx",
+    "line": 243,
+    "text": "toast({ title: \"خطأ\", description: \"خطأ בעדכון\", variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/page.tsx",
+    "line": 263,
+    "text": "toast({ title: \"خطأ\", description: \"خطأ בإلغاء\", variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/page.tsx",
+    "line": 312,
+    "text": "toast({ title: \"خطأ\", description: error instanceof Error ? error.message : \"خطأ בהעלאה\", variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/page.tsx",
+    "line": 325,
+    "text": "toast({ title: \"خطأ\", description: \"خطأ בحذف\", variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/page.tsx",
+    "line": 336,
+    "text": "toast({ title: \"خطأ\", description: \"خطأ בעדכון תיאור\", variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/page.tsx",
+    "line": 561,
+    "text": "<h3 className=\"text-xl font-bold text-muted-foreground\">לא נמצאו حجوزات</h3>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/page.tsx",
+    "line": 599,
+    "text": "<span className=\"text-[10px] font-black uppercase tracking-widest text-muted-foreground\">הזמנה #{order.id}</span>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/page.tsx",
+    "line": 680,
+    "text": "(כולל {formatCurrency(order.total_customer_charge)})"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/page.tsx",
+    "line": 727,
+    "text": "دمج 2 حجوزات שנבחרו"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/page.tsx",
+    "line": 737,
+    "text": "<h2 className=\"text-2xl font-black text-purple-700\">איחוד حجوزات</h2>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/page.tsx",
+    "line": 744,
+    "text": "שימי לב: פעולה זו תאחד את כל הقطع, התשלומים וההיסטוריה של שתי الحجوزات להזמנה אחת. ההזמנה השנייה תימחק."
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/page.tsx",
+    "line": 770,
+    "text": "ההזמנה הראשית (תישמר)"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/page.tsx",
+    "line": 773,
+    "text": "<h3 className=\"font-bold text-lg mb-1\">הזמנה #{o.id}</h3>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/page.tsx",
+    "line": 946,
+    "text": "<span className=\"text-muted-foreground\">סך قطع:</span>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/page.tsx",
+    "line": 997,
+    "text": "צפיה בחתימה"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/page.tsx",
+    "line": 1009,
+    "text": "צפיה בחתימה"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/page.tsx",
+    "line": 1029,
+    "text": "חתימה"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/page.tsx",
+    "line": 1037,
+    "text": "الخاصة بيחה בווצאפ"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/page.tsx",
+    "line": 1067,
+    "text": "<p className=\"text-center text-xs text-muted-foreground py-4 italic\">אין المرفقات להזמנה זו</p>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/page.tsx",
+    "line": 1137,
+    "text": "<Edit className=\"h-5 w-5 ml-2\" /> تعديل מלאה"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/page.tsx",
+    "line": 1144,
+    "text": "<Plus className=\"h-5 w-5 ml-2\" /> הוספת תשלום"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/new/page.tsx",
+    "line": 45,
+    "text": "toast({ title: \"תמונה התקבלה\", description: \"תמונת השמלה הועלתה בהצלחה לטופס\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/new/page.tsx",
+    "line": 48,
+    "text": "toast({ title: \"שגיאה\", description: \"טעינת התמונה מהשיתוף נכשלה\", variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/new/page.tsx",
+    "line": 75,
+    "text": "toast({ title: \"שגיאה\", description: \"ניתן להעלות רק קובצי תמונה\", variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/new/page.tsx",
+    "line": 80,
+    "text": "toast({ title: \"שגיאה\", description: \"הקובץ גדול מדי (מקסימום 10MB)\", variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/new/page.tsx",
+    "line": 98,
+    "text": "toast({ title: \"הצלחה\", description: \"התמונה הועלתה בהצלחה\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/new/page.tsx",
+    "line": 101,
+    "text": "toast({ title: \"שגיאה\", description: \"העלאת תמונה נכשלה\", variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/new/page.tsx",
+    "line": 106,
+    "text": "action: 'העלאת תמונת שמלה'"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/new/page.tsx",
+    "line": 116,
+    "text": "toast({ title: \"שגיאה\", description: \"נא להזין שם שמלה\", variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/new/page.tsx",
+    "line": 132,
+    "text": "toast({ title: \"הצלחה\", description: \"שמלה נוספה בהצלחה\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/new/page.tsx",
+    "line": 135,
+    "text": "const message = error instanceof Error ? error.message : \"שגיאה בשמירת שמלה\";"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/new/page.tsx",
+    "line": 137,
+    "text": "title: \"שגיאה\","
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/new/page.tsx",
+    "line": 145,
+    "text": "action: 'שמירת שמלה חדשה'"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/new/page.tsx",
+    "line": 162,
+    "text": "<h1 className=\"text-2xl font-black\">הוספת שמלה חדשה</h1>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/new/page.tsx",
+    "line": 169,
+    "text": "<label className=\"text-sm font-bold text-gray-700\">שם השמלה *</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/new/page.tsx",
+    "line": 174,
+    "text": "placeholder=\"לדוגמה: שמלת זהב נוצצת\""
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/new/page.tsx",
+    "line": 180,
+    "text": "<label className=\"text-sm font-bold text-gray-700\">מחיר בסיס</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/new/page.tsx",
+    "line": 194,
+    "text": "<label className=\"text-sm font-bold text-gray-700\">סטטוס</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/new/page.tsx",
+    "line": 200,
+    "text": "<option value=\"available\">פנויה</option>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/new/page.tsx",
+    "line": 201,
+    "text": "<option value=\"sold\">נמכרה</option>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/new/page.tsx",
+    "line": 202,
+    "text": "<option value=\"retired\">הוצאה מהמלאי</option>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/new/page.tsx",
+    "line": 203,
+    "text": "<option value=\"custom_sewing\">תפירה אישית</option>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/new/page.tsx",
+    "line": 209,
+    "text": "<label className=\"text-sm font-bold text-gray-700\">ייעוד שמלה</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/new/page.tsx",
+    "line": 215,
+    "text": "<option value=\"\">ללא ייעוד</option>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/new/page.tsx",
+    "line": 216,
+    "text": "<option value=\"rental\">מיועדת להשכרה</option>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/new/page.tsx",
+    "line": 217,
+    "text": "<option value=\"sale\">מיועדת למכירה</option>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/new/page.tsx",
+    "line": 222,
+    "text": "<label className=\"text-sm font-bold text-gray-700\">תמונת השמלה</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/new/page.tsx",
+    "line": 228,
+    "text": "alt=\"תצוגה מקדימה\""
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/new/page.tsx",
+    "line": 244,
+    "text": "<span className=\"text-sm font-bold text-muted-foreground\">לחצי להעלאת תמונה</span>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/new/page.tsx",
+    "line": 245,
+    "text": "<span className=\"text-[10px] text-muted-foreground/60 uppercase font-black\">JPG, PNG, WEBP (מקס' 10MB)</span>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/new/page.tsx",
+    "line": 260,
+    "text": "<label className=\"text-sm font-bold text-gray-700\">הערות</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/new/page.tsx",
+    "line": 265,
+    "text": "placeholder=\"מידות, סוג בד, דגשים מיוחדים...\""
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/new/page.tsx",
+    "line": 271,
+    "text": "ביטול"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/new/page.tsx",
+    "line": 274,
+    "text": "{saving ? \"טוען...\" : \"שמור שמלה\"}"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/[id]/edit/page.tsx",
+    "line": 64,
+    "text": "toast({ title: \"תמונה התקבלה\", description: \"תמונת השמלה הועלתה בהצלחה (נדרשת שמירה)\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/[id]/edit/page.tsx",
+    "line": 67,
+    "text": "toast({ title: \"שגיאה\", description: \"טעינת התמונה מהשיתוף נכשלה\", variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/[id]/edit/page.tsx",
+    "line": 73,
+    "text": "toast({ title: \"שגיאה\", description: \"השמלה לא נמצאה\", variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/[id]/edit/page.tsx",
+    "line": 77,
+    "text": "toast({ title: \"שגיאה\", description: \"כשל בטעינת שמלה\", variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/[id]/edit/page.tsx",
+    "line": 107,
+    "text": "toast({ title: \"שגיאה\", description: \"ניתן להעלות רק קובצי תמונה\", variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/[id]/edit/page.tsx",
+    "line": 112,
+    "text": "toast({ title: \"שגיאה\", description: \"הקובץ גדול מדי (מקסימום 10MB)\", variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/[id]/edit/page.tsx",
+    "line": 130,
+    "text": "toast({ title: \"הצלחה\", description: \"התמונה הועלתה בהצלחה לטופס\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/[id]/edit/page.tsx",
+    "line": 133,
+    "text": "toast({ title: \"שגיאה\", description: \"העלאת תמונה נכשלה\", variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/[id]/edit/page.tsx",
+    "line": 138,
+    "text": "action: 'העלאת תמונת שמלה'"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/[id]/edit/page.tsx",
+    "line": 148,
+    "text": "toast({ title: \"שגיאה\", description: \"נא להזין שם שמלה\", variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/[id]/edit/page.tsx",
+    "line": 164,
+    "text": "toast({ title: \"הצלחה\", description: \"שמלה עודכנה בהצלחה\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/[id]/edit/page.tsx",
+    "line": 167,
+    "text": "const message = error instanceof Error ? error.message : \"שגיאה בעדכון שמלה\";"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/[id]/edit/page.tsx",
+    "line": 169,
+    "text": "title: \"שגיאה\","
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/[id]/edit/page.tsx",
+    "line": 177,
+    "text": "action: 'עדכון שמלה'"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/[id]/edit/page.tsx",
+    "line": 202,
+    "text": "<h1 className=\"text-2xl font-black\">עריכת שמלה</h1>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/[id]/edit/page.tsx",
+    "line": 209,
+    "text": "<label className=\"text-sm font-bold text-gray-700\">שם השמלה *</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/[id]/edit/page.tsx",
+    "line": 214,
+    "text": "placeholder=\"לדוגמה: שמלת זהב נוצצת\""
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/[id]/edit/page.tsx",
+    "line": 220,
+    "text": "<label className=\"text-sm font-bold text-gray-700\">מחיר בסיס</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/[id]/edit/page.tsx",
+    "line": 234,
+    "text": "<label className=\"text-sm font-bold text-gray-700\">סטטוס</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/[id]/edit/page.tsx",
+    "line": 240,
+    "text": "<option value=\"available\">פנויה</option>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/[id]/edit/page.tsx",
+    "line": 241,
+    "text": "<option value=\"sold\">נמכרה</option>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/[id]/edit/page.tsx",
+    "line": 242,
+    "text": "<option value=\"retired\">הוצאה מהמלאי</option>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/[id]/edit/page.tsx",
+    "line": 243,
+    "text": "<option value=\"custom_sewing\">תפירה אישית</option>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/[id]/edit/page.tsx",
+    "line": 249,
+    "text": "<label className=\"text-sm font-bold text-gray-700\">ייעוד שמלה</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/[id]/edit/page.tsx",
+    "line": 255,
+    "text": "<option value=\"\">ללא ייעוד</option>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/[id]/edit/page.tsx",
+    "line": 256,
+    "text": "<option value=\"rental\">מיועדת להשכרה</option>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/[id]/edit/page.tsx",
+    "line": 257,
+    "text": "<option value=\"sale\">מיועדת למכירה</option>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/[id]/edit/page.tsx",
+    "line": 262,
+    "text": "<label className=\"text-sm font-bold text-gray-700\">תמונת השמלה</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/[id]/edit/page.tsx",
+    "line": 268,
+    "text": "alt=\"תצוגה מקדימה\""
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/[id]/edit/page.tsx",
+    "line": 284,
+    "text": "<span className=\"text-sm font-bold text-muted-foreground\">לחצי להעלאת תמונה</span>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/[id]/edit/page.tsx",
+    "line": 285,
+    "text": "<span className=\"text-[10px] text-muted-foreground/60 uppercase font-black\">JPG, PNG, WEBP (מקס' 10MB)</span>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/[id]/edit/page.tsx",
+    "line": 300,
+    "text": "<label className=\"text-sm font-bold text-gray-700\">הערות</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/[id]/edit/page.tsx",
+    "line": 305,
+    "text": "placeholder=\"מידות, סוג בד, דגשים מיוחדים...\""
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/[id]/edit/page.tsx",
+    "line": 311,
+    "text": "ביטול"
+  },
+  {
+    "file": "frontend/src/app/dashboard/dresses/[id]/edit/page.tsx",
+    "line": 314,
+    "text": "{saving ? \"טוען...\" : \"עדכן שמלה\"}"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 40,
+    "text": "{ value: \"existing_order\", label: \"הזמנה\" },"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 41,
+    "text": "{ value: \"repair\", label: \"תיקונים\" },"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 42,
+    "text": "{ value: \"other\", label: \"אחר\" },"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 46,
+    "text": "{ value: \"materials\", label: \"חומרים\" },"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 47,
+    "text": "{ value: \"overhead\", label: \"תקורה\" },"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 48,
+    "text": "{ value: \"tax\", label: \"מיסוי\" },"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 49,
+    "text": "{ value: \"equipment\", label: \"ציוד\" },"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 50,
+    "text": "{ value: \"salary\", label: \"משכורות\" },"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 51,
+    "text": "{ value: \"other\", label: \"אחר\" },"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 55,
+    "text": "{ value: \"cash\", label: \"מזומן\" },"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 56,
+    "text": "{ value: \"bit\", label: \"ביט\" },"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 57,
+    "text": "{ value: \"paybox\", label: \"פייבוקס\" },"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 58,
+    "text": "{ value: \"credit\", label: \"אשראי\" },"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 59,
+    "text": "{ value: \"transfer\", label: \"העברה\" },"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 60,
+    "text": "{ value: \"check\", label: \"צ'ק\" },"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 145,
+    "text": "toast({ title: \"קובץ שותף נטען\", description: \"האסמכתא צורפה לטופס הנוכחי.\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 184,
+    "text": "toast({ title: \"הקובץ גדול מדי\", description: \"הגודל המרבי הוא 20MB. נסי לצלם שוב ברזולוציה נמוכה יותר.\", variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 197,
+    "text": "toast({ title: \"שגיאה בקריאת הקובץ\", description: \"לא ניתן לקרוא את הקובץ. נסי לצלם שוב.\", variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 202,
+    "text": "action: 'קריאת קובץ אסמכתא'"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 212,
+    "text": "toast({ title: \"חסר סכום\", description: \"נא להזין את סכום התנועה.\", variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 216,
+    "text": "toast({ title: \"חסר אמצעי תשלום\", description: \"נא לבחור אמצעי תשלום לתנועה.\", variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 220,
+    "text": "toast({ title: \"חסר סוג הכנסה\", description: \"נא לבחור סוג הכנסה: הזמנה, תיקונים או אחר.\", variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 224,
+    "text": "toast({ title: \"חסרה קטגוריה\", description: \"נא לבחור קטגוריה להוצאה (חומרים, תקורה וכו').\", variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 228,
+    "text": "toast({ title: \"חסרה לקוחה\", description: \"נא לחפש ולבחור לקוחה קיימת, או ליצור לקוחה חדשה.\", variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 260,
+    "text": "toast({ title: \"חסר שם לקוחה\", description: \"נא למלא שם מלא ללקוחה החדשה.\", variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 269,
+    "text": "toast({ title: \"הצלחה!\", description: \"הפעולה נרשמה בהצלחה\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 276,
+    "text": ": \"לא ניתן לשמור את התנועה. בדקי את החיבור לאינטרנט ונסי שוב.\";"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 277,
+    "text": "toast({ title: \"שגיאה בשמירה\", description: message, variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 282,
+    "text": "action: 'שמירת תנועה'"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 298,
+    "text": "<h1 className=\"text-lg font-black\">תנועה חדשה</h1>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 321,
+    "text": "הוצאה"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 331,
+    "text": "הכנסה"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 337,
+    "text": "<label className=\"text-xs text-muted-foreground font-bold uppercase tracking-widest mb-0.5 block\">סכום בשקלים</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 358,
+    "text": "<Calendar className=\"h-3 w-3\" /> תאריך"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 372,
+    "text": "<label className=\"text-xs font-bold text-muted-foreground uppercase tracking-widest\">מה סוג ההכנסה? *</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 398,
+    "text": "<label className=\"text-xs font-bold text-primary flex items-center gap-1\"><Search className=\"h-3 w-3\" /> בחרי הזמנה</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 417,
+    "text": "<span className=\"text-xs text-muted-foreground\">{order.order_summary || 'הזמנה'}</span>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 419,
+    "text": "יתרה: ₪{(order.total_price || 0) + (order.total_customer_charge || 0) - (order.paid_amount || 0)}"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 433,
+    "text": "<p className=\"text-[10px] font-black text-primary uppercase tracking-widest\">משוייך להזמנה #{orderId}</p>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 443,
+    "text": "<Wallet className=\"h-3 w-3\" /> חוב נוכחי בהזמנה: ₪{balance}"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 455,
+    "text": "<label className=\"text-xs font-bold text-muted-foreground uppercase tracking-widest\">מי הלקוחה?</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 461,
+    "text": "<User className=\"h-4 w-4\" /> פרטי לקוחה חדשה"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 484,
+    "text": "label=\"ייבוא מאנשי קשר\""
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 490,
+    "text": "<label className=\"text-xs font-medium\">שם מלא</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 495,
+    "text": "placeholder=\"שם הלקוחה\""
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 499,
+    "text": "<label className=\"text-xs font-medium\">טלפון</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 509,
+    "text": "<label className=\"text-xs font-medium\">אימייל (אופציונלי)</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 524,
+    "text": "placeholder=\"חפשי לקוחה...\""
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 567,
+    "text": "יצירת לקוחה חדשה: \"{customerSearch}\""
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 583,
+    "text": "<label className=\"text-xs font-bold text-muted-foreground uppercase tracking-widest\">ספק / חנות</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 587,
+    "text": "placeholder=\"איפה קנית?\""
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 592,
+    "text": "<label className=\"text-xs font-bold text-muted-foreground uppercase tracking-widest\">מוצר / שירות</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 596,
+    "text": "placeholder=\"מה קנית?\""
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 603,
+    "text": "<label className=\"text-xs font-bold text-muted-foreground uppercase tracking-widest\">קטגוריה *</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 609,
+    "text": "<option value=\"\">בחרי קטגוריה...</option>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 616,
+    "text": "{ id: \"business\", label: \"עסקית\" },"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 617,
+    "text": "{ id: \"customer\", label: \"לקוחה\" },"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 618,
+    "text": "{ id: \"split\", label: \"משולב\" }"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 636,
+    "text": "<label className=\"text-xs font-bold text-red-700 uppercase\">שיוך לחיוב</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 648,
+    "text": "<p className=\"text-[10px] text-muted-foreground\">הזמנה #{o.id}</p>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 652,
+    "text": "₪{(o.total_price || 0) + (o.total_customer_charge || 0) - (o.paid_amount || 0)} חסר"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 661,
+    "text": "<p className=\"text-[10px] font-black text-red-600\">הזמנה #{orderId}</p>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 669,
+    "text": "<Wallet className=\"h-3 w-3\" /> חוב נוכחי: ₪{balance}"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 685,
+    "text": "placeholder=\"כמה היא משלמת?\""
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 701,
+    "text": "<CreditCard className=\"h-3 w-3\" /> אמצעי תשלום"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 708,
+    "text": "<option value=\"\" disabled>בחרי אמצעי תשלום...</option>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 718,
+    "text": "<label className=\"text-[11px] font-bold text-muted-foreground uppercase\">מספר צ'ק</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 723,
+    "text": "<label className=\"text-[11px] font-bold text-muted-foreground uppercase\">אסמכתא</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 724,
+    "text": "<Input value={confirmationNumber} onChange={(e) => setConfirmationNumber(e.target.value)} placeholder=\"מספר אישור...\" className=\"h-10\" />"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 734,
+    "text": "<label className=\"text-[10px] font-bold text-muted-foreground uppercase\">4 ספרות</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 744,
+    "text": "<label className=\"text-[10px] font-bold text-muted-foreground uppercase\">תשלומים</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 759,
+    "text": "<label className=\"text-[10px] font-bold text-muted-foreground uppercase\">מס' בנק</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 763,
+    "text": "<label className=\"text-[10px] font-bold text-muted-foreground uppercase\">מס' סניף</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 767,
+    "text": "<label className=\"text-[10px] font-bold text-muted-foreground uppercase\">מס' חשבון</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 774,
+    "text": "<label className=\"text-xs font-bold text-muted-foreground uppercase tracking-widest\">הערות</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 778,
+    "text": "placeholder=\"פרטים נוספים...\""
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 787,
+    "text": "<Camera className=\"h-3 w-3\" /> {type === \"expense\" ? \"צילום קבלה\" : \"אסמכתא / צילום\"}"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 794,
+    "text": "<span className=\"font-bold text-sm\">{fileName || \"לחצי להעלאת קובץ או צילום\"}</span>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 811,
+    "text": "ביטול"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+    "line": 821,
+    "text": "{saving ? \"שומר...\" : \"שמרי תנועה 🎉\"}"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 35,
+    "text": "{ value: \"existing_order\", label: \"הזמנה\" },"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 36,
+    "text": "{ value: \"repair\", label: \"תיקונים\" },"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 37,
+    "text": "{ value: \"other\", label: \"אחר\" },"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 41,
+    "text": "{ value: \"materials\", label: \"חומרים\" },"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 42,
+    "text": "{ value: \"overhead\", label: \"תקורה\" },"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 43,
+    "text": "{ value: \"tax\", label: \"מיסוי\" },"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 44,
+    "text": "{ value: \"equipment\", label: \"ציוד\" },"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 45,
+    "text": "{ value: \"salary\", label: \"משכורות\" },"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 46,
+    "text": "{ value: \"other\", label: \"אחר\" },"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 50,
+    "text": "{ value: \"cash\", label: \"מזומן\" },"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 51,
+    "text": "{ value: \"bit\", label: \"ביט\" },"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 52,
+    "text": "{ value: \"paybox\", label: \"פייבוקס\" },"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 53,
+    "text": "{ value: \"credit\", label: \"אשראי\" },"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 54,
+    "text": "{ value: \"transfer\", label: \"העברה\" },"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 55,
+    "text": "{ value: \"check\", label: \"צ'ק\" },"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 149,
+    "text": "toast({ title: \"שגיאה\", description: \"לא ניתן לטעון את העסקה\", variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 192,
+    "text": "toast({ title: \"הקובץ גדול מדי\", description: \"הגודל המרבי הוא 20MB. נסי לצלם שוב ברזולוציה נמוכה יותר.\", variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 202,
+    "text": "toast({ title: \"שגיאה בקריאת הקובץ\", description: \"לא ניתן לקרוא את הקובץ. נסי לצלם שוב.\", variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 207,
+    "text": "action: 'קריאת קובץ אסמכתא'"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 216,
+    "text": "toast({ title: \"חסר סכום\", description: \"נא להזין את סכום התנועה.\", variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 220,
+    "text": "toast({ title: \"חסר סוג הכנסה\", description: \"נא לבחור סוג הכנסה: הזמנה, תיקונים או אחר.\", variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 224,
+    "text": "toast({ title: \"חסרה קטגוריה\", description: \"נא לבחור קטגוריה להוצאה (חומרים, תקורה וכו').\", variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 228,
+    "text": "toast({ title: \"חסרה לקוחה\", description: \"נא לבחור לקוחה קיימת או ליצור חדשה.\", variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 259,
+    "text": "toast({ title: \"הצלחה!\", description: \"העסקה עודכנה בהצלחה\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 264,
+    "text": ": \"לא ניתן לעדכן את התנועה. בדקי את החיבור לאינטרנט ונסי שוב.\";"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 265,
+    "text": "toast({ title: \"שגיאה בעדכון\", description: message, variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 270,
+    "text": "action: 'עדכון תנועה'"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 277,
+    "text": "if (loading) return <div className=\"flex items-center justify-center min-h-screen\">טוען...</div>;"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 288,
+    "text": "<h1 className=\"text-xl font-black\">עריכת תנועה</h1>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 297,
+    "text": "<span className=\"text-sm font-bold text-muted-foreground uppercase tracking-widest\">סוג התנועה:</span>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 299,
+    "text": "{type === 'income' ? 'הכנסה' : 'הוצאה'}"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 305,
+    "text": "<label className=\"text-xs text-muted-foreground font-bold uppercase tracking-widest mb-2 block\">סכום בשקלים</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 326,
+    "text": "<Calendar className=\"h-3 w-3\" /> תאריך"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 337,
+    "text": "<CreditCard className=\"h-3 w-3\" /> אמצעי תשלום"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 355,
+    "text": "<label className=\"text-xs font-bold text-muted-foreground uppercase tracking-widest\">מה סוג ההכנסה? *</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 381,
+    "text": "<label className=\"text-xs font-bold text-primary flex items-center gap-1\"><Search className=\"h-3 w-3\" /> בחרי הזמנה</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 400,
+    "text": "<span className=\"text-xs text-muted-foreground\">{order.order_summary || 'הזמנה'}</span>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 413,
+    "text": "<p className=\"text-[10px] font-black text-primary uppercase tracking-widest\">משוייך להזמנה #{orderId}</p>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 423,
+    "text": "<label className=\"text-xs font-bold text-muted-foreground uppercase tracking-widest\">מי הלקוחה?</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 427,
+    "text": "placeholder=\"חפשי לקוחה...\""
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 459,
+    "text": "<label className=\"text-xs font-bold text-muted-foreground uppercase tracking-widest\">ספק / חנות</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 463,
+    "text": "placeholder=\"איפה קנית?\""
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 468,
+    "text": "<label className=\"text-xs font-bold text-muted-foreground uppercase tracking-widest\">מוצר / שירות</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 472,
+    "text": "placeholder=\"מה קנית?\""
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 479,
+    "text": "<label className=\"text-xs font-bold text-muted-foreground uppercase tracking-widest\">קטגוריה *</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 485,
+    "text": "<option value=\"\">בחרי קטגוריה...</option>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 492,
+    "text": "{ id: \"business\", label: \"עסקית\" },"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 493,
+    "text": "{ id: \"customer\", label: \"לקוחה\" },"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 494,
+    "text": "{ id: \"split\", label: \"משולב\" }"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 512,
+    "text": "<label className=\"text-xs font-bold text-red-700 uppercase\">שיוך לחיוב</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 523,
+    "text": "<p className=\"text-[10px] text-muted-foreground\">הזמנה #{o.id}</p>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 530,
+    "text": "<p className=\"text-[10px] font-black text-red-600\">הזמנה #{orderId}</p>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 544,
+    "text": "placeholder=\"כמה היא משלמת?\""
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 561,
+    "text": "<label className=\"text-[10px] font-bold text-muted-foreground uppercase\">אסמכתא</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 562,
+    "text": "<Input value={confirmationNumber} onChange={(e) => setConfirmationNumber(e.target.value)} placeholder=\"אישור...\" className=\"h-10 text-center\" />"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 565,
+    "text": "<label className=\"text-[10px] font-bold text-muted-foreground uppercase\">4 ספרות</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 575,
+    "text": "<label className=\"text-[10px] font-bold text-muted-foreground uppercase\">תשלומים</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 589,
+    "text": "<label className=\"text-[10px] font-bold text-muted-foreground uppercase\">אסמכתא</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 590,
+    "text": "<Input value={confirmationNumber} onChange={(e) => setConfirmationNumber(e.target.value)} placeholder=\"מספר אישור...\" className=\"h-10\" />"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 597,
+    "text": "<label className=\"text-[10px] font-bold text-muted-foreground uppercase\">מס' בנק</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 601,
+    "text": "<label className=\"text-[10px] font-bold text-muted-foreground uppercase\">מס' סניף</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 605,
+    "text": "<label className=\"text-[10px] font-bold text-muted-foreground uppercase\">מס' חשבון</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 614,
+    "text": "<label className=\"text-[10px] font-bold text-muted-foreground uppercase\">מספר צ'ק</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 619,
+    "text": "<label className=\"text-[10px] font-bold text-muted-foreground uppercase\">מס' בנק</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 623,
+    "text": "<label className=\"text-[10px] font-bold text-muted-foreground uppercase\">מס' סניף</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 627,
+    "text": "<label className=\"text-[10px] font-bold text-muted-foreground uppercase\">מס' חשבון</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 635,
+    "text": "<label className=\"text-xs font-bold text-muted-foreground uppercase tracking-widest\">הערות</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 639,
+    "text": "placeholder=\"פרטים נוספים...\""
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 648,
+    "text": "<Camera className=\"h-3 w-3\" /> {type === \"expense\" ? \"צילום קבלה\" : \"אסמכתא / צילום\"}"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 655,
+    "text": "<span className=\"font-bold text-sm\">{fileName || \"לחצי להעלאת קובץ או צילום\"}</span>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 672,
+    "text": "ביטול"
+  },
+  {
+    "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+    "line": 682,
+    "text": "{saving ? \"מעדכן...\" : \"שמרי שינויים 🎉\"}"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 53,
+    "text": "{ value: \"rental\", label: \"השכרה\" },"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 54,
+    "text": "{ value: \"sewing_for_rental\", label: \"תפירה שנשארת בהשכרה\" },"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 55,
+    "text": "{ value: \"sewing\", label: \"תפירה\" },"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 56,
+    "text": "{ value: \"sale\", label: \"מכירה\" },"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 163,
+    "text": "toast({ title: \"שימי לב\", description: \"לא נמצאו שמלות פעילות במלאי\", variant: \"default\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 166,
+    "text": "toast({ title: \"שגיאה\", description: dresRes.message || \"לא ניתן לטעון את רשימת השמלות\", variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 171,
+    "text": "toast({ title: \"שגיאת תקשורת\", description: \"לא ניתן להתחבר לשרת\", variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 201,
+    "text": "toast({ title: \"קובץ שותף נטען\", description: \"האסמכתא צורפה לתשלום הראשון במקדמה.\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 311,
+    "text": "toast({ title: \"הקובץ גדול מדי\", description: \"הגודל המרבי הוא 20MB. נסי לצלם שוב ברזולוציה נמוכה יותר.\", variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 325,
+    "text": "toast({ title: \"שגיאה בקריאת הקובץ\", description: \"לא ניתן לקרוא את הקובץ. נסי לצלם שוב.\", variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 330,
+    "text": "action: 'קריאת קובץ אסמכתא (מקדמה)'"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 354,
+    "text": "action: 'דחיסת קובץ מצורף בתור'"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 381,
+    "text": "throw new Error(response.message || \"לא ניתן ליצור קישור חתימה\");"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 395,
+    "text": "toast({ title: \"קישור חתימה מוכן\", description: \"הקישור הועתק ללוח.\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 397,
+    "text": "toast({ title: \"קישור חתימה מוכן\", description: data.link });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 408,
+    "text": "title: \"שגיאה\","
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 409,
+    "text": "description: error instanceof Error ? error.message : \"לא ניתן ליצור קישור חתימה\","
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 435,
+    "text": "toast({ title: \"שגיאה\", description: \"נא למלא שם של הלקוחה החדשה\", variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 439,
+    "text": "toast({ title: \"שגיאה\", description: \"נא לבחור לקוחה מהרשימה\", variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 443,
+    "text": "toast({ title: \"שגיאה\", description: \"נא להזין תאריך אירוע\", variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 447,
+    "text": "toast({ title: \"שגיאה\", description: \"נא לבחור אמצעי תשלום עבור המקדמה\", variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 496,
+    "text": "toast({ title: \"הצלחה!\", description: \"הזמנה נוצרה בהצלחה 🎉\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 510,
+    "text": "const uploadMessage = uploadError instanceof Error ? uploadError.message : \"שגיאה בהעלאת קבצים מצורפים\";"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 512,
+    "text": "title: \"שגיאה בהעלאת קבצים מצורפים\","
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 513,
+    "text": "description: `${uploadMessage}. ההזמנה נוצרה. אפשר לצרף אותם דרך מסך עריכת ההזמנה.`,"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 520,
+    "text": "action: 'העלאת קבצים מצורפים להזמנה חדשה'"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 530,
+    "text": "const message = error instanceof Error ? error.message : \"שגיאה בשמירת הזמנה\";"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 531,
+    "text": "toast({ title: \"שגיאה\", description: message, variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 536,
+    "text": "action: 'שמירת הזמנה'"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 552,
+    "text": "<CardTitle className=\"text-2xl font-black text-green-700\">ההזמנה נשמרה בהצלחה</CardTitle>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 553,
+    "text": "<p className=\"text-sm text-muted-foreground\">הזמנה #{createdOrderId}</p>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 559,
+    "text": "<p className=\"font-bold\">לינק חתימה ללקוחה</p>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 565,
+    "text": "placeholder={creatingSignLink ? \"יוצר קישור...\" : \"לא נוצר קישור עדיין\"}"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 575,
+    "text": "{creatingSignLink ? \"יוצר קישור...\" : \"העתקה מחדש\"}"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 584,
+    "text": "חתימה מיידית"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 593,
+    "text": "שליחה לוואטסאפ"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 604,
+    "text": "עריכה להזמנה"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 611,
+    "text": "חזרה לרשימת הזמנות"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 629,
+    "text": "<h1 className=\"text-xl font-black\">הזמנה חדשה</h1>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 632,
+    "text": "סה&quot;כ לתשלום: <span className=\"text-green-600 font-bold text-lg\">{formatCurrency(totalPrice)}</span>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 646,
+    "text": "<h2 className=\"font-bold text-base sm:text-lg\">לקוחה</h2>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 657,
+    "text": "קיימת"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 667,
+    "text": "חדשה"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 696,
+    "text": "placeholder=\"חיפוש לפי שם או טלפון...\""
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 734,
+    "text": "יצירת לקוחה: \"{customerSearch}\""
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 758,
+    "text": "<label className=\"text-[10px] font-bold text-muted-foreground uppercase tracking-wider\">שם מלא *</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 762,
+    "text": "placeholder=\"שם הלקוחה\""
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 767,
+    "text": "<label className=\"text-[10px] font-bold text-muted-foreground uppercase tracking-wider\">טלפון</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 777,
+    "text": "<label className=\"text-[10px] font-bold text-muted-foreground uppercase tracking-wider\">מקור</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 781,
+    "text": "placeholder=\"מאיפה הגיעה?\""
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 796,
+    "text": "<h2 className=\"font-bold text-base sm:text-lg\">מועד אירוע</h2>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 814,
+    "text": "<h2 className=\"font-bold text-base sm:text-lg\">שמלות ופריטים</h2>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 817,
+    "text": "<Plus className=\"h-4 w-4 ml-1\" /> פריט נוסף"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 834,
+    "text": "פריט {index + 1}"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 852,
+    "text": "<label className=\"text-[10px] font-bold text-muted-foreground uppercase tracking-widest\">סוג פעולה</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 871,
+    "text": "<label className=\"text-[10px] font-bold text-muted-foreground uppercase tracking-widest\">בחירת שמלה</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 891,
+    "text": "<p className=\"text-[11px] font-black text-gray-900\">יומן תפוסה לשמלה</p>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 893,
+    "text": "תאריך הזמנה נוכחית:{\" \"}"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 895,
+    "text": "{eventDate ? formatDateShort(eventDate) : \"לא נבחר עדיין\"}"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 901,
+    "text": "<p className=\"text-[11px] font-bold text-gray-800\">השמלה כבר מוזמנת לתאריכים:</p>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 912,
+    "text": "הזמנה #{order.order_id} • {formatDateShort(order.event_date)}"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 914,
+    "text": "{order.wearer_name ? ` • לובשת: ${order.wearer_name}` : \"\"}"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 920,
+    "text": "<p className=\"text-[11px] text-green-700 font-medium\">כרגע אין הזמנות עתידיות לשמלה הזו.</p>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 925,
+    "text": "יש חפיפה לתאריך ההזמנה הנוכחי. אפשר להמשיך לפי שיקול דעת המנהלת."
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 935,
+    "text": "placeholder=\"שם השמלה החדשה\""
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 942,
+    "text": "<label className=\"text-[10px] font-bold text-muted-foreground uppercase tracking-widest\">שם הלובשת</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 946,
+    "text": "placeholder=\"שם מלא (אופציונלי)\""
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 953,
+    "text": "<label className=\"text-[10px] font-bold text-muted-foreground uppercase tracking-widest\">מחיר בסיס</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 969,
+    "text": "<label className=\"text-[10px] font-bold text-muted-foreground uppercase tracking-widest\">תוספות</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 990,
+    "text": "הערות לפריט {item.notes ? \"📝\" : \"(לחצי להוספה)\"}"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 996,
+    "text": "placeholder=\"הערה ספציפית לפריט זה...\""
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 1011,
+    "text": "<Plus className=\"h-4 w-4 ml-1\" /> פריט נוסף"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 1021,
+    "text": "<h2 className=\"font-bold text-lg\">תשלום מקדמה</h2>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 1029,
+    "text": "<Plus className=\"h-4 w-4 ml-1\" /> תשלום נוסף"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 1038,
+    "text": "<label className=\"text-[10px] font-bold text-muted-foreground\">סכום</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 1058,
+    "text": "<label className=\"text-[10px] font-bold text-muted-foreground\">אמצעי תשלום</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 1068,
+    "text": "<option value=\"\" disabled>בחרי אמצעי תשלום...</option>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 1069,
+    "text": "<option value=\"cash\">מזומן</option>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 1070,
+    "text": "<option value=\"credit\">אשראי</option>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 1072,
+    "text": "<option value=\"paybox\">פייבוקס</option>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 1073,
+    "text": "<option value=\"transfer\">העברה</option>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 1074,
+    "text": "<option value=\"check\">צ׳ק</option>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 1080,
+    "text": "<label className=\"text-[10px] font-bold text-muted-foreground\">אסמכתא</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 1088,
+    "text": "placeholder=\"מספר אישור...\""
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 1093,
+    "text": "<label className=\"text-[10px] font-bold text-muted-foreground\">4 ספרות</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 1108,
+    "text": "<label className=\"text-[10px] font-bold text-muted-foreground\">תשלומים</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 1126,
+    "text": "<label className=\"text-[10px] font-bold text-muted-foreground\">אסמכתא</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 1134,
+    "text": "placeholder=\"מספר אישור...\""
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 1144,
+    "text": "placeholder=\"מס' בנק\""
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 1155,
+    "text": "placeholder=\"מס' סניף\""
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 1166,
+    "text": "placeholder=\"מס' חשבון\""
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 1183,
+    "text": "placeholder=\"מס' צ'ק\""
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 1193,
+    "text": "placeholder=\"מס' בנק\""
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 1204,
+    "text": "placeholder=\"מס' סניף\""
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 1215,
+    "text": "placeholder=\"מס' חשבון\""
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 1235,
+    "text": "<span className=\"text-[10px] mr-1 hidden sm:inline\">{payment.fileName ? \"הועלה\" : \"אסמכתא\"}</span>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 1260,
+    "text": "<label className=\"font-bold text-lg text-green-600 block\">הערות נוספות</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 1264,
+    "text": "placeholder=\"כל פרט נוסף שחשוב לזכור...\""
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 1277,
+    "text": "<h2 className=\"font-bold text-lg\">קבצים מצורפים</h2>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 1284,
+    "text": "הוסף קובץ"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 1290,
+    "text": "<Card className=\"border-2\"><CardContent className=\"p-4 text-center text-muted-foreground text-sm italic\">אין קבצים מצורפים. הקבצים יעלו לאחר יצירת ההזמנה.</CardContent></Card>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 1337,
+    "text": "<p className=\"text-xs text-muted-foreground font-bold uppercase\">סה&quot;כ הזמנה</p>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 1346,
+    "text": "ביטול"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+    "line": 1353,
+    "text": "{saving ? \"יוצר הזמנה...\" : \"צרי הזמנה 🎉\"}"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 39,
+    "text": "{ value: \"rental\", label: \"השכרה\" },"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 40,
+    "text": "{ value: \"sewing_for_rental\", label: \"תפירה שנשארת בהשכרה\" },"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 41,
+    "text": "{ value: \"sewing\", label: \"תפירה\" },"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 42,
+    "text": "{ value: \"sale\", label: \"מכירה\" },"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 175,
+    "text": "name: it.dress_name || `שמלה #${it.dress_id}`,"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 200,
+    "text": "toast({ title: \"שגיאה\", description: orderRes.message || \"הזמנה לא נמצאה\", variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 206,
+    "text": "toast({ title: \"שגיאה\", description: \"לא ניתן לטעון את פרטי ההזמנה. בדקי את החיבור לשרת.\", variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 239,
+    "text": "toast({ title: \"הצלחה\", description: `${prepared.length} קבצים הועלו` });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 241,
+    "text": "const message = err instanceof Error ? err.message : \"שגיאה בהעלאה\";"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 242,
+    "text": "toast({ title: \"שגיאה\", description: message, variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 247,
+    "text": "action: 'העלאת קובץ מצורף'"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 255,
+    "text": "if (!confirm(\"למחוק קובץ זה?\")) return;"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 260,
+    "text": "toast({ title: \"שגיאה\", description: \"שגיאה במחיקה\", variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 270,
+    "text": "toast({ title: \"שגיאה\", description: \"שגיאה בעדכון\", variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 335,
+    "text": "throw new Error(response.message || \"לא ניתן ליצור קישור חתימה\");"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 348,
+    "text": "toast({ title: \"קישור חתימה נוצר\", description: \"הקישור הועתק ללוח.\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 350,
+    "text": "toast({ title: \"קישור חתימה נוצר\", description: data.link });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 360,
+    "text": "title: \"שגיאה\","
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 361,
+    "text": "description: error instanceof Error ? error.message : \"לא ניתן ליצור קישור חתימה\","
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 430,
+    "text": "toast({ title: \"שגיאה\", description: \"נא להזין תאריך אירוע\", variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 459,
+    "text": "toast({ title: \"הצלחה!\", description: \"הזמנה עודכנה בהצלחה 🎉\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 462,
+    "text": "const message = error instanceof Error ? error.message : \"שגיאה בעדכון ההזמנה\";"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 463,
+    "text": "toast({ title: \"שגיאה\", description: message, variant: \"destructive\" });"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 468,
+    "text": "action: 'עדכון הזמנה'"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 480,
+    "text": "return <div className=\"flex items-center justify-center min-h-screen\">טוען...</div>;"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 491,
+    "text": "<h1 className=\"text-xl font-black\">עריכת הזמנה #{orderId}</h1>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 494,
+    "text": "לקוחה: <span className=\"text-green-600 font-bold\">{customerName}</span>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 507,
+    "text": "<h2 className=\"font-bold text-base sm:text-lg\">מועד אירוע</h2>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 524,
+    "text": "<h2 className=\"font-bold text-base sm:text-lg\">חתימה דיגיטלית</h2>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 537,
+    "text": "צפיה בחתימה"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 549,
+    "text": "צפיה בחתימה"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 561,
+    "text": "{sendingSignLink ? \"מייצר...\" : \"העתקת קישור\"}"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 571,
+    "text": "חתימה"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 580,
+    "text": "שליחה בווצאפ"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 587,
+    "text": "חסר טלפון לקוחה בהזמנה. לא ניתן לשלוח הודעת WhatsApp."
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 599,
+    "text": "<h2 className=\"font-bold text-lg\">שמלות ופריטים</h2>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 602,
+    "text": "<Plus className=\"h-4 w-4 ml-1\" /> פריט נוסף"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 619,
+    "text": "פריט {index + 1}"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 637,
+    "text": "<label className=\"text-[10px] font-bold text-muted-foreground uppercase tracking-widest\">סוג פעולה</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 656,
+    "text": "<label className=\"text-[10px] font-bold text-muted-foreground uppercase tracking-widest\">בחירת שמלה</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 676,
+    "text": "<p className=\"text-[11px] font-black text-gray-900\">יומן תפוסה לשמלה</p>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 678,
+    "text": "תאריך הזמנה נוכחית:{\" \"}"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 680,
+    "text": "{eventDate ? formatDateShort(eventDate) : \"לא נבחר עדיין\"}"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 686,
+    "text": "<p className=\"text-[11px] font-bold text-gray-800\">השמלה כבר מוזמנת לתאריכים:</p>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 697,
+    "text": "הזמנה #{order.order_id} • {formatDateShort(order.event_date)}"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 699,
+    "text": "{order.wearer_name ? ` • לובשת: ${order.wearer_name}` : \"\"}"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 705,
+    "text": "<p className=\"text-[11px] text-green-700 font-medium\">כרגע אין הזמנות עתידיות לשמלה הזו.</p>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 710,
+    "text": "יש חפיפה לתאריך ההזמנה הנוכחי. אפשר להמשיך לפי שיקול דעת המנהלת."
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 720,
+    "text": "placeholder=\"שם השמלה החדשה\""
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 727,
+    "text": "<label className=\"text-[10px] font-bold text-muted-foreground uppercase tracking-widest\">שם הלובשת</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 731,
+    "text": "placeholder=\"שם מלא (אופציונלי)\""
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 738,
+    "text": "<label className=\"text-[10px] font-bold text-muted-foreground uppercase tracking-widest\">מחיר בסיס</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 748,
+    "text": "<label className=\"text-[10px] font-bold text-muted-foreground uppercase tracking-widest\">תוספות</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 762,
+    "text": "הערות {item.notes ? \"📝\" : \"(לחצי להוספה)\"}"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 768,
+    "text": "placeholder=\"הערה ספציפית לפריט זה...\""
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 783,
+    "text": "<Plus className=\"h-4 w-4 ml-1\" /> פריט נוסף"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 790,
+    "text": "<label className=\"font-bold text-lg text-green-600 block\">הערות נוספות</label>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 794,
+    "text": "placeholder=\"כל פרט נוסף שחשוב לזכור...\""
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 804,
+    "text": "<h2 className=\"font-bold text-lg\">קבצים מצורפים</h2>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 814,
+    "text": "{uploadingFiles ? \"מעלה...\" : \"הוסף קובץ\"}"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 820,
+    "text": "<Card className=\"border-2\"><CardContent className=\"p-4 text-center text-muted-foreground text-sm\">טוען קבצים...</CardContent></Card>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 822,
+    "text": "<Card className=\"border-2\"><CardContent className=\"p-4 text-center text-muted-foreground text-sm italic\">אין קבצים מצורפים</CardContent></Card>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 846,
+    "text": "placeholder=\"תיאור...\""
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 885,
+    "text": "<p className=\"text-xs text-muted-foreground font-bold uppercase\">סה&quot;כ הזמנה</p>"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 894,
+    "text": "ביטול"
+  },
+  {
+    "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+    "line": 901,
+    "text": "{saving ? \"מעדכן...\" : \"שמרי שינויים ✨\"}"
+  },
+  {
+    "file": "frontend/public/manifest.json",
+    "line": 4,
+    "text": "\"description\": \"מערכת ניהול עסק להשכרת ותפירת שמלות ערב\","
+  },
+  {
+    "file": "backend/src/index.js",
+    "line": 129,
+    "text": "message: 'נדרשת התחברות לצפייה בקבצים'"
+  },
+  {
+    "file": "backend/src/index.js",
+    "line": 141,
+    "text": "message: 'פג תוקף ההתחברות - נא להתחבר מחדש'"
+  },
+  {
+    "file": "backend/src/index.js",
+    "line": 204,
+    "text": "message: 'יותר מדי ניסיונות התחברות. נסה שוב בעוד 15 דקות.',"
+  },
+  {
+    "file": "backend/src/utils/hebrewDate.js",
+    "line": 14,
+    "text": "'תשרי', 'חשוון', 'כסלו', 'טבת', 'שבט', 'אדר',"
+  },
+  {
+    "file": "backend/src/utils/hebrewDate.js",
+    "line": 15,
+    "text": "'ניסן', 'אייר', 'סיוון', 'תמוז', 'אב', 'אלול'"
+  },
+  {
+    "file": "backend/src/utils/hebrewDate.js",
+    "line": 19,
+    "text": "const ADAR_II = 'אדר ב׳';"
+  },
+  {
+    "file": "backend/src/utils/hebrewDate.js",
+    "line": 20,
+    "text": "const ADAR_I = 'אדר א׳';"
+  },
+  {
+    "file": "backend/src/utils/hebrewDate.js",
+    "line": 26,
+    "text": "'', 'א׳', 'ב׳', 'ג׳', 'ד׳', 'ה׳', 'ו׳', 'ז׳', 'ח׳', 'ט׳', 'י׳',"
+  },
+  {
+    "file": "backend/src/utils/hebrewDate.js",
+    "line": 27,
+    "text": "'י״א', 'י״ב', 'י״ג', 'י״ד', 'ט״ו', 'ט״ז', 'י״ז', 'י״ח', 'י״ט', 'כ׳',"
+  },
+  {
+    "file": "backend/src/utils/hebrewDate.js",
+    "line": 28,
+    "text": "'כ״א', 'כ״ב', 'כ״ג', 'כ״ד', 'כ״ה', 'כ״ו', 'כ״ז', 'כ״ח', 'כ״ט', 'ל׳'"
+  },
+  {
+    "file": "backend/src/utils/hebrewDate.js",
+    "line": 35,
+    "text": "* @returns {string} - Hebrew date string (e.g., \"כ״ה בכסלו\" or \"כ״ה בכסלו תשפ״ו\")"
+  },
+  {
+    "file": "backend/src/utils/hebrewDate.js",
+    "line": 71,
+    "text": "// Format: \"כ״ה בכסלו\" or \"כ״ה בכסלו תשפ״ו\""
+  },
+  {
+    "file": "backend/src/utils/hebrewDate.js",
+    "line": 72,
+    "text": "let result = `${day} ב${month}`;"
+  },
+  {
+    "file": "backend/src/utils/hebrewDate.js",
+    "line": 88,
+    "text": "* @returns {string} - Short Hebrew date (e.g., \"כ״ה כסלו\")"
+  },
+  {
+    "file": "backend/src/utils/hebrewDate.js",
+    "line": 129,
+    "text": "* @returns {string} - Full Hebrew date (e.g., \"יום רביעי, כ״ה בכסלו תשפ״ו\")"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 205,
+    "text": "const eventDateFormatted = eventDate ? formatDateHebrew(eventDate) : 'לא צוין';"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 212,
+    "text": "const subject = `הסכם השכרת שמלה - ${customerName}`;"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 215,
+    "text": "שלום ${customerName},"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 217,
+    "text": "מצורף ההסכם החתום להשכרת שמלת ערב."
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 219,
+    "text": "פרטי ההזמנה:"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 220,
+    "text": "- מועד האירוע: ${eventDateFormatted}"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 221,
+    "text": "- תאריך חתימת ההסכם: ${signedAt}"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 223,
+    "text": "ההסכם המלא מצורף כקובץ PDF."
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 225,
+    "text": "תודה שבחרת ב${businessConfig.name}!"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 227,
+    "text": "בברכה,"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 229,
+    "text": "טלפון: ${businessConfig.phone}"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 235,
+    "text": "<h2 style=\"color: #8e44ad; margin-bottom: 10px;\">הסכם השכרת שמלת ערב</h2>"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 239,
+    "text": "<p>שלום ${customerName},</p>"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 240,
+    "text": "<p>מצורף ההסכם החתום להשכרת שמלת ערב.</p>"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 243,
+    "text": "<p>${ICON.calendar} <strong>מועד האירוע:</strong> ${eventDateFormatted}</p>"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 244,
+    "text": "<p>${ICON.sign} <strong>תאריך חתימת ההסכם:</strong> ${signedAt}</p>"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 248,
+    "text": "${ICON.check} <strong>ההסכם המלא מצורף כקובץ PDF</strong><br>"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 249,
+    "text": "הקובץ כולל את כל התנאים, פרטי הלקוחה והחתימה הדיגיטלית."
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 253,
+    "text": "<p style=\"margin: 0; color: #666;\">תודה שבחרת בבוטיק שמלות הערב שלנו!</p>"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 263,
+    "text": "filename: `הסכם השכרת שמלה - ${customerName}.pdf`,"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 288,
+    "text": "const eventDateFormatted = eventDate ? formatDateHebrew(eventDate) : 'לא צוין';"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 291,
+    "text": "const subject = `הסכם חדש נחתם - ${customerName}`;"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 294,
+    "text": "התקבל הסכם חתום חדש:"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 296,
+    "text": "לקוחה: ${customerName}"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 297,
+    "text": "טלפון: ${customerPhone}"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 298,
+    "text": "מייל: ${customerEmail || 'לא צוין'}"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 300,
+    "text": "מועד האירוע: ${eventDateFormatted}"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 302,
+    "text": "וואטסאפ: ${whatsappUrl}"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 307,
+    "text": "<h2 style=\"color: #8e44ad; text-align: center;\">${ICON.note} הסכם חדש נחתם</h2>"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 310,
+    "text": "<p>${ICON.person} <strong>לקוחה:</strong> ${customerName}</p>"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 311,
+    "text": "<p>${ICON.phone} <strong>טלפון:</strong> ${customerPhone}</p>"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 312,
+    "text": "<p>${ICON.email} <strong>מייל:</strong> ${customerEmail || 'לא צוין'}</p>"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 314,
+    "text": "<p>${ICON.calendar} <strong>מועד האירוע:</strong> ${eventDateFormatted}</p>"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 319,
+    "text": "${ICON.whatsapp} וואטסאפ ללקוחה"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 328,
+    "text": "filename: `הסכם - ${customerName}.pdf`,"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 363,
+    "text": "const subject = `הכנסה חדשה: ₪${amount} - ${customerName || category}`;"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 367,
+    "text": "<h2 style=\"color: #28a745; text-align: center;\">${ICON.money} הכנסה חדשה</h2>"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 370,
+    "text": "<p>${ICON.money} <strong>סכום:</strong> <span style=\"font-size: 1.2em; font-weight: bold;\">₪${amount}</span></p>"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 371,
+    "text": "<p>${ICON.tag} <strong>קטגוריה:</strong> ${category}</p>"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 372,
+    "text": "${customerName ? `<p>${ICON.person} <strong>לקוחה:</strong> ${customerName}</p>` : ''}"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 373,
+    "text": "${dressName ? `<p>${ICON.dress} <strong>שמלה:</strong> ${dressName}</p>` : ''}"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 374,
+    "text": "<p>${ICON.card} <strong>אמצעי תשלום:</strong> ${paymentMethod || 'לא צוין'}</p>"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 375,
+    "text": "<p>${ICON.calendar} <strong>תאריך:</strong> ${formattedDate}</p>"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 378,
+    "text": "${notes ? `<div style=\"background-color: #fff3cd; padding: 15px; border-radius: 8px; margin: 15px 0;\"><p>${ICON.note} <strong>הערות:</strong> ${notes}</p></div>` : ''}"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 384,
+    "text": "<p>נשלח אוטומטית ממערכת הניהול</p>"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 425,
+    "text": "const subject = `הוצאה חדשה: ₪${amount} - ${supplier || category}`;"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 429,
+    "text": "<h2 style=\"color: #dc3545; text-align: center;\">${ICON.expense} הוצאה חדשה</h2>"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 432,
+    "text": "<p>${ICON.expense} <strong>סכום:</strong> <span style=\"font-size: 1.2em; font-weight: bold;\">₪${amount}</span></p>"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 433,
+    "text": "<p>${ICON.tag} <strong>קטגוריה:</strong> ${category}</p>"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 434,
+    "text": "${supplier ? `<p>${ICON.shop} <strong>ספק:</strong> ${supplier}</p>` : ''}"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 435,
+    "text": "${product ? `<p>${ICON.box} <strong>מוצר/שירות:</strong> ${product}</p>` : ''}"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 436,
+    "text": "<p>${ICON.calendar} <strong>תאריך:</strong> ${formattedDate}</p>"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 439,
+    "text": "${notes ? `<div style=\"background-color: #fff3cd; padding: 15px; border-radius: 8px; margin: 15px 0;\"><p>${ICON.note} <strong>הערות:</strong> ${notes}</p></div>` : ''}"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 445,
+    "text": "<p>נשלח אוטומטית ממערכת הניהול</p>"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 485,
+    "text": "const eventDateFormatted = eventDate ? formatDateHebrew(eventDate) : 'לא צוין';"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 488,
+    "text": "rental: 'השכרה',"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 489,
+    "text": "sewing_for_rental: 'תפירה שנשארת בהשכרה',"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 490,
+    "text": "sewing: 'תפירה',"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 491,
+    "text": "sale: 'מכירה',"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 494,
+    "text": "? (dresses[0].itemTypeLabel || typeLabelMap[dresses[0].itemType] || 'הזמנה')"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 495,
+    "text": ": 'הזמנה';"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 498,
+    "text": "? dresses.map((d) => `${d.itemTypeLabel || typeLabelMap[d.itemType] || 'פריט'} ${d.name}`.trim()).join(', ')"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 505,
+    "text": ": 'לא צוינו שמלות';"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 508,
+    "text": "? dresses.map(d => `<li>${d.itemTypeLabel || typeLabelMap[d.itemType] || 'פריט'}: ${d.name} - ₪${d.price}</li>`).join('')"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 509,
+    "text": ": '<li>לא צוינו שמלות</li>';"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 514,
+    "text": "depositDetailsText = '\\nפירוט מקדמות:\\n' + depositPayments.map(p => {"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 515,
+    "text": "const confirmStr = p.confirmationNumber ? ` (אסמכתא: ${p.confirmationNumber})` : '';"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 516,
+    "text": "return `- ₪${p.amount} ב${p.method}${confirmStr}`;"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 523,
+    "text": "const subject = `הזמנה חדשה: ${customerName}${subjectDetails ? ` - ${subjectDetails}` : ''}`;"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 526,
+    "text": "הזמנה חדשה התקבלה:"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 528,
+    "text": "לקוחה: ${customerName}"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 529,
+    "text": "טלפון: ${normalizedCustomerPhone}"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 530,
+    "text": "סוג: ${firstItemTypeLabel}"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 531,
+    "text": "תאריך אירוע: ${eventDateFormatted}"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 533,
+    "text": "שמלות:"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 536,
+    "text": "מחיר כולל: ₪${totalPrice}"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 537,
+    "text": "מקדמה: ₪${deposit || 0}${depositDetailsText}"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 538,
+    "text": "יתרה לתשלום: ₪${remaining}"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 540,
+    "text": "${computedOrderSummary ? `מה נסגר: ${computedOrderSummary}` : ''}"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 541,
+    "text": "${customerEmail ? `אימייל: ${customerEmail}` : ''}"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 542,
+    "text": "${notes ? `הערות: ${notes}` : ''}"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 549,
+    "text": "const confirmStr = p.confirmationNumber ? ` <span style=\"font-size:0.9em; color:#666;\">(אסמכתא: ${p.confirmationNumber})</span>` : '';"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 551,
+    "text": "return `<li>₪${p.amount} ב${p.method}${confirmStr}${fileStr}</li>`;"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 558,
+    "text": "<h2 style=\"color: #8e44ad; text-align: center;\">הזמנה חדשה</h2>"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 561,
+    "text": "<p>${ICON.person} <strong>לקוחה:</strong> ${customerName}</p>"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 562,
+    "text": "<p>${ICON.phone} <strong>טלפון:</strong> ${normalizedCustomerPhone}</p>"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 563,
+    "text": "${customerEmail ? `<p>${ICON.email} <strong>אימייל:</strong> ${customerEmail}</p>` : ''}"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 564,
+    "text": "<p>${ICON.note} <strong>סוג:</strong> ${firstItemTypeLabel}</p>"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 565,
+    "text": "<p>${ICON.calendar} <strong>תאריך אירוע:</strong> ${eventDateFormatted}</p>"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 566,
+    "text": "${computedOrderSummary ? `<p>${ICON.check} <strong>מה נסגר:</strong> ${computedOrderSummary}</p>` : ''}"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 570,
+    "text": "<p style=\"margin: 0 0 10px 0;\">${ICON.dress} <strong>שמלות:</strong></p>"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 577,
+    "text": "<p>${ICON.money} <strong>מחיר כולל:</strong> ₪${totalPrice}</p>"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 578,
+    "text": "<p>${ICON.card} <strong>מקדמה:</strong> ₪${deposit || 0}</p>"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 579,
+    "text": "${depositHtml ? `<div style=\"margin-top:5px; padding-top:5px; border-top:1px dashed #ccc;\"><strong>פירוט:</strong>${depositHtml}</div>` : ''}"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 580,
+    "text": "<p style=\"font-weight: bold; color: #155724;\">${ICON.money} <strong>יתרה לתשלום:</strong> ₪${remaining}</p>"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 583,
+    "text": "${notes ? `<p>${ICON.note} <strong>הערות:</strong> ${notes}</p>` : ''}"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 702,
+    "text": "* @param {string} listName - Task list name (e.g., \"לקוחות\")"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 706,
+    "text": "export async function sendTaskToGoogle({ listName = 'לקוחות', title, dueDate }) {"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 719,
+    "text": "* @param {string} fileName - Target file name (e.g., \"260203 חנות 150₪.jpg\")"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 720,
+    "text": "* @param {string} folder - Folder path (e.g., \"2026/הוצאות/הוצאות מוכרות 2026\")"
+  },
+  {
+    "file": "backend/src/services/email.js",
+    "line": 777,
+    "text": "sheet: 'רשימת_תפוצה',"
+  },
+  {
+    "file": "backend/src/services/localStorage.js",
+    "line": 8,
+    "text": "* - Expenses: /הוצאות והכנסות עסק/[YEAR]/[CATEGORY]/"
+  },
+  {
+    "file": "backend/src/services/localStorage.js",
+    "line": 9,
+    "text": "* - Agreements: /הסכמי השכרה/[CUSTOMER_NAME - DATE]/"
+  },
+  {
+    "file": "backend/src/services/localStorage.js",
+    "line": 108,
+    "text": "* @param {string}        category     - Expense category (folder name, e.g. 'חומרים')"
+  },
+  {
+    "file": "backend/src/services/localStorage.js",
+    "line": 178,
+    "text": "// Create folder name: \"שם לקוחה - תאריך\" or \"שם לקוחה - תאריך - מספר הזמנה\""
+  },
+  {
+    "file": "backend/src/services/localStorage.js",
+    "line": 188,
+    "text": "const pdfFilename = `הסכם השכרה - ${cleanName}.pdf`;"
+  },
+  {
+    "file": "backend/src/services/pdfGenerator.js",
+    "line": 44,
+    "text": "if (!dateStr) return 'לא צוין';"
+  },
+  {
+    "file": "backend/src/services/pdfGenerator.js",
+    "line": 46,
+    "text": "if (Number.isNaN(date.getTime())) return 'לא צוין';"
+  },
+  {
+    "file": "backend/src/services/pdfGenerator.js",
+    "line": 63,
+    "text": "rental: 'השכרה',"
+  },
+  {
+    "file": "backend/src/services/pdfGenerator.js",
+    "line": 64,
+    "text": "sewing_for_rental: 'תפירה שנשארת בהשכרה',"
+  },
+  {
+    "file": "backend/src/services/pdfGenerator.js",
+    "line": 65,
+    "text": "sewing: 'תפירה',"
+  },
+  {
+    "file": "backend/src/services/pdfGenerator.js",
+    "line": 66,
+    "text": "sale: 'מכירה',"
+  },
+  {
+    "file": "backend/src/services/pdfGenerator.js",
+    "line": 68,
+    "text": "return map[normalized] || sanitize(type, 'פריט');"
+  },
+  {
+    "file": "backend/src/services/pdfGenerator.js",
+    "line": 118,
+    "text": "const wearer = sanitize(item.wearerName || item.wearer_name, 'ללא שם');"
+  },
+  {
+    "file": "backend/src/services/pdfGenerator.js",
+    "line": 320,
+    "text": "<div class=\"brand\">${escapeHtml(sanitize(businessConfig.name, 'ישראל ישראלי'))}</div>"
+  },
+  {
+    "file": "backend/src/services/pdfGenerator.js",
+    "line": 321,
+    "text": "<div class=\"title\">הסכם דיגיטלי</div>"
+  },
+  {
+    "file": "backend/src/services/pdfGenerator.js",
+    "line": 323,
+    "text": "תאריך חתימה: ${escapeHtml(formatDateHebrew(signedDate))}"
+  },
+  {
+    "file": "backend/src/services/pdfGenerator.js",
+    "line": 324,
+    "text": "${signedTime ? ` | שעה: ${escapeHtml(signedTime)}` : ''}"
+  },
+  {
+    "file": "backend/src/services/pdfGenerator.js",
+    "line": 327,
+    "text": "<div class=\"logo-wrap\">${logoDataUrl ? `<img src=\"${logoDataUrl}\" alt=\"לוגו העסק\" />` : ''}</div>"
+  },
+  {
+    "file": "backend/src/services/pdfGenerator.js",
+    "line": 332,
+    "text": "<h3>פרטי לקוחה</h3>"
+  },
+  {
+    "file": "backend/src/services/pdfGenerator.js",
+    "line": 333,
+    "text": "<div class=\"line\">שם מלא: ${escapeHtml(sanitize(agreementData.customerName))}</div>"
+  },
+  {
+    "file": "backend/src/services/pdfGenerator.js",
+    "line": 334,
+    "text": "<div class=\"line\">טלפון: ${escapeHtml(sanitize(agreementData.customerPhone))}</div>"
+  },
+  {
+    "file": "backend/src/services/pdfGenerator.js",
+    "line": 335,
+    "text": "<div class=\"line\">אימייל: ${escapeHtml(sanitize(agreementData.customerEmail, 'לא צוין'))}</div>"
+  },
+  {
+    "file": "backend/src/services/pdfGenerator.js",
+    "line": 339,
+    "text": "<h3>פרטי אירוע</h3>"
+  },
+  {
+    "file": "backend/src/services/pdfGenerator.js",
+    "line": 340,
+    "text": "<div class=\"line\">תאריך אירוע: ${escapeHtml(formatDateHebrew(agreementData.eventDate))}</div>"
+  },
+  {
+    "file": "backend/src/services/pdfGenerator.js",
+    "line": 345,
+    "text": "<h3 style=\"margin:0 0 2mm;font-size:14px;\">פריטים וסכומים</h3>"
+  },
+  {
+    "file": "backend/src/services/pdfGenerator.js",
+    "line": 349,
+    "text": "<th>סוג</th>"
+  },
+  {
+    "file": "backend/src/services/pdfGenerator.js",
+    "line": 350,
+    "text": "<th>לובשת</th>"
+  },
+  {
+    "file": "backend/src/services/pdfGenerator.js",
+    "line": 351,
+    "text": "<th>סכום</th>"
+  },
+  {
+    "file": "backend/src/services/pdfGenerator.js",
+    "line": 355,
+    "text": "${itemRows || '<tr><td colspan=\"3\">לא הוזנו פריטים</td></tr>'}"
+  },
+  {
+    "file": "backend/src/services/pdfGenerator.js",
+    "line": 361,
+    "text": "<h3>תנאי ההסכם המלאים</h3>"
+  },
+  {
+    "file": "backend/src/services/pdfGenerator.js",
+    "line": 368,
+    "text": "<h4>מדיניות ביטול עסקה</h4>"
+  },
+  {
+    "file": "backend/src/services/pdfGenerator.js",
+    "line": 375,
+    "text": "<div class=\"declaration\">אני מאשרת שקרמנהל את תנאי ההסכם ומסכימה להם.</div>"
+  },
+  {
+    "file": "backend/src/services/pdfGenerator.js",
+    "line": 377,
+    "text": "<div class=\"signature-label\">חתימה דיגיטלית</div>"
+  },
+  {
+    "file": "backend/src/services/pdfGenerator.js",
+    "line": 379,
+    "text": "${safeSignature ? `<img src=\"${safeSignature}\" alt=\"חתימה\" />` : '<span>ללא חתימה</span>'}"
+  },
+  {
+    "file": "backend/src/services/ai.js",
+    "line": 128,
+    "text": "- confirmation_number (אסמכתא / אישור / מספר פעולה) - REMOVE HYPHENS/DASHES if present."
+  },
+  {
+    "file": "backend/src/services/ai.js",
+    "line": 129,
+    "text": "- last_four_digits (4 ספרות אחרונות של כרטיס אשראי)"
+  },
+  {
+    "file": "backend/src/services/ai.js",
+    "line": 130,
+    "text": "- check_number (מספר צ'ק)"
+  },
+  {
+    "file": "backend/src/services/ai.js",
+    "line": 131,
+    "text": "- installments (מספר תשלומים - default to 1 if not specified or if it's a single payment)"
+  },
+  {
+    "file": "backend/src/services/logger.js",
+    "line": 505,
+    "text": "details: success ? { message: 'התחברות מוצלחת' } : { message: 'התחברות נכשלה', reason: errorMessage },"
+  },
+  {
+    "file": "backend/src/services/paymentDetails.js",
+    "line": 9,
+    "text": "cash: ['cash', 'מזומן'],"
+  },
+  {
+    "file": "backend/src/services/paymentDetails.js",
+    "line": 10,
+    "text": "bit: ['bit', 'ביט'],"
+  },
+  {
+    "file": "backend/src/services/paymentDetails.js",
+    "line": 11,
+    "text": "paybox: ['paybox', 'פייבוקס', 'pay box'],"
+  },
+  {
+    "file": "backend/src/services/paymentDetails.js",
+    "line": 12,
+    "text": "credit: ['credit', 'card', 'אשראי', 'כרטיס'],"
+  },
+  {
+    "file": "backend/src/services/paymentDetails.js",
+    "line": 13,
+    "text": "transfer: ['transfer', 'bank transfer', 'העברה', 'בנקאית'],"
+  },
+  {
+    "file": "backend/src/services/paymentDetails.js",
+    "line": 14,
+    "text": "check: ['check', 'cheque', \"צ'ק\", 'צ׳ק', 'שיק']"
+  },
+  {
+    "file": "backend/src/routes/transactions.js",
+    "line": 54,
+    "text": "order: 'הזמנה',"
+  },
+  {
+    "file": "backend/src/routes/transactions.js",
+    "line": 55,
+    "text": "repair: 'תיקונים',"
+  },
+  {
+    "file": "backend/src/routes/transactions.js",
+    "line": 56,
+    "text": "other: 'אחר',"
+  },
+  {
+    "file": "backend/src/routes/transactions.js",
+    "line": 57,
+    "text": "materials: 'חומרים',"
+  },
+  {
+    "file": "backend/src/routes/transactions.js",
+    "line": 58,
+    "text": "overhead: 'תקורה',"
+  },
+  {
+    "file": "backend/src/routes/transactions.js",
+    "line": 59,
+    "text": "tax: 'מיסוי',"
+  },
+  {
+    "file": "backend/src/routes/transactions.js",
+    "line": 60,
+    "text": "equipment: 'ציוד',"
+  },
+  {
+    "file": "backend/src/routes/transactions.js",
+    "line": 61,
+    "text": "salary: 'משכורות',"
+  },
+  {
+    "file": "backend/src/routes/transactions.js",
+    "line": 304,
+    "text": "throw new ApiError(404, 'עסקה לא נמצאה');"
+  },
+  {
+    "file": "backend/src/routes/transactions.js",
+    "line": 346,
+    "text": "throw new ApiError(400, 'נא להזין תאריך');"
+  },
+  {
+    "file": "backend/src/routes/transactions.js",
+    "line": 349,
+    "text": "throw new ApiError(400, 'נא לבחור סוג עסקה (הכנסה/הוצאה)');"
+  },
+  {
+    "file": "backend/src/routes/transactions.js",
+    "line": 352,
+    "text": "throw new ApiError(400, 'נא לבחור קטגוריה');"
+  },
+  {
+    "file": "backend/src/routes/transactions.js",
+    "line": 355,
+    "text": "throw new ApiError(400, 'נא להזין סכום');"
+  },
+  {
+    "file": "backend/src/routes/transactions.js",
+    "line": 359,
+    "text": "throw new ApiError(400, 'נא לבחור לקוחה או להזין פרטי לקוחה חדשה עבור הכנסה');"
+  },
+  {
+    "file": "backend/src/routes/transactions.js",
+    "line": 364,
+    "text": "throw new ApiError(400, 'קטגוריה לא תקינה');"
+  },
+  {
+    "file": "backend/src/routes/transactions.js",
+    "line": 375,
+    "text": "throw new ApiError(400, 'שם לקוחה חובה עבור לקוחה חדשה');"
+  },
+  {
+    "file": "backend/src/routes/transactions.js",
+    "line": 481,
+    "text": "message: type === 'income' ? 'הכנסה נוספה בהצלחה' : 'הוצאה נוספה בהצלחה',"
+  },
+  {
+    "file": "backend/src/routes/transactions.js",
+    "line": 639,
+    "text": "throw new ApiError(404, 'עסקה לא נמצאה');"
+  },
+  {
+    "file": "backend/src/routes/transactions.js",
+    "line": 643,
+    "text": "throw new ApiError(400, 'נא להזין תאריך');"
+  },
+  {
+    "file": "backend/src/routes/transactions.js",
+    "line": 646,
+    "text": "throw new ApiError(400, 'נא לבחור סוג עסקה');"
+  },
+  {
+    "file": "backend/src/routes/transactions.js",
+    "line": 649,
+    "text": "throw new ApiError(400, 'נא לבחור קטגוריה');"
+  },
+  {
+    "file": "backend/src/routes/transactions.js",
+    "line": 652,
+    "text": "throw new ApiError(400, 'נא להזין סכום');"
+  },
+  {
+    "file": "backend/src/routes/transactions.js",
+    "line": 656,
+    "text": "throw new ApiError(400, 'נא לבחור לקוחה עבור הכנסה');"
+  },
+  {
+    "file": "backend/src/routes/transactions.js",
+    "line": 740,
+    "text": "message: 'עסקה עודכנה בהצלחה',"
+  },
+  {
+    "file": "backend/src/routes/transactions.js",
+    "line": 785,
+    "text": "const oldFolder = `${oldYear}/הוצאות/הוצאות מוכרות ${oldYear}`;"
+  },
+  {
+    "file": "backend/src/routes/transactions.js",
+    "line": 786,
+    "text": "const newFolder = `${newYear}/הוצאות/הוצאות מוכרות ${newYear}`;"
+  },
+  {
+    "file": "backend/src/routes/transactions.js",
+    "line": 793,
+    "text": "return `${pyy}${pmm}${pdd} ${s || 'ספק_לא_ידוע'} ${a}₪${ext}`;"
+  },
+  {
+    "file": "backend/src/routes/transactions.js",
+    "line": 849,
+    "text": "customerName: updatedTransaction.customer_name || finalCustomerName || 'לקוח_כלשהו',"
+  },
+  {
+    "file": "backend/src/routes/transactions.js",
+    "line": 886,
+    "text": "throw new ApiError(404, 'עסקה לא נמצאה');"
+  },
+  {
+    "file": "backend/src/routes/transactions.js",
+    "line": 897,
+    "text": "message: 'עסקה נמחקה בהצלחה'"
+  },
+  {
+    "file": "backend/src/routes/transactions.js",
+    "line": 914,
+    "text": "{ value: 'order', label: 'הזמנה' },"
+  },
+  {
+    "file": "backend/src/routes/transactions.js",
+    "line": 915,
+    "text": "{ value: 'repair', label: 'תיקונים' },"
+  },
+  {
+    "file": "backend/src/routes/transactions.js",
+    "line": 916,
+    "text": "{ value: 'other', label: 'אחר' }"
+  },
+  {
+    "file": "backend/src/routes/transactions.js",
+    "line": 931,
+    "text": "{ value: 'materials', label: 'חומרים' },"
+  },
+  {
+    "file": "backend/src/routes/transactions.js",
+    "line": 932,
+    "text": "{ value: 'overhead', label: 'תקורה' },"
+  },
+  {
+    "file": "backend/src/routes/transactions.js",
+    "line": 933,
+    "text": "{ value: 'tax', label: 'מיסוי' },"
+  },
+  {
+    "file": "backend/src/routes/transactions.js",
+    "line": 934,
+    "text": "{ value: 'equipment', label: 'ציוד' },"
+  },
+  {
+    "file": "backend/src/routes/transactions.js",
+    "line": 935,
+    "text": "{ value: 'salary', label: 'משכורות' },"
+  },
+  {
+    "file": "backend/src/routes/transactions.js",
+    "line": 936,
+    "text": "{ value: 'other', label: 'אחר' }"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 19,
+    "text": "{ value: 'pending', label: 'ממתין' },"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 20,
+    "text": "{ value: 'confirmed', label: 'מאושר' },"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 21,
+    "text": "{ value: 'in_progress', label: 'בתהליך' },"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 22,
+    "text": "{ value: 'completed', label: 'הושלם' },"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 23,
+    "text": "{ value: 'cancelled', label: 'בוטל' },"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 27,
+    "text": "{ value: 'rental', label: 'השכרה' },"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 28,
+    "text": "{ value: 'sewing_for_rental', label: 'תפירה שנשארת בהשכרה' },"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 29,
+    "text": "{ value: 'sewing', label: 'תפירה' },"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 30,
+    "text": "{ value: 'sale', label: 'מכירה' },"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 31,
+    "text": "{ value: 'repair', label: 'תיקון' },"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 35,
+    "text": "{ value: 'available', label: 'פנויה' },"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 36,
+    "text": "{ value: 'sold', label: 'נמכרה' },"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 37,
+    "text": "{ value: 'retired', label: 'יצאה ממלאי' },"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 38,
+    "text": "{ value: 'custom_sewing', label: 'תפירה אישית' },"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 42,
+    "text": "{ value: 'rental', label: 'להשכרה' },"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 43,
+    "text": "{ value: 'sale', label: 'למכירה' },"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 47,
+    "text": "{ value: 'income', label: 'הכנסה' },"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 48,
+    "text": "{ value: 'expense', label: 'הוצאה' },"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 52,
+    "text": "{ value: 'order', label: 'הזמנה' },"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 53,
+    "text": "{ value: 'repair', label: 'תיקונים' },"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 54,
+    "text": "{ value: 'materials', label: 'חומרים' },"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 55,
+    "text": "{ value: 'overhead', label: 'תקורה' },"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 56,
+    "text": "{ value: 'tax', label: 'מיסוי' },"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 57,
+    "text": "{ value: 'equipment', label: 'ציוד' },"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 58,
+    "text": "{ value: 'salary', label: 'משכורות' },"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 59,
+    "text": "{ value: 'other', label: 'אחר' },"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 63,
+    "text": "{ value: 'cash', label: 'מזומן' },"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 64,
+    "text": "{ value: 'bit', label: 'ביט' },"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 65,
+    "text": "{ value: 'paybox', label: 'פייבוקס' },"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 66,
+    "text": "{ value: 'credit', label: 'אשראי' },"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 67,
+    "text": "{ value: 'transfer', label: 'העברה בנקאית' },"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 68,
+    "text": "{ value: 'check', label: \"צ'ק\" },"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 72,
+    "text": "{ value: 'rental', label: 'השכרה' },"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 73,
+    "text": "{ value: 'sewing_for_rental', label: 'תפירה שנשארת בהשכרה' },"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 74,
+    "text": "{ value: 'sewing', label: 'תפירה' },"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 75,
+    "text": "{ value: 'sale', label: 'מכירה' },"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 76,
+    "text": "{ value: 'repair', label: 'תיקון' },"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 80,
+    "text": "{ value: 'admin', label: 'מנהל' },"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 81,
+    "text": "{ value: 'user', label: 'משתמש' },"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 85,
+    "text": "{ value: '1', label: 'פעיל' },"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 86,
+    "text": "{ value: '0', label: 'לא פעיל' },"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 89,
+    "text": "function createDateFilters(column, fromLabel = 'מתאריך', toLabel = 'עד תאריך') {"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 111,
+    "text": "label: 'לקוחות',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 112,
+    "text": "description: 'פרטי לקוחות, מקור הגעה וסטטוס פעילות',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 115,
+    "text": "...createDateFilters('created_at', 'נוצר מתאריך', 'נוצר עד תאריך'),"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 118,
+    "text": "label: 'מקור הגעה',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 122,
+    "text": "placeholder: 'לדוגמה: אינסטגרם',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 126,
+    "text": "label: 'חיפוש חופשי',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 130,
+    "text": "placeholder: 'שם, טלפון, אימייל...',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 136,
+    "text": "label: 'שמלות',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 137,
+    "text": "description: 'מלאי שמלות, סטטוס וייעוד',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 140,
+    "text": "...createDateFilters('updated_at', 'עודכן מתאריך', 'עודכן עד תאריך'),"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 143,
+    "text": "label: 'סטטוס שמלה',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 151,
+    "text": "label: 'ייעוד שמלה',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 159,
+    "text": "label: 'חיפוש חופשי',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 163,
+    "text": "placeholder: 'שם שמלה או הערה',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 169,
+    "text": "label: 'הזמנות',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 170,
+    "text": "description: 'הזמנות השכרה, תפירה ומכירה',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 173,
+    "text": "...createDateFilters('event_date', 'תאריך אירוע מתאריך', 'תאריך אירוע עד תאריך'),"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 176,
+    "text": "label: 'סטטוס הזמנה',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 184,
+    "text": "label: 'מזהה לקוחה',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 193,
+    "text": "label: 'פריטי הזמנה',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 194,
+    "text": "description: 'כל הפריטים ברמת שמלה בתוך הזמנות',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 197,
+    "text": "...createDateFilters('created_at', 'נוצר מתאריך', 'נוצר עד תאריך'),"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 200,
+    "text": "label: 'סוג פריט',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 208,
+    "text": "label: 'מזהה הזמנה',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 215,
+    "text": "label: 'מזהה שמלה',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 222,
+    "text": "label: 'חיפוש חופשי',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 226,
+    "text": "placeholder: 'שם שמלה/לובשת/הערות',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 232,
+    "text": "label: 'תנועות כספיות',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 233,
+    "text": "description: 'הכנסות והוצאות לפי סוג, קטגוריה ואמצעי תשלום',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 236,
+    "text": "...createDateFilters('date', 'תאריך תנועה מתאריך', 'תאריך תנועה עד תאריך'),"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 239,
+    "text": "label: 'סוג תנועה',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 247,
+    "text": "label: 'קטגוריה',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 255,
+    "text": "label: 'אמצעי תשלום',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 263,
+    "text": "label: 'מזהה לקוחה',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 270,
+    "text": "label: 'מזהה הזמנה',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 277,
+    "text": "label: 'חיפוש חופשי',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 281,
+    "text": "placeholder: 'לקוחה/ספק/מוצר/הערות',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 287,
+    "text": "label: 'היסטוריית שמלות',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 288,
+    "text": "description: 'אירועי השכרה/תפירה/מכירה ברמת שמלה',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 291,
+    "text": "...createDateFilters('event_date', 'תאריך אירוע מתאריך', 'תאריך אירוע עד תאריך'),"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 294,
+    "text": "label: 'סוג אירוע',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 302,
+    "text": "label: 'מזהה לקוחה',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 309,
+    "text": "label: 'מזהה שמלה',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 316,
+    "text": "label: 'מזהה הזמנה',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 323,
+    "text": "label: 'חיפוש חופשי',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 327,
+    "text": "placeholder: 'שם לובשת/לקוחה או הערה',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 333,
+    "text": "label: 'הסכמי השכרה',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 334,
+    "text": "description: 'רשומות חתימה על הסכמי השכרה',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 337,
+    "text": "...createDateFilters('agreed_at', 'תאריך חתימה מתאריך', 'תאריך חתימה עד תאריך'),"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 340,
+    "text": "label: 'מזהה לקוחה',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 347,
+    "text": "label: 'מזהה הזמנה',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 354,
+    "text": "label: 'חיפוש חופשי',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 358,
+    "text": "placeholder: 'שם/טלפון/אימייל',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 364,
+    "text": "label: 'הגדרות מערכת',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 365,
+    "text": "description: 'מפתחות וערכי קונפיגורציה',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 368,
+    "text": "...createDateFilters('updated_at', 'עודכן מתאריך', 'עודכן עד תאריך'),"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 371,
+    "text": "label: 'חיפוש חופשי',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 375,
+    "text": "placeholder: 'מפתח או תיאור',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 381,
+    "text": "label: 'משתמשות מערכת',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 382,
+    "text": "description: 'משתמשים, תפקידים וסטטוס חשבון',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 385,
+    "text": "...createDateFilters('created_at', 'נוצר מתאריך', 'נוצר עד תאריך'),"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 388,
+    "text": "label: 'תפקיד',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 396,
+    "text": "label: 'סטטוס משתמשת',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 404,
+    "text": "label: 'חיפוש חופשי',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 408,
+    "text": "placeholder: 'שם או אימייל',"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 439,
+    "text": "throw new ApiError(400, `ערך מספרי לא תקין עבור ${label}`);"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 452,
+    "text": "throw new ApiError(400, `תאריך לא תקין עבור ${label}. נדרש פורמט YYYY-MM-DD`);"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 471,
+    "text": "throw new ApiError(400, `ערך בוליאני לא תקין עבור ${label}`);"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 482,
+    "text": "throw new ApiError(400, `ערך מסנן לא תקין עבור ${filter.label}`);"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 625,
+    "text": "throw new ApiError(400, 'חובה לבחור dataset לייצוא');"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 630,
+    "text": "throw new ApiError(400, 'dataset לא תקין לייצוא');"
+  },
+  {
+    "file": "backend/src/routes/export.js",
+    "line": 650,
+    "text": "throw new ApiError(500, `לא נמצאו עמודות לטבלה ${config.table}`);"
+  },
+  {
+    "file": "backend/src/routes/customers.js",
+    "line": 100,
+    "text": "throw new ApiError(404, 'לקוחה לא נמצאה');"
+  },
+  {
+    "file": "backend/src/routes/customers.js",
+    "line": 160,
+    "text": "throw new ApiError(400, 'נא להזין שם לקוחה');"
+  },
+  {
+    "file": "backend/src/routes/customers.js",
+    "line": 167,
+    "text": "throw new ApiError(409, 'לקוחה עם מספר טלפון זה כבר קיימת');"
+  },
+  {
+    "file": "backend/src/routes/customers.js",
+    "line": 182,
+    "text": "message: 'לקוחה נוספה בהצלחה',"
+  },
+  {
+    "file": "backend/src/routes/customers.js",
+    "line": 205,
+    "text": "throw new ApiError(404, 'לקוחה לא נמצאה');"
+  },
+  {
+    "file": "backend/src/routes/customers.js",
+    "line": 210,
+    "text": "throw new ApiError(400, 'נא להזין שם לקוחה');"
+  },
+  {
+    "file": "backend/src/routes/customers.js",
+    "line": 220,
+    "text": "throw new ApiError(409, 'לקוחה אחרת עם מספר טלפון זה כבר קיימת');"
+  },
+  {
+    "file": "backend/src/routes/customers.js",
+    "line": 236,
+    "text": "message: 'לקוחה עודכנה בהצלחה',"
+  },
+  {
+    "file": "backend/src/routes/customers.js",
+    "line": 292,
+    "text": "throw new ApiError(400, 'חובה לציין מזהה לקוחה למיזוג ומזהה לקוחה יעד');"
+  },
+  {
+    "file": "backend/src/routes/customers.js",
+    "line": 296,
+    "text": "throw new ApiError(400, 'לא ניתן למזג לקוחה עם עצמה');"
+  },
+  {
+    "file": "backend/src/routes/customers.js",
+    "line": 308,
+    "text": "throw new ApiError(404, 'אחת הלקוחות לא נמצאה');"
+  },
+  {
+    "file": "backend/src/routes/customers.js",
+    "line": 351,
+    "text": "message: 'לקוחות אוחדו בהצלחה'"
+  },
+  {
+    "file": "backend/src/routes/agreements.js",
+    "line": 191,
+    "text": "throw new ApiError(400, 'מזהה הזמנה לא תקין');"
+  },
+  {
+    "file": "backend/src/routes/agreements.js",
+    "line": 196,
+    "text": "throw new ApiError(404, 'הזמנה לא נמצאה');"
+  },
+  {
+    "file": "backend/src/routes/agreements.js",
+    "line": 199,
+    "text": "throw new ApiError(409, 'כבר קיים הסכם חתום להזמנה זו');"
+  },
+  {
+    "file": "backend/src/routes/agreements.js",
+    "line": 206,
+    "text": "const customerName = orderWithItems.order.customer_name || 'לקוחה';"
+  },
+  {
+    "file": "backend/src/routes/agreements.js",
+    "line": 208,
+    "text": "`היי ${customerName}, מצורף קישור לחתימה דיגיטלית על הסכם:\\n${link}`"
+  },
+  {
+    "file": "backend/src/routes/agreements.js",
+    "line": 237,
+    "text": "throw new ApiError(400, 'חסר טוקן חתימה');"
+  },
+  {
+    "file": "backend/src/routes/agreements.js",
+    "line": 242,
+    "text": "throw new ApiError(401, 'קישור חתימה לא תקין או שפג תוקפו');"
+  },
+  {
+    "file": "backend/src/routes/agreements.js",
+    "line": 247,
+    "text": "throw new ApiError(404, 'הזמנה לא נמצאה');"
+  },
+  {
+    "file": "backend/src/routes/agreements.js",
+    "line": 250,
+    "text": "throw new ApiError(410, 'ההסכם כבר נחתם והקישור כבר לא זמין');"
+  },
+  {
+    "file": "backend/src/routes/agreements.js",
+    "line": 282,
+    "text": "throw new ApiError(400, 'נא להזין שם מלא');"
+  },
+  {
+    "file": "backend/src/routes/agreements.js",
+    "line": 285,
+    "text": "throw new ApiError(400, 'נא להזין מספר טלפון');"
+  },
+  {
+    "file": "backend/src/routes/agreements.js",
+    "line": 288,
+    "text": "throw new ApiError(400, 'נא לחתום על ההסכם');"
+  },
+  {
+    "file": "backend/src/routes/agreements.js",
+    "line": 295,
+    "text": "throw new ApiError(401, 'קישור חתימה לא תקין או שפג תוקפו');"
+  },
+  {
+    "file": "backend/src/routes/agreements.js",
+    "line": 304,
+    "text": "throw new ApiError(404, 'הזמנה לא נמצאה');"
+  },
+  {
+    "file": "backend/src/routes/agreements.js",
+    "line": 307,
+    "text": "throw new ApiError(410, 'ההסכם כבר נחתם והקישור כבר לא זמין');"
+  },
+  {
+    "file": "backend/src/routes/agreements.js",
+    "line": 321,
+    "text": "throw new ApiError(409, 'מספר הטלפון כבר קיים אצל לקוחה אחרת');"
+  },
+  {
+    "file": "backend/src/routes/agreements.js",
+    "line": 371,
+    "text": "const cleanName = full_name.trim().replace(/[^א-תa-zA-Z0-9]/g, '_');"
+  },
+  {
+    "file": "backend/src/routes/agreements.js",
+    "line": 512,
+    "text": "message: 'ההסכם נחתם בהצלחה!',"
+  },
+  {
+    "file": "backend/src/routes/agreements.js",
+    "line": 587,
+    "text": "throw new ApiError(404, 'הסכם לא נמצא');"
+  },
+  {
+    "file": "backend/src/routes/orders.js",
+    "line": 38,
+    "text": "rental: 'השכרה',"
+  },
+  {
+    "file": "backend/src/routes/orders.js",
+    "line": 39,
+    "text": "sewing_for_rental: 'תפירה שנשארת בהשכרה',"
+  },
+  {
+    "file": "backend/src/routes/orders.js",
+    "line": 40,
+    "text": "sewing: 'תפירה',"
+  },
+  {
+    "file": "backend/src/routes/orders.js",
+    "line": 41,
+    "text": "sale: 'מכירה'"
+  },
+  {
+    "file": "backend/src/routes/orders.js",
+    "line": 43,
+    "text": "return labels[type] || type || 'פריט';"
+  },
+  {
+    "file": "backend/src/routes/orders.js",
+    "line": 284,
+    "text": "throw new ApiError(404, 'הזמנה לא נמצאה');"
+  },
+  {
+    "file": "backend/src/routes/orders.js",
+    "line": 339,
+    "text": "throw new ApiError(400, 'נא לבחור לקוחה או להזין פרטי לקוחה חדשה');"
+  },
+  {
+    "file": "backend/src/routes/orders.js",
+    "line": 342,
+    "text": "throw new ApiError(400, 'נא להזין מחיר (0 או יותר)');"
+  },
+  {
+    "file": "backend/src/routes/orders.js",
+    "line": 345,
+    "text": "throw new ApiError(400, 'נא להזין תאריך אירוע');"
+  },
+  {
+    "file": "backend/src/routes/orders.js",
+    "line": 354,
+    "text": "throw new ApiError(400, 'נא להזין שם לקוחה');"
+  },
+  {
+    "file": "backend/src/routes/orders.js",
+    "line": 393,
+    "text": "throw new ApiError(404, 'לקוחה לא נמצאה');"
+  },
+  {
+    "file": "backend/src/routes/orders.js",
+    "line": 406,
+    "text": "orderSummary = 'הזמנה';"
+  },
+  {
+    "file": "backend/src/routes/orders.js",
+    "line": 515,
+    "text": "method: paymentMethod || payment.payment_method || 'לא צוין',"
+  },
+  {
+    "file": "backend/src/routes/orders.js",
+    "line": 534,
+    "text": "paymentMethod || 'לא צוין',"
+  },
+  {
+    "file": "backend/src/routes/orders.js",
+    "line": 560,
+    "text": "message: 'הזמנה נוצרה בהצלחה',"
+  },
+  {
+    "file": "backend/src/routes/orders.js",
+    "line": 584,
+    "text": "if (aiData.paymentMethod && (!payment.method || payment.method === 'לא צוין')) payment.method = aiData.paymentMethod;"
+  },
+  {
+    "file": "backend/src/routes/orders.js",
+    "line": 640,
+    "text": "name: item.dress_name || item.wearer_name || 'פריט',"
+  },
+  {
+    "file": "backend/src/routes/orders.js",
+    "line": 690,
+    "text": "throw new ApiError(404, 'הזמנה לא נמצאה');"
+  },
+  {
+    "file": "backend/src/routes/orders.js",
+    "line": 752,
+    "text": "const normalizedDressName = normalizeTextForSave(item.dress_name) || 'פריט';"
+  },
+  {
+    "file": "backend/src/routes/orders.js",
+    "line": 771,
+    "text": "itemSummaries.push(`${getItemTypeLabel(resolvedItemType)} ${normalizedDressName !== 'פריט' ? normalizedDressName : ''}`.trim());"
+  },
+  {
+    "file": "backend/src/routes/orders.js",
+    "line": 786,
+    "text": "run('UPDATE orders SET order_summary = ? WHERE id = ?', ['הזמנה', id]);"
+  },
+  {
+    "file": "backend/src/routes/orders.js",
+    "line": 842,
+    "text": "message: 'הזמנה עודכנה בהצלחה',"
+  },
+  {
+    "file": "backend/src/routes/orders.js",
+    "line": 855,
+    "text": "const oldCustomerName = oldCustomerData ? oldCustomerData.name : 'לקוח_לא_ידוע';"
+  },
+  {
+    "file": "backend/src/routes/orders.js",
+    "line": 891,
+    "text": "throw new ApiError(404, 'הזמנה לא נמצאה');"
+  },
+  {
+    "file": "backend/src/routes/orders.js",
+    "line": 916,
+    "text": "message: 'הזמנה בוטלה בהצלחה'"
+  },
+  {
+    "file": "backend/src/routes/orders.js",
+    "line": 935,
+    "text": "throw new ApiError(400, 'חובה לציין מזהה הזמנה למיזוג ומזהה הזמנה יעד');"
+  },
+  {
+    "file": "backend/src/routes/orders.js",
+    "line": 939,
+    "text": "throw new ApiError(400, 'לא ניתן למזג הזמנה עם עצמה');"
+  },
+  {
+    "file": "backend/src/routes/orders.js",
+    "line": 949,
+    "text": "throw new ApiError(404, 'אחת ההזמנות לא נמצאה');"
+  },
+  {
+    "file": "backend/src/routes/orders.js",
+    "line": 1016,
+    "text": "orderSummary = 'הזמנה';"
+  },
+  {
+    "file": "backend/src/routes/orders.js",
+    "line": 1027,
+    "text": "message: 'הזמנות אוחדו בהצלחה'"
+  },
+  {
+    "file": "backend/src/routes/auth.js",
+    "line": 33,
+    "text": "logLogin(email || 'unknown', false, null, null, ipAddress, userAgent, 'חסרים פרטי התחברות');"
+  },
+  {
+    "file": "backend/src/routes/auth.js",
+    "line": 34,
+    "text": "throw new ApiError(400, 'נא להזין אימייל וסיסמה');"
+  },
+  {
+    "file": "backend/src/routes/auth.js",
+    "line": 41,
+    "text": "logLogin(email, false, null, null, ipAddress, userAgent, 'משתמש לא קיים');"
+  },
+  {
+    "file": "backend/src/routes/auth.js",
+    "line": 42,
+    "text": "throw new ApiError(401, 'אימייל או סיסמה שגויים');"
+  },
+  {
+    "file": "backend/src/routes/auth.js",
+    "line": 46,
+    "text": "logLogin(email, false, user.id, user.name, ipAddress, userAgent, 'חשבון לא פעיל');"
+  },
+  {
+    "file": "backend/src/routes/auth.js",
+    "line": 47,
+    "text": "throw new ApiError(401, 'חשבון לא פעיל');"
+  },
+  {
+    "file": "backend/src/routes/auth.js",
+    "line": 54,
+    "text": "logLogin(email, false, user.id, user.name, ipAddress, userAgent, 'סיסמה שגויה');"
+  },
+  {
+    "file": "backend/src/routes/auth.js",
+    "line": 55,
+    "text": "throw new ApiError(401, 'אימייל או סיסמה שגויים');"
+  },
+  {
+    "file": "backend/src/routes/auth.js",
+    "line": 91,
+    "text": "message: 'התחברת בהצלחה',"
+  },
+  {
+    "file": "backend/src/routes/auth.js",
+    "line": 128,
+    "text": "message: 'התנתקת בהצלחה'"
+  },
+  {
+    "file": "backend/src/routes/auth.js",
+    "line": 173,
+    "text": "throw new ApiError(400, 'נא להזין סיסמה נוכחית וסיסמה חדשה');"
+  },
+  {
+    "file": "backend/src/routes/auth.js",
+    "line": 177,
+    "text": "throw new ApiError(400, 'הסיסמה החדשה חייבת להיות לפחות 8 תווים');"
+  },
+  {
+    "file": "backend/src/routes/auth.js",
+    "line": 187,
+    "text": "throw new ApiError(401, 'הסיסמה הנוכחית שגויה');"
+  },
+  {
+    "file": "backend/src/routes/auth.js",
+    "line": 204,
+    "text": "message: 'הסיסמה שונתה בהצלחה'"
+  },
+  {
+    "file": "backend/src/routes/auth.js",
+    "line": 219,
+    "text": "message: 'טוקן תקין',"
+  },
+  {
+    "file": "backend/src/routes/dresses.js",
+    "line": 83,
+    "text": "throw new ApiError(400, 'לא הועלה קובץ');"
+  },
+  {
+    "file": "backend/src/routes/dresses.js",
+    "line": 140,
+    "text": "throw new ApiError(400, 'סטטוס לא תקין');"
+  },
+  {
+    "file": "backend/src/routes/dresses.js",
+    "line": 150,
+    "text": "throw new ApiError(400, 'ייעוד שמלה לא תקין');"
+  },
+  {
+    "file": "backend/src/routes/dresses.js",
+    "line": 305,
+    "text": "throw new ApiError(404, 'שמלה לא נמצאה');"
+  },
+  {
+    "file": "backend/src/routes/dresses.js",
+    "line": 375,
+    "text": "throw new ApiError(400, 'נא להזין שם שמלה');"
+  },
+  {
+    "file": "backend/src/routes/dresses.js",
+    "line": 381,
+    "text": "throw new ApiError(409, 'שמלה עם שם זה כבר קיימת');"
+  },
+  {
+    "file": "backend/src/routes/dresses.js",
+    "line": 385,
+    "text": "throw new ApiError(400, 'סטטוס לא תקין');"
+  },
+  {
+    "file": "backend/src/routes/dresses.js",
+    "line": 390,
+    "text": "throw new ApiError(400, 'ייעוד שמלה לא תקין');"
+  },
+  {
+    "file": "backend/src/routes/dresses.js",
+    "line": 412,
+    "text": "message: 'שמלה נוספה בהצלחה',"
+  },
+  {
+    "file": "backend/src/routes/dresses.js",
+    "line": 436,
+    "text": "throw new ApiError(404, 'שמלה לא נמצאה');"
+  },
+  {
+    "file": "backend/src/routes/dresses.js",
+    "line": 441,
+    "text": "throw new ApiError(400, 'נא להזין שם שמלה');"
+  },
+  {
+    "file": "backend/src/routes/dresses.js",
+    "line": 451,
+    "text": "throw new ApiError(409, 'שמלה אחרת עם שם זה כבר קיימת');"
+  },
+  {
+    "file": "backend/src/routes/dresses.js",
+    "line": 456,
+    "text": "throw new ApiError(400, 'סטטוס לא תקין');"
+  },
+  {
+    "file": "backend/src/routes/dresses.js",
+    "line": 461,
+    "text": "throw new ApiError(400, 'ייעוד שמלה לא תקין');"
+  },
+  {
+    "file": "backend/src/routes/dresses.js",
+    "line": 489,
+    "text": "message: 'שמלה עודכנה בהצלחה',"
+  },
+  {
+    "file": "backend/src/routes/dresses.js",
+    "line": 508,
+    "text": "throw new ApiError(400, 'סטטוס לא תקין');"
+  },
+  {
+    "file": "backend/src/routes/dresses.js",
+    "line": 513,
+    "text": "throw new ApiError(404, 'שמלה לא נמצאה');"
+  },
+  {
+    "file": "backend/src/routes/dresses.js",
+    "line": 523,
+    "text": "message: 'סטטוס שמלה עודכן'"
+  },
+  {
+    "file": "backend/src/routes/dresses.js",
+    "line": 544,
+    "text": "throw new ApiError(404, 'שמלה לא נמצאה');"
+  },
+  {
+    "file": "backend/src/routes/dresses.js",
+    "line": 549,
+    "text": "throw new ApiError(400, 'נא להזין סכום תקין');"
+  },
+  {
+    "file": "backend/src/routes/dresses.js",
+    "line": 578,
+    "text": "message: 'השכרה נוספה להיסטוריה'"
+  },
+  {
+    "file": "backend/src/routes/dresses.js",
+    "line": 608,
+    "text": "throw new ApiError(400, 'חובה לציין מזהה שמלה למיזוג ומזהה שמלה יעד');"
+  },
+  {
+    "file": "backend/src/routes/dresses.js",
+    "line": 612,
+    "text": "throw new ApiError(400, 'לא ניתן למזג שמלה עם עצמה');"
+  },
+  {
+    "file": "backend/src/routes/dresses.js",
+    "line": 621,
+    "text": "throw new ApiError(404, `שמלת היעד (ID ${targetDressId}) לא נמצאה`);"
+  },
+  {
+    "file": "backend/src/routes/dresses.js",
+    "line": 624,
+    "text": "throw new ApiError(404, `שמלת המקור (ID ${sourceDressId}) לא נמצאה`);"
+  },
+  {
+    "file": "backend/src/routes/dresses.js",
+    "line": 697,
+    "text": "message: 'שמלות אוחדו בהצלחה'"
+  },
+  {
+    "file": "backend/src/routes/order-attachments.js",
+    "line": 53,
+    "text": "message: `הקובץ גדול מדי. הגודל המקסימלי הוא ${Math.round(PER_FILE_LIMIT_BYTES / (1024 * 1024))}MB לקובץ.`"
+  },
+  {
+    "file": "backend/src/routes/order-attachments.js",
+    "line": 59,
+    "text": "message: 'יותר מדי קבצים בהעלאה אחת. עד 20 קבצים בכל פעם.'"
+  },
+  {
+    "file": "backend/src/routes/order-attachments.js",
+    "line": 92,
+    "text": "throw new ApiError(404, 'הזמנה לא נמצאה');"
+  },
+  {
+    "file": "backend/src/routes/order-attachments.js",
+    "line": 134,
+    "text": "throw new ApiError(400, 'לא הועלו קבצים');"
+  },
+  {
+    "file": "backend/src/routes/order-attachments.js",
+    "line": 170,
+    "text": "message: `${saved.length} קבצים הועלו בהצלחה`,"
+  },
+  {
+    "file": "backend/src/routes/order-attachments.js",
+    "line": 191,
+    "text": "throw new ApiError(404, 'קובץ לא נמצא');"
+  },
+  {
+    "file": "backend/src/routes/order-attachments.js",
+    "line": 201,
+    "text": "message: 'תיאור הקובץ עודכן',"
+  },
+  {
+    "file": "backend/src/routes/order-attachments.js",
+    "line": 221,
+    "text": "throw new ApiError(404, 'קובץ לא נמצא');"
+  },
+  {
+    "file": "backend/src/routes/order-attachments.js",
+    "line": 233,
+    "text": "res.json({ success: true, message: 'קובץ נמחק בהצלחה' });"
+  },
+  {
+    "file": "backend/src/routes/order-attachments.js",
+    "line": 251,
+    "text": "throw new ApiError(404, 'קובץ לא נמצא');"
+  },
+  {
+    "file": "backend/src/routes/order-attachments.js",
+    "line": 256,
+    "text": "throw new ApiError(404, 'הקובץ לא נמצא בדיסק');"
+  },
+  {
+    "file": "backend/src/scripts/import-dresses.js",
+    "line": 5,
+    "text": "* Parses the מלאי שמלות.csv file and populates the dresses table."
+  },
+  {
+    "file": "backend/src/scripts/import-dresses.js",
+    "line": 22,
+    "text": "const csvPath = join(__dirname, '..', '..', '..', 'csv-files-from-google-sheets', 'מלאי שמלות.csv');"
+  },
+  {
+    "file": "backend/src/scripts/import-dresses.js",
+    "line": 86,
+    "text": "rentals.push({ amount: firstIncome, customer: firstCustomer || 'לא ידוע' });"
+  },
+  {
+    "file": "backend/src/scripts/import-dresses.js",
+    "line": 116,
+    "text": "if (rental.customer && rental.customer !== 'לא ידוע') {"
+  },
+  {
+    "file": "backend/src/constants/agreementTerms.js",
+    "line": 23,
+    "text": "'ביום ההזמנה תידרש מקדמה בשיעור 50% מסכום ההזמנה.',"
+  },
+  {
+    "file": "backend/src/constants/agreementTerms.js",
+    "line": 24,
+    "text": "'יתרת הסכום תשולם ביום קבלת השמלה. השמלה לא תימסר ללקוחה ללא תשלום מלא.',"
+  },
+  {
+    "file": "backend/src/constants/agreementTerms.js",
+    "line": 25,
+    "text": "'בעת השכרת שמלת ערב יבוצע פיקדון בגובה סכום ההשכרה באמצעות תפיסת מסגרת בכרטיס אשראי.',"
+  },
+  {
+    "file": "backend/src/constants/agreementTerms.js",
+    "line": 26,
+    "text": "'המסגרת בכרטיס האשראי תשוחרר לאחר החזרה תקינה של השמלה במועד שנקבע.',"
+  },
+  {
+    "file": "backend/src/constants/agreementTerms.js",
+    "line": 27,
+    "text": "'במקרה של נזק או גניבה, תחויב הלקוחה בעלות תיקון השמלה, אם ניתן לתקנה, בנוסף לדמי השכירות.',"
+  },
+  {
+    "file": "backend/src/constants/agreementTerms.js",
+    "line": 28,
+    "text": "'אם השמלה אינה ניתנת לתיקון, תחויב הלקוחה בתשלום השווה לעלות תפירת שמלה דומה בהתאמה אישית.',"
+  },
+  {
+    "file": "backend/src/constants/agreementTerms.js",
+    "line": 29,
+    "text": "'השמלה תימסר ללקוחה 2 ימי עסקים לפני תאריך האירוע, ותוחזר בתוך 2 ימי עסקים לאחר האירוע.',"
+  },
+  {
+    "file": "backend/src/constants/agreementTerms.js",
+    "line": 30,
+    "text": "'על הלקוחה להחזיר את השמלה עם הקולב והכיסוי לאחר האירוע. אי החזרת הקולב או הכיסוי תגרור קנס בסך 50₪.',"
+  },
+  {
+    "file": "backend/src/constants/agreementTerms.js",
+    "line": 31,
+    "text": "'איחור בהחזרת השמלה יגרור קנס בסך 200₪ עבור כל יום איחור.',"
+  },
+  {
+    "file": "backend/src/constants/agreementTerms.js",
+    "line": 39,
+    "text": "// Wording adapted: \"השכרה\" → \"הזמנה\"."
+  },
+  {
+    "file": "backend/src/constants/agreementTerms.js",
+    "line": 42,
+    "text": "'ביום ההזמנה תידרש מקדמה בשיעור 50% מסכום ההזמנה.',"
+  },
+  {
+    "file": "backend/src/constants/agreementTerms.js",
+    "line": 43,
+    "text": "'יתרת הסכום תשולם ביום קבלת השמלה. השמלה לא תימסר ללקוחה ללא תשלום מלא.',"
+  },
+  {
+    "file": "backend/src/constants/agreementTerms.js",
+    "line": 44,
+    "text": "'השמלה תימסר ללקוחה 2 ימי עסקים לפני תאריך האירוע.',"
+  },
+  {
+    "file": "backend/src/constants/agreementTerms.js",
+    "line": 51,
+    "text": "'כל עוד לא התקבל אישור ההזמנה ולא שולמה מקדמה, ניתן לבטל את ההזמנה ללא עלות.',"
+  },
+  {
+    "file": "backend/src/constants/agreementTerms.js",
+    "line": 52,
+    "text": "'לאחר אישור ההזמנה, ניתן לבטל בתוך 2 ימי עסקים, בתשלום של 25% מסכום ההזמנה (יוחזר חצי מסכום המקדמה).',"
+  },
+  {
+    "file": "backend/src/constants/agreementTerms.js",
+    "line": 53,
+    "text": "'לאחר 2 ימי עסקים, לא ניתן לבטל את ההזמנה, והלקוחה תידרש לשלם את יתרת הסכום.',"
+  },
+  {
+    "file": "backend/src/constants/agreementTerms.js",
+    "line": 54,
+    "text": "'לאחר מסירת השמלה ללקוחה, לא ניתן לבטל את ההזמנה או לבצע החזרה.',"
+  },
+  {
+    "file": "backend/src/constants/agreementTerms.js",
+    "line": 91,
+    "text": "heading: 'תנאים',"
+  },
+  {
+    "file": "backend/src/db/migrate.js",
+    "line": 46,
+    "text": "{ key: 'business_name', value: 'השכרת שמלות - דמו', description: 'Business display name' },"
+  },
+  {
+    "file": "backend/src/middleware/errorHandler.js",
+    "line": 29,
+    "text": "const error = new ApiError(404, 'הדף המבוקש לא נמצא');"
+  },
+  {
+    "file": "backend/src/middleware/errorHandler.js",
+    "line": 49,
+    "text": "let message = err.message || 'שגיאה פנימית בשרת';"
+  },
+  {
+    "file": "backend/src/middleware/errorHandler.js",
+    "line": 65,
+    "text": "message = 'שגיאה בנתונים שהוזנו';"
+  },
+  {
+    "file": "backend/src/middleware/errorHandler.js",
+    "line": 68,
+    "text": "message = 'נתונים כפולים או הפרת אילוץ';"
+  },
+  {
+    "file": "backend/src/middleware/errorHandler.js",
+    "line": 71,
+    "text": "message = 'הערך כבר קיים במערכת';"
+  },
+  {
+    "file": "backend/src/middleware/errorHandler.js",
+    "line": 76,
+    "text": "message = 'שגיאה פנימית בשרת';"
+  },
+  {
+    "file": "backend/src/middleware/auth.js",
+    "line": 48,
+    "text": "message: 'אין הרשאה - נדרשת התחברות'"
+  },
+  {
+    "file": "backend/src/middleware/auth.js",
+    "line": 67,
+    "text": "message: 'משתמש לא נמצא'"
+  },
+  {
+    "file": "backend/src/middleware/auth.js",
+    "line": 75,
+    "text": "message: 'חשבון לא פעיל'"
+  },
+  {
+    "file": "backend/src/middleware/auth.js",
+    "line": 89,
+    "text": "message: 'פג תוקף ההתחברות - נא להתחבר מחדש'"
+  },
+  {
+    "file": "backend/src/middleware/auth.js",
+    "line": 96,
+    "text": "message: 'טוקן לא תקין'"
+  },
+  {
+    "file": "backend/src/middleware/auth.js",
+    "line": 103,
+    "text": "message: 'שגיאת אימות'"
+  },
+  {
+    "file": "backend/src/middleware/auth.js",
+    "line": 145,
+    "text": "message: 'נדרשת התחברות'"
+  },
+  {
+    "file": "backend/src/middleware/auth.js",
+    "line": 152,
+    "text": "message: 'אין הרשאות מנהל'"
+  }
+]
