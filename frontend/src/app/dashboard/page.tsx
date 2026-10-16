@@ -69,7 +69,7 @@ export default function DashboardPage() {
   if (!data) {
     return (
       <div className="text-center py-12">
-        <p className="text-muted-foreground">לא ניתן לטעון את הנתונים</p>
+        <p className="text-muted-foreground">تعذر تحميل البيانات</p>
       </div>
     );
   }
@@ -81,9 +81,9 @@ export default function DashboardPage() {
         <div>
           <div className="flex items-center gap-2 text-green-600 mb-1">
             <Sparkles className="h-4 w-4" />
-            <span className="text-xs font-bold uppercase tracking-wider">לוח בקרה</span>
+            <span className="text-xs font-bold uppercase tracking-wider">لوحة التحكم</span>
           </div>
-          <h1 className="text-3xl font-black tracking-tight">שלום, <span className="text-green-600">מנהל</span></h1>
+          <h1 className="text-3xl font-black tracking-tight">أهلاً، <span className="text-green-600">مدير الأتيليه</span></h1>
         </div>
       </div>
 
@@ -101,8 +101,8 @@ export default function DashboardPage() {
               <PlusCircle className="h-8 w-8 text-white" />
             </div>
             <div>
-              <h3 className="text-xl font-bold text-white">הזמנה חדשה</h3>
-              <p className="text-white/80 text-sm">השכרה או תפירה חדשה</p>
+              <h3 className="text-xl font-bold text-white">حجز جديد</h3>
+              <p className="text-white/80 text-sm">إضافة حجز أو عملية جديدة</p>
             </div>
           </div>
         </Link>
@@ -116,8 +116,8 @@ export default function DashboardPage() {
               <TrendingUp className="h-6 w-6 text-white" />
             </div>
             <div>
-              <h3 className="text-lg font-bold text-white">הכנסה</h3>
-              <p className="text-white/70 text-xs">תיעוד תשלום</p>
+              <h3 className="text-lg font-bold text-white">إيراد</h3>
+              <p className="text-white/70 text-xs">تسجيل دفعة</p>
             </div>
           </Link>
 
@@ -129,8 +129,8 @@ export default function DashboardPage() {
               <TrendingDown className="h-6 w-6 text-white" />
             </div>
             <div>
-              <h3 className="text-lg font-bold text-white">הוצאה</h3>
-              <p className="text-white/70 text-xs">תיעוד הוצאה</p>
+              <h3 className="text-lg font-bold text-white">مصروف</h3>
+              <p className="text-white/70 text-xs">תיעוד مصروف</p>
             </div>
           </Link>
         </div>
@@ -144,7 +144,7 @@ export default function DashboardPage() {
           className="rounded-[1.5rem] border-none shadow-sm bg-white/50 block transition-all active:scale-[0.97] hover:shadow-md hover:bg-white/80"
         >
           <CardContent className="p-5">
-            <p className="text-xs font-bold text-muted-foreground mb-1 uppercase">הכנסות החודש</p>
+            <p className="text-xs font-bold text-muted-foreground mb-1 uppercase">إيرادات الشهر</p>
             <div className="text-xl font-black text-green-600">
               {formatCurrency(data.financials.monthly.income)}
             </div>
@@ -157,7 +157,7 @@ export default function DashboardPage() {
           className="rounded-[1.5rem] border-none shadow-sm bg-white/50 block transition-all active:scale-[0.97] hover:shadow-md hover:bg-white/80"
         >
           <CardContent className="p-5">
-            <p className="text-xs font-bold text-muted-foreground mb-1 uppercase">הזמנות פתוחות</p>
+            <p className="text-xs font-bold text-muted-foreground mb-1 uppercase">الحجوزات المفتوحة</p>
             <div className="text-xl font-black">
               {data.orders.open} <span className="text-xs font-normal text-muted-foreground">/ {data.orders.totalActive}</span>
             </div>
@@ -170,7 +170,7 @@ export default function DashboardPage() {
           className="rounded-[1.5rem] border-none shadow-sm bg-white/50 block transition-all active:scale-[0.97] hover:shadow-md hover:bg-white/80"
         >
           <CardContent className="p-5">
-            <p className="text-xs font-bold text-muted-foreground mb-1 uppercase">שמלות פעילות</p>
+            <p className="text-xs font-bold text-muted-foreground mb-1 uppercase">القطع المتاحة</p>
             <div className="text-xl font-black">
               {data.dresses.available} <span className="text-xs font-normal text-muted-foreground">/ {data.dresses.total}</span>
             </div>
@@ -183,7 +183,7 @@ export default function DashboardPage() {
           className="rounded-[1.5rem] border-none shadow-sm bg-white/50 block transition-all active:scale-[0.97] hover:shadow-md hover:bg-white/80"
         >
           <CardContent className="p-5">
-            <p className="text-xs font-bold text-muted-foreground mb-1 uppercase">לקוחות</p>
+            <p className="text-xs font-bold text-muted-foreground mb-1 uppercase">العملاء</p>
             <div className="text-xl font-black">
               {data.customers.total}
             </div>
