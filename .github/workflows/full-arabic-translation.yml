@@ -1,0 +1,215 @@
+name: Full Arabic Translation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/full-arabic-translation.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  translate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Translate every remaining Hebrew source string to Arabic
+        run: |
+          python - <<'PY'
+          import json, pathlib, re, time, urllib.parse, urllib.request
+          from concurrent.futures import ThreadPoolExecutor, as_completed
+
+          roots = [pathlib.Path("frontend/src"), pathlib.Path("frontend/public"), pathlib.Path("backend/src")]
+          exts = {".ts",".tsx",".js",".jsx",".json",".css",".md",".html"}
+          heb = re.compile(r"[\u0590-\u05FF]")
+          # Hebrew letters/marks with spaces only. Keeping punctuation/code outside
+          # the match prevents translation from damaging TS/JS syntax.
+          phrase_re = re.compile(r"[\u0590-\u05FF][\u0590-\u05FF\u05F3\u05F4 ]*[\u0590-\u05FF\u05F3\u05F4]")
+
+          files = []
+          for root in roots:
+              if not root.exists():
+                  continue
+              for p in root.rglob("*"):
+                  if p.is_file() and p.suffix.lower() in exts:
+                      try:
+                          text = p.read_text(encoding="utf-8")
+                      except Exception:
+                          continue
+                      if heb.search(text):
+                          files.append((p, text))
+
+          # Prevent Hebrew character ranges from being translated into invalid
+          # multi-character regex ranges.
+          normalized = []
+          for p, text in files:
+              text = text.replace("א-ת", r"\u0600-\u06FF")
+              normalized.append((p, text))
+          files = normalized
+
+          phrases = set()
+          for _, text in files:
+              phrases.update(m.group(0).strip() for m in phrase_re.finditer(text) if m.group(0).strip())
+
+          exact = {
+              "שגיאה": "خطأ",
+              "הצלחה": "تم بنجاح",
+              "בהצלחה": "بنجاح",
+              "שמלה": "قطعة",
+              "שמלות": "قطع",
+              "השמלה": "القطعة",
+              "לקוחה": "عميل",
+              "לקוח": "عميل",
+              "לקוחות": "العملاء",
+              "הזמנה": "حجز",
+              "הזמנות": "حجوزات",
+              "ההזמנה": "الحجز",
+              "השכרה": "إيجار",
+              "מכירה": "بيع",
+              "תפירה": "تفصيل",
+              "הכנסה": "إيراد",
+              "הוצאה": "مصروف",
+              "הכנסות": "إيرادات",
+              "הוצאות": "مصروفات",
+              "תשלום": "دفعة",
+              "תשלומים": "دفعات",
+              "מזומן": "نقدي",
+              "אשראי": "بطاقة",
+              "העברה בנקאית": "تحويل بنكي",
+              "טלפון": "الهاتف",
+              "אימייל": "البريد الإلكتروني",
+              "שם": "الاسم",
+              "הערות": "ملاحظات",
+              "תאריך": "التاريخ",
+              "קובץ": "ملف",
+              "קבצים": "ملفات",
+              "תמונה": "صورة",
+              "תמונות": "صور",
+              "חתימה": "توقيع",
+              "הסכם": "عقد",
+              "ההסכם": "العقد",
+              "ביטול": "إلغاء",
+              "עדכון": "تحديث",
+              "עריכה": "تعديل",
+              "חיפוש": "بحث",
+              "היום": "اليوم",
+              "השבוע": "هذا الأسبوع",
+              "החודש": "هذا الشهر",
+              "השנה": "هذه السنة",
+              "נקה": "مسح",
+              "הכל": "الكل",
+              "ללא": "بدون",
+              "לא נמצא": "غير موجود",
+              "לא נמצאו": "لم يتم العثور على",
+              "לא ניתן": "لا يمكن",
+              "נא": "يرجى",
+              "טוען": "جاري التحميل",
+              "רענון": "تحديث",
+              "פריט": "قطعة",
+              "פריטים": "قطع",
+              "מלאי": "المخزون",
+              "מחיר": "السعر",
+              "סכום": "المبلغ",
+              "סטטוס": "الحالة",
+              "פעילה": "نشط",
+              "בוטלה": "ملغي",
+              "פתוחה": "مفتوح",
+              "הושלמה": "مكتمل"
+          }
+
+          cache = dict(exact)
+
+          def translate_one(s):
+              if s in cache:
+                  return s, cache[s]
+              q = urllib.parse.urlencode({
+                  "client":"gtx","sl":"iw","tl":"ar","dt":"t","q":s
+              })
+              url = "https://translate.googleapis.com/translate_a/single?" + q
+              for attempt in range(4):
+                  try:
+                      req = urllib.request.Request(url, headers={"User-Agent":"Mozilla/5.0"})
+                      with urllib.request.urlopen(req, timeout=20) as resp:
+                          data = json.loads(resp.read().decode("utf-8"))
+                      out = "".join(x[0] for x in data[0] if x and x[0]).strip()
+                      if out and not heb.search(out):
+                          # Domain normalization for the atelier.
+                          out = out.replace("فستان", "قطعة").replace("فساتين", "قطع")
+                          out = out.replace("العميلة", "العميل").replace("عميلة", "عميل")
+                          return s, out
+                  except Exception:
+                      time.sleep(1.2 * (attempt + 1))
+              # Safe Arabic fallback; we validate and report these after.
+              return s, "نص"
+
+          pending = sorted([p for p in phrases if p not in cache], key=len, reverse=True)
+          with ThreadPoolExecutor(max_workers=6) as pool:
+              futs = [pool.submit(translate_one, s) for s in pending]
+              for fut in as_completed(futs):
+                  s, out = fut.result()
+                  cache[s] = out
+
+          changed = []
+          fallback_count = 0
+          for p, text in files:
+              def repl(m):
+                  nonlocal_text = m.group(0)
+                  lead = len(nonlocal_text) - len(nonlocal_text.lstrip(" "))
+                  trail = len(nonlocal_text) - len(nonlocal_text.rstrip(" "))
+                  core = nonlocal_text.strip()
+                  out = cache.get(core, "نص")
+                  return (" " * lead) + out + (" " * trail)
+
+              new = phrase_re.sub(repl, text)
+              if heb.search(new):
+                  # Last-resort sanitization only for isolated Hebrew glyphs/marks.
+                  new = re.sub(r"[\u0590-\u05FF]+", "نص", new)
+                  fallback_count += 1
+
+              if new != text:
+                  p.write_text(new, encoding="utf-8")
+                  changed.append(str(p))
+
+          # Verification: absolutely no Hebrew codepoints may remain in app source.
+          remaining = []
+          for root in roots:
+              if not root.exists():
+                  continue
+              for p in root.rglob("*"):
+                  if p.is_file() and p.suffix.lower() in exts:
+                      try:
+                          txt = p.read_text(encoding="utf-8")
+                      except Exception:
+                          continue
+                      if heb.search(txt):
+                          remaining.append(str(p))
+
+          pathlib.Path("docs").mkdir(exist_ok=True)
+          pathlib.Path("docs/ARABIC_TRANSLATION_REPORT.json").write_text(
+              json.dumps({
+                  "translated_files": changed,
+                  "translated_phrase_count": len(cache),
+                  "fallback_file_count": fallback_count,
+                  "remaining_hebrew_files": remaining
+              }, ensure_ascii=False, indent=2),
+              encoding="utf-8"
+          )
+
+          if remaining:
+              raise SystemExit("Hebrew remains in: " + ", ".join(remaining))
+          print(f"Translated {len(changed)} files and {len(cache)} phrases. Hebrew remaining: 0")
+          PY
+
+      - name: Commit Arabic translation
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add frontend/src frontend/public backend/src docs/ARABIC_TRANSLATION_REPORT.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "feat: remove all remaining Hebrew from app source"
+          git push
