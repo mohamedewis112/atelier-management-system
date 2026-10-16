@@ -12,7 +12,7 @@ const API_BASE = typeof window !== 'undefined'
   : (process.env.NEXT_PUBLIC_API_URL || '/api');
 
 import { reportClientError } from './error-reporter';
-import { DEMO_EMAIL, DEMO_PASSWORD, DEMO_TOKEN, handleDemoRequest } from './demo-data';
+import { DEMO_EMAIL, DEMO_PASSWORD, DEMO_TOKEN, getDemoAccountByCredentials, handleDemoRequest, isDemoToken } from './demo-data';
 
 interface ApiResponse<T = unknown> {
   success: boolean;
@@ -39,7 +39,7 @@ class ApiClient {
         // Demo mode has no backend to create the HttpOnly auth cookie.
         // The Next.js middleware protects /dashboard by checking for the
         // existence of auth_token, so create a same-site demo cookie here.
-        if (token === DEMO_TOKEN) {
+        if (isDemoToken(token)) {
           document.cookie = `auth_token=${encodeURIComponent(token)}; path=/; max-age=604800; samesite=lax; secure`;
         }
       } else {
@@ -67,8 +67,8 @@ class ApiClient {
     endpoint: string,
     options: RequestInit = {}
   ): Promise<ApiResponse<T>> {
-    if (this.token === DEMO_TOKEN) {
-      return handleDemoRequest(endpoint, options) as ApiResponse<T>;
+    if (isDemoToken(this.token)) {
+      return handleDemoRequest(endpoint, options, this.token) as ApiResponse<T>;
     }
 
     const isFormData = options.body instanceof FormData;
@@ -198,13 +198,14 @@ export const api = new ApiClient();
 // Auth API
 export const authApi = {
   login: async (email: string, password: string) => {
-    if (email.trim().toLowerCase() === DEMO_EMAIL && password === DEMO_PASSWORD) {
+    const account = getDemoAccountByCredentials(email, password);
+    if (account) {
       return {
         success: true,
         message: 'تم تسجيل الدخول بنجاح',
         data: {
-          token: DEMO_TOKEN,
-          user: { id: 1, email: DEMO_EMAIL, name: 'مدير الأتيليه', role: 'admin' }
+          token: account.token,
+          user: account.user
         }
       };
     }
@@ -212,12 +213,24 @@ export const authApi = {
     throw new Error('بيانات الدخول غير صحيحة');
   },
 
-  me: () => api.get<{ user: { id: number; email: string; name: string; role: string } }>('/auth/me'),
+  me: () => api.get<{ user: { id: number; email: string; name: string; role: string; is_active?: boolean } }>('/auth/me'),
 
-  verify: () => api.post<{ user: { id: number; email: string; name: string; role: string } }>('/auth/verify'),
+  verify: () => api.post<{ user: { id: number; email: string; name: string; role: string; is_active?: boolean } }>('/auth/verify'),
 
   changePassword: (currentPassword: string, newPassword: string) =>
     api.post('/auth/change-password', { currentPassword, newPassword }),
+};
+
+
+// Users & Roles API
+export const usersApi = {
+  list: () => api.get<{ users: Array<{ id: number; name: string; email: string; role: 'admin' | 'supervisor' | 'sales'; is_active: boolean; created_at?: string }> }>('/users'),
+
+  create: (data: { name: string; email: string; role: 'admin' | 'supervisor' | 'sales'; is_active?: boolean }) =>
+    api.post('/users', data),
+
+  update: (id: number, data: { name?: string; email?: string; role?: 'admin' | 'supervisor' | 'sales'; is_active?: boolean }) =>
+    api.put(`/users/${id}`, data),
 };
 
 // Customers API
