@@ -1,0 +1,140 @@
+{
+  "placeholder_lines": [
+    {
+      "file": "frontend/src/app/dashboard/customers/page.tsx",
+      "line": 178,
+      "text": "const message = error instanceof Error ? error.message : \"خطأ نصدمج\";"
+    },
+    {
+      "file": "frontend/src/app/dashboard/customers/page.tsx",
+      "line": 456,
+      "text": "انتبه: سيؤدي هذا إلى توحيد جميع الطلبات, المدفوعات وتاريخ كل منعملاء نصعميل واحد. نصعميل سيتم حذف الثاني."
+    },
+    {
+      "file": "frontend/src/app/dashboard/customers/page.tsx",
+      "line": 484,
+      "text": "نصعميل الرئيسي (يتم حفظها)"
+    },
+    {
+      "file": "frontend/src/app/dashboard/dresses/page.tsx",
+      "line": 228,
+      "text": "description: error instanceof Error ? error.message : \"خطأ نصدمج\","
+    },
+    {
+      "file": "frontend/src/app/dashboard/dresses/page.tsx",
+      "line": 405,
+      "text": "ماك&quot;نص: {dress.id} • {dress.rental_count} إيجارات • {getIntendedUseShortLabel(dress.intended_use)}"
+    },
+    {
+      "file": "frontend/src/app/dashboard/dresses/page.tsx",
+      "line": 474,
+      "text": "ماك&quot;نص: {dress.id} • {dress.rental_count} إيجارات • {getIntendedUseLabel(dress.intended_use)}"
+    },
+    {
+      "file": "frontend/src/app/dashboard/dresses/page.tsx",
+      "line": 578,
+      "text": "<p className=\"text-xs text-muted-foreground\">ماك&quot;نص {d.id} • {d.rental_count} إيجارات</p>"
+    },
+    {
+      "file": "frontend/src/app/dashboard/orders/page.tsx",
+      "line": 199,
+      "text": "description: error instanceof Error ? error.message : \"خطأ نصدمج\","
+    },
+    {
+      "file": "frontend/src/app/dashboard/orders/page.tsx",
+      "line": 263,
+      "text": "toast({ title: \"خطأ\", description: \"خطأ نصإلغاء\", variant: \"destructive\" });"
+    },
+    {
+      "file": "frontend/src/app/dashboard/orders/page.tsx",
+      "line": 325,
+      "text": "toast({ title: \"خطأ\", description: \"خطأ نصحذف\", variant: \"destructive\" });"
+    },
+    {
+      "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+      "line": 60,
+      "text": "{ value: \"check\", label: \"نص'نص\" },"
+    },
+    {
+      "file": "frontend/src/app/dashboard/transactions/new/page.tsx",
+      "line": 718,
+      "text": "<label className=\"text-[11px] font-bold text-muted-foreground uppercase\">رقم ج'نص</label>"
+    },
+    {
+      "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+      "line": 55,
+      "text": "{ value: \"check\", label: \"نص'نص\" },"
+    },
+    {
+      "file": "frontend/src/app/dashboard/transactions/[id]/edit/page.tsx",
+      "line": 614,
+      "text": "<label className=\"text-[10px] font-bold text-muted-foreground uppercase\">رقم ج'نص</label>"
+    },
+    {
+      "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+      "line": 817,
+      "text": "<Plus className=\"h-4 w-4 ml-1\" /> عنصر آخر"
+    },
+    {
+      "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+      "line": 1011,
+      "text": "<Plus className=\"h-4 w-4 ml-1\" /> عنصر آخر"
+    },
+    {
+      "file": "frontend/src/app/dashboard/orders/new/page.tsx",
+      "line": 1183,
+      "text": "placeholder=\"ضريبة' نص'نص\""
+    },
+    {
+      "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+      "line": 602,
+      "text": "<Plus className=\"h-4 w-4 ml-1\" /> عنصر آخر"
+    },
+    {
+      "file": "frontend/src/app/dashboard/orders/[id]/edit/page.tsx",
+      "line": 783,
+      "text": "<Plus className=\"h-4 w-4 ml-1\" /> عنصر آخر"
+    },
+    {
+      "file": "backend/src/utils/hebrewDate.js",
+      "line": 72,
+      "text": "let result = `${day} نص${month}`;"
+    },
+    {
+      "file": "backend/src/services/email.js",
+      "line": 516,
+      "text": "return `- ₪${p.amount} نص${p.method}${confirmStr}`;"
+    },
+    {
+      "file": "backend/src/services/email.js",
+      "line": 551,
+      "text": "return `<li>₪${p.amount} نص${p.method}${confirmStr}${fileStr}</li>`;"
+    },
+    {
+      "file": "backend/src/services/ai.js",
+      "line": 130,
+      "text": "- check_number (رقم ج'نص)"
+    },
+    {
+      "file": "backend/src/services/paymentDetails.js",
+      "line": 14,
+      "text": "check: ['check', 'cheque', \"نص'نص\", 'يفحص', 'شيك']"
+    },
+    {
+      "file": "backend/src/routes/export.js",
+      "line": 68,
+      "text": "{ value: 'check', label: \"نص'نص\" },"
+    },
+    {
+      "file": "backend/src/routes/export.js",
+      "line": 200,
+      "text": "label: 'نوع العنصر',"
+    },
+    {
+      "file": "backend/src/constants/agreementTerms.js",
+      "line": 52,
+      "text": "'بعد تأكيد الطلب, يمكن إلغاؤها داخل 2 أيام العمل, في دفع 25% مبلغ النظام (سيتم إرجاع نصف المبلغ المقدم).',"
+    }
+  ],
+  "hebrew_lines": []
+}
