@@ -217,7 +217,7 @@ export default function DressesPage() {
         thumbnail_url: mergeThumbnailUrl,
         notes: mergeNotes,
       });
-      toast({ title: "تم بنجاح", description: "القطع אוחדו בتم بنجاح" });
+      toast({ title: "تم بنجاح", description: "القطع متحدون بتم بنجاح" });
       setShowMergeDialog(false);
       setSelectedIds([]);
       setIsSelectionMode(false);
@@ -225,7 +225,7 @@ export default function DressesPage() {
     } catch (error) {
       toast({
         title: "خطأ",
-        description: error instanceof Error ? error.message : "خطأ בدمج",
+        description: error instanceof Error ? error.message : "خطأ نصدمج",
         variant: "destructive",
       });
     } finally {
@@ -255,7 +255,7 @@ export default function DressesPage() {
             </div>
             <h1 className="text-3xl font-black">المخزون <span className="text-primary">القطع</span></h1>
             <p className="text-muted-foreground text-sm font-medium">
-              {dresses.length} القطع במערכת • {bookableCount} פעילות בالمخزون
+              {dresses.length} القطع في النظام • {bookableCount} النشاط بالمخزون
             </p>
           </div>
           <div className="flex gap-2">
@@ -268,7 +268,7 @@ export default function DressesPage() {
             </Button>
             <Button onClick={() => router.push("/dashboard/dresses/new")} className="rounded-2xl h-12 px-6 shadow-lg shadow-primary/20">
               <Plus className="h-5 w-5 ml-2" />
-              שמלה
+              قطعة
             </Button>
           </div>
         </div>
@@ -293,7 +293,7 @@ export default function DressesPage() {
               <option value="">كل الحالات</option>
               <option value="available">متاحة</option>
               <option value="sold">مباعة</option>
-              <option value="retired">הוצאה מהالمخزون</option>
+              <option value="retired">انفق ماذاالمخزون</option>
               <option value="custom_sewing">تفصيل خاص</option>
             </select>
             <select
@@ -338,7 +338,7 @@ export default function DressesPage() {
               )}
             >
               <List className="h-3.5 w-3.5" />
-              רשימה
+              قائمة
             </button>
             <button
               type="button"
@@ -349,7 +349,7 @@ export default function DressesPage() {
               )}
             >
               <LayoutGrid className="h-3.5 w-3.5" />
-              תמונות
+              صور
             </button>
           </div>
         </div>
@@ -402,10 +402,10 @@ export default function DressesPage() {
               <div className="order-2 flex-1 min-w-0 text-right">
                 <div className="font-bold text-base leading-snug break-words">{dress.name}</div>
                 <div className="text-[11px] font-bold text-muted-foreground mt-0.5">
-                  מק&quot;ט: {dress.id} • {dress.rental_count} إيجارات • {getIntendedUseShortLabel(dress.intended_use)}
+                  ماك&quot;نص: {dress.id} • {dress.rental_count} إيجارات • {getIntendedUseShortLabel(dress.intended_use)}
                 </div>
                 <div className="text-[11px] font-bold text-muted-foreground mt-0.5">
-                  מחיר: {formatCurrency(dress.base_price)} • הכנסות: {formatCurrency(dress.total_income)}
+                  السعر: {formatCurrency(dress.base_price)} • إيرادات: {formatCurrency(dress.total_income)}
                 </div>
               </div>
 
@@ -471,7 +471,7 @@ export default function DressesPage() {
                   <div>
                     <h3 className="font-black text-xl text-gray-900 leading-snug break-words whitespace-normal">{dress.name}</h3>
                     <p className="text-xs font-bold text-muted-foreground uppercase mt-1">
-                      מק&quot;ט: {dress.id} • {dress.rental_count} إيجارات • {getIntendedUseLabel(dress.intended_use)}
+                      ماك&quot;نص: {dress.id} • {dress.rental_count} إيجارات • {getIntendedUseLabel(dress.intended_use)}
                     </p>
                   </div>
                   <div className="flex gap-2">
@@ -510,7 +510,7 @@ export default function DressesPage() {
       {dresses.length === 0 && !loading && (
         <div className="text-center py-24 bg-white rounded-[3rem] shadow-inner">
           <ShoppingBag className="h-16 w-16 mx-auto text-muted-foreground/30 mb-4" />
-          <h3 className="text-xl font-bold text-gray-900">לא נמצאו القطع</h3>
+          <h3 className="text-xl font-bold text-gray-900">لم يتم العثور على القطع</h3>
           <p className="text-muted-foreground">غيّر البحث أو أضف قطعة جديدة</p>
         </div>
       )}
@@ -523,7 +523,7 @@ export default function DressesPage() {
             className="h-14 px-8 rounded-full shadow-2xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-lg gap-2"
           >
             <Users className="h-5 w-5" />
-            دمج 2 القطع שנבחרו
+            دمج 2 القطع اختيار
           </Button>
         </div>
       )}
@@ -536,14 +536,14 @@ export default function DressesPage() {
           <div className="fixed inset-0 bg-black/50 z-[100] flex items-center justify-center p-4 backdrop-blur-sm">
             <Card className="w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-[2rem]">
               <div className="p-6 border-b flex justify-between items-center bg-white sticky top-0 z-10">
-                <h2 className="text-2xl font-black text-purple-700">איחוד القطع</h2>
+                <h2 className="text-2xl font-black text-purple-700">الاتحاد القطع</h2>
                 <Button variant="ghost" size="icon" onClick={() => setShowMergeDialog(false)}>
                   <X className="h-6 w-6" />
                 </Button>
               </div>
               <CardContent className="p-6 space-y-6">
                 <div className="bg-purple-50 p-4 rounded-xl text-purple-800 text-sm font-medium">
-                  שימי לב: פעולה זו תאחד את כל ההיסטוריה של שתי הالقطع לשמלה אחת. השמלה השנייה תימחק לצמיתות.
+                  انتبه: سيوحد هذا الإجراء تاريخ الاثنين بأكملهالقطع لثوب واحد. سيتم حذف القطعة الثاني نهائيا.
                 </div>
 
                 {/* Pick primary dress */}
@@ -568,14 +568,14 @@ export default function DressesPage() {
                       >
                         {isTarget && (
                           <div className="absolute top-0 right-0 bg-purple-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-bl-xl">
-                            שמלה ראשית (תישמר)
+                            اللباس الرئيسي (يتم حفظها)
                           </div>
                         )}
                         {(d.thumbnail_url || d.photo_url) && (
                           <img src={d.thumbnail_url || d.photo_url || ""} alt={d.name} className="w-full h-28 object-cover rounded-lg mb-2" />
                         )}
                         <h3 className="font-bold text-base leading-snug">{d.name}</h3>
-                        <p className="text-xs text-muted-foreground">מק&quot;ט {d.id} • {d.rental_count} إيجارات</p>
+                        <p className="text-xs text-muted-foreground">ماك&quot;نص {d.id} • {d.rental_count} إيجارات</p>
                       </div>
                     );
                   })}
@@ -638,7 +638,7 @@ export default function DressesPage() {
                 <div>
                   <h2 className="font-black text-2xl leading-snug break-words whitespace-normal">{viewingDress.dress.name}</h2>
                   <p className="text-xs font-bold text-muted-foreground uppercase">
-                    מק״ט {viewingDress.dress.id} • {getStatusLabel(viewingDress.dress.status)} • {getIntendedUseLabel(viewingDress.dress.intended_use)}
+                    رمز التخزين التعريفي {viewingDress.dress.id} • {getStatusLabel(viewingDress.dress.status)} • {getIntendedUseLabel(viewingDress.dress.intended_use)}
                   </p>
                 </div>
               </div>
@@ -654,7 +654,7 @@ export default function DressesPage() {
                   <div className="relative h-48 w-full rounded-3xl overflow-hidden mb-6">
                     <img src={viewingDress.dress.photo_url || ""} className="w-full h-full object-cover" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
-                      <span className="text-white font-bold">{viewingDress.dress.notes || "אין ملاحظات מיוחדות"}</span>
+                      <span className="text-white font-bold">{viewingDress.dress.notes || "لا شئ ملاحظات خاص"}</span>
                     </div>
                   </div>
                 )}
@@ -686,11 +686,11 @@ export default function DressesPage() {
                 <div className="space-y-4">
                   <h4 className="font-black text-lg flex items-center gap-2">
                     <Calendar className="h-5 w-5 text-primary" />
-                    הזמנות עתידיות לשמלה
+                    الطلبات المستقبلية للقطعة
                   </h4>
                   {viewingDress.upcoming_bookings.length === 0 ? (
                     <p className="text-center py-6 text-muted-foreground bg-muted/10 rounded-2xl italic">
-                      אין כרגע הזמנות עתידיות רשומות לשמלה זו
+                      لا يوجد حاليا أي طلبات مستقبلية مدرجة لهذا اللباس
                     </p>
                   ) : (
                     <div className="space-y-3">
@@ -702,10 +702,10 @@ export default function DressesPage() {
                           className="w-full text-right p-4 border-2 rounded-2xl bg-amber-50/70 border-amber-200 hover:border-primary/40 hover:bg-primary/5 transition-all active:scale-[0.98]"
                         >
                           <p className="font-black text-gray-900">
-                            {formatDateShort(booking.event_date)} • הזמנה #{booking.order_id}
+                            {formatDateShort(booking.event_date)} • حجز #{booking.order_id}
                           </p>
                           <p className="text-xs font-bold text-muted-foreground uppercase">
-                            {booking.wearer_name ? `לובשת: ${booking.wearer_name}` : booking.customer_name || "عميل غير معروف"}
+                            {booking.wearer_name ? `يرتدي: ${booking.wearer_name}` : booking.customer_name || "عميل غير معروف"}
                             {booking.customer_name && booking.wearer_name && booking.customer_name !== booking.wearer_name ? ` • العميل: ${booking.customer_name}` : ""}
                           </p>
                         </button>
@@ -718,11 +718,11 @@ export default function DressesPage() {
                 <div className="space-y-4">
                   <h4 className="font-black text-lg flex items-center gap-2">
                     <History className="h-5 w-5 text-primary" />
-                    היסטוריית אירועים
+                    تاريخ الحدث
                   </h4>
                   <div className="space-y-3">
                     {viewingDress.rentals.length === 0 ? (
-                      <p className="text-center py-8 text-muted-foreground bg-muted/10 rounded-2xl italic">טרם בוצעו إيجارات לשמלה זו</p>
+                      <p className="text-center py-8 text-muted-foreground bg-muted/10 rounded-2xl italic">لم يتم تنفيذها بعد إيجارات لهذا اللباس</p>
                     ) : (
                       viewingDress.rentals.map((rental, idx) => (
                         <div
@@ -741,7 +741,7 @@ export default function DressesPage() {
                         >
                           <div>
                             <p className="font-black text-gray-900">
-                              {rental.wearer_name || rental.customer_name || rental.customer_full_name || "عميل غير معروف"} (לובשת)
+                              {rental.wearer_name || rental.customer_name || rental.customer_full_name || "عميل غير معروف"} (يرتدي)
                             </p>
                             <p className="text-xs font-bold text-muted-foreground uppercase">
                               {formatDateShort(rental.event_date)} • {
@@ -766,7 +766,7 @@ export default function DressesPage() {
 
             <div className="p-6 border-t bg-muted/10">
               <Button onClick={(e) => { e.stopPropagation(); router.push(`/dashboard/dresses/${viewingDress.dress.id}/edit`); }} className="w-full h-14 rounded-2xl font-black text-lg shadow-lg">
-                <Edit className="h-5 w-5 ml-2" /> עריכת פרטי שמלה
+                <Edit className="h-5 w-5 ml-2" /> تحرير تفاصيل اللباس
               </Button>
             </div>
           </Card>

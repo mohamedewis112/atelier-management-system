@@ -43,7 +43,7 @@ try {
     console.log('\nInserting default settings...');
     
     const defaultSettings = [
-      { key: 'business_name', value: 'השכרת שמלות - דמו', description: 'Business display name' },
+      { key: 'business_name', value: 'تأجير القطع - دمه', description: 'Business display name' },
       { key: 'business_phone', value: '050-0000000', description: 'Business phone number' },
       { key: 'business_email', value: 'admin@example.com', description: 'Business email' },
     ];

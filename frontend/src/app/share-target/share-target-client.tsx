@@ -16,32 +16,32 @@ const TARGET_OPTIONS: Array<{
 }> = [
   {
     context: "order_deposit",
-    title: "אסמכתא להזמנה חדשה",
-    description: "יפתח טופס הזמנה חדשה עם הקובץ מצורף לתשלום מקדמה.",
+    title: "إشارة إلى أمر جديد",
+    description: "سيتم فتح نموذج طلب جديد مع مرفق الدفع المسبق.",
     href: "/dashboard/orders/new?shared_upload=1&share_context=order_deposit",
   },
   {
     context: "transaction_income",
-    title: "אסמכתא להכנסה חדשה",
-    description: "יפתח טופס תנועה חדשה כהכנסה עם הקובץ טעון מראש.",
+    title: "مرجع للدخل الجديد",
+    description: "سيتم فتح نموذج مرور جديد كإدخال مع الملف الذي تم تحميله مسبقًا.",
     href: "/dashboard/transactions/new?type=income&shared_upload=1&share_context=transaction_income",
   },
   {
     context: "transaction_expense",
-    title: "אסמכתא להוצאה חדשה",
-    description: "יפתח טופס תנועה חדשה כהוצאה עם הקובץ טעון מראש.",
+    title: "إشارة إلى منشور جديد",
+    description: "سيتم فتح نموذج حركة جديد كمصروف مع الملف الذي تم تحميله مسبقًا.",
     href: "/dashboard/transactions/new?type=expense&shared_upload=1&share_context=transaction_expense",
   },
   {
     context: "dress_add",
-    title: "הוספת שמלה חדשה",
-    description: "יפתח טופס שמלה חדשה ויטען את התמונה אוטומטית.",
+    title: "وأضاف قطعة جديد",
+    description: "سيتم فتح نموذج قطعة جديد وتحميل الصورة تلقائيًا.",
     href: "/dashboard/dresses?openForm=1&shared_upload=1&share_context=dress_add",
   },
   {
     context: "dress_edit",
-    title: "עדכון תמונת שמלה קיימת",
-    description: "יפתח מלאי שמלות לבחירת שמלה לעדכון התמונה.",
+    title: "تحديث صورة اللباس الموجودة",
+    description: "سيتم فتح جرد اللباس لاختيار قطعة لتحديث الصورة.",
     href: "/dashboard/dresses?shared_upload=1&share_context=dress_edit",
   },
 ];
@@ -85,8 +85,8 @@ export function ShareTargetClient() {
       if (error) {
         setLoading(false);
         toast({
-          title: "שיתוף לא הושלם",
-          description: "לא התקבל קובץ תקין מתפריט השיתוף.",
+          title: "المشاركة لم تكتمل",
+          description: "لم يتم استلام ملف صالح من قائمة المشاركة.",
           variant: "destructive",
         });
         return;
@@ -127,8 +127,8 @@ export function ShareTargetClient() {
       } catch (loadError) {
         console.error(loadError);
         toast({
-          title: "שגיאה בטעינת הקובץ",
-          description: "לא הצלחנו לטעון את הקובץ מהשיתוף.",
+          title: "خطأ في تحميل الملف",
+          description: "لم نتمكن من تحميل الملف من المشاركة.",
           variant: "destructive",
         });
       } finally {
@@ -152,25 +152,25 @@ export function ShareTargetClient() {
           <CardContent className="p-6 space-y-4">
             <div className="flex items-center gap-2 text-primary">
               <FileImage className="h-5 w-5" />
-              <h1 className="font-black text-xl">שיתוף קובץ למערכת</h1>
+              <h1 className="font-black text-xl">مشاركة الملفات على النظام</h1>
             </div>
 
-            {loading && <p className="text-sm text-muted-foreground">טוען את הקובץ מתפריט השיתוף...</p>}
+            {loading && <p className="text-sm text-muted-foreground">يقوم بتحميل الملف من قائمة المشاركة...</p>}
 
             {!loading && !ready && (
-              <p className="text-sm text-destructive">לא זוהה קובץ לשיוך. נסי לשתף מחדש.</p>
+              <p className="text-sm text-destructive">لم يتم اكتشاف أي ملف لربطه. حاول المشاركة مرة أخرى.</p>
             )}
 
             {ready && (
               <div className="space-y-3">
-                <p className="text-sm font-bold">הקובץ מוכן לשיוך:</p>
+                <p className="text-sm font-bold">الملف جاهز للارتباط:</p>
                 <div className="rounded-xl border bg-muted/20 p-3">
                   <p className="text-sm font-bold">{fileName}</p>
                   <p className="text-xs text-muted-foreground">{fileType}</p>
                 </div>
                 {isImage && filePreviewUrl && (
                   <div className="rounded-xl overflow-hidden border bg-muted/10">
-                    <img src={filePreviewUrl} alt="תצוגה מקדימה" className="w-full max-h-72 object-cover" />
+                    <img src={filePreviewUrl} alt="معاينة" className="w-full max-h-72 object-cover" />
                   </div>
                 )}
               </div>
@@ -180,7 +180,7 @@ export function ShareTargetClient() {
 
         <Card className="border-2">
           <CardContent className="p-6 space-y-3">
-            <h2 className="font-black text-lg">לאן לשייך את הקובץ?</h2>
+            <h2 className="font-black text-lg">مكان ربط الملف?</h2>
             {TARGET_OPTIONS.map((option) => (
               <button
                 key={option.context}
@@ -203,7 +203,7 @@ export function ShareTargetClient() {
         </Card>
 
         <Button variant="outline" className="w-full h-12 rounded-xl" onClick={() => router.push("/dashboard")}>
-          מעבר ללוח הבקרה
+          انتقل إلى لوحة التحكم
         </Button>
       </div>
     </div>

@@ -23,7 +23,7 @@ export function MobileActions() {
           <div className="bg-red-50 p-2 rounded-2xl">
             <TrendingDown className="h-6 w-6" />
           </div>
-          <span className="text-[10px] font-bold">הוצאה</span>
+          <span className="text-[10px] font-bold">مصروف</span>
         </a>
 
         <a
@@ -31,7 +31,7 @@ export function MobileActions() {
           className="flex flex-col items-center justify-center flex-[1.5] py-3 gap-1 bg-green-600 text-white rounded-2xl shadow-lg shadow-green-600/30 active:scale-95 transition-all -translate-y-4 border-4 border-background"
         >
           <ShoppingBag className="h-7 w-7" />
-          <span className="text-xs font-bold">הזמנה חדשה</span>
+          <span className="text-xs font-bold">طلب جديد</span>
         </a>
 
         <a
@@ -41,7 +41,7 @@ export function MobileActions() {
           <div className="bg-green-50 p-2 rounded-2xl">
             <TrendingUp className="h-6 w-6" />
           </div>
-          <span className="text-[10px] font-bold">הכנסה</span>
+          <span className="text-[10px] font-bold">إيراد</span>
         </a>
       </div>
     </div>

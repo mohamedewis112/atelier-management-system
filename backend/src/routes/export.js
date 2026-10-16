@@ -16,77 +16,77 @@ router.use(requireAuth);
 router.use(requireAdmin);
 
 const ORDER_STATUS_OPTIONS = [
-  { value: 'pending', label: 'ממתין' },
-  { value: 'confirmed', label: 'מאושר' },
-  { value: 'in_progress', label: 'בתהליך' },
-  { value: 'completed', label: 'הושלם' },
-  { value: 'cancelled', label: 'בוטל' },
+  { value: 'pending', label: 'منتظر' },
+  { value: 'confirmed', label: 'موافقة' },
+  { value: 'in_progress', label: 'قيد المعالجة' },
+  { value: 'completed', label: 'مكتمل' },
+  { value: 'cancelled', label: 'تم الإلغاء' },
 ];
 
 const ORDER_TYPE_OPTIONS = [
-  { value: 'rental', label: 'השכרה' },
-  { value: 'sewing_for_rental', label: 'תפירה שנשארת בהשכרה' },
-  { value: 'sewing', label: 'תפירה' },
-  { value: 'sale', label: 'מכירה' },
-  { value: 'repair', label: 'תיקון' },
+  { value: 'rental', label: 'إيجار' },
+  { value: 'sewing_for_rental', label: 'الخياطة التي تبقى في الإيجار' },
+  { value: 'sewing', label: 'تفصيل' },
+  { value: 'sale', label: 'بيع' },
+  { value: 'repair', label: 'تصحيح' },
 ];
 
 const DRESS_STATUS_OPTIONS = [
-  { value: 'available', label: 'פנויה' },
-  { value: 'sold', label: 'נמכרה' },
-  { value: 'retired', label: 'יצאה ממלאי' },
-  { value: 'custom_sewing', label: 'תפירה אישית' },
+  { value: 'available', label: 'حر' },
+  { value: 'sold', label: 'مُباع' },
+  { value: 'retired', label: 'إنتهى من المخزن' },
+  { value: 'custom_sewing', label: 'الخياطة الشخصية' },
 ];
 
 const DRESS_INTENDED_USE_OPTIONS = [
-  { value: 'rental', label: 'להשכרה' },
-  { value: 'sale', label: 'למכירה' },
+  { value: 'rental', label: 'للإيجار' },
+  { value: 'sale', label: 'للبيع' },
 ];
 
 const TRANSACTION_TYPE_OPTIONS = [
-  { value: 'income', label: 'הכנסה' },
-  { value: 'expense', label: 'הוצאה' },
+  { value: 'income', label: 'إيراد' },
+  { value: 'expense', label: 'مصروف' },
 ];
 
 const TRANSACTION_CATEGORY_OPTIONS = [
-  { value: 'order', label: 'הזמנה' },
-  { value: 'repair', label: 'תיקונים' },
-  { value: 'materials', label: 'חומרים' },
-  { value: 'overhead', label: 'תקורה' },
-  { value: 'tax', label: 'מיסוי' },
-  { value: 'equipment', label: 'ציוד' },
-  { value: 'salary', label: 'משכורות' },
-  { value: 'other', label: 'אחר' },
+  { value: 'order', label: 'حجز' },
+  { value: 'repair', label: 'التصحيحات' },
+  { value: 'materials', label: 'مواد' },
+  { value: 'overhead', label: 'النفقات العامة' },
+  { value: 'tax', label: 'الضرائب' },
+  { value: 'equipment', label: 'معدات' },
+  { value: 'salary', label: 'الرواتب' },
+  { value: 'other', label: 'آخر' },
 ];
 
 const PAYMENT_METHOD_OPTIONS = [
-  { value: 'cash', label: 'מזומן' },
-  { value: 'bit', label: 'ביט' },
-  { value: 'paybox', label: 'פייבוקס' },
-  { value: 'credit', label: 'אשראי' },
-  { value: 'transfer', label: 'העברה בנקאית' },
-  { value: 'check', label: "צ'ק" },
+  { value: 'cash', label: 'نقدي' },
+  { value: 'bit', label: 'قليل' },
+  { value: 'paybox', label: 'صندوق الدفع' },
+  { value: 'credit', label: 'بطاقة' },
+  { value: 'transfer', label: 'تحويل بنكي' },
+  { value: 'check', label: "نص'نص" },
 ];
 
 const RENTAL_TYPE_OPTIONS = [
-  { value: 'rental', label: 'השכרה' },
-  { value: 'sewing_for_rental', label: 'תפירה שנשארת בהשכרה' },
-  { value: 'sewing', label: 'תפירה' },
-  { value: 'sale', label: 'מכירה' },
-  { value: 'repair', label: 'תיקון' },
+  { value: 'rental', label: 'إيجار' },
+  { value: 'sewing_for_rental', label: 'الخياطة التي تبقى في الإيجار' },
+  { value: 'sewing', label: 'تفصيل' },
+  { value: 'sale', label: 'بيع' },
+  { value: 'repair', label: 'تصحيح' },
 ];
 
 const USER_ROLE_OPTIONS = [
-  { value: 'admin', label: 'מנהל' },
-  { value: 'user', label: 'משתמש' },
+  { value: 'admin', label: 'إدارة' },
+  { value: 'user', label: 'مستخدم' },
 ];
 
 const ACTIVE_OPTIONS = [
-  { value: '1', label: 'פעיל' },
-  { value: '0', label: 'לא פעיל' },
+  { value: '1', label: 'نشيط' },
+  { value: '0', label: 'غير نشط' },
 ];
 
-function createDateFilters(column, fromLabel = 'מתאריך', toLabel = 'עד תאריך') {
+function createDateFilters(column, fromLabel = 'مؤرخة', toLabel = 'حتى الآن') {
   return [
     {
       key: 'dateFrom',
@@ -108,39 +108,39 @@ function createDateFilters(column, fromLabel = 'מתאריך', toLabel = 'עד �
 const DATASET_CONFIG = {
   customers: {
     table: 'customers',
-    label: 'לקוחות',
-    description: 'פרטי לקוחות, מקור הגעה וסטטוס פעילות',
+    label: 'العملاء',
+    description: 'تفاصيل العميل, مصدر الوصول وحالة النشاط',
     orderBy: 'created_at DESC, id DESC',
     filters: [
-      ...createDateFilters('created_at', 'נוצר מתאריך', 'נוצר עד תאריך'),
+      ...createDateFilters('created_at', 'تم إنشاؤها من تاريخ', 'تم إنشاؤها حسب التاريخ'),
       {
         key: 'source',
-        label: 'מקור הגעה',
+        label: 'مصدر الوصول',
         inputType: 'text',
         queryType: 'contains',
         column: 'source',
-        placeholder: 'לדוגמה: אינסטגרם',
+        placeholder: 'على سبيل المثال: انستغرام',
       },
       {
         key: 'search',
-        label: 'חיפוש חופשי',
+        label: 'بحث مجاني',
         inputType: 'text',
         queryType: 'search_any',
         columns: ['name', 'phone', 'email', 'notes'],
-        placeholder: 'שם, טלפון, אימייל...',
+        placeholder: 'الاسم, الهاتف, البريد الإلكتروني...',
       },
     ],
   },
   dresses: {
     table: 'dresses',
-    label: 'שמלות',
-    description: 'מלאי שמלות, סטטוס וייעוד',
+    label: 'قطع',
+    description: 'مخزون اللباس, الوضع والدعوة',
     orderBy: 'updated_at DESC, id DESC',
     filters: [
-      ...createDateFilters('updated_at', 'עודכן מתאריך', 'עודכן עד תאריך'),
+      ...createDateFilters('updated_at', 'تم التحديث من', 'تم التحديث حتى الآن'),
       {
         key: 'dressStatus',
-        label: 'סטטוס שמלה',
+        label: 'حالة اللباس',
         inputType: 'select',
         queryType: 'in',
         column: 'status',
@@ -148,7 +148,7 @@ const DATASET_CONFIG = {
       },
       {
         key: 'dressIntendedUse',
-        label: 'ייעוד שמלה',
+        label: 'تسمية اللباس',
         inputType: 'select',
         queryType: 'in',
         column: 'intended_use',
@@ -156,24 +156,24 @@ const DATASET_CONFIG = {
       },
       {
         key: 'search',
-        label: 'חיפוש חופשי',
+        label: 'بحث مجاني',
         inputType: 'text',
         queryType: 'search_any',
         columns: ['name', 'notes'],
-        placeholder: 'שם שמלה או הערה',
+        placeholder: 'اسم القطعة او التعليق',
       },
     ],
   },
   orders: {
     table: 'orders',
-    label: 'הזמנות',
-    description: 'הזמנות השכרה, תפירה ומכירה',
+    label: 'حجوزات',
+    description: 'أوامر الإيجار, الخياطة والبيع',
     orderBy: 'event_date DESC, created_at DESC, id DESC',
     filters: [
-      ...createDateFilters('event_date', 'תאריך אירוע מתאריך', 'תאריך אירוע עד תאריך'),
+      ...createDateFilters('event_date', 'تاريخ الحدث من تاريخ', 'تاريخ الحدث حتى الآن'),
       {
         key: 'orderStatus',
-        label: 'סטטוס הזמנה',
+        label: 'حالة الطلب',
         inputType: 'select',
         queryType: 'in',
         column: 'status',
@@ -181,7 +181,7 @@ const DATASET_CONFIG = {
       },
       {
         key: 'customerId',
-        label: 'מזהה לקוחה',
+        label: 'معرف العميل',
         inputType: 'number',
         queryType: 'equals_number',
         column: 'customer_id',
@@ -190,14 +190,14 @@ const DATASET_CONFIG = {
   },
   order_items: {
     table: 'order_items',
-    label: 'פריטי הזמנה',
-    description: 'כל הפריטים ברמת שמלה בתוך הזמנות',
+    label: 'عناصر الطلب',
+    description: 'جميع عناصر مستوى اللباس ضمن الطلبات',
     orderBy: 'created_at DESC, id DESC',
     filters: [
-      ...createDateFilters('created_at', 'נוצר מתאריך', 'נוצר עד תאריך'),
+      ...createDateFilters('created_at', 'تم إنشاؤها من تاريخ', 'تم إنشاؤها حسب التاريخ'),
       {
         key: 'itemType',
-        label: 'סוג פריט',
+        label: 'نوع العنصر',
         inputType: 'select',
         queryType: 'in',
         column: 'item_type',
@@ -205,38 +205,38 @@ const DATASET_CONFIG = {
       },
       {
         key: 'orderId',
-        label: 'מזהה הזמנה',
+        label: 'معرف الطلب',
         inputType: 'number',
         queryType: 'equals_number',
         column: 'order_id',
       },
       {
         key: 'dressId',
-        label: 'מזהה שמלה',
+        label: 'معرف اللباس',
         inputType: 'number',
         queryType: 'equals_number',
         column: 'dress_id',
       },
       {
         key: 'search',
-        label: 'חיפוש חופשי',
+        label: 'بحث مجاني',
         inputType: 'text',
         queryType: 'search_any',
         columns: ['dress_name', 'wearer_name', 'notes'],
-        placeholder: 'שם שמלה/לובשת/הערות',
+        placeholder: 'هناك قطعة/يرتدي/ملاحظات',
       },
     ],
   },
   transactions: {
     table: 'transactions',
-    label: 'תנועות כספיות',
-    description: 'הכנסות והוצאות לפי סוג, קטגוריה ואמצעי תשלום',
+    label: 'الحركات المالية',
+    description: 'الدخل والمصروفات حسب النوع, الفئة وطريقة الدفع',
     orderBy: 'date DESC, id DESC',
     filters: [
-      ...createDateFilters('date', 'תאריך תנועה מתאריך', 'תאריך תנועה עד תאריך'),
+      ...createDateFilters('date', 'تاريخ الحركة من تاريخ', 'تاريخ الحركة حتى الآن'),
       {
         key: 'transactionType',
-        label: 'סוג תנועה',
+        label: 'نوع الحركة',
         inputType: 'select',
         queryType: 'in',
         column: 'type',
@@ -244,7 +244,7 @@ const DATASET_CONFIG = {
       },
       {
         key: 'transactionCategory',
-        label: 'קטגוריה',
+        label: 'فئة',
         inputType: 'select',
         queryType: 'in',
         column: 'category',
@@ -252,7 +252,7 @@ const DATASET_CONFIG = {
       },
       {
         key: 'paymentMethod',
-        label: 'אמצעי תשלום',
+        label: 'طريقة الدفع',
         inputType: 'select',
         queryType: 'in',
         column: 'payment_method',
@@ -260,38 +260,38 @@ const DATASET_CONFIG = {
       },
       {
         key: 'customerId',
-        label: 'מזהה לקוחה',
+        label: 'معرف العميل',
         inputType: 'number',
         queryType: 'equals_number',
         column: 'customer_id',
       },
       {
         key: 'orderId',
-        label: 'מזהה הזמנה',
+        label: 'معرف الطلب',
         inputType: 'number',
         queryType: 'equals_number',
         column: 'order_id',
       },
       {
         key: 'search',
-        label: 'חיפוש חופשי',
+        label: 'بحث مجاني',
         inputType: 'text',
         queryType: 'search_any',
         columns: ['customer_name', 'supplier', 'product', 'notes'],
-        placeholder: 'לקוחה/ספק/מוצר/הערות',
+        placeholder: 'عميل/مزود/منتج/ملاحظات',
       },
     ],
   },
   dress_history: {
     table: 'dress_history',
-    label: 'היסטוריית שמלות',
-    description: 'אירועי השכרה/תפירה/מכירה ברמת שמלה',
+    label: 'تاريخ اللباس',
+    description: 'أحداث الإيجار/تفصيل/البيع على مستوى القطعة',
     orderBy: 'event_date DESC, created_at DESC, id DESC',
     filters: [
-      ...createDateFilters('event_date', 'תאריך אירוע מתאריך', 'תאריך אירוע עד תאריך'),
+      ...createDateFilters('event_date', 'تاريخ الحدث من تاريخ', 'تاريخ الحدث حتى الآن'),
       {
         key: 'rentalType',
-        label: 'סוג אירוע',
+        label: 'نوع الحدث',
         inputType: 'select',
         queryType: 'in',
         column: 'rental_type',
@@ -299,93 +299,93 @@ const DATASET_CONFIG = {
       },
       {
         key: 'customerId',
-        label: 'מזהה לקוחה',
+        label: 'معرف العميل',
         inputType: 'number',
         queryType: 'equals_number',
         column: 'customer_id',
       },
       {
         key: 'dressId',
-        label: 'מזהה שמלה',
+        label: 'معرف اللباس',
         inputType: 'number',
         queryType: 'equals_number',
         column: 'dress_id',
       },
       {
         key: 'orderId',
-        label: 'מזהה הזמנה',
+        label: 'معرف الطلب',
         inputType: 'number',
         queryType: 'equals_number',
         column: 'order_id',
       },
       {
         key: 'search',
-        label: 'חיפוש חופשי',
+        label: 'بحث مجاني',
         inputType: 'text',
         queryType: 'search_any',
         columns: ['wearer_name', 'customer_name', 'notes'],
-        placeholder: 'שם לובשת/לקוחה או הערה',
+        placeholder: 'يرتدي اسم/العميل أو التعليق',
       },
     ],
   },
   agreements: {
     table: 'agreements',
-    label: 'הסכמי השכרה',
-    description: 'רשומות חתימה על הסכמי השכרה',
+    label: 'اتفاقيات الإيجار',
+    description: 'سجلات توقيع اتفاقيات الإيجار',
     orderBy: 'agreed_at DESC, id DESC',
     filters: [
-      ...createDateFilters('agreed_at', 'תאריך חתימה מתאריך', 'תאריך חתימה עד תאריך'),
+      ...createDateFilters('agreed_at', 'تاريخ التوقيع من التاريخ', 'تاريخ التوقيع حتى الآن'),
       {
         key: 'customerId',
-        label: 'מזהה לקוחה',
+        label: 'معرف العميل',
         inputType: 'number',
         queryType: 'equals_number',
         column: 'customer_id',
       },
       {
         key: 'orderId',
-        label: 'מזהה הזמנה',
+        label: 'معرف الطلب',
         inputType: 'number',
         queryType: 'equals_number',
         column: 'order_id',
       },
       {
         key: 'search',
-        label: 'חיפוש חופשי',
+        label: 'بحث مجاني',
         inputType: 'text',
         queryType: 'search_any',
         columns: ['customer_name', 'customer_phone', 'customer_email'],
-        placeholder: 'שם/טלפון/אימייל',
+        placeholder: 'الاسم/الهاتف/البريد الإلكتروني',
       },
     ],
   },
   settings: {
     table: 'settings',
-    label: 'הגדרות מערכת',
-    description: 'מפתחות וערכי קונפיגורציה',
+    label: 'إعدادات النظام',
+    description: 'مفاتيح التكوين والقيم',
     orderBy: 'updated_at DESC, id DESC',
     filters: [
-      ...createDateFilters('updated_at', 'עודכן מתאריך', 'עודכן עד תאריך'),
+      ...createDateFilters('updated_at', 'تم التحديث من', 'تم التحديث حتى الآن'),
       {
         key: 'search',
-        label: 'חיפוש חופשי',
+        label: 'بحث مجاني',
         inputType: 'text',
         queryType: 'search_any',
         columns: ['key', 'value', 'description'],
-        placeholder: 'מפתח או תיאור',
+        placeholder: 'المفتاح أو الوصف',
       },
     ],
   },
   users: {
     table: 'users',
-    label: 'משתמשות מערכת',
-    description: 'משתמשים, תפקידים וסטטוס חשבון',
+    label: 'مستخدمي النظام',
+    description: 'المستخدمين, الأدوار وحالة الحساب',
     orderBy: 'created_at DESC, id DESC',
     filters: [
-      ...createDateFilters('created_at', 'נוצר מתאריך', 'נוצר עד תאריך'),
+      ...createDateFilters('created_at', 'تم إنشاؤها من تاريخ', 'تم إنشاؤها حسب التاريخ'),
       {
         key: 'userRole',
-        label: 'תפקיד',
+        label: 'دور',
         inputType: 'select',
         queryType: 'in',
         column: 'role',
@@ -393,7 +393,7 @@ const DATASET_CONFIG = {
       },
       {
         key: 'userIsActive',
-        label: 'סטטוס משתמשת',
+        label: 'حالة المستخدم',
         inputType: 'select',
         queryType: 'equals_number',
         column: 'is_active',
@@ -401,11 +401,11 @@ const DATASET_CONFIG = {
       },
       {
         key: 'search',
-        label: 'חיפוש חופשי',
+        label: 'بحث مجاني',
         inputType: 'text',
         queryType: 'search_any',
         columns: ['name', 'email'],
-        placeholder: 'שם או אימייל',
+        placeholder: 'الاسم أو البريد الإلكتروني',
       },
     ],
   },
@@ -436,7 +436,7 @@ function normalizeText(rawValue) {
 function parseInteger(rawValue, label) {
   const parsed = Number.parseInt(String(rawValue), 10);
   if (Number.isNaN(parsed)) {
-    throw new ApiError(400, `ערך מספרי לא תקין עבור ${label}`);
+    throw new ApiError(400, `قيمة رقمية غير صالحة لـ ${label}`);
   }
   return parsed;
 }
@@ -449,7 +449,7 @@ function parseDate(rawValue, label) {
 
   const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
   if (!dateRegex.test(value)) {
-    throw new ApiError(400, `תאריך לא תקין עבור ${label}. נדרש פורמט YYYY-MM-DD`);
+    throw new ApiError(400, `تاريخ غير صالح ل ${label}. التنسيق مطلوب YYYY-MM-DD`);
   }
 
   return value;
@@ -468,7 +468,7 @@ function parseBoolean(rawValue, label) {
     return false;
   }
 
-  throw new ApiError(400, `ערך בוליאני לא תקין עבור ${label}`);
+  throw new ApiError(400, `قيمة منطقية غير صالحة لـ ${label}`);
 }
 
 function validateAllowedValues(filter, values) {
@@ -479,7 +479,7 @@ function validateAllowedValues(filter, values) {
   const allowed = new Set(filter.options.map((option) => option.value));
   for (const value of values.map(String)) {
     if (!allowed.has(value)) {
-      throw new ApiError(400, `ערך מסנן לא תקין עבור ${filter.label}`);
+      throw new ApiError(400, `قيمة عامل التصفية غير صالحة لـ ${filter.label}`);
     }
   }
 }
@@ -622,12 +622,12 @@ router.get('/csv', (req, res, next) => {
   try {
     const datasetKey = normalizeText(getQueryValue(req.query, 'dataset'));
     if (!datasetKey) {
-      throw new ApiError(400, 'חובה לבחור dataset לייצוא');
+      throw new ApiError(400, 'يجب أن تختار dataset للتصدير');
     }
 
     const config = DATASET_CONFIG[datasetKey];
     if (!config) {
-      throw new ApiError(400, 'dataset לא תקין לייצוא');
+      throw new ApiError(400, 'dataset غير صالحة للتصدير');
     }
 
     const whereClauses = [];
@@ -647,7 +647,7 @@ router.get('/csv', (req, res, next) => {
     const rows = all(sql, params);
     const columns = all(`PRAGMA table_info(${config.table})`).map((column) => column.name);
     if (columns.length === 0) {
-      throw new ApiError(500, `לא נמצאו עמודות לטבלה ${config.table}`);
+      throw new ApiError(500, `لم يتم العثور على أعمدة للجدول ${config.table}`);
     }
 
     const csvContent = rowsToCsv(rows, columns);

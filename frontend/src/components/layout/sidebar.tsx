@@ -64,8 +64,8 @@ export function Sidebar({ onItemClick }: SidebarProps) {
               <span className="text-2xl text-white">👗</span>
             </div>
             <div>
-              <h1 className="font-bold text-xl tracking-tight text-primary">ניהול עסק القطع</h1>
-              <p className="text-xs font-medium text-muted-foreground uppercase tracking-widest">القطع ערב</p>
+              <h1 className="font-bold text-xl tracking-tight text-primary">إدارة الأعمال القطع</h1>
+              <p className="text-xs font-medium text-muted-foreground uppercase tracking-widest">القطع مساء</p>
             </div>
           </div>
         </div>

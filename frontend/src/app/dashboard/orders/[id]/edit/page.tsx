@@ -36,10 +36,10 @@ import { prepareAttachmentsForUpload } from "@/lib/shared-upload";
 import { DressSelector } from "@/components/dashboard/dress-selector";
 
 const ORDER_TYPES = [
-  { value: "rental", label: "השכרה" },
-  { value: "sewing_for_rental", label: "תפירה שנשארת בהשכרה" },
-  { value: "sewing", label: "תפירה" },
-  { value: "sale", label: "מכירה" },
+  { value: "rental", label: "إيجار" },
+  { value: "sewing_for_rental", label: "الخياطة التي تبقى في الإيجار" },
+  { value: "sewing", label: "تفصيل" },
+  { value: "sale", label: "بيع" },
 ];
 
 interface Dress {
@@ -172,7 +172,7 @@ export default function EditOrderPage() {
                 // sold/retired dresses already on the order.
                 availableDresses.push({
                   id: it.dress_id,
-                  name: it.dress_name || `שמלה #${it.dress_id}`,
+                  name: it.dress_name || `قطعة #${it.dress_id}`,
                   base_price: it.dress_base_price ?? it.base_price ?? 0,
                   status: it.dress_status || "available",
                   intended_use: it.dress_intended_use ?? null,
@@ -197,13 +197,13 @@ export default function EditOrderPage() {
             })));
           }
         } else {
-          toast({ title: "שגיאה", description: orderRes.message || "הזמנה לא נמצאה", variant: "destructive" });
+          toast({ title: "خطأ", description: orderRes.message || "لم يتم العثور على الطلب", variant: "destructive" });
         }
 
         setDresses(availableDresses);
       } catch (e) {
         console.error("Error loading order for edit:", e);
-        toast({ title: "שגיאה", description: "לא ניתן לטעון את פרטי ההזמנה. בדקי את החיבור לשרת.", variant: "destructive" });
+        toast({ title: "خطأ", description: "لا يمكن تحميل تفاصيل الطلب. تحقق من الاتصال بالخادم.", variant: "destructive" });
       } finally {
         setLoading(false);
       }
@@ -236,15 +236,15 @@ export default function EditOrderPage() {
       if (res.success && res.data) {
         setAttachments(prev => [...((res.data as any).attachments || []), ...prev]);
       }
-      toast({ title: "הצלחה", description: `${prepared.length} קבצים הועלו` });
+      toast({ title: "تم بنجاح", description: `${prepared.length} تم تحميل الملفات` });
     } catch (err) {
-      const message = err instanceof Error ? err.message : "שגיאה בהעלאה";
-      toast({ title: "שגיאה", description: message, variant: "destructive" });
+      const message = err instanceof Error ? err.message : "حدث خطأ أثناء التحميل";
+      toast({ title: "خطأ", description: message, variant: "destructive" });
       reportClientError({
         message,
         stack: err instanceof Error ? err.stack : undefined,
         component: 'EditOrder',
-        action: 'העלאת קובץ מצורף'
+        action: 'تحميل مرفق'
       });
     } finally {
       setUploadingFiles(false);
@@ -252,12 +252,12 @@ export default function EditOrderPage() {
   };
 
   const handleDeleteAttachment = async (attachmentId: number) => {
-    if (!confirm("למחוק קובץ זה?")) return;
+    if (!confirm("احذف هذا الملف?")) return;
     try {
       await ordersApi.deleteAttachment(parseInt(orderId), attachmentId);
       setAttachments(prev => prev.filter(a => a.id !== attachmentId));
     } catch {
-      toast({ title: "שגיאה", description: "שגיאה במחיקה", variant: "destructive" });
+      toast({ title: "خطأ", description: "حدث خطأ أثناء الحذف", variant: "destructive" });
     }
   };
 
@@ -267,7 +267,7 @@ export default function EditOrderPage() {
       setAttachments(prev => prev.map(a => a.id === attachmentId ? { ...a, description: editingDescText } : a));
       setEditingDescId(null);
     } catch {
-      toast({ title: "שגיאה", description: "שגיאה בעדכון", variant: "destructive" });
+      toast({ title: "خطأ", description: "حدث خطأ أثناء التحديث", variant: "destructive" });
     }
   };
 
@@ -332,7 +332,7 @@ export default function EditOrderPage() {
     try {
       const response = await agreementsApi.createSignLink(parseInt(orderId));
       if (!response.success || !response.data) {
-        throw new Error(response.message || "לא ניתן ליצור קישור חתימה");
+        throw new Error(response.message || "غير قادر على إنشاء رابط التوقيع");
       }
 
       const data = response.data as {
@@ -345,9 +345,9 @@ export default function EditOrderPage() {
       if (shouldCopyToClipboard) {
         try {
           await navigator.clipboard.writeText(data.link);
-          toast({ title: "קישור חתימה נוצר", description: "הקישור הועתק ללוח." });
+          toast({ title: "تم إنشاء رابط التوقيع", description: "تم نسخ الرابط إلى الحافظة." });
         } catch {
-          toast({ title: "קישור חתימה נוצר", description: data.link });
+          toast({ title: "تم إنشاء رابط التوقيع", description: data.link });
         }
       }
 
@@ -357,8 +357,8 @@ export default function EditOrderPage() {
       return data.link;
     } catch (error) {
       toast({
-        title: "שגיאה",
-        description: error instanceof Error ? error.message : "לא ניתן ליצור קישור חתימה",
+        title: "خطأ",
+        description: error instanceof Error ? error.message : "غير قادر على إنشاء رابط التوقيع",
         variant: "destructive"
       });
       return null;
@@ -427,7 +427,7 @@ export default function EditOrderPage() {
     e.preventDefault();
 
     if (!eventDate) {
-      toast({ title: "שגיאה", description: "נא להזין תאריך אירוע", variant: "destructive" });
+      toast({ title: "خطأ", description: "الرجاء إدخال تاريخ الحدث", variant: "destructive" });
       return;
     }
 
@@ -456,16 +456,16 @@ export default function EditOrderPage() {
       };
 
       await ordersApi.update(parseInt(orderId), payload);
-      toast({ title: "הצלחה!", description: "הזמנה עודכנה בהצלחה 🎉" });
+      toast({ title: "تم بنجاح!", description: "تم تحديث الطلب بنجاح 🎉" });
       router.push("/dashboard/orders");
     } catch (error) {
-      const message = error instanceof Error ? error.message : "שגיאה בעדכון ההזמנה";
-      toast({ title: "שגיאה", description: message, variant: "destructive" });
+      const message = error instanceof Error ? error.message : "حدث خطأ أثناء تحديث الطلب";
+      toast({ title: "خطأ", description: message, variant: "destructive" });
       reportClientError({
         message,
         stack: error instanceof Error ? error.stack : undefined,
         component: 'EditOrder',
-        action: 'עדכון הזמנה'
+        action: 'تحديث الطلب'
       });
     } finally {
       setSaving(false);
@@ -477,7 +477,7 @@ export default function EditOrderPage() {
   );
 
   if (loading) {
-    return <div className="flex items-center justify-center min-h-screen">טוען...</div>;
+    return <div className="flex items-center justify-center min-h-screen">جاري التحميل...</div>;
   }
 
   return (
@@ -488,10 +488,10 @@ export default function EditOrderPage() {
             <Button variant="ghost" size="icon" onClick={() => router.back()} className="rounded-full">
               <ArrowRight className="h-6 w-6" />
             </Button>
-            <h1 className="text-xl font-black">עריכת הזמנה #{orderId}</h1>
+            <h1 className="text-xl font-black">تحرير أمر #{orderId}</h1>
           </div>
           <div className="hidden sm:block text-sm font-medium text-muted-foreground">
-            לקוחה: <span className="text-green-600 font-bold">{customerName}</span>
+            عميل: <span className="text-green-600 font-bold">{customerName}</span>
           </div>
         </div>
       </div>
@@ -504,7 +504,7 @@ export default function EditOrderPage() {
             <div className="flex flex-row items-center justify-between gap-4">
               <div className="flex items-center gap-2 text-green-600 shrink-0">
                 <Calendar className="h-5 w-5" />
-                <h2 className="font-bold text-base sm:text-lg">מועד אירוע</h2>
+                <h2 className="font-bold text-base sm:text-lg">تاريخ الحدث</h2>
               </div>
               <Input
                 type="date"
@@ -521,7 +521,7 @@ export default function EditOrderPage() {
             <div className="space-y-3">
               <div className="flex items-center gap-2 text-green-600">
                 <Link2 className="h-5 w-5" />
-                <h2 className="font-bold text-base sm:text-lg">חתימה דיגיטלית</h2>
+                <h2 className="font-bold text-base sm:text-lg">التوقيع الرقمي</h2>
               </div>
               {isCurrentOrderVersionSigned ? (
                 <Button
@@ -534,7 +534,7 @@ export default function EditOrderPage() {
                   className="w-full bg-green-600 hover:bg-green-700 h-10 px-2 text-[10px] sm:text-xs font-bold"
                 >
                   <FileText className="h-3 w-3 sm:h-4 sm:w-4 ml-1.5" />
-                  צפיה בחתימה
+                  عرض التوقيع
                 </Button>
               ) : (
                 <>
@@ -546,7 +546,7 @@ export default function EditOrderPage() {
                       className="w-full h-10 px-2 text-[10px] sm:text-xs font-bold"
                     >
                       <FileText className="h-3 w-3 sm:h-4 sm:w-4 ml-1.5" />
-                      צפיה בחתימה
+                      عرض التوقيع
                     </Button>
                   )}
                   <div className="flex flex-row items-center gap-2">
@@ -558,7 +558,7 @@ export default function EditOrderPage() {
                       className="flex-1 border-green-600 text-green-700 h-10 px-2 text-[10px] sm:text-xs font-bold"
                     >
                       <Copy className="h-3 w-3 sm:h-4 sm:w-4 ml-1.5" />
-                      {sendingSignLink ? "מייצר..." : "העתקת קישור"}
+                      {sendingSignLink ? "ينتج..." : "نسخ الوصلة"}
                     </Button>
                     <Button
                       type="button"
@@ -568,7 +568,7 @@ export default function EditOrderPage() {
                       className="flex-1 h-10 px-2 text-[10px] sm:text-xs font-bold"
                     >
                       <FileSignature className="h-3 w-3 sm:h-4 sm:w-4 ml-1.5" />
-                      חתימה
+                      توقيع
                     </Button>
                     <Button
                       type="button"
@@ -577,14 +577,14 @@ export default function EditOrderPage() {
                       className="flex-1 bg-green-600 hover:bg-green-700 h-10 px-2 text-[10px] sm:text-xs font-bold"
                     >
                       <MessageCircle className="h-3 w-3 sm:h-4 sm:w-4 ml-1.5" />
-                      שליחה בווצאפ
+                      الإرسال على الواتساب
                     </Button>
                   </div>
                 </>
               )}
               {!customerPhone && (
                 <p className="text-[10px] text-muted-foreground mt-2 leading-tight">
-                  חסר טלפון לקוחה בהזמנה. לא ניתן לשלוח הודעת WhatsApp.
+                  رقم هاتف العميل مفقود في الطلب. غير قادر على إرسال الرسالة WhatsApp.
                 </p>
               )}
             </div>
@@ -596,10 +596,10 @@ export default function EditOrderPage() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 text-green-600">
               <ShoppingBag className="h-5 w-5" />
-              <h2 className="font-bold text-lg">שמלות ופריטים</h2>
+              <h2 className="font-bold text-lg">قطع وأشياء</h2>
             </div>
             <Button type="button" variant="outline" onClick={addItem} className="rounded-xl border-green-600 text-green-600 hover:bg-green-50">
-              <Plus className="h-4 w-4 ml-1" /> פריט נוסף
+              <Plus className="h-4 w-4 ml-1" /> عنصر آخر
             </Button>
           </div>
 
@@ -616,7 +616,7 @@ export default function EditOrderPage() {
                 {/* Floating Badge Header */}
                 <div className="absolute top-0 right-4 z-10 flex items-center justify-between w-[calc(100%-2rem)]">
                   <span className="font-black text-green-700 bg-green-100 border border-green-200 px-3 py-1 rounded-full text-[10px] shadow-sm">
-                    פריט {index + 1}
+                    قطعة {index + 1}
                   </span>
                   {items.length > 1 && (
                     <button
@@ -634,7 +634,7 @@ export default function EditOrderPage() {
                   <CardContent className="p-3 sm:p-5 pt-6 space-y-4">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                       <div className="space-y-1">
-                        <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">סוג פעולה</label>
+                        <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">نوع العمل</label>
                         <div className="grid grid-cols-2 gap-1.5">
                           {ORDER_TYPES.map(t => (
                             <button
@@ -653,7 +653,7 @@ export default function EditOrderPage() {
                       </div>
 
                       <div className="space-y-1">
-                        <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">בחירת שמלה</label>
+                        <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">اختيار اللباس</label>
                         {(item.item_type === "rental" || item.item_type === "sale") ? (
                           <div className="space-y-3">
                             <DressSelector
@@ -673,17 +673,17 @@ export default function EditOrderPage() {
                                       : "bg-emerald-50 border-emerald-300"
                                 )}
                               >
-                                <p className="text-[11px] font-black text-gray-900">יומן תפוסה לשמלה</p>
+                                <p className="text-[11px] font-black text-gray-900">مذكرات الحجز للقطعة</p>
                                 <p className="text-[11px] text-muted-foreground">
-                                  תאריך הזמנה נוכחית:{" "}
+                                  تاريخ الطلب الحالي:{" "}
                                   <span className="font-black text-gray-900">
-                                    {eventDate ? formatDateShort(eventDate) : "לא נבחר עדיין"}
+                                    {eventDate ? formatDateShort(eventDate) : "لم يتم التحديد بعد"}
                                   </span>
                                 </p>
 
                                 {bookedDates.length > 0 ? (
                                   <div className="space-y-2">
-                                    <p className="text-[11px] font-bold text-gray-800">השמלה כבר מוזמנת לתאריכים:</p>
+                                    <p className="text-[11px] font-bold text-gray-800">تم حجز القطعة بالفعل للتواريخ:</p>
                                     <div className="flex flex-wrap gap-1.5">
                                       {bookedDates.map((date) => (
                                         <span key={date} className="px-2 py-1 rounded-full bg-white border text-[10px] font-bold">
@@ -694,20 +694,20 @@ export default function EditOrderPage() {
                                     <div className="space-y-1">
                                       {upcomingOrders.map((order) => (
                                         <p key={`${order.order_id}-${order.event_date}`} className="text-[10px] text-muted-foreground">
-                                          הזמנה #{order.order_id} • {formatDateShort(order.event_date)}
+                                          حجز #{order.order_id} • {formatDateShort(order.event_date)}
                                           {order.customer_name ? ` • ${order.customer_name}` : ""}
-                                          {order.wearer_name ? ` • לובשת: ${order.wearer_name}` : ""}
+                                          {order.wearer_name ? ` • يرتدي: ${order.wearer_name}` : ""}
                                         </p>
                                       ))}
                                     </div>
                                   </div>
                                 ) : (
-                                  <p className="text-[11px] text-green-700 font-medium">כרגע אין הזמנות עתידיות לשמלה הזו.</p>
+                                  <p className="text-[11px] text-green-700 font-medium">لا يوجد حاليا أي أوامر القادمة لهذا اللباس.</p>
                                 )}
 
                                 {hasExactConflict && (
                                   <p className="text-[11px] font-bold text-red-700">
-                                    יש חפיפה לתאריך ההזמנה הנוכחי. אפשר להמשיך לפי שיקול דעת המנהלת.
+                                    هناك تداخل مع تاريخ الطلب الحالي. يمكنك الاستمرار حسب تقدير المدير.
                                   </p>
                                 )}
                               </div>
@@ -717,25 +717,25 @@ export default function EditOrderPage() {
                           <Input
                             value={item.dress_name}
                             onChange={(e) => updateItem(index, "dress_name", e.target.value)}
-                            placeholder="שם השמלה החדשה"
+                            placeholder="اسم القطعة الجديد"
                             className="h-10 rounded-xl border-2"
                           />
                         )}
                       </div>
 
                       <div className="space-y-1 sm:col-span-2">
-                        <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">שם הלובשת</label>
+                        <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">اسم مرتديها</label>
                         <Input
                           value={item.wearer_name}
                           onChange={(e) => updateItem(index, "wearer_name", e.target.value)}
-                          placeholder="שם מלא (אופציונלי)"
+                          placeholder="الاسم الكامل (خياري)"
                           className="h-10 rounded-xl border-2"
                         />
                       </div>
 
                       <div className="grid grid-cols-2 gap-2">
                         <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">מחיר בסיס</label>
+                          <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">السعر الأساسي</label>
                           <Input
                             type="number"
                             value={item.base_price}
@@ -745,7 +745,7 @@ export default function EditOrderPage() {
                           />
                         </div>
                         <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">תוספות</label>
+                          <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">إضافات</label>
                           <Input
                             type="number"
                             value={item.additional_payments}
@@ -759,13 +759,13 @@ export default function EditOrderPage() {
                       <div className="sm:col-span-2">
                         <details className="group">
                           <summary className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest cursor-pointer select-none hover:text-green-600">
-                            הערות {item.notes ? "📝" : "(לחצי להוספה)"}
+                            ملاحظات {item.notes ? "📝" : "(انقر للإضافة)"}
                           </summary>
                           <div className="mt-2">
                             <Input
                               value={item.notes}
                               onChange={(e) => updateItem(index, "notes", e.target.value)}
-                              placeholder="הערה ספציפית לפריט זה..."
+                              placeholder="ملاحظة خاصة بهذا البند..."
                               className="h-10 rounded-xl border-2"
                             />
                           </div>
@@ -780,18 +780,18 @@ export default function EditOrderPage() {
           </div>
           <div className="flex justify-end">
             <Button type="button" variant="outline" onClick={addItem} className="rounded-xl border-green-600 text-green-600 hover:bg-green-50">
-              <Plus className="h-4 w-4 ml-1" /> פריט נוסף
+              <Plus className="h-4 w-4 ml-1" /> عنصر آخر
             </Button>
           </div>
         </section>
 
         {/* Notes */}
         <section className="space-y-2">
-          <label className="font-bold text-lg text-green-600 block">הערות נוספות</label>
+          <label className="font-bold text-lg text-green-600 block">تعليقات إضافية</label>
           <textarea
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
-            placeholder="כל פרט נוסף שחשוב לזכור..."
+            placeholder="أي تفاصيل إضافية من المهم أن نتذكرها..."
             className="w-full h-32 p-4 rounded-2xl border-2 bg-background focus:border-green-600 outline-none resize-none shadow-inner"
           />
         </section>
@@ -801,7 +801,7 @@ export default function EditOrderPage() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 text-green-600">
               <Paperclip className="h-5 w-5" />
-              <h2 className="font-bold text-lg">קבצים מצורפים</h2>
+              <h2 className="font-bold text-lg">المرفقات</h2>
               {attachments.length > 0 && (
                 <span className="text-xs font-bold bg-green-100 text-green-700 px-2 py-0.5 rounded-full">{attachments.length}</span>
               )}
@@ -811,15 +811,15 @@ export default function EditOrderPage() {
               uploadingFiles ? "opacity-50 cursor-wait" : "border-green-600 text-green-600 hover:bg-green-50"
             )}>
               <Plus className="h-3.5 w-3.5" />
-              {uploadingFiles ? "מעלה..." : "הוסף קובץ"}
+              {uploadingFiles ? "أعلى..." : "إضافة ملف"}
               <input type="file" multiple className="hidden" onChange={handleFileUpload} disabled={uploadingFiles} />
             </label>
           </div>
 
           {loadingAttachments ? (
-            <Card className="border-2"><CardContent className="p-4 text-center text-muted-foreground text-sm">טוען קבצים...</CardContent></Card>
+            <Card className="border-2"><CardContent className="p-4 text-center text-muted-foreground text-sm">تحميل الملفات...</CardContent></Card>
           ) : attachments.length === 0 ? (
-            <Card className="border-2"><CardContent className="p-4 text-center text-muted-foreground text-sm italic">אין קבצים מצורפים</CardContent></Card>
+            <Card className="border-2"><CardContent className="p-4 text-center text-muted-foreground text-sm italic">لا توجد مرفقات</CardContent></Card>
           ) : (
             <div className="space-y-2">
               {attachments.map((att) => (
@@ -843,7 +843,7 @@ export default function EditOrderPage() {
                             onChange={(e) => setEditingDescText(e.target.value)}
                             onKeyDown={(e) => { if (e.key === "Enter") handleSaveDescription(att.id); if (e.key === "Escape") setEditingDescId(null); }}
                             className="flex-1 h-8 px-2 text-sm border rounded-lg"
-                            placeholder="תיאור..."
+                            placeholder="وصف..."
                           />
                           <Button size="icon" variant="ghost" className="h-7 w-7" type="button" onClick={() => handleSaveDescription(att.id)}><Check className="h-3.5 w-3.5" /></Button>
                           <Button size="icon" variant="ghost" className="h-7 w-7" type="button" onClick={() => setEditingDescId(null)}><X className="h-3.5 w-3.5" /></Button>
@@ -882,7 +882,7 @@ export default function EditOrderPage() {
       <div className="fixed bottom-0 left-0 right-0 p-4 bg-background/80 backdrop-blur-lg border-t z-40">
         <div className="max-w-4xl mx-auto flex items-center justify-between gap-4">
           <div className="hidden sm:block">
-            <p className="text-xs text-muted-foreground font-bold uppercase">סה&quot;כ הזמנה</p>
+            <p className="text-xs text-muted-foreground font-bold uppercase">سا&quot;كدعوة</p>
             <p className="text-2xl font-black text-green-600">{formatCurrency(totalPrice)}</p>
           </div>
           <div className="flex-1 flex gap-3">
@@ -891,14 +891,14 @@ export default function EditOrderPage() {
               className="flex-1 h-14 rounded-2xl text-lg font-bold border-2"
               onClick={() => router.back()}
             >
-              ביטול
+              إلغاء
             </Button>
             <Button
               className="flex-[2] h-14 rounded-2xl text-lg font-bold shadow-xl shadow-green-500/20 bg-green-600 hover:bg-green-700"
               onClick={handleSubmit}
               disabled={saving}
             >
-              {saving ? "מעדכן..." : "שמרי שינויים ✨"}
+              {saving ? "تحديث..." : "حفظ التغييرات ✨"}
             </Button>
           </div>
         </div>

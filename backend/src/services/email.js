@@ -202,55 +202,55 @@ export async function sendAgreementConfirmationToCustomer({
     return { success: false, reason: 'No email provided' };
   }
 
-  const eventDateFormatted = eventDate ? formatDateHebrew(eventDate) : 'לא צוין';
+  const eventDateFormatted = eventDate ? formatDateHebrew(eventDate) : 'غير محدد';
   const signedAt = formatDateHebrew(new Date()) + ' ' + new Date().toLocaleTimeString('he-IL', {
     hour: '2-digit',
     minute: '2-digit',
     timeZone: 'Asia/Jerusalem',
   });
 
-  const subject = `הסכם השכרת שמלה - ${customerName}`;
+  const subject = `اتفاقية تأجير الملابس - ${customerName}`;
 
   const textBody = `
-שלום ${customerName},
+سلام ${customerName},
 
-מצורף ההסכם החתום להשכרת שמלת ערב.
+مرفق الاتفاقية الموقعة لتأجير قطعة السهرة.
 
-פרטי ההזמנה:
-- מועד האירוע: ${eventDateFormatted}
-- תאריך חתימת ההסכם: ${signedAt}
+تفاصيل الطلب:
+- تاريخ الحدث: ${eventDateFormatted}
+- تاريخ توقيع الاتفاقية: ${signedAt}
 
-ההסכם המלא מצורף כקובץ PDF.
+الاتفاقية كاملة مرفقة كملف PDF.
 
-תודה שבחרת ב${businessConfig.name}!
+شكرا لاختيارك ب${businessConfig.name}!
 
-בברכה,
+مرحباً,
 ${businessConfig.name}
-טלפון: ${businessConfig.phone}
+الهاتف: ${businessConfig.phone}
   `.trim();
 
   const htmlBody = `
     <div dir="rtl" style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; text-align: right;">
       <div style="text-align: center; margin-bottom: 30px;">
-        <h2 style="color: #8e44ad; margin-bottom: 10px;">הסכם השכרת שמלת ערב</h2>
+        <h2 style="color: #8e44ad; margin-bottom: 10px;">عقد تأجير قطع السهرة</h2>
         <h3 style="color: #555; font-weight: normal;">${businessConfig.name}</h3>
       </div>
       
-      <p>שלום ${customerName},</p>
-      <p>מצורף ההסכם החתום להשכרת שמלת ערב.</p>
+      <p>سلام ${customerName},</p>
+      <p>مرفق الاتفاقية الموقعة لتأجير قطعة السهرة.</p>
       
       <div style="background-color: #f9f9f9; padding: 20px; border-radius: 8px; margin: 20px 0;">
-        <p>${ICON.calendar} <strong>מועד האירוע:</strong> ${eventDateFormatted}</p>
-        <p>${ICON.sign} <strong>תאריך חתימת ההסכם:</strong> ${signedAt}</p>
+        <p>${ICON.calendar} <strong>تاريخ الحدث:</strong> ${eventDateFormatted}</p>
+        <p>${ICON.sign} <strong>تاريخ توقيع الاتفاقية:</strong> ${signedAt}</p>
       </div>
       
       <p style="background-color: #e8f5e8; padding: 15px; border-radius: 5px; border-right: 4px solid #28a745;">
-        ${ICON.check} <strong>ההסכם המלא מצורף כקובץ PDF</strong><br>
-        הקובץ כולל את כל התנאים, פרטי הלקוחה והחתימה הדיגיטלית.
+        ${ICON.check} <strong>الاتفاقية كاملة مرفقة كملف PDF</strong><br>
+        الملف يتضمن كافة الشروط, تفاصيل العميل والتوقيع الرقمي.
       </p>
       
       <div style="margin-top: 30px; padding: 20px; background-color: #f8f9fa; border-radius: 5px; text-align: center;">
-        <p style="margin: 0; color: #666;">תודה שבחרת בבוטיק שמלות הערב שלנו!</p>
+        <p style="margin: 0; color: #666;">شكرا لاختيارك بوتيك قطع السهرة!</p>
         <p style="margin: 5px 0 0 0; font-weight: bold; color: #8e44ad;">${businessConfig.name}</p>
         <p style="margin: 5px 0 0 0; color: #666;">${ICON.phone} ${businessConfig.phone}</p>
       </div>
@@ -260,7 +260,7 @@ ${businessConfig.name}
   const attachments = [];
   if (pdfBuffer) {
     attachments.push({
-      filename: `הסכם השכרת שמלה - ${customerName}.pdf`,
+      filename: `اتفاقية تأجير الملابس - ${customerName}.pdf`,
       content: pdfBuffer,
       contentType: 'application/pdf',
     });
@@ -285,38 +285,38 @@ export async function sendAgreementNotificationToOwner({
   eventDate,
   pdfBuffer = null,
 }) {
-  const eventDateFormatted = eventDate ? formatDateHebrew(eventDate) : 'לא צוין';
+  const eventDateFormatted = eventDate ? formatDateHebrew(eventDate) : 'غير محدد';
   const whatsappUrl = createWhatsAppLink(customerPhone);
 
-  const subject = `הסכם חדש נחתם - ${customerName}`;
+  const subject = `وتم التوقيع على اتفاقية جديدة - ${customerName}`;
 
   const textBody = `
-התקבל הסכם חתום חדש:
+تم استلام اتفاقية موقعة جديدة:
 
-לקוחה: ${customerName}
-טלפון: ${customerPhone}
-מייל: ${customerEmail || 'לא צוין'}
+عميل: ${customerName}
+الهاتف: ${customerPhone}
+بريد: ${customerEmail || 'غير محدد'}
 
-מועד האירוע: ${eventDateFormatted}
+تاريخ الحدث: ${eventDateFormatted}
 
-וואטסאפ: ${whatsappUrl}
+واتساب: ${whatsappUrl}
   `.trim();
 
   const htmlBody = `
     <div dir="rtl" style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; text-align: right;">
-      <h2 style="color: #8e44ad; text-align: center;">${ICON.note} הסכם חדש נחתם</h2>
+      <h2 style="color: #8e44ad; text-align: center;">${ICON.note} وتم التوقيع على اتفاقية جديدة</h2>
       
       <div style="background-color: #f9f9f9; padding: 20px; border-radius: 8px; margin: 20px 0;">
-        <p>${ICON.person} <strong>לקוחה:</strong> ${customerName}</p>
-        <p>${ICON.phone} <strong>טלפון:</strong> ${customerPhone}</p>
-        <p>${ICON.email} <strong>מייל:</strong> ${customerEmail || 'לא צוין'}</p>
+        <p>${ICON.person} <strong>عميل:</strong> ${customerName}</p>
+        <p>${ICON.phone} <strong>الهاتف:</strong> ${customerPhone}</p>
+        <p>${ICON.email} <strong>بريد:</strong> ${customerEmail || 'غير محدد'}</p>
         <hr style="border: none; border-top: 1px solid #ddd; margin: 15px 0;">
-        <p>${ICON.calendar} <strong>מועד האירוע:</strong> ${eventDateFormatted}</p>
+        <p>${ICON.calendar} <strong>تاريخ الحدث:</strong> ${eventDateFormatted}</p>
       </div>
       
       <p style="text-align: center;">
         <a href="${whatsappUrl}" style="display: inline-block; background-color: #25D366; color: white; padding: 12px 24px; text-decoration: none; border-radius: 25px; font-weight: bold;">
-          ${ICON.whatsapp} וואטסאפ ללקוחה
+          ${ICON.whatsapp} واتساب للعميل
         </a>
       </p>
     </div>
@@ -325,7 +325,7 @@ export async function sendAgreementNotificationToOwner({
   const attachments = [];
   if (pdfBuffer) {
     attachments.push({
-      filename: `הסכם - ${customerName}.pdf`,
+      filename: `عقد - ${customerName}.pdf`,
       content: pdfBuffer,
       contentType: 'application/pdf',
     });
@@ -360,28 +360,28 @@ export async function sendNewIncomeNotification({
 }) {
   const formattedDate = transactionDate ? formatDateHebrew(transactionDate) : formatDateHebrew(new Date());
 
-  const subject = `הכנסה חדשה: ₪${amount} - ${customerName || category}`;
+  const subject = `دخل جديد: ₪${amount} - ${customerName || category}`;
 
   const htmlBody = `
     <div dir="rtl" style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; text-align: right;">
-      <h2 style="color: #28a745; text-align: center;">${ICON.money} הכנסה חדשה</h2>
+      <h2 style="color: #28a745; text-align: center;">${ICON.money} دخل جديد</h2>
       
       <div style="background-color: #f9f9f9; padding: 20px; border-radius: 8px; margin: 20px 0;">
-        <p>${ICON.money} <strong>סכום:</strong> <span style="font-size: 1.2em; font-weight: bold;">₪${amount}</span></p>
-        <p>${ICON.tag} <strong>קטגוריה:</strong> ${category}</p>
-        ${customerName ? `<p>${ICON.person} <strong>לקוחה:</strong> ${customerName}</p>` : ''}
-        ${dressName ? `<p>${ICON.dress} <strong>שמלה:</strong> ${dressName}</p>` : ''}
-        <p>${ICON.card} <strong>אמצעי תשלום:</strong> ${paymentMethod || 'לא צוין'}</p>
-        <p>${ICON.calendar} <strong>תאריך:</strong> ${formattedDate}</p>
+        <p>${ICON.money} <strong>المبلغ:</strong> <span style="font-size: 1.2em; font-weight: bold;">₪${amount}</span></p>
+        <p>${ICON.tag} <strong>فئة:</strong> ${category}</p>
+        ${customerName ? `<p>${ICON.person} <strong>عميل:</strong> ${customerName}</p>` : ''}
+        ${dressName ? `<p>${ICON.dress} <strong>قطعة:</strong> ${dressName}</p>` : ''}
+        <p>${ICON.card} <strong>طريقة الدفع:</strong> ${paymentMethod || 'غير محدد'}</p>
+        <p>${ICON.calendar} <strong>التاريخ:</strong> ${formattedDate}</p>
       </div>
       
-      ${notes ? `<div style="background-color: #fff3cd; padding: 15px; border-radius: 8px; margin: 15px 0;"><p>${ICON.note} <strong>הערות:</strong> ${notes}</p></div>` : ''}
+      ${notes ? `<div style="background-color: #fff3cd; padding: 15px; border-radius: 8px; margin: 15px 0;"><p>${ICON.note} <strong>ملاحظات:</strong> ${notes}</p></div>` : ''}
       
       <!-- FILE_LINK_PLACEHOLDER -->
       {{FILE_LINK}}
       
       <div style="margin-top: 30px; text-align: center; color: #666; font-size: 12px;">
-        <p>נשלח אוטומטית ממערכת הניהול</p>
+        <p>يتم إرسالها تلقائيًا من نظام الإدارة</p>
       </div>
     </div>
   `;
@@ -422,27 +422,27 @@ export async function sendNewExpenseNotification({
 }) {
   const formattedDate = transactionDate ? formatDateHebrew(transactionDate) : formatDateHebrew(new Date());
 
-  const subject = `הוצאה חדשה: ₪${amount} - ${supplier || category}`;
+  const subject = `إصدار جديد: ₪${amount} - ${supplier || category}`;
 
   const htmlBody = `
     <div dir="rtl" style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; text-align: right;">
-      <h2 style="color: #dc3545; text-align: center;">${ICON.expense} הוצאה חדשה</h2>
+      <h2 style="color: #dc3545; text-align: center;">${ICON.expense} إصدار جديد</h2>
       
       <div style="background-color: #f9f9f9; padding: 20px; border-radius: 8px; margin: 20px 0;">
-        <p>${ICON.expense} <strong>סכום:</strong> <span style="font-size: 1.2em; font-weight: bold;">₪${amount}</span></p>
-        <p>${ICON.tag} <strong>קטגוריה:</strong> ${category}</p>
-        ${supplier ? `<p>${ICON.shop} <strong>ספק:</strong> ${supplier}</p>` : ''}
-        ${product ? `<p>${ICON.box} <strong>מוצר/שירות:</strong> ${product}</p>` : ''}
-        <p>${ICON.calendar} <strong>תאריך:</strong> ${formattedDate}</p>
+        <p>${ICON.expense} <strong>المبلغ:</strong> <span style="font-size: 1.2em; font-weight: bold;">₪${amount}</span></p>
+        <p>${ICON.tag} <strong>فئة:</strong> ${category}</p>
+        ${supplier ? `<p>${ICON.shop} <strong>مزود:</strong> ${supplier}</p>` : ''}
+        ${product ? `<p>${ICON.box} <strong>منتج/خدمة:</strong> ${product}</p>` : ''}
+        <p>${ICON.calendar} <strong>التاريخ:</strong> ${formattedDate}</p>
       </div>
       
-      ${notes ? `<div style="background-color: #fff3cd; padding: 15px; border-radius: 8px; margin: 15px 0;"><p>${ICON.note} <strong>הערות:</strong> ${notes}</p></div>` : ''}
+      ${notes ? `<div style="background-color: #fff3cd; padding: 15px; border-radius: 8px; margin: 15px 0;"><p>${ICON.note} <strong>ملاحظات:</strong> ${notes}</p></div>` : ''}
       
       <!-- FILE_LINK_PLACEHOLDER -->
       {{FILE_LINK}}
       
       <div style="margin-top: 30px; text-align: center; color: #666; font-size: 12px;">
-        <p>נשלח אוטומטית ממערכת הניהול</p>
+        <p>يتم إرسالها تلقائيًا من نظام الإدارة</p>
       </div>
     </div>
   `;
@@ -482,105 +482,105 @@ export async function sendNewOrderNotification({
   depositPayments, // Array of detailed payments with potential files
   notes,
 }) {
-  const eventDateFormatted = eventDate ? formatDateHebrew(eventDate) : 'לא צוין';
+  const eventDateFormatted = eventDate ? formatDateHebrew(eventDate) : 'غير محدد';
   const normalizedCustomerPhone = normalizePhoneNumber(customerPhone) || customerPhone;
   const typeLabelMap = {
-    rental: 'השכרה',
-    sewing_for_rental: 'תפירה שנשארת בהשכרה',
-    sewing: 'תפירה',
-    sale: 'מכירה',
+    rental: 'إيجار',
+    sewing_for_rental: 'الخياطة التي تبقى في الإيجار',
+    sewing: 'تفصيل',
+    sale: 'بيع',
   };
   const firstItemTypeLabel = dresses && dresses.length > 0
-    ? (dresses[0].itemTypeLabel || typeLabelMap[dresses[0].itemType] || 'הזמנה')
-    : 'הזמנה';
+    ? (dresses[0].itemTypeLabel || typeLabelMap[dresses[0].itemType] || 'حجز')
+    : 'حجز';
   const computedOrderSummary = orderSummary || (
     dresses && dresses.length > 0
-      ? dresses.map((d) => `${d.itemTypeLabel || typeLabelMap[d.itemType] || 'פריט'} ${d.name}`.trim()).join(', ')
+      ? dresses.map((d) => `${d.itemTypeLabel || typeLabelMap[d.itemType] || 'قطعة'} ${d.name}`.trim()).join(', ')
       : ''
   );
 
   // Build dresses list
   const dressesText = dresses && dresses.length > 0
     ? dresses.map(d => `${d.itemTypeLabel || typeLabelMap[d.itemType] || ''} ${d.name} - ₪${d.price}`.trim()).join('\n')
-    : 'לא צוינו שמלות';
+    : 'لم يتم تحديد القطع';
 
   const dressesHtml = dresses && dresses.length > 0
-    ? dresses.map(d => `<li>${d.itemTypeLabel || typeLabelMap[d.itemType] || 'פריט'}: ${d.name} - ₪${d.price}</li>`).join('')
-    : '<li>לא צוינו שמלות</li>';
+    ? dresses.map(d => `<li>${d.itemTypeLabel || typeLabelMap[d.itemType] || 'قطعة'}: ${d.name} - ₪${d.price}</li>`).join('')
+    : '<li>لم يتم تحديد القطع</li>';
 
   // Build deposit details string if available
   let depositDetailsText = '';
   if (depositPayments && depositPayments.length > 0) {
-    depositDetailsText = '\nפירוט מקדמות:\n' + depositPayments.map(p => {
-      const confirmStr = p.confirmationNumber ? ` (אסמכתא: ${p.confirmationNumber})` : '';
-      return `- ₪${p.amount} ב${p.method}${confirmStr}`;
+    depositDetailsText = '\nتفاصيل التقدم:\n' + depositPayments.map(p => {
+      const confirmStr = p.confirmationNumber ? ` (مرجع: ${p.confirmationNumber})` : '';
+      return `- ₪${p.amount} نص${p.method}${confirmStr}`;
     }).join('\n');
   }
 
   const remaining = totalPrice - (deposit || 0);
 
   const subjectDetails = computedOrderSummary || firstItemTypeLabel;
-  const subject = `הזמנה חדשה: ${customerName}${subjectDetails ? ` - ${subjectDetails}` : ''}`;
+  const subject = `طلب جديد: ${customerName}${subjectDetails ? ` - ${subjectDetails}` : ''}`;
 
   const textBody = `
-הזמנה חדשה התקבלה:
+تم استلام طلب جديد:
 
-לקוחה: ${customerName}
-טלפון: ${normalizedCustomerPhone}
-סוג: ${firstItemTypeLabel}
-תאריך אירוע: ${eventDateFormatted}
+عميل: ${customerName}
+الهاتف: ${normalizedCustomerPhone}
+يكتب: ${firstItemTypeLabel}
+تاريخ الحدث: ${eventDateFormatted}
 
-שמלות:
+قطع:
 ${dressesText}
 
-מחיר כולל: ₪${totalPrice}
-מקדמה: ₪${deposit || 0}${depositDetailsText}
-יתרה לתשלום: ₪${remaining}
+السعر الإجمالي: ₪${totalPrice}
+يتقدم: ₪${deposit || 0}${depositDetailsText}
+الرصيد المستحق: ₪${remaining}
 
-${computedOrderSummary ? `מה נסגר: ${computedOrderSummary}` : ''}
-${customerEmail ? `אימייל: ${customerEmail}` : ''}
-${notes ? `הערות: ${notes}` : ''}
+${computedOrderSummary ? `ما أغلق: ${computedOrderSummary}` : ''}
+${customerEmail ? `البريد الإلكتروني: ${customerEmail}` : ''}
+${notes ? `ملاحظات: ${notes}` : ''}
   `.trim();
 
   // Create HTML list for deposit payments
   let depositHtml = '';
   if (depositPayments && depositPayments.length > 0) {
     const items = depositPayments.map(p => {
-      const confirmStr = p.confirmationNumber ? ` <span style="font-size:0.9em; color:#666;">(אסמכתא: ${p.confirmationNumber})</span>` : '';
+      const confirmStr = p.confirmationNumber ? ` <span style="font-size:0.9em; color:#666;">(مرجع: ${p.confirmationNumber})</span>` : '';
       const fileStr = p.hasFile ? ' &#10004;' : '';
-      return `<li>₪${p.amount} ב${p.method}${confirmStr}${fileStr}</li>`;
+      return `<li>₪${p.amount} نص${p.method}${confirmStr}${fileStr}</li>`;
     }).join('');
     depositHtml = `<ul style="margin: 5px 0;">${items}</ul>`;
   }
 
   const htmlBody = `
     <div dir="rtl" style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; text-align: right;">
-      <h2 style="color: #8e44ad; text-align: center;">הזמנה חדשה</h2>
+      <h2 style="color: #8e44ad; text-align: center;">طلب جديد</h2>
       
       <div style="background-color: #f9f9f9; padding: 20px; border-radius: 8px; margin: 20px 0;">
-        <p>${ICON.person} <strong>לקוחה:</strong> ${customerName}</p>
-        <p>${ICON.phone} <strong>טלפון:</strong> ${normalizedCustomerPhone}</p>
-        ${customerEmail ? `<p>${ICON.email} <strong>אימייל:</strong> ${customerEmail}</p>` : ''}
-        <p>${ICON.note} <strong>סוג:</strong> ${firstItemTypeLabel}</p>
-        <p>${ICON.calendar} <strong>תאריך אירוע:</strong> ${eventDateFormatted}</p>
-        ${computedOrderSummary ? `<p>${ICON.check} <strong>מה נסגר:</strong> ${computedOrderSummary}</p>` : ''}
+        <p>${ICON.person} <strong>عميل:</strong> ${customerName}</p>
+        <p>${ICON.phone} <strong>الهاتف:</strong> ${normalizedCustomerPhone}</p>
+        ${customerEmail ? `<p>${ICON.email} <strong>البريد الإلكتروني:</strong> ${customerEmail}</p>` : ''}
+        <p>${ICON.note} <strong>يكتب:</strong> ${firstItemTypeLabel}</p>
+        <p>${ICON.calendar} <strong>تاريخ الحدث:</strong> ${eventDateFormatted}</p>
+        ${computedOrderSummary ? `<p>${ICON.check} <strong>ما أغلق:</strong> ${computedOrderSummary}</p>` : ''}
       </div>
       
       <div style="background-color: #fff3cd; padding: 15px; border-radius: 8px; margin: 20px 0; border: 1px solid #ffc107;">
-        <p style="margin: 0 0 10px 0;">${ICON.dress} <strong>שמלות:</strong></p>
+        <p style="margin: 0 0 10px 0;">${ICON.dress} <strong>قطع:</strong></p>
         <ul style="margin: 0; padding-right: 20px;">
           ${dressesHtml}
         </ul>
       </div>
       
       <div style="background-color: #d4edda; padding: 15px; border-radius: 8px; margin: 20px 0; border: 1px solid #c3e6cb;">
-        <p>${ICON.money} <strong>מחיר כולל:</strong> ₪${totalPrice}</p>
-        <p>${ICON.card} <strong>מקדמה:</strong> ₪${deposit || 0}</p>
-        ${depositHtml ? `<div style="margin-top:5px; padding-top:5px; border-top:1px dashed #ccc;"><strong>פירוט:</strong>${depositHtml}</div>` : ''}
-        <p style="font-weight: bold; color: #155724;">${ICON.money} <strong>יתרה לתשלום:</strong> ₪${remaining}</p>
+        <p>${ICON.money} <strong>السعر الإجمالي:</strong> ₪${totalPrice}</p>
+        <p>${ICON.card} <strong>يتقدم:</strong> ₪${deposit || 0}</p>
+        ${depositHtml ? `<div style="margin-top:5px; padding-top:5px; border-top:1px dashed #ccc;"><strong>التفاصيل:</strong>${depositHtml}</div>` : ''}
+        <p style="font-weight: bold; color: #155724;">${ICON.money} <strong>الرصيد المستحق:</strong> ₪${remaining}</p>
       </div>
       
-      ${notes ? `<p>${ICON.note} <strong>הערות:</strong> ${notes}</p>` : ''}
+      ${notes ? `<p>${ICON.note} <strong>ملاحظات:</strong> ${notes}</p>` : ''}
       
       <!-- FILE_LINK_PLACEHOLDER -->
       {{FILE_LINK}}
@@ -699,11 +699,11 @@ export async function sendCalendarEvent({ title, date, allDay = true }) {
 /**
  * Send task to Google Tasks via Apps Script
  * 
- * @param {string} listName - Task list name (e.g., "לקוחות")
+ * @param {string} listName - Task list name (e.g., "العملاء")
  * @param {string} title - Task title with Hebrew date
  * @param {string} dueDate - Due date (ISO string)
  */
-export async function sendTaskToGoogle({ listName = 'לקוחות', title, dueDate }) {
+export async function sendTaskToGoogle({ listName = 'العملاء', title, dueDate }) {
   return sendToAppsScript({
     type: 'task',
     listName,
@@ -716,8 +716,8 @@ export async function sendTaskToGoogle({ listName = 'לקוחות', title, dueDa
 /**
  * Send file upload request to Google Drive via Apps Script
  * 
- * @param {string} fileName - Target file name (e.g., "260203 חנות 150₪.jpg")
- * @param {string} folder - Folder path (e.g., "2026/הוצאות/הוצאות מוכרות 2026")
+ * @param {string} fileName - Target file name (e.g., "260203 محل 150₪.jpg")
+ * @param {string} folder - Folder path (e.g., "2026/مصروفات/النفقات المعروفة 2026")
  * @param {Buffer} fileBuffer - File content as Buffer
  */
 export async function sendFileToDrive({ fileName, folder, fileBuffer }) {
@@ -774,7 +774,7 @@ export async function sendOrderUpdate({ oldCustomerName, oldEventDate, newCustom
 export async function sendToEmailList({ email, name }) {
   return sendToAppsScript({
     type: 'sheets',
-    sheet: 'רשימת_תפוצה',
+    sheet: 'قائمة_توزيع',
     data: [email, name],
     timestamp: new Date().toISOString()
   });

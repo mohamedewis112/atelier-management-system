@@ -97,7 +97,7 @@ router.get('/:id', (req, res, next) => {
     const customer = get('SELECT * FROM customers WHERE id = ?', [id]);
 
     if (!customer) {
-      throw new ApiError(404, 'לקוחה לא נמצאה');
+      throw new ApiError(404, 'لم يتم العثور على العميل');
     }
 
     // Get customer's orders
@@ -157,14 +157,14 @@ router.post('/', (req, res, next) => {
 
     // Validate required fields
     if (!normalizedName) {
-      throw new ApiError(400, 'נא להזין שם לקוחה');
+      throw new ApiError(400, 'الرجاء إدخال اسم العميل');
     }
 
     // Check for duplicate (by phone or email if provided)
     if (normalizedPhone) {
       const existing = get('SELECT id FROM customers WHERE phone = ?', [normalizedPhone]);
       if (existing) {
-        throw new ApiError(409, 'לקוחה עם מספר טלפון זה כבר קיימת');
+        throw new ApiError(409, 'العميل الذي لديه رقم الهاتف هذا موجود بالفعل');
       }
     }
 
@@ -179,7 +179,7 @@ router.post('/', (req, res, next) => {
 
     res.status(201).json({
       success: true,
-      message: 'לקוחה נוספה בהצלחה',
+      message: 'تمت إضافة العميل بنجاح',
       data: { customer: newCustomer }
     });
 
@@ -202,12 +202,12 @@ router.put('/:id', (req, res, next) => {
     // Check if customer exists
     const existing = get('SELECT * FROM customers WHERE id = ?', [id]);
     if (!existing) {
-      throw new ApiError(404, 'לקוחה לא נמצאה');
+      throw new ApiError(404, 'لم يتم العثور على العميل');
     }
 
     // Validate required fields
     if (!normalizedName) {
-      throw new ApiError(400, 'נא להזין שם לקוחה');
+      throw new ApiError(400, 'الرجاء إدخال اسم العميل');
     }
 
     // Check for duplicate phone (if changed)
@@ -217,7 +217,7 @@ router.put('/:id', (req, res, next) => {
         [normalizedPhone, id]
       );
       if (duplicate) {
-        throw new ApiError(409, 'לקוחה אחרת עם מספר טלפון זה כבר קיימת');
+        throw new ApiError(409, 'يوجد عميل آخر برقم الهاتف هذا بالفعل');
       }
     }
 
@@ -233,7 +233,7 @@ router.put('/:id', (req, res, next) => {
 
     res.json({
       success: true,
-      message: 'לקוחה עודכנה בהצלחה',
+      message: 'تم تحديث العميل بنجاح',
       data: { customer: updatedCustomer }
     });
 
@@ -289,11 +289,11 @@ router.post('/merge', (req, res, next) => {
     const { targetCustomerId, sourceCustomerId, updatedTargetData } = req.body;
 
     if (!targetCustomerId || !sourceCustomerId) {
-      throw new ApiError(400, 'חובה לציין מזהה לקוחה למיזוג ומזהה לקוחה יעד');
+      throw new ApiError(400, 'من الضروري تحديد هوية العميل لعملية الدمج وهوية العميل المستهدف');
     }
 
     if (parseInt(targetCustomerId) === parseInt(sourceCustomerId)) {
-      throw new ApiError(400, 'לא ניתן למזג לקוחה עם עצמה');
+      throw new ApiError(400, 'لا يمكن دمج العميل مع نفسه');
     }
 
     // Start transaction
@@ -305,7 +305,7 @@ router.post('/merge', (req, res, next) => {
       const source = get('SELECT * FROM customers WHERE id = ?', [sourceCustomerId]);
 
       if (!target || !source) {
-        throw new ApiError(404, 'אחת הלקוחות לא נמצאה');
+        throw new ApiError(404, 'لم يتم العثور على أحد العملاء');
       }
 
       // 2. Update target customer details if provided
@@ -348,7 +348,7 @@ router.post('/merge', (req, res, next) => {
 
       res.json({
         success: true,
-        message: 'לקוחות אוחדו בהצלחה'
+        message: 'تم دمج العملاء بنجاح'
       });
 
     } catch (err) {

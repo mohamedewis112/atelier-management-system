@@ -125,10 +125,10 @@ export async function extractReceiptDetails(fileBuffer, mimeType, expectedPaymen
       Payment method hint from system (if provided): ${methodHint || 'none'}.
       Identify payment method code as one of: cash, bit, paybox, credit, transfer, check.
       Extract the following fields if visible:
-      - confirmation_number (אסמכתא / אישור / מספר פעולה) - REMOVE HYPHENS/DASHES if present.
-      - last_four_digits (4 ספרות אחרונות של כרטיס אשראי)
-      - check_number (מספר צ'ק)
-      - installments (מספר תשלומים - default to 1 if not specified or if it's a single payment)
+      - confirmation_number (مرجع / تأكيد / رقم الإجراء) - REMOVE HYPHENS/DASHES if present.
+      - last_four_digits (4 الأرقام الأخيرة من بطاقة الائتمان)
+      - check_number (رقم ج'نص)
+      - installments (عدد الدفعات - default to 1 if not specified or if it's a single payment)
       - bank_details: Extract bank number, branch number, and account number separately if present.
       
       ${bankIgnorePrompt}

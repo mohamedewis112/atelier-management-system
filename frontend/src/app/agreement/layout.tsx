@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "חתימה דיגיטלית על הסכם",
-  description: "חתימה דיגיטלית על הסכם",
+  title: "التوقيع الرقمي على الاتفاقية",
+  description: "التوقيع الرقمي على الاتفاقية",
 };
 
 export default function AgreementLayout({

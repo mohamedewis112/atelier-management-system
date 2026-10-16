@@ -50,10 +50,10 @@ import { clearSharedUploadPayload, getSharedUploadPayload, compressImageForUploa
 import { reportClientError } from "@/lib/error-reporter";
 
 const ORDER_TYPES = [
-  { value: "rental", label: "השכרה" },
-  { value: "sewing_for_rental", label: "תפירה שנשארת בהשכרה" },
-  { value: "sewing", label: "תפירה" },
-  { value: "sale", label: "מכירה" },
+  { value: "rental", label: "إيجار" },
+  { value: "sewing_for_rental", label: "الخياطة التي تبقى في الإيجار" },
+  { value: "sewing", label: "تفصيل" },
+  { value: "sale", label: "بيع" },
 ];
 
 interface OrderItem {
@@ -160,15 +160,15 @@ export default function NewOrderPage() {
           console.log("Dresses loaded:", data?.length);
           setDresses(data || []);
           if (!data || data.length === 0) {
-            toast({ title: "שימי לב", description: "לא נמצאו שמלות פעילות במלאי", variant: "default" });
+            toast({ title: "انتبه", description: "لم يتم العثور على قطع نشطة في المخزون", variant: "default" });
           }
         } else {
-          toast({ title: "שגיאה", description: dresRes.message || "לא ניתן לטעון את רשימת השמלות", variant: "destructive" });
+          toast({ title: "خطأ", description: dresRes.message || "غير قادر على تحميل قائمة اللباس", variant: "destructive" });
         }
         if (custRes.success) setCustomers((custRes.data as any).customers);
       } catch (e) {
         console.error("Error loading initial data:", e);
-        toast({ title: "שגיאת תקשורת", description: "לא ניתן להתחבר לשרת", variant: "destructive" });
+        toast({ title: "خطأ في الاتصال", description: "غير قادر على الاتصال بالخادم", variant: "destructive" });
       }
     };
     loadInitialData();
@@ -198,7 +198,7 @@ export default function NewOrderPage() {
 
     clearSharedUploadPayload();
     setSharedApplied(true);
-    toast({ title: "קובץ שותף נטען", description: "האסמכתא צורפה לתשלום הראשון במקדמה." });
+    toast({ title: "تم تحميل ملف الشريك", description: "تم إرفاق المرجع بالدفعة الأولى." });
   }, [searchParams, sharedApplied, toast]);
 
   useEffect(() => {
@@ -308,7 +308,7 @@ export default function NewOrderPage() {
     if (!file) return;
 
     if (file.size > 20 * 1024 * 1024) {
-      toast({ title: "הקובץ גדול מדי", description: "הגודל המרבי הוא 20MB. נסי לצלם שוב ברזולוציה נמוכה יותר.", variant: "destructive" });
+      toast({ title: "الملف كبير جدًا", description: "الحد الأقصى للحجم هو 20MB. حاول التصوير مرة أخرى بدقة أقل.", variant: "destructive" });
       return;
     }
 
@@ -322,12 +322,12 @@ export default function NewOrderPage() {
       setDepositPayments(newPayments);
     } catch (err) {
       console.error('File read/compress error:', err);
-      toast({ title: "שגיאה בקריאת הקובץ", description: "לא ניתן לקרוא את הקובץ. נסי לצלם שוב.", variant: "destructive" });
+      toast({ title: "خطأ في قراءة الملف", description: "لا يمكن قراءة الملف. حاول إطلاق النار مرة أخرى.", variant: "destructive" });
       reportClientError({
         message: err instanceof Error ? err.message : String(err),
         stack: err instanceof Error ? err.stack : undefined,
         component: 'NewOrder',
-        action: 'קריאת קובץ אסמכתא (מקדמה)'
+        action: 'قراءة ملف مرجعي (يتقدم)'
       });
     }
   };
@@ -351,7 +351,7 @@ export default function NewOrderPage() {
       reportClientError({
         message: compressionError instanceof Error ? compressionError.message : String(compressionError),
         component: 'NewOrder',
-        action: 'דחיסת קובץ מצורף בתור'
+        action: 'ضغط مرفقات قائمة الانتظار'
       });
     }
   };
@@ -378,7 +378,7 @@ export default function NewOrderPage() {
     try {
       const response = await agreementsApi.createSignLink(orderId);
       if (!response.success || !response.data) {
-        throw new Error(response.message || "לא ניתן ליצור קישור חתימה");
+        throw new Error(response.message || "غير قادر على إنشاء رابط التوقيع");
       }
 
       const data = response.data as {
@@ -392,9 +392,9 @@ export default function NewOrderPage() {
       if (shouldCopyToClipboard) {
         try {
           await navigator.clipboard.writeText(data.link);
-          toast({ title: "קישור חתימה מוכן", description: "הקישור הועתק ללוח." });
+          toast({ title: "رابط التوقيع جاهز", description: "تم نسخ الرابط إلى الحافظة." });
         } catch {
-          toast({ title: "קישור חתימה מוכן", description: data.link });
+          toast({ title: "رابط التوقيع جاهز", description: data.link });
         }
       }
 
@@ -405,8 +405,8 @@ export default function NewOrderPage() {
       return data.link;
     } catch (error) {
       toast({
-        title: "שגיאה",
-        description: error instanceof Error ? error.message : "לא ניתן ליצור קישור חתימה",
+        title: "خطأ",
+        description: error instanceof Error ? error.message : "غير قادر على إنشاء رابط التوقيع",
         variant: "destructive",
       });
       return null;
@@ -432,19 +432,19 @@ export default function NewOrderPage() {
     e.preventDefault();
 
     if (customerMode === "new" && !newCustomer.name.trim()) {
-      toast({ title: "שגיאה", description: "נא למלא שם של הלקוחה החדשה", variant: "destructive" });
+      toast({ title: "خطأ", description: "برجاء إدخال اسم العميل الجديد", variant: "destructive" });
       return;
     }
     if (customerMode === "search" && !selectedCustomerId) {
-      toast({ title: "שגיאה", description: "נא לבחור לקוחה מהרשימה", variant: "destructive" });
+      toast({ title: "خطأ", description: "الرجاء اختيار عميل من القائمة", variant: "destructive" });
       return;
     }
     if (!eventDate) {
-      toast({ title: "שגיאה", description: "נא להזין תאריך אירוע", variant: "destructive" });
+      toast({ title: "خطأ", description: "الرجاء إدخال تاريخ الحدث", variant: "destructive" });
       return;
     }
     if (depositPayments.some(p => parseFloat(p.amount) > 0 && !p.method)) {
-      toast({ title: "שגיאה", description: "נא לבחור אמצעי תשלום עבור המקדמה", variant: "destructive" });
+      toast({ title: "خطأ", description: "الرجاء اختيار طريقة الدفع للدفعة المقدمة", variant: "destructive" });
       return;
     }
 
@@ -493,7 +493,7 @@ export default function NewOrderPage() {
       const response = await ordersApi.create(payload);
       const newOrderId = Number((response.data as any)?.order?.id);
 
-      toast({ title: "הצלחה!", description: "הזמנה נוצרה בהצלחה 🎉" });
+      toast({ title: "تم بنجاح!", description: "تم إنشاء الطلب بنجاح 🎉" });
 
       if (!Number.isNaN(newOrderId) && newOrderId > 0) {
         setCreatedOrderId(newOrderId);
@@ -507,17 +507,17 @@ export default function NewOrderPage() {
             await ordersApi.uploadAttachment(newOrderId, pendingAttachments);
             setPendingAttachments([]);
           } catch (uploadError) {
-            const uploadMessage = uploadError instanceof Error ? uploadError.message : "שגיאה בהעלאת קבצים מצורפים";
+            const uploadMessage = uploadError instanceof Error ? uploadError.message : "حدث خطأ أثناء تحميل المرفقات";
             toast({
-              title: "שגיאה בהעלאת קבצים מצורפים",
-              description: `${uploadMessage}. ההזמנה נוצרה. אפשר לצרף אותם דרך מסך עריכת ההזמנה.`,
+              title: "حدث خطأ أثناء تحميل المرفقات",
+              description: `${uploadMessage}. تم إنشاء الطلب. يمكنك إضافتها من خلال شاشة تعديل الطلب.`,
               variant: "destructive",
             });
             reportClientError({
               message: uploadMessage,
               stack: uploadError instanceof Error ? uploadError.stack : undefined,
               component: 'NewOrder',
-              action: 'העלאת קבצים מצורפים להזמנה חדשה'
+              action: 'تحميل المرفقات لطلب جديد'
             });
           }
         }
@@ -527,13 +527,13 @@ export default function NewOrderPage() {
         router.push("/dashboard/orders");
       }
     } catch (error) {
-      const message = error instanceof Error ? error.message : "שגיאה בשמירת הזמנה";
-      toast({ title: "שגיאה", description: message, variant: "destructive" });
+      const message = error instanceof Error ? error.message : "خطأ في حفظ الطلب";
+      toast({ title: "خطأ", description: message, variant: "destructive" });
       reportClientError({
         message,
         stack: error instanceof Error ? error.stack : undefined,
         component: 'NewOrder',
-        action: 'שמירת הזמנה'
+        action: 'حجز أمر'
       });
     } finally {
       setSaving(false);
@@ -549,20 +549,20 @@ export default function NewOrderPage() {
       <div className="min-h-screen bg-background flex items-center justify-center p-4">
         <Card className="w-full max-w-2xl border-2">
           <CardHeader>
-            <CardTitle className="text-2xl font-black text-green-700">ההזמנה נשמרה בהצלחה</CardTitle>
-            <p className="text-sm text-muted-foreground">הזמנה #{createdOrderId}</p>
+            <CardTitle className="text-2xl font-black text-green-700">تم حفظ الطلب بنجاح</CardTitle>
+            <p className="text-sm text-muted-foreground">حجز #{createdOrderId}</p>
           </CardHeader>
           <CardContent className="space-y-5">
             <div className="rounded-xl border p-4 bg-muted/20">
               <div className="flex items-center gap-2 mb-3 text-green-700">
                 <Link2 className="h-4 w-4" />
-                <p className="font-bold">לינק חתימה ללקוחה</p>
+                <p className="font-bold">رابط التوقيع للعميل</p>
               </div>
               <Input
                 value={createdOrderSignLink}
                 readOnly
                 className="mb-3 text-xs"
-                placeholder={creatingSignLink ? "יוצר קישור..." : "לא נוצר קישור עדיין"}
+                placeholder={creatingSignLink ? "يقوم بإنشاء رابط..." : "لم يتم إنشاء أي رابط حتى الآن"}
               />
               <div className="flex flex-col sm:flex-row gap-3">
                 <Button
@@ -572,7 +572,7 @@ export default function NewOrderPage() {
                   disabled={creatingSignLink}
                 >
                   <Copy className="h-4 w-4 ml-2" />
-                  {creatingSignLink ? "יוצר קישור..." : "העתקה מחדש"}
+                  {creatingSignLink ? "يقوم بإنشاء رابط..." : "انسخ مرة أخرى"}
                 </Button>
                 <Button
                   type="button"
@@ -581,7 +581,7 @@ export default function NewOrderPage() {
                   disabled={creatingSignLink}
                 >
                   <FileSignature className="h-4 w-4 ml-2" />
-                  חתימה מיידית
+                  توقيع فوري
                 </Button>
                 <Button
                   type="button"
@@ -590,7 +590,7 @@ export default function NewOrderPage() {
                   className="bg-green-600 hover:bg-green-700"
                 >
                   <MessageCircle className="h-4 w-4 ml-2" />
-                  שליחה לוואטסאפ
+                  الإرسال إلى الواتساب
                 </Button>
               </div>
             </div>
@@ -601,14 +601,14 @@ export default function NewOrderPage() {
                 variant="outline"
                 onClick={() => router.push(`/dashboard/orders/${createdOrderId}/edit`)}
               >
-                עריכה להזמנה
+                التحرير حسب الطلب
               </Button>
               <Button
                 type="button"
                 onClick={() => router.push("/dashboard/orders")}
                 className="bg-green-600 hover:bg-green-700"
               >
-                חזרה לרשימת הזמנות
+                العودة إلى قائمة الطلب
               </Button>
             </div>
           </CardContent>
@@ -626,10 +626,10 @@ export default function NewOrderPage() {
             <Button variant="ghost" size="icon" onClick={() => router.back()} className="rounded-full">
               <ArrowRight className="h-6 w-6" />
             </Button>
-            <h1 className="text-xl font-black">הזמנה חדשה</h1>
+            <h1 className="text-xl font-black">طلب جديد</h1>
           </div>
           <div className="hidden sm:block text-sm font-medium text-muted-foreground">
-            סה&quot;כ לתשלום: <span className="text-green-600 font-bold text-lg">{formatCurrency(totalPrice)}</span>
+            سا&quot;أما بالنسبة للدفع: <span className="text-green-600 font-bold text-lg">{formatCurrency(totalPrice)}</span>
           </div>
         </div>
       </div>
@@ -643,7 +643,7 @@ export default function NewOrderPage() {
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2 text-green-600">
                   <User className="h-5 w-5" />
-                  <h2 className="font-bold text-base sm:text-lg">לקוחה</h2>
+                  <h2 className="font-bold text-base sm:text-lg">عميل</h2>
                 </div>
                 <div className="bg-muted/50 p-1 flex rounded-lg shrink-0">
                   <button
@@ -654,7 +654,7 @@ export default function NewOrderPage() {
                       customerMode === "search" ? "bg-white shadow-sm text-green-600" : "text-muted-foreground"
                     )}
                   >
-                    קיימת
+                    موجود
                   </button>
                   <button
                     type="button"
@@ -664,7 +664,7 @@ export default function NewOrderPage() {
                       customerMode === "new" ? "bg-white shadow-sm text-green-600" : "text-muted-foreground"
                     )}
                   >
-                    חדשה
+                    جديد
                   </button>
                 </div>
               </div>
@@ -693,7 +693,7 @@ export default function NewOrderPage() {
                       <div className="relative">
                         <Search className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                         <Input
-                          placeholder="חיפוש לפי שם או טלפון..."
+                          placeholder="البحث بالاسم أو الهاتف..."
                           value={customerSearch}
                           onChange={(e) => setCustomerSearch(e.target.value)}
                           className="pr-10 h-12 focus:border-green-600 rounded-xl"
@@ -731,7 +731,7 @@ export default function NewOrderPage() {
                               className="flex items-center justify-center p-3 rounded-lg border-2 border-dashed border-green-300 bg-green-50/50 text-green-700 hover:bg-green-100 transition-all font-bold text-sm"
                             >
                               <Plus className="h-4 w-4 ml-1" />
-                              יצירת לקוחה: "{customerSearch}"
+                              إنشاء عميل: "{customerSearch}"
                             </button>
                           )}
                         </div>
@@ -755,16 +755,16 @@ export default function NewOrderPage() {
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div className="space-y-1.5">
-                      <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">שם מלא *</label>
+                      <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">الاسم الكامل *</label>
                       <Input
                         value={newCustomer.name}
                         onChange={(e) => setNewCustomer({ ...newCustomer, name: e.target.value })}
-                        placeholder="שם הלקוחה"
+                        placeholder="اسم العميل"
                         className="h-12 focus:border-green-600 rounded-xl"
                       />
                     </div>
                     <div className="space-y-1.5">
-                      <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">טלפון</label>
+                      <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">الهاتف</label>
                       <Input
                         value={newCustomer.phone}
                         onChange={(e) => setNewCustomer({ ...newCustomer, phone: normalizePhoneInput(e.target.value) })}
@@ -774,11 +774,11 @@ export default function NewOrderPage() {
                       />
                     </div>
                     <div className="space-y-1.5">
-                      <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">מקור</label>
+                      <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">مصدر</label>
                       <Input
                         value={newCustomer.source}
                         onChange={(e) => setNewCustomer({ ...newCustomer, source: e.target.value })}
-                        placeholder="מאיפה הגיעה?"
+                        placeholder="من أين أتت؟?"
                         className="h-12 focus:border-green-600 rounded-xl"
                       />
                     </div>
@@ -793,7 +793,7 @@ export default function NewOrderPage() {
             <div className="flex flex-row items-center justify-between gap-4">
               <div className="flex items-center gap-2 text-green-600 shrink-0">
                 <Calendar className="h-5 w-5" />
-                <h2 className="font-bold text-base sm:text-lg">מועד אירוע</h2>
+                <h2 className="font-bold text-base sm:text-lg">تاريخ الحدث</h2>
               </div>
               <Input
                 type="date"
@@ -811,10 +811,10 @@ export default function NewOrderPage() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 text-green-600 mb-2 px-1">
               <ShoppingBag className="h-5 w-5" />
-              <h2 className="font-bold text-base sm:text-lg">שמלות ופריטים</h2>
+              <h2 className="font-bold text-base sm:text-lg">قطع وأشياء</h2>
             </div>
             <Button type="button" variant="outline" onClick={addItem} className="rounded-xl border-green-600 text-green-600 hover:bg-green-50 h-10 px-3">
-              <Plus className="h-4 w-4 ml-1" /> פריט נוסף
+              <Plus className="h-4 w-4 ml-1" /> عنصر آخر
             </Button>
           </div>
 
@@ -831,7 +831,7 @@ export default function NewOrderPage() {
                   {/* Floating Badge Header */}
                   <div className="absolute top-0 right-4 z-10 flex items-center justify-between w-[calc(100%-2rem)]">
                     <span className="font-black text-green-700 bg-green-100 border border-green-200 px-3 py-1 rounded-full text-[10px] shadow-sm">
-                      פריט {index + 1}
+                      قطعة {index + 1}
                     </span>
                     {items.length > 1 && (
                       <button
@@ -849,7 +849,7 @@ export default function NewOrderPage() {
                     <CardContent className="p-3 sm:p-5 pt-6 space-y-4">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                         <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">סוג פעולה</label>
+                          <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">نوع العمل</label>
                           <div className="grid grid-cols-2 gap-1.5">
                             {ORDER_TYPES.map((t) => (
                               <button
@@ -868,7 +868,7 @@ export default function NewOrderPage() {
                         </div>
 
                         <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">בחירת שמלה</label>
+                          <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">اختيار اللباس</label>
                           {(item.item_type === "rental" || item.item_type === "sale") ? (
                             <div className="space-y-3">
                               <DressSelector
@@ -888,17 +888,17 @@ export default function NewOrderPage() {
                                         : "bg-emerald-50 border-emerald-300"
                                   )}
                                 >
-                                  <p className="text-[11px] font-black text-gray-900">יומן תפוסה לשמלה</p>
+                                  <p className="text-[11px] font-black text-gray-900">مذكرات الحجز للقطعة</p>
                                   <p className="text-[11px] text-muted-foreground">
-                                    תאריך הזמנה נוכחית:{" "}
+                                    تاريخ الطلب الحالي:{" "}
                                     <span className="font-black text-gray-900">
-                                      {eventDate ? formatDateShort(eventDate) : "לא נבחר עדיין"}
+                                      {eventDate ? formatDateShort(eventDate) : "لم يتم التحديد بعد"}
                                     </span>
                                   </p>
 
                                   {bookedDates.length > 0 ? (
                                     <div className="space-y-2">
-                                      <p className="text-[11px] font-bold text-gray-800">השמלה כבר מוזמנת לתאריכים:</p>
+                                      <p className="text-[11px] font-bold text-gray-800">تم حجز القطعة بالفعل للتواريخ:</p>
                                       <div className="flex flex-wrap gap-1.5">
                                         {bookedDates.map((date) => (
                                           <span key={date} className="px-2 py-1 rounded-full bg-white border text-[10px] font-bold">
@@ -909,20 +909,20 @@ export default function NewOrderPage() {
                                       <div className="space-y-1">
                                         {upcomingOrders.map((order) => (
                                           <p key={`${order.order_id}-${order.event_date}`} className="text-[10px] text-muted-foreground">
-                                            הזמנה #{order.order_id} • {formatDateShort(order.event_date)}
+                                            حجز #{order.order_id} • {formatDateShort(order.event_date)}
                                             {order.customer_name ? ` • ${order.customer_name}` : ""}
-                                            {order.wearer_name ? ` • לובשת: ${order.wearer_name}` : ""}
+                                            {order.wearer_name ? ` • يرتدي: ${order.wearer_name}` : ""}
                                           </p>
                                         ))}
                                       </div>
                                     </div>
                                   ) : (
-                                    <p className="text-[11px] text-green-700 font-medium">כרגע אין הזמנות עתידיות לשמלה הזו.</p>
+                                    <p className="text-[11px] text-green-700 font-medium">لا يوجد حاليا أي أوامر القادمة لهذا اللباس.</p>
                                   )}
 
                                   {hasExactConflict && (
                                     <p className="text-[11px] font-bold text-red-700">
-                                      יש חפיפה לתאריך ההזמנה הנוכחי. אפשר להמשיך לפי שיקול דעת המנהלת.
+                                      هناك تداخل مع تاريخ الطلب الحالي. يمكنك الاستمرار حسب تقدير المدير.
                                     </p>
                                   )}
                                 </div>
@@ -932,25 +932,25 @@ export default function NewOrderPage() {
                             <Input
                               value={item.dress_name}
                               onChange={(e) => updateItem(index, "dress_name", e.target.value)}
-                              placeholder="שם השמלה החדשה"
+                              placeholder="اسم القطعة الجديد"
                               className="h-10 rounded-xl border-2"
                             />
                           )}
                         </div>
 
                         <div className="space-y-1 sm:col-span-2">
-                          <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">שם הלובשת</label>
+                          <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">اسم مرتديها</label>
                           <Input
                             value={item.wearer_name}
                             onChange={(e) => updateItem(index, "wearer_name", e.target.value)}
-                            placeholder="שם מלא (אופציונלי)"
+                            placeholder="الاسم الكامل (خياري)"
                             className="h-10 rounded-xl border-2"
                           />
                         </div>
 
                         <div className="grid grid-cols-2 gap-2">
                           <div className="space-y-1">
-                            <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">מחיר בסיס</label>
+                            <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">السعر الأساسي</label>
                             <Input
                               type="number"
                               step="1"
@@ -966,7 +966,7 @@ export default function NewOrderPage() {
                             />
                           </div>
                           <div className="space-y-1">
-                            <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">תוספות</label>
+                            <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">إضافات</label>
                             <Input
                               type="number"
                               step="1"
@@ -987,13 +987,13 @@ export default function NewOrderPage() {
                         <div className="sm:col-span-2 mt-1">
                           <details className="group">
                             <summary className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest cursor-pointer select-none hover:text-green-600 transition-colors">
-                              הערות לפריט {item.notes ? "📝" : "(לחצי להוספה)"}
+                              تعليقات البند {item.notes ? "📝" : "(انقر للإضافة)"}
                             </summary>
                             <div className="mt-2">
                               <Input
                                 value={item.notes}
                                 onChange={(e) => updateItem(index, "notes", e.target.value)}
-                                placeholder="הערה ספציפית לפריט זה..."
+                                placeholder="ملاحظة خاصة بهذا البند..."
                                 className="h-10 rounded-xl border-2"
                               />
                             </div>
@@ -1008,7 +1008,7 @@ export default function NewOrderPage() {
           </div>
           <div className="flex justify-end">
             <Button type="button" variant="outline" onClick={addItem} className="rounded-xl border-green-600 text-green-600 hover:bg-green-50">
-              <Plus className="h-4 w-4 ml-1" /> פריט נוסף
+              <Plus className="h-4 w-4 ml-1" /> عنصر آخر
             </Button>
           </div>
         </div>
@@ -1018,7 +1018,7 @@ export default function NewOrderPage() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 text-green-600">
               <CreditCard className="h-5 w-5" />
-              <h2 className="font-bold text-lg">תשלום מקדמה</h2>
+              <h2 className="font-bold text-lg">الدفع مقدما</h2>
             </div>
             <Button
               type="button"
@@ -1026,7 +1026,7 @@ export default function NewOrderPage() {
               onClick={() => setDepositPayments([...depositPayments, { amount: "", method: "cash", notes: "", confirmation_number: "", last_four_digits: "", installments: "1" }])}
               className="rounded-xl border-green-600 text-green-600"
             >
-              <Plus className="h-4 w-4 ml-1" /> תשלום נוסף
+              <Plus className="h-4 w-4 ml-1" /> تكلفة إضافية
             </Button>
           </div>
 
@@ -1035,7 +1035,7 @@ export default function NewOrderPage() {
               <Card key={index} className="border-2 bg-muted/10">
                 <CardContent className="p-4 grid grid-cols-1 sm:grid-cols-4 gap-4 items-end">
                   <div className="space-y-2">
-                    <label className="text-[10px] font-bold text-muted-foreground">סכום</label>
+                    <label className="text-[10px] font-bold text-muted-foreground">المبلغ</label>
                     <Input
                       type="number"
                       step="1"
@@ -1055,7 +1055,7 @@ export default function NewOrderPage() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[10px] font-bold text-muted-foreground">אמצעי תשלום</label>
+                    <label className="text-[10px] font-bold text-muted-foreground">طريقة الدفع</label>
                     <select
                       value={payment.method}
                       onChange={(e) => {
@@ -1065,19 +1065,19 @@ export default function NewOrderPage() {
                       }}
                       className="w-full h-11 px-3 border-b-2 border-input bg-background font-medium outline-none focus:border-green-600 transition-all"
                     >
-                      <option value="" disabled>בחרי אמצעי תשלום...</option>
-                      <option value="cash">מזומן</option>
-                      <option value="credit">אשראי</option>
+                      <option value="" disabled>اختر طريقة الدفع...</option>
+                      <option value="cash">نقدي</option>
+                      <option value="credit">بطاقة</option>
                       <option value="bit">Bit</option>
-                      <option value="paybox">פייבוקס</option>
-                      <option value="transfer">העברה</option>
-                      <option value="check">צ׳ק</option>
+                      <option value="paybox">صندوق الدفع</option>
+                      <option value="transfer">نقل</option>
+                      <option value="check">يفحص</option>
                     </select>
                   </div>
                   {payment.method === "credit" && (
                     <div className="space-y-2 sm:col-span-2 grid grid-cols-3 gap-2">
                       <div className="space-y-1">
-                        <label className="text-[10px] font-bold text-muted-foreground">אסמכתא</label>
+                        <label className="text-[10px] font-bold text-muted-foreground">مرجع</label>
                         <Input
                           value={payment.confirmation_number || ""}
                           onChange={(e) => {
@@ -1085,12 +1085,12 @@ export default function NewOrderPage() {
                             next[index].confirmation_number = e.target.value;
                             setDepositPayments(next);
                           }}
-                          placeholder="מספר אישור..."
+                          placeholder="رقم التأكيد..."
                           className="focus:border-green-600"
                         />
                       </div>
                       <div className="space-y-1">
-                        <label className="text-[10px] font-bold text-muted-foreground">4 ספרות</label>
+                        <label className="text-[10px] font-bold text-muted-foreground">4 الأدب</label>
                         <Input
                           value={payment.last_four_digits || ""}
                           onChange={(e) => {
@@ -1105,7 +1105,7 @@ export default function NewOrderPage() {
                         />
                       </div>
                       <div className="space-y-1">
-                        <label className="text-[10px] font-bold text-muted-foreground">תשלומים</label>
+                        <label className="text-[10px] font-bold text-muted-foreground">دفعات</label>
                         <Input
                           type="number"
                           min="1"
@@ -1123,7 +1123,7 @@ export default function NewOrderPage() {
                   )}
                   {(payment.method === "bit" || payment.method === "paybox" || payment.method === "transfer") && (
                     <div className="space-y-2 sm:col-span-1">
-                      <label className="text-[10px] font-bold text-muted-foreground">אסמכתא</label>
+                      <label className="text-[10px] font-bold text-muted-foreground">مرجع</label>
                       <Input
                         value={payment.confirmation_number || ""}
                         onChange={(e) => {
@@ -1131,7 +1131,7 @@ export default function NewOrderPage() {
                           next[index].confirmation_number = e.target.value;
                           setDepositPayments(next);
                         }}
-                        placeholder="מספר אישור..."
+                        placeholder="رقم التأكيد..."
                         className="focus:border-green-600"
                       />
                     </div>
@@ -1141,7 +1141,7 @@ export default function NewOrderPage() {
                   {payment.method === "transfer" && (
                     <div className="sm:col-span-4 grid grid-cols-3 gap-2">
                       <Input
-                        placeholder="מס' בנק"
+                        placeholder="ضريبة' بنك"
                         className="h-10 text-center focus:border-green-600"
                         value={payment.bank_details?.bank || ""}
                         onChange={(e) => {
@@ -1152,7 +1152,7 @@ export default function NewOrderPage() {
                         }}
                       />
                       <Input
-                        placeholder="מס' סניף"
+                        placeholder="ضريبة' فرع"
                         className="h-10 text-center focus:border-green-600"
                         value={payment.bank_details?.branch || ""}
                         onChange={(e) => {
@@ -1163,7 +1163,7 @@ export default function NewOrderPage() {
                         }}
                       />
                       <Input
-                        placeholder="מס' חשבון"
+                        placeholder="ضريبة' فاتورة"
                         className="h-10 text-center focus:border-green-600"
                         value={payment.bank_details?.account || ""}
                         onChange={(e) => {
@@ -1180,7 +1180,7 @@ export default function NewOrderPage() {
                   {payment.method === "check" && (
                     <div className="sm:col-span-4 grid grid-cols-4 gap-2">
                       <Input
-                        placeholder="מס' צ'ק"
+                        placeholder="ضريبة' نص'نص"
                         className="h-10 text-center focus:border-green-600"
                         value={payment.check_number || ""}
                         onChange={(e) => {
@@ -1190,7 +1190,7 @@ export default function NewOrderPage() {
                         }}
                       />
                       <Input
-                        placeholder="מס' בנק"
+                        placeholder="ضريبة' بنك"
                         className="h-10 text-center focus:border-green-600"
                         value={payment.bank_details?.bank || ""}
                         onChange={(e) => {
@@ -1201,7 +1201,7 @@ export default function NewOrderPage() {
                         }}
                       />
                       <Input
-                        placeholder="מס' סניף"
+                        placeholder="ضريبة' فرع"
                         className="h-10 text-center focus:border-green-600"
                         value={payment.bank_details?.branch || ""}
                         onChange={(e) => {
@@ -1212,7 +1212,7 @@ export default function NewOrderPage() {
                         }}
                       />
                       <Input
-                        placeholder="מס' חשבון"
+                        placeholder="ضريبة' فاتورة"
                         className="h-10 text-center focus:border-green-600"
                         value={payment.bank_details?.account || ""}
                         onChange={(e) => {
@@ -1232,7 +1232,7 @@ export default function NewOrderPage() {
                         payment.fileName ? "bg-green-50 border-green-300 text-green-700" : "bg-background border-dashed"
                       )}>
                         {payment.fileName ? <Check className="h-5 w-5" /> : <Upload className="h-5 w-5" />}
-                        <span className="text-[10px] mr-1 hidden sm:inline">{payment.fileName ? "הועלה" : "אסמכתא"}</span>
+                        <span className="text-[10px] mr-1 hidden sm:inline">{payment.fileName ? "تم رفعه" : "مرجع"}</span>
                         <input type="file" accept="image/*,application/pdf" capture="environment" className="hidden" onChange={(e) => handleDepositFileChange(e, index)} />
                       </label>
                       {depositPayments.length > 1 && (
@@ -1257,11 +1257,11 @@ export default function NewOrderPage() {
 
         {/* Notes */}
         <section className="space-y-2">
-          <label className="font-bold text-lg text-green-600 block">הערות נוספות</label>
+          <label className="font-bold text-lg text-green-600 block">تعليقات إضافية</label>
           <textarea
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
-            placeholder="כל פרט נוסף שחשוב לזכור..."
+            placeholder="أي تفاصيل إضافية من المهم أن نتذكرها..."
             className="w-full h-32 p-4 border-b-2 border-input bg-transparent focus:border-green-600 outline-none resize-none transition-all shadow-inner"
           />
         </section>
@@ -1274,20 +1274,20 @@ export default function NewOrderPage() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 text-green-600">
               <Paperclip className="h-5 w-5" />
-              <h2 className="font-bold text-lg">קבצים מצורפים</h2>
+              <h2 className="font-bold text-lg">المرفقات</h2>
               {pendingAttachments.length > 0 && (
                 <span className="text-xs font-bold bg-green-100 text-green-700 px-2 py-0.5 rounded-full">{pendingAttachments.length}</span>
               )}
             </div>
             <label className="cursor-pointer inline-flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-bold border-2 transition-all border-green-600 text-green-600 hover:bg-green-50">
               <Plus className="h-3.5 w-3.5" />
-              הוסף קובץ
+              إضافة ملف
               <input type="file" multiple className="hidden" onChange={handlePendingAttachmentAdd} />
             </label>
           </div>
 
           {pendingAttachments.length === 0 ? (
-            <Card className="border-2"><CardContent className="p-4 text-center text-muted-foreground text-sm italic">אין קבצים מצורפים. הקבצים יעלו לאחר יצירת ההזמנה.</CardContent></Card>
+            <Card className="border-2"><CardContent className="p-4 text-center text-muted-foreground text-sm italic">لا توجد مرفقات. سيتم تحميل الملفات بعد إنشاء الطلب.</CardContent></Card>
           ) : (
             <div className="space-y-2">
               {pendingAttachments.map((file, index) => {
@@ -1334,7 +1334,7 @@ export default function NewOrderPage() {
       <div className="fixed bottom-0 left-0 right-0 p-4 bg-background/80 backdrop-blur-lg border-t z-40">
         <div className="max-w-4xl mx-auto flex items-center justify-between gap-4">
           <div className="hidden sm:block">
-            <p className="text-xs text-muted-foreground font-bold uppercase">סה&quot;כ הזמנה</p>
+            <p className="text-xs text-muted-foreground font-bold uppercase">سا&quot;كدعوة</p>
             <p className="text-2xl font-black text-green-600">{formatCurrency(totalPrice)}</p>
           </div>
           <div className="flex-1 flex gap-3">
@@ -1343,14 +1343,14 @@ export default function NewOrderPage() {
               className="flex-1 h-14 rounded-2xl text-lg font-bold border-2"
               onClick={() => router.back()}
             >
-              ביטול
+              إلغاء
             </Button>
             <Button
               className="flex-[2] h-14 rounded-2xl text-lg font-bold shadow-xl shadow-green-500/20 bg-green-600 hover:bg-green-700"
               onClick={handleSubmit}
               disabled={saving}
             >
-              {saving ? "יוצר הזמנה..." : "צרי הזמנה 🎉"}
+              {saving ? "يخلق أمرا..." : "اطلب دعوة 🎉"}
             </Button>
           </div>
         </div>

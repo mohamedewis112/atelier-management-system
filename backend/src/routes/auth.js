@@ -30,29 +30,29 @@ router.post('/login', async (req, res, next) => {
 
     // Validate input
     if (!email || !password) {
-      logLogin(email || 'unknown', false, null, null, ipAddress, userAgent, 'חסרים פרטי התחברות');
-      throw new ApiError(400, 'נא להזין אימייל וסיסמה');
+      logLogin(email || 'unknown', false, null, null, ipAddress, userAgent, 'تفاصيل تسجيل الدخول مفقودة');
+      throw new ApiError(400, 'الرجاء إدخال البريد الإلكتروني وكلمة المرور');
     }
 
     // Find user
     const user = get('SELECT * FROM users WHERE email = ?', [email.toLowerCase()]);
 
     if (!user) {
-      logLogin(email, false, null, null, ipAddress, userAgent, 'משתמש לא קיים');
-      throw new ApiError(401, 'אימייל או סיסמה שגויים');
+      logLogin(email, false, null, null, ipAddress, userAgent, 'المستخدم غير موجود');
+      throw new ApiError(401, 'البريد الإلكتروني أو كلمة المرور غير صحيحة');
     }
 
     if (!user.is_active) {
-      logLogin(email, false, user.id, user.name, ipAddress, userAgent, 'חשבון לא פעיל');
-      throw new ApiError(401, 'חשבון לא פעיל');
+      logLogin(email, false, user.id, user.name, ipAddress, userAgent, 'حساب غير نشط');
+      throw new ApiError(401, 'حساب غير نشط');
     }
 
     // Verify password
     const isValid = await bcrypt.compare(password, user.password_hash);
 
     if (!isValid) {
-      logLogin(email, false, user.id, user.name, ipAddress, userAgent, 'סיסמה שגויה');
-      throw new ApiError(401, 'אימייל או סיסמה שגויים');
+      logLogin(email, false, user.id, user.name, ipAddress, userAgent, 'كلمة مرور غير صحيحة');
+      throw new ApiError(401, 'البريد الإلكتروني أو كلمة المرور غير صحيحة');
     }
 
     // Update last login
@@ -88,7 +88,7 @@ router.post('/login', async (req, res, next) => {
 
     res.json({
       success: true,
-      message: 'התחברת בהצלחה',
+      message: 'لقد قمت بالاتصال بنجاح',
       data: {
         token,
         user: {
@@ -125,7 +125,7 @@ router.post('/logout', (req, res) => {
   });
   res.json({
     success: true,
-    message: 'התנתקת בהצלחה'
+    message: 'لقد قمت بتسجيل الخروج بنجاح'
   });
 });
 
@@ -170,11 +170,11 @@ router.post('/change-password', requireAuth, async (req, res, next) => {
 
     // Validate input
     if (!currentPassword || !newPassword) {
-      throw new ApiError(400, 'נא להזין סיסמה נוכחית וסיסמה חדשה');
+      throw new ApiError(400, 'الرجاء إدخال كلمة المرور الحالية وكلمة المرور الجديدة');
     }
 
     if (newPassword.length < 8) {
-      throw new ApiError(400, 'הסיסמה החדשה חייבת להיות לפחות 8 תווים');
+      throw new ApiError(400, 'كلمة المرور الجديدة يجب أن تكون على الأقل 8 الشخصيات');
     }
 
     // Get current user with password hash
@@ -184,7 +184,7 @@ router.post('/change-password', requireAuth, async (req, res, next) => {
     const isValid = await bcrypt.compare(currentPassword, user.password_hash);
 
     if (!isValid) {
-      throw new ApiError(401, 'הסיסמה הנוכחית שגויה');
+      throw new ApiError(401, 'كلمة المرور الحالية غير صحيحة');
     }
 
     // Hash new password
@@ -201,7 +201,7 @@ router.post('/change-password', requireAuth, async (req, res, next) => {
 
     res.json({
       success: true,
-      message: 'הסיסמה שונתה בהצלחה'
+      message: 'تم تغيير كلمة المرور بنجاح'
     });
 
   } catch (error) {
@@ -216,7 +216,7 @@ router.post('/change-password', requireAuth, async (req, res, next) => {
 router.post('/verify', requireAuth, (req, res) => {
   res.json({
     success: true,
-    message: 'טוקן תקין',
+    message: 'رمز صالح',
     data: {
       user: req.user
     }

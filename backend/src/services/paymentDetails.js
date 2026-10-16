@@ -6,12 +6,12 @@
  */
 
 const METHOD_SYNONYMS = {
-  cash: ['cash', 'מזומן'],
-  bit: ['bit', 'ביט'],
-  paybox: ['paybox', 'פייבוקס', 'pay box'],
-  credit: ['credit', 'card', 'אשראי', 'כרטיס'],
-  transfer: ['transfer', 'bank transfer', 'העברה', 'בנקאית'],
-  check: ['check', 'cheque', "צ'ק", 'צ׳ק', 'שיק']
+  cash: ['cash', 'نقدي'],
+  bit: ['bit', 'قليل'],
+  paybox: ['paybox', 'صندوق الدفع', 'pay box'],
+  credit: ['credit', 'card', 'بطاقة', 'بطاقة'],
+  transfer: ['transfer', 'bank transfer', 'نقل', 'مصرفي'],
+  check: ['check', 'cheque', "نص'نص", 'يفحص', 'شيك']
 };
 
 function normalizeText(value) {

@@ -125,7 +125,7 @@ export function GlobalSearch() {
                         newResults.push({
                             id: o.id,
                             type: "order",
-                            title: `הזמנה #${o.id} - ${o.customer_name}`,
+                            title: `حجز #${o.id} - ${o.customer_name}`,
                             subtitle: formatCurrency(o.total_price),
                             href: `/dashboard/orders`,
                         });
@@ -187,11 +187,11 @@ export function GlobalSearch() {
     const getTypeLabel = (type: string) => {
         switch (type) {
             case "customer":
-                return "לקוחה";
+                return "عميل";
             case "dress":
-                return "שמלה";
+                return "قطعة";
             case "order":
-                return "הזמנה";
+                return "حجز";
             default:
                 return "";
         }
@@ -206,7 +206,7 @@ export function GlobalSearch() {
                 className="gap-2 hidden lg:flex"
             >
                 <Search className="h-4 w-4" />
-                <span>חיפוש</span>
+                <span>بحث</span>
                 <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
                     <span className="text-xs">⌘</span>K
                 </kbd>
@@ -233,7 +233,7 @@ export function GlobalSearch() {
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
                         onKeyDown={handleKeyDown}
-                        placeholder="חיפוש לקוחות, שמלות, הזמנות..."
+                        placeholder="بحث العملاء, قطع, حجوزات..."
                         className="border-0 focus-visible:ring-0 text-lg"
                     />
                     <Button
@@ -255,7 +255,7 @@ export function GlobalSearch() {
 
                     {!loading && search.length >= 2 && results.length === 0 && (
                         <div className="text-center py-8 text-muted-foreground">
-                            לא נמצאו תוצאות עבור &quot;{search}&quot;
+                            لم يتم العثور على نتائج ل &quot;{search}&quot;
                         </div>
                     )}
 
@@ -304,7 +304,7 @@ export function GlobalSearch() {
 
                     {!loading && search.length < 2 && (
                         <div className="text-center py-8 text-muted-foreground text-sm">
-                            הקלידי לפחות 2 תווים לחיפוש
+                            اكتب على الأقل 2 شخصيات للبحث عنها
                         </div>
                     )}
                 </div>
@@ -313,15 +313,15 @@ export function GlobalSearch() {
                 <div className="border-t p-2 flex items-center justify-between text-xs text-muted-foreground">
                     <div className="flex gap-2">
                         <kbd className="px-2 py-1 rounded bg-muted">↑↓</kbd>
-                        <span>לניווט</span>
+                        <span>للملاحة</span>
                     </div>
                     <div className="flex gap-2">
                         <kbd className="px-2 py-1 rounded bg-muted">Enter</kbd>
-                        <span>לבחירה</span>
+                        <span>للاختيار</span>
                     </div>
                     <div className="flex gap-2">
                         <kbd className="px-2 py-1 rounded bg-muted">Esc</kbd>
-                        <span>לסגירה</span>
+                        <span>ليغلق</span>
                     </div>
                 </div>
             </div>

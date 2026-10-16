@@ -80,7 +80,7 @@ router.post('/upload', upload.single('image'), async (req, res, next) => {
       // JSON base64 path (direct file picker on Android)
       buffer = Buffer.from(req.body.imageBase64, 'base64');
     } else {
-      throw new ApiError(400, 'לא הועלה קובץ');
+      throw new ApiError(400, 'لم يتم تحميل أي ملف');
     }
 
     const { imageUrl, thumbnailUrl } = await processDressImage(buffer);
@@ -137,7 +137,7 @@ router.get('/', (req, res, next) => {
     // Add status filter
     if (status) {
       if (!validStatuses.includes(status)) {
-        throw new ApiError(400, 'סטטוס לא תקין');
+        throw new ApiError(400, 'الحالة غير صالحة');
       }
       sql += ' AND d.status = ?';
       params.push(status);
@@ -147,7 +147,7 @@ router.get('/', (req, res, next) => {
       if (intended_use === '__empty__') {
         sql += ' AND d.intended_use IS NULL';
       } else if (!validIntendedUses.includes(intended_use)) {
-        throw new ApiError(400, 'ייעוד שמלה לא תקין');
+        throw new ApiError(400, 'تسمية اللباس غير صحيحة');
       } else {
         sql += ' AND d.intended_use = ?';
         params.push(intended_use);
@@ -302,7 +302,7 @@ router.get('/:id', (req, res, next) => {
     const dress = get('SELECT * FROM dresses WHERE id = ?', [id]);
 
     if (!dress) {
-      throw new ApiError(404, 'שמלה לא נמצאה');
+      throw new ApiError(404, 'لم يتم العثور على اللباس');
     }
 
     // Get rental history
@@ -372,22 +372,22 @@ router.post('/', (req, res, next) => {
 
     // Validate required fields
     if (!normalizedName) {
-      throw new ApiError(400, 'נא להזין שם שמלה');
+      throw new ApiError(400, 'الرجاء إدخال اسم اللباس');
     }
 
     // Check for duplicate name
     const existing = get('SELECT id FROM dresses WHERE name = ?', [normalizedName]);
     if (existing) {
-      throw new ApiError(409, 'שמלה עם שם זה כבר קיימת');
+      throw new ApiError(409, 'يوجد قطعة بهذا الاسم بالفعل');
     }
 
     if (status && !validStatuses.includes(status)) {
-      throw new ApiError(400, 'סטטוס לא תקין');
+      throw new ApiError(400, 'الحالة غير صالحة');
     }
 
     const normalizedIntendedUse = intended_use === '' || intended_use === null ? null : intended_use;
     if (normalizedIntendedUse && !validIntendedUses.includes(normalizedIntendedUse)) {
-      throw new ApiError(400, 'ייעוד שמלה לא תקין');
+      throw new ApiError(400, 'تسمية اللباس غير صحيحة');
     }
 
     // Insert dress
@@ -409,7 +409,7 @@ router.post('/', (req, res, next) => {
 
     res.status(201).json({
       success: true,
-      message: 'שמלה נוספה בהצלחה',
+      message: 'تمت إضافة القطعة بنجاح',
       data: { dress: newDress }
     });
 
@@ -433,12 +433,12 @@ router.put('/:id', (req, res, next) => {
     // Check if dress exists
     const existing = get('SELECT * FROM dresses WHERE id = ?', [id]);
     if (!existing) {
-      throw new ApiError(404, 'שמלה לא נמצאה');
+      throw new ApiError(404, 'لم يتم العثور على اللباس');
     }
 
     // Validate required fields
     if (!normalizedName) {
-      throw new ApiError(400, 'נא להזין שם שמלה');
+      throw new ApiError(400, 'الرجاء إدخال اسم اللباس');
     }
 
     // Check for duplicate name (if changed)
@@ -448,17 +448,17 @@ router.put('/:id', (req, res, next) => {
         [normalizedName, id]
       );
       if (duplicate) {
-        throw new ApiError(409, 'שמלה אחרת עם שם זה כבר קיימת');
+        throw new ApiError(409, 'يوجد بالفعل قطعة آخر بهذا الاسم');
       }
     }
 
     if (status && !validStatuses.includes(status)) {
-      throw new ApiError(400, 'סטטוס לא תקין');
+      throw new ApiError(400, 'الحالة غير صالحة');
     }
 
     const normalizedIntendedUse = intended_use === '' || intended_use === null ? null : intended_use;
     if (normalizedIntendedUse && !validIntendedUses.includes(normalizedIntendedUse)) {
-      throw new ApiError(400, 'ייעוד שמלה לא תקין');
+      throw new ApiError(400, 'تسمية اللباس غير صحيحة');
     }
 
     const nextIntendedUse = normalizedIntendedUse === undefined
@@ -486,7 +486,7 @@ router.put('/:id', (req, res, next) => {
 
     res.json({
       success: true,
-      message: 'שמלה עודכנה בהצלחה',
+      message: 'تم تحديث القطعة بنجاح',
       data: { dress: updatedDress }
     });
 
@@ -505,12 +505,12 @@ router.patch('/:id/status', (req, res, next) => {
     const { status } = req.body;
 
     if (!validStatuses.includes(status)) {
-      throw new ApiError(400, 'סטטוס לא תקין');
+      throw new ApiError(400, 'الحالة غير صالحة');
     }
 
     const existing = get('SELECT * FROM dresses WHERE id = ?', [id]);
     if (!existing) {
-      throw new ApiError(404, 'שמלה לא נמצאה');
+      throw new ApiError(404, 'لم يتم العثور على اللباس');
     }
 
     run(
@@ -520,7 +520,7 @@ router.patch('/:id/status', (req, res, next) => {
 
     res.json({
       success: true,
-      message: 'סטטוס שמלה עודכן'
+      message: 'تم تحديث حالة القطعة'
     });
 
   } catch (error) {
@@ -541,12 +541,12 @@ router.post('/:id/rental', (req, res, next) => {
     // Check if dress exists
     const dress = get('SELECT * FROM dresses WHERE id = ?', [id]);
     if (!dress) {
-      throw new ApiError(404, 'שמלה לא נמצאה');
+      throw new ApiError(404, 'لم يتم العثور على اللباس');
     }
 
     // Validate amount
     if (!amount || parseFloat(amount) <= 0) {
-      throw new ApiError(400, 'נא להזין סכום תקין');
+      throw new ApiError(400, 'الرجاء إدخال مبلغ صالح');
     }
 
     // Insert history record (wearer_name holds the wearer, customer_name holds the account holder)
@@ -575,7 +575,7 @@ router.post('/:id/rental', (req, res, next) => {
 
     res.status(201).json({
       success: true,
-      message: 'השכרה נוספה להיסטוריה'
+      message: 'تمت إضافة الإيجار إلى التاريخ'
     });
 
   } catch (error) {
@@ -605,11 +605,11 @@ router.post('/merge', (req, res, next) => {
     const { targetDressId, sourceDressId, updatedDressData } = req.body;
 
     if (!targetDressId || !sourceDressId) {
-      throw new ApiError(400, 'חובה לציין מזהה שמלה למיזוג ומזהה שמלה יעד');
+      throw new ApiError(400, 'من الضروري تحديد معرف اللباس للدمج ومعرف اللباس المستهدف');
     }
 
     if (parseInt(targetDressId) === parseInt(sourceDressId)) {
-      throw new ApiError(400, 'לא ניתן למזג שמלה עם עצמה');
+      throw new ApiError(400, 'لا يمكن دمج القطعة مع نفسه');
     }
 
     transaction(() => {
@@ -618,10 +618,10 @@ router.post('/merge', (req, res, next) => {
       const source = get('SELECT * FROM dresses WHERE id = ?', [sourceDressId]);
 
       if (!target) {
-        throw new ApiError(404, `שמלת היעד (ID ${targetDressId}) לא נמצאה`);
+        throw new ApiError(404, `قطعة الوجهة (ID ${targetDressId}) لم يتم العثور عليه`);
       }
       if (!source) {
-        throw new ApiError(404, `שמלת המקור (ID ${sourceDressId}) לא נמצאה`);
+        throw new ApiError(404, `اللباس الأصلي (ID ${sourceDressId}) لم يتم العثور عليه`);
       }
 
       // 2. Update target dress details if provided by the caller
@@ -694,7 +694,7 @@ router.post('/merge', (req, res, next) => {
 
     res.json({
       success: true,
-      message: 'שמלות אוחדו בהצלחה'
+      message: 'تم دمج القطع بنجاح'
     });
 
   } catch (error) {

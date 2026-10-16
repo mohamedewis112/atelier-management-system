@@ -7,15 +7,15 @@
  * Used in orders and transactions pages for filtering by dates.
  * 
  * Method: Renders date inputs for from/to dates with quick preset buttons.
- * Preset options: היום, השבוע, החודש, חודש קודם, רבעון, רבעון קודם, השנה, שנה שעברה, טווח מותאם.
+ * Preset options: اليوم, هذا الأسبوع, هذا الشهر, قبل شهر, ربع سنوي, الربع السابق, هذه السنة, العام الماضي, النطاق المعدل.
  * Calls onChange callback when dates are updated.
  *
  * Quarter logic:
  *   Q1 = Jan–Mar, Q2 = Apr–Jun, Q3 = Jul–Sep, Q4 = Oct–Dec.
- *   'רבעון'       → start of current quarter .. today (inclusive).
- *   'רבעון קודם' → full previous quarter (first day .. last day).
- *   'השנה'        → Jan 1 of current year .. today (inclusive).
- *   'שנה שעברה'  → Jan 1 .. Dec 31 of the previous year.
+ *   'ربع سنوي'       → start of current quarter .. today (inclusive).
+ *   'الربع السابق' → full previous quarter (first day .. last day).
+ *   'هذه السنة'        → Jan 1 of current year .. today (inclusive).
+ *   'العام الماضي'  → Jan 1 .. Dec 31 of the previous year.
  */
 
 import { useState, useCallback } from "react";
@@ -32,14 +32,14 @@ interface DateRangeFilterProps {
 
 // Hebrew labels for preset date ranges
 const presets = [
-    { label: "היום", getValue: () => getToday() },
-    { label: "השבוע", getValue: () => getThisWeek() },
-    { label: "החודש", getValue: () => getThisMonth() },
-    { label: "חודש קודם", getValue: () => getLastMonth() },
-    { label: "רבעון", getValue: () => getThisQuarter() },
-    { label: "רבעון קודם", getValue: () => getLastQuarter() },
-    { label: "השנה", getValue: () => getThisYear() },
-    { label: "שנה שעברה", getValue: () => getLastYear() },
+    { label: "اليوم", getValue: () => getToday() },
+    { label: "هذا الأسبوع", getValue: () => getThisWeek() },
+    { label: "هذا الشهر", getValue: () => getThisMonth() },
+    { label: "قبل شهر", getValue: () => getLastMonth() },
+    { label: "ربع سنوي", getValue: () => getThisQuarter() },
+    { label: "الربع السابق", getValue: () => getLastQuarter() },
+    { label: "هذه السنة", getValue: () => getThisYear() },
+    { label: "العام الماضي", getValue: () => getLastYear() },
 ] as const;
 
 // Helper functions to calculate date ranges
@@ -194,7 +194,7 @@ export function DateRangeFilter({ onDateChange, dateFrom, dateTo }: DateRangeFil
                 className="gap-1 text-xs h-8"
             >
                 <Calendar className="h-3 w-3" />
-                טווח מותאם
+                النطاق المعدل
             </Button>
 
             {/* Custom date inputs */}
@@ -206,16 +206,16 @@ export function DateRangeFilter({ onDateChange, dateFrom, dateTo }: DateRangeFil
                         onChange={(e) => onDateChange(e.target.value || null, dateTo)}
                         className="h-8 w-32 text-xs"
                         dir="ltr"
-                        placeholder="מתאריך"
+                        placeholder="مؤرخة"
                     />
-                    <span className="text-xs text-muted-foreground">עד</span>
+                    <span className="text-xs text-muted-foreground">ل</span>
                     <Input
                         type="date"
                         value={dateTo || ""}
                         onChange={(e) => onDateChange(dateFrom, e.target.value || null)}
                         className="h-8 w-32 text-xs"
                         dir="ltr"
-                        placeholder="עד תאריך"
+                        placeholder="حتى الآن"
                     />
                 </div>
             )}
@@ -230,7 +230,7 @@ export function DateRangeFilter({ onDateChange, dateFrom, dateTo }: DateRangeFil
                     className="gap-1 text-xs h-8 text-muted-foreground hover:text-destructive"
                 >
                     <X className="h-3 w-3" />
-                    נקה
+                    مسح
                 </Button>
             )}
         </div>

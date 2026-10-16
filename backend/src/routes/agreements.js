@@ -188,24 +188,24 @@ router.post('/order/:orderId/sign-link', requireAuth, (req, res, next) => {
   try {
     const orderId = Number.parseInt(req.params.orderId, 10);
     if (Number.isNaN(orderId)) {
-      throw new ApiError(400, 'מזהה הזמנה לא תקין');
+      throw new ApiError(400, 'معرف الطلب غير صالح');
     }
 
     const orderWithItems = getOrderForAgreement(orderId);
     if (!orderWithItems) {
-      throw new ApiError(404, 'הזמנה לא נמצאה');
+      throw new ApiError(404, 'لم يتم العثور على الطلب');
     }
     if (hasSignedAgreementForCurrentOrderVersion(orderId)) {
-      throw new ApiError(409, 'כבר קיים הסכם חתום להזמנה זו');
+      throw new ApiError(409, 'هناك بالفعل اتفاقية موقعة لهذا الطلب');
     }
 
     const token = createAgreementToken(orderId);
     const baseUrl = resolvePublicFrontendBaseUrl();
     const link = `${baseUrl}/agreement?token=${encodeURIComponent(token)}`;
     const customerPhone = orderWithItems.order.customer_phone || '';
-    const customerName = orderWithItems.order.customer_name || 'לקוחה';
+    const customerName = orderWithItems.order.customer_name || 'عميل';
     const whatsappText = encodeURIComponent(
-      `היי ${customerName}, מצורף קישור לחתימה דיגיטלית על הסכם:\n${link}`
+      `أهلاً ${customerName}, مرفق رابط لتوقيع الاتفاقية رقميًا:\n${link}`
     );
     const whatsappLink = customerPhone
       ? `https://wa.me/972${customerPhone.replace(/\D/g, '').replace(/^0/, '')}?text=${whatsappText}`
@@ -234,20 +234,20 @@ router.get('/prefill', (req, res, next) => {
   try {
     const token = String(req.query.token || '').trim();
     if (!token) {
-      throw new ApiError(400, 'חסר טוקן חתימה');
+      throw new ApiError(400, 'رمز التوقيع مفقود');
     }
 
     const resolved = resolveAgreementToken(token);
     if (!resolved?.orderId) {
-      throw new ApiError(401, 'קישור חתימה לא תקין או שפג תוקפו');
+      throw new ApiError(401, 'رابط التوقيع غير صالح أو منتهي الصلاحية');
     }
 
     const orderWithItems = getOrderForAgreement(resolved.orderId);
     if (!orderWithItems) {
-      throw new ApiError(404, 'הזמנה לא נמצאה');
+      throw new ApiError(404, 'لم يتم العثور على الطلب');
     }
     if (hasSignedAgreementForCurrentOrderVersion(resolved.orderId)) {
-      throw new ApiError(410, 'ההסכם כבר נחתם והקישור כבר לא זמין');
+      throw new ApiError(410, 'تم توقيع الاتفاقية بالفعل ولم يعد الرابط متاحًا');
     }
 
     res.json({
@@ -279,20 +279,20 @@ router.post('/sign', async (req, res, next) => {
 
     // Validate required fields
     if (!full_name || !full_name.trim()) {
-      throw new ApiError(400, 'נא להזין שם מלא');
+      throw new ApiError(400, 'الرجاء إدخال الاسم الكامل');
     }
     if (!normalizedPhone || !normalizedPhone.trim()) {
-      throw new ApiError(400, 'נא להזין מספר טלפון');
+      throw new ApiError(400, 'الرجاء إدخال رقم الهاتف');
     }
     if (!signature_data) {
-      throw new ApiError(400, 'נא לחתום על ההסכם');
+      throw new ApiError(400, 'الرجاء التوقيع على الاتفاقية');
     }
 
     let resolvedOrderId = order_id ? Number.parseInt(String(order_id), 10) : null;
     if (token) {
       const resolved = resolveAgreementToken(String(token).trim());
       if (!resolved?.orderId) {
-        throw new ApiError(401, 'קישור חתימה לא תקין או שפג תוקפו');
+        throw new ApiError(401, 'رابط التوقيع غير صالح أو منتهي الصلاحية');
       }
       resolvedOrderId = resolved.orderId;
     }
@@ -301,10 +301,10 @@ router.post('/sign', async (req, res, next) => {
     if (resolvedOrderId) {
       orderWithItems = getOrderForAgreement(resolvedOrderId);
       if (!orderWithItems) {
-        throw new ApiError(404, 'הזמנה לא נמצאה');
+        throw new ApiError(404, 'لم يتم العثور على الطلب');
       }
       if (hasSignedAgreementForCurrentOrderVersion(resolvedOrderId)) {
-        throw new ApiError(410, 'ההסכם כבר נחתם והקישור כבר לא זמין');
+        throw new ApiError(410, 'تم توقيع الاتفاقية بالفعل ولم يعد الرابط متاحًا');
       }
     }
 
@@ -318,7 +318,7 @@ router.post('/sign', async (req, res, next) => {
         [normalizedPhone, customerId]
       );
       if (duplicatePhone) {
-        throw new ApiError(409, 'מספר הטלפון כבר קיים אצל לקוחה אחרת');
+        throw new ApiError(409, 'رقم الهاتف موجود بالفعل مع عميل آخر');
       }
 
       run(
@@ -368,7 +368,7 @@ router.post('/sign', async (req, res, next) => {
       // Generate unique filename
       const now = new Date();
       const dateStr = now.toISOString().split('T')[0].replace(/-/g, '');
-      const cleanName = full_name.trim().replace(/[^א-תa-zA-Z0-9]/g, '_');
+      const cleanName = full_name.trim().replace(/[^\u0600-\u06FFa-zA-Z0-9]/g, '_');
       const filename = `${dateStr}_${cleanName}_${uuidv4().slice(0, 8)}.png`;
       const filepath = join(uploadConfig.signaturesDir, filename);
 
@@ -509,7 +509,7 @@ router.post('/sign', async (req, res, next) => {
 
     res.status(201).json({
       success: true,
-      message: 'ההסכם נחתם בהצלחה!',
+      message: 'تم توقيع الاتفاقية بنجاح!',
       data: {
         agreementId: agreement.id,
         customerName: agreement.customer_name,
@@ -584,7 +584,7 @@ router.get('/:id', requireAuth, (req, res, next) => {
     );
 
     if (!agreement) {
-      throw new ApiError(404, 'הסכם לא נמצא');
+      throw new ApiError(404, 'لم يتم العثور على اتفاق');
     }
 
     res.json({

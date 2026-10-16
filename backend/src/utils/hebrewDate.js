@@ -11,28 +11,28 @@
  * Hebrew month names
  */
 const HEBREW_MONTHS = [
-  'תשרי', 'חשוון', 'כסלו', 'טבת', 'שבט', 'אדר',
-  'ניסן', 'אייר', 'סיוון', 'תמוז', 'אב', 'אלול'
+  'شرب', 'تشيشون', 'كيسليف', 'لقد استفدت', 'قبيلة', 'أدار',
+  'نيسان', 'هواء', 'سيفان', 'تموز', 'أب', 'إلول'
 ];
 
 // Adar II for leap years
-const ADAR_II = 'אדר ב׳';
-const ADAR_I = 'אדר א׳';
+const ADAR_II = 'أدار ب.';
+const ADAR_I = 'أدار أ.';
 
 /**
  * Hebrew number representation for days (1-30)
  */
 const HEBREW_DAYS = [
-  '', 'א׳', 'ב׳', 'ג׳', 'ד׳', 'ה׳', 'ו׳', 'ז׳', 'ח׳', 'ט׳', 'י׳',
-  'י״א', 'י״ב', 'י״ג', 'י״ד', 'ט״ו', 'ט״ז', 'י״ז', 'י״ח', 'י״ט', 'כ׳',
-  'כ״א', 'כ״ב', 'כ״ג', 'כ״ד', 'כ״ה', 'כ״ו', 'כ״ז', 'כ״ח', 'כ״ט', 'ל׳'
+  '', 'أ'', 'على'', 'ثالث'', 'د', 'ال'', 'و'', 'ز', 'ح', 'التاسع"', 'ي',
+  '11', '12', '13', 'يُسلِّم', 'تو', '16', '17', '18', '19', 'عن'',
+  '21', '22', '23', 'إبريق', 'لذا', '26', '27', '28', '29', 'ل''
 ];
 
 /**
  * Get Hebrew date from a JavaScript Date or date string
  * @param {Date|string} date - The date to convert
  * @param {boolean} includeYear - Whether to include the year (default: false)
- * @returns {string} - Hebrew date string (e.g., "כ״ה בכסלו" or "כ״ה בכסלו תשפ״ו")
+ * @returns {string} - Hebrew date string (e.g., "25 في كسلو" or "25 في كيسلو تشافو")
  */
 export function getHebrewDate(date, includeYear = false) {
   try {
@@ -68,8 +68,8 @@ export function getHebrewDate(date, includeYear = false) {
       }
     }
     
-    // Format: "כ״ה בכסלו" or "כ״ה בכסלו תשפ״ו"
-    let result = `${day} ב${month}`;
+    // Format: "25 في كسلو" or "25 في كيسلو تشافو"
+    let result = `${day} نص${month}`;
     if (includeYear && year) {
       result += ` ${year}`;
     }
@@ -85,7 +85,7 @@ export function getHebrewDate(date, includeYear = false) {
 /**
  * Get Hebrew date in short format (day and month only, no prefix)
  * @param {Date|string} date - The date to convert
- * @returns {string} - Short Hebrew date (e.g., "כ״ה כסלו")
+ * @returns {string} - Short Hebrew date (e.g., "K. H. كيسلو")
  */
 export function getHebrewDateShort(date) {
   try {
@@ -126,7 +126,7 @@ export function getHebrewDateShort(date) {
 /**
  * Get full Hebrew date with weekday
  * @param {Date|string} date - The date to convert  
- * @returns {string} - Full Hebrew date (e.g., "יום רביעי, כ״ה בכסלו תשפ״ו")
+ * @returns {string} - Full Hebrew date (e.g., "الأربعاء, 25 في كيسلو تشافو")
  */
 export function getFullHebrewDate(date) {
   try {

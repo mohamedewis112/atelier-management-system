@@ -502,7 +502,7 @@ export function logLogin(email, success, userId = null, userName = null, ipAddre
     userName,
     action: success ? LogAction.LOGIN : LogAction.LOGIN_FAILED,
     category: LogCategory.AUTH,
-    details: success ? { message: 'התחברות מוצלחת' } : { message: 'התחברות נכשלה', reason: errorMessage },
+    details: success ? { message: 'تم تسجيل الدخول بنجاح' } : { message: 'فشل تسجيل الدخول', reason: errorMessage },
     ipAddress,
     userAgent,
     responseStatus: success ? 200 : 401,

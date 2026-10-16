@@ -130,7 +130,7 @@ export default function DashboardPage() {
             </div>
             <div>
               <h3 className="text-lg font-bold text-white">مصروف</h3>
-              <p className="text-white/70 text-xs">תיעוד مصروف</p>
+              <p className="text-white/70 text-xs">التوثيق مصروف</p>
             </div>
           </Link>
         </div>

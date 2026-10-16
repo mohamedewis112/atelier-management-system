@@ -2,7 +2,7 @@
  * Dress Import Script
  * 
  * Purpose: Import dresses from the CSV export of the Google Sheets inventory.
- * Parses the מלאי שמלות.csv file and populates the dresses table.
+ * Parses the مخزون اللباس.csv file and populates the dresses table.
  * 
  * Operation: Reads the CSV file, parses each row, and creates dress records
  * with their rental history.
@@ -19,7 +19,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 // Path to CSV file
-const csvPath = join(__dirname, '..', '..', '..', 'csv-files-from-google-sheets', 'מלאי שמלות.csv');
+const csvPath = join(__dirname, '..', '..', '..', 'csv-files-from-google-sheets', 'مخزون اللباس.csv');
 
 console.log('');
 console.log('╔════════════════════════════════════════════════════════════╗');
@@ -83,7 +83,7 @@ try {
     
     if (firstIncome > 0 || firstCustomer) {
       totalIncome += firstIncome;
-      rentals.push({ amount: firstIncome, customer: firstCustomer || 'לא ידוע' });
+      rentals.push({ amount: firstIncome, customer: firstCustomer || 'مجهول' });
     }
     
     // Remaining rentals (starting from column 5, in pairs)
@@ -113,7 +113,7 @@ try {
       if (dress) {
         // Insert rental records
         for (const rental of rentals) {
-          if (rental.customer && rental.customer !== 'לא ידוע') {
+          if (rental.customer && rental.customer !== 'مجهول') {
             insertRental.run(
               dress.id,
               rental.customer,

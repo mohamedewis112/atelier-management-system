@@ -44,16 +44,16 @@ export class ErrorBoundary extends Component<Props, State> {
           <div className="bg-red-50 text-red-600 p-6 rounded-full mb-6 ring-8 ring-red-50/50">
             <AlertOctagon className="h-16 w-16" />
           </div>
-          <h1 className="text-3xl font-black mb-4 text-gray-900">אופס! משהו השתבש...</h1>
+          <h1 className="text-3xl font-black mb-4 text-gray-900">أُووبس! حدث خطأ ما...</h1>
           <p className="text-muted-foreground font-medium mb-8 max-w-md mx-auto text-lg leading-relaxed">
-            קרתה שגיאה לא צפויה במערכת. הבעיה דווחה אוטומטית לצוות הפיתוח לטיפול מהיר.
+            حدث خطأ غير متوقع في النظام. تم الإبلاغ عن المشكلة تلقائيًا إلى فريق التطوير للتعامل معها بسرعة.
           </p>
           <Button 
             onClick={() => window.location.reload()} 
             className="h-14 px-8 rounded-2xl bg-gray-900 hover:bg-gray-800 text-white font-bold text-lg gap-2 shadow-xl hover:shadow-2xl transition-all hover:-translate-y-1"
           >
             <RefreshCcw className="h-5 w-5" />
-            רענון העמוד
+            قم بتحديث الصفحة
           </Button>
           
           {process.env.NODE_ENV === 'development' && this.state.error && (

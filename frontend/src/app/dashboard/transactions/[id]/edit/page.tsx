@@ -32,27 +32,27 @@ import { compressImageForUpload } from "@/lib/shared-upload";
 import { reportClientError } from "@/lib/error-reporter";
 
 const FORM_INCOME_CATEGORIES = [
-  { value: "existing_order", label: "הזמנה" },
-  { value: "repair", label: "תיקונים" },
-  { value: "other", label: "אחר" },
+  { value: "existing_order", label: "حجز" },
+  { value: "repair", label: "التصحيحات" },
+  { value: "other", label: "آخر" },
 ];
 
 const EXPENSE_CATEGORIES = [
-  { value: "materials", label: "חומרים" },
-  { value: "overhead", label: "תקורה" },
-  { value: "tax", label: "מיסוי" },
-  { value: "equipment", label: "ציוד" },
-  { value: "salary", label: "משכורות" },
-  { value: "other", label: "אחר" },
+  { value: "materials", label: "مواد" },
+  { value: "overhead", label: "النفقات العامة" },
+  { value: "tax", label: "الضرائب" },
+  { value: "equipment", label: "معدات" },
+  { value: "salary", label: "الرواتب" },
+  { value: "other", label: "آخر" },
 ];
 
 const PAYMENT_METHODS = [
-  { value: "cash", label: "מזומן" },
-  { value: "bit", label: "ביט" },
-  { value: "paybox", label: "פייבוקס" },
-  { value: "credit", label: "אשראי" },
-  { value: "transfer", label: "העברה" },
-  { value: "check", label: "צ'ק" },
+  { value: "cash", label: "نقدي" },
+  { value: "bit", label: "قليل" },
+  { value: "paybox", label: "صندوق الدفع" },
+  { value: "credit", label: "بطاقة" },
+  { value: "transfer", label: "نقل" },
+  { value: "check", label: "نص'نص" },
 ];
 
 export default function EditTransactionPage() {
@@ -146,7 +146,7 @@ export default function EditTransactionPage() {
         }
       } catch (e) {
         console.error("Error loading transaction:", e);
-        toast({ title: "שגיאה", description: "לא ניתן לטעון את העסקה", variant: "destructive" });
+        toast({ title: "خطأ", description: "لا يمكن المطالبة بالمعاملة", variant: "destructive" });
         router.push("/dashboard/transactions");
       } finally {
         setLoading(false);
@@ -189,7 +189,7 @@ export default function EditTransactionPage() {
     if (!file) return;
 
     if (file.size > 20 * 1024 * 1024) {
-      toast({ title: "הקובץ גדול מדי", description: "הגודל המרבי הוא 20MB. נסי לצלם שוב ברזולוציה נמוכה יותר.", variant: "destructive" });
+      toast({ title: "الملف كبير جدًا", description: "الحد الأقصى للحجم هو 20MB. حاول التصوير مرة أخرى بدقة أقل.", variant: "destructive" });
       return;
     }
 
@@ -199,12 +199,12 @@ export default function EditTransactionPage() {
       setFileName(file.name);
     } catch (err) {
       console.error('File read/compress error:', err);
-      toast({ title: "שגיאה בקריאת הקובץ", description: "לא ניתן לקרוא את הקובץ. נסי לצלם שוב.", variant: "destructive" });
+      toast({ title: "خطأ في قراءة الملف", description: "لا يمكن قراءة الملف. حاول إطلاق النار مرة أخرى.", variant: "destructive" });
       reportClientError({
         message: err instanceof Error ? err.message : String(err),
         stack: err instanceof Error ? err.stack : undefined,
         component: 'EditTransaction',
-        action: 'קריאת קובץ אסמכתא'
+        action: 'قراءة ملف مرجعي'
       });
     }
   };
@@ -213,19 +213,19 @@ export default function EditTransactionPage() {
     e.preventDefault();
 
     if (!amount) {
-      toast({ title: "חסר סכום", description: "נא להזין את סכום התנועה.", variant: "destructive" });
+      toast({ title: "المبلغ المفقود", description: "الرجاء إدخال مبلغ المعاملة.", variant: "destructive" });
       return;
     }
     if (type === "income" && !uiCategory) {
-      toast({ title: "חסר סוג הכנסה", description: "נא לבחור סוג הכנסה: הזמנה, תיקונים או אחר.", variant: "destructive" });
+      toast({ title: "نوع الدخل مفقود", description: "الرجاء تحديد نوع الدخل: حجز, إصلاحات أو غير ذلك.", variant: "destructive" });
       return;
     }
     if (type === "expense" && !category) {
-      toast({ title: "חסרה קטגוריה", description: "נא לבחור קטגוריה להוצאה (חומרים, תקורה וכו').", variant: "destructive" });
+      toast({ title: "الفئة مفقودة", description: "الرجاء تحديد فئة للنشر (مواد, النفقات العامة الخ').", variant: "destructive" });
       return;
     }
     if (type === "income" && !customerId) {
-      toast({ title: "חסרה לקוחה", description: "נא לבחור לקוחה קיימת או ליצור חדשה.", variant: "destructive" });
+      toast({ title: "في عداد المفقودين العميل", description: "الرجاء تحديد عميل حالي أو إنشاء عميل جديد.", variant: "destructive" });
       return;
     }
 
@@ -256,25 +256,25 @@ export default function EditTransactionPage() {
       };
 
       await transactionsApi.update(parseInt(transactionId), data);
-      toast({ title: "הצלחה!", description: "העסקה עודכנה בהצלחה" });
+      toast({ title: "تم بنجاح!", description: "تم تحديث المعاملة بنجاح" });
       router.push("/dashboard/transactions");
     } catch (error) {
       const message = error instanceof Error && error.message
         ? error.message
-        : "לא ניתן לעדכן את התנועה. בדקי את החיבור לאינטרנט ונסי שוב.";
-      toast({ title: "שגיאה בעדכון", description: message, variant: "destructive" });
+        : "لا يمكن تحديث حركة المرور. تحقق من اتصالك بالإنترنت وحاول مرة أخرى.";
+      toast({ title: "حدث خطأ أثناء التحديث", description: message, variant: "destructive" });
       reportClientError({
         message,
         stack: error instanceof Error ? error.stack : undefined,
         component: 'EditTransaction',
-        action: 'עדכון תנועה'
+        action: 'تحديث المرور'
       });
     } finally {
       setSaving(false);
     }
   };
 
-  if (loading) return <div className="flex items-center justify-center min-h-screen">טוען...</div>;
+  if (loading) return <div className="flex items-center justify-center min-h-screen">جاري التحميل...</div>;
 
   return (
     <div className="min-h-screen bg-background pb-24">
@@ -285,7 +285,7 @@ export default function EditTransactionPage() {
             <Button variant="ghost" size="icon" onClick={() => router.back()} className="rounded-full">
               <ArrowRight className="h-6 w-6" />
             </Button>
-            <h1 className="text-xl font-black">עריכת תנועה</h1>
+            <h1 className="text-xl font-black">تحرير حركة المرور</h1>
           </div>
         </div>
       </div>
@@ -294,15 +294,15 @@ export default function EditTransactionPage() {
 
         {/* Type Info (Non-editable for safety) */}
         <div className="bg-muted p-4 rounded-2xl flex items-center justify-center gap-2">
-          <span className="text-sm font-bold text-muted-foreground uppercase tracking-widest">סוג התנועה:</span>
+          <span className="text-sm font-bold text-muted-foreground uppercase tracking-widest">نوع حركة المرور:</span>
           <span className={cn("font-black px-4 py-1 rounded-full text-white", type === 'income' ? 'bg-green-600' : 'bg-red-600')}>
-            {type === 'income' ? 'הכנסה' : 'הוצאה'}
+            {type === 'income' ? 'إيراد' : 'مصروف'}
           </span>
         </div>
 
         {/* Amount Input */}
         <div className="text-center py-4">
-          <label className="text-xs text-muted-foreground font-bold uppercase tracking-widest mb-2 block">סכום בשקלים</label>
+          <label className="text-xs text-muted-foreground font-bold uppercase tracking-widest mb-2 block">المبلغ بالشيكل</label>
           <div className="relative inline-block w-full max-w-[240px]">
             <input
               type="number"
@@ -323,7 +323,7 @@ export default function EditTransactionPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="space-y-2">
             <label className="text-xs font-bold text-muted-foreground flex items-center gap-1">
-              <Calendar className="h-3 w-3" /> תאריך
+              <Calendar className="h-3 w-3" /> التاريخ
             </label>
             <Input
               type="date"
@@ -334,7 +334,7 @@ export default function EditTransactionPage() {
           </div>
           <div className="space-y-2">
             <label className="text-xs font-bold text-muted-foreground flex items-center gap-1">
-              <CreditCard className="h-3 w-3" /> אמצעי תשלום
+              <CreditCard className="h-3 w-3" /> طريقة الدفع
             </label>
             <select
               value={paymentMethod}
@@ -352,7 +352,7 @@ export default function EditTransactionPage() {
         {type === "income" && (
           <div className="space-y-6">
             <div className="space-y-3">
-              <label className="text-xs font-bold text-muted-foreground uppercase tracking-widest">מה סוג ההכנסה? *</label>
+              <label className="text-xs font-bold text-muted-foreground uppercase tracking-widest">ما هو نوع الدخل؟? *</label>
               <div className="grid grid-cols-3 gap-2">
                 {FORM_INCOME_CATEGORIES.map((cat) => (
                   <button
@@ -378,7 +378,7 @@ export default function EditTransactionPage() {
 
             {uiCategory === "existing_order" && !orderId && (
               <div className="space-y-2 animate-in fade-in slide-in-from-top-2">
-                <label className="text-xs font-bold text-primary flex items-center gap-1"><Search className="h-3 w-3" /> בחרי הזמנה</label>
+                <label className="text-xs font-bold text-primary flex items-center gap-1"><Search className="h-3 w-3" /> حدد الطلب</label>
                 <div className="grid gap-2 max-h-60 overflow-y-auto p-1 bg-muted/20 rounded-2xl border-2">
                   {recentOrders.map((order) => (
                     <button
@@ -397,7 +397,7 @@ export default function EditTransactionPage() {
                         <span className="text-[10px] bg-primary/10 text-primary px-2 py-0.5 rounded-full">#{order.id}</span>
                       </div>
                       <div className="flex justify-between items-center mt-2">
-                        <span className="text-xs text-muted-foreground">{order.order_summary || 'הזמנה'}</span>
+                        <span className="text-xs text-muted-foreground">{order.order_summary || 'حجز'}</span>
                       </div>
                     </button>
                   ))}
@@ -410,7 +410,7 @@ export default function EditTransactionPage() {
                 <div className="flex items-center gap-3">
                   <div className="bg-primary/10 p-3 rounded-full"><ShoppingBag className="h-6 w-6 text-primary" /></div>
                   <div>
-                    <p className="text-[10px] font-black text-primary uppercase tracking-widest">משוייך להזמנה #{orderId}</p>
+                    <p className="text-[10px] font-black text-primary uppercase tracking-widest">المرتبطة بالأمر #{orderId}</p>
                     <p className="text-lg font-black">{customerSearch}</p>
                   </div>
                 </div>
@@ -420,11 +420,11 @@ export default function EditTransactionPage() {
 
             {(uiCategory === "repair" || uiCategory === "other") && (
               <div className="space-y-4 animate-in fade-in slide-in-from-top-2">
-                <label className="text-xs font-bold text-muted-foreground uppercase tracking-widest">מי הלקוחה?</label>
+                <label className="text-xs font-bold text-muted-foreground uppercase tracking-widest">من هو العميل؟?</label>
                 <div className="relative">
                   <Search className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input
-                    placeholder="חפשי לקוחה..."
+                    placeholder="ابحث عن عميل..."
                     value={customerSearch}
                     onChange={(e) => setCustomerSearch(e.target.value)}
                     className="pr-10 h-12 rounded-xl border-2"
@@ -456,42 +456,42 @@ export default function EditTransactionPage() {
           <div className="space-y-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <label className="text-xs font-bold text-muted-foreground uppercase tracking-widest">ספק / חנות</label>
+                <label className="text-xs font-bold text-muted-foreground uppercase tracking-widest">مزود / محل</label>
                 <Input
                   value={supplier}
                   onChange={(e) => setSupplier(e.target.value)}
-                  placeholder="איפה קנית?"
+                  placeholder="أين اشتريت?"
                   className="focus:border-red-600"
                 />
               </div>
               <div className="space-y-2">
-                <label className="text-xs font-bold text-muted-foreground uppercase tracking-widest">מוצר / שירות</label>
+                <label className="text-xs font-bold text-muted-foreground uppercase tracking-widest">منتج / خدمة</label>
                 <Input
                   value={product}
                   onChange={(e) => setProduct(e.target.value)}
-                  placeholder="מה קנית?"
+                  placeholder="ماذا اشتريت?"
                   className="focus:border-red-600"
                 />
               </div>
             </div>
 
             <div className="space-y-2">
-              <label className="text-xs font-bold text-muted-foreground uppercase tracking-widest">קטגוריה *</label>
+              <label className="text-xs font-bold text-muted-foreground uppercase tracking-widest">فئة *</label>
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
                 className="w-full h-12 rounded-xl border-2 bg-background px-3 font-bold"
               >
-                <option value="">בחרי קטגוריה...</option>
+                <option value="">اختر فئة...</option>
                 {EXPENSE_CATEGORIES.map(c => <option key={c.value} value={c.value}>{c.label}</option>)}
               </select>
             </div>
 
             <div className="bg-muted p-1.5 rounded-2xl flex gap-1">
               {[
-                { id: "business", label: "עסקית" },
-                { id: "customer", label: "לקוחה" },
-                { id: "split", label: "משולב" }
+                { id: "business", label: "عمل" },
+                { id: "customer", label: "عميل" },
+                { id: "split", label: "مدمج" }
               ].map(opt => (
                 <button
                   key={opt.id}
@@ -509,7 +509,7 @@ export default function EditTransactionPage() {
 
             {expenseAllocation !== "business" && (
               <Card className="border-2 border-red-100 bg-red-50/30 p-4 rounded-2xl space-y-4">
-                <label className="text-xs font-bold text-red-700 uppercase">שיוך לחיוב</label>
+                <label className="text-xs font-bold text-red-700 uppercase">جمعية لتوجيه الاتهام</label>
                 {!orderId ? (
                   <div className="grid gap-2 max-h-40 overflow-y-auto">
                     {recentOrders.map(o => (
@@ -520,14 +520,14 @@ export default function EditTransactionPage() {
                         className="p-3 bg-white border-2 rounded-xl text-right hover:border-red-300 transition-all"
                       >
                         <p className="font-bold text-red-600 text-sm">{o.customer_name}</p>
-                        <p className="text-[10px] text-muted-foreground">הזמנה #{o.id}</p>
+                        <p className="text-[10px] text-muted-foreground">حجز #{o.id}</p>
                       </button>
                     ))}
                   </div>
                 ) : (
                   <div className="bg-white p-3 rounded-xl border-2 border-red-200 flex items-center justify-between">
                     <div>
-                      <p className="text-[10px] font-black text-red-600">הזמנה #{orderId}</p>
+                      <p className="text-[10px] font-black text-red-600">حجز #{orderId}</p>
                       <p className="font-bold">{customerSearch}</p>
                     </div>
                     <Button type="button" variant="ghost" size="icon" onClick={() => setOrderId("")} className="text-red-600"><X /></Button>
@@ -541,7 +541,7 @@ export default function EditTransactionPage() {
                     onKeyDown={(e) => {
                       if (e.key === '.' || e.key === '-') e.preventDefault();
                     }}
-                    placeholder="כמה היא משלמת?"
+                    placeholder="كم تدفع?"
                     className="h-11 rounded-xl border-2"
                   />
                 )}
@@ -558,11 +558,11 @@ export default function EditTransactionPage() {
           {type === "income" && paymentMethod === "credit" && (
             <div className="grid grid-cols-3 gap-2 animate-in fade-in slide-in-from-top-2">
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-muted-foreground uppercase">אסמכתא</label>
-                <Input value={confirmationNumber} onChange={(e) => setConfirmationNumber(e.target.value)} placeholder="אישור..." className="h-10 text-center" />
+                <label className="text-[10px] font-bold text-muted-foreground uppercase">مرجع</label>
+                <Input value={confirmationNumber} onChange={(e) => setConfirmationNumber(e.target.value)} placeholder="تأكيد..." className="h-10 text-center" />
               </div>
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-muted-foreground uppercase">4 ספרות</label>
+                <label className="text-[10px] font-bold text-muted-foreground uppercase">4 الأدب</label>
                 <Input
                   value={lastFourDigits}
                   onChange={(e) => setLastFourDigits(e.target.value)}
@@ -572,7 +572,7 @@ export default function EditTransactionPage() {
                 />
               </div>
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-muted-foreground uppercase">תשלומים</label>
+                <label className="text-[10px] font-bold text-muted-foreground uppercase">دفعات</label>
                 <Input
                   type="number"
                   min="1"
@@ -586,23 +586,23 @@ export default function EditTransactionPage() {
 
           {type === "income" && (paymentMethod === "bit" || paymentMethod === "paybox" || paymentMethod === "transfer") && (
             <div className="space-y-1 animate-in fade-in slide-in-from-top-2">
-              <label className="text-[10px] font-bold text-muted-foreground uppercase">אסמכתא</label>
-              <Input value={confirmationNumber} onChange={(e) => setConfirmationNumber(e.target.value)} placeholder="מספר אישור..." className="h-10" />
+              <label className="text-[10px] font-bold text-muted-foreground uppercase">مرجع</label>
+              <Input value={confirmationNumber} onChange={(e) => setConfirmationNumber(e.target.value)} placeholder="رقم التأكيد..." className="h-10" />
             </div>
           )}
 
           {type === "income" && paymentMethod === "transfer" && (
             <div className="grid grid-cols-3 gap-2 animate-in fade-in slide-in-from-top-2">
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-muted-foreground uppercase">מס' בנק</label>
+                <label className="text-[10px] font-bold text-muted-foreground uppercase">ضريبة' بنك</label>
                 <Input value={bankNumber} onChange={(e) => setBankNumber(e.target.value)} className="h-10 text-center" />
               </div>
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-muted-foreground uppercase">מס' סניף</label>
+                <label className="text-[10px] font-bold text-muted-foreground uppercase">ضريبة' فرع</label>
                 <Input value={branchNumber} onChange={(e) => setBranchNumber(e.target.value)} className="h-10 text-center" />
               </div>
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-muted-foreground uppercase">מס' חשבון</label>
+                <label className="text-[10px] font-bold text-muted-foreground uppercase">ضريبة' فاتورة</label>
                 <Input value={accountNumber} onChange={(e) => setAccountNumber(e.target.value)} className="h-10 text-center" />
               </div>
             </div>
@@ -611,20 +611,20 @@ export default function EditTransactionPage() {
           {type === "income" && paymentMethod === "check" && (
             <div className="space-y-2 animate-in fade-in slide-in-from-top-2">
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-muted-foreground uppercase">מספר צ'ק</label>
+                <label className="text-[10px] font-bold text-muted-foreground uppercase">رقم ج'نص</label>
                 <Input value={checkNumber} onChange={(e) => setCheckNumber(e.target.value)} className="h-10" />
               </div>
               <div className="grid grid-cols-3 gap-2">
                 <div className="space-y-1">
-                  <label className="text-[10px] font-bold text-muted-foreground uppercase">מס' בנק</label>
+                  <label className="text-[10px] font-bold text-muted-foreground uppercase">ضريبة' بنك</label>
                   <Input value={bankNumber} onChange={(e) => setBankNumber(e.target.value)} className="h-10 text-center" />
                 </div>
                 <div className="space-y-1">
-                  <label className="text-[10px] font-bold text-muted-foreground uppercase">מס' סניף</label>
+                  <label className="text-[10px] font-bold text-muted-foreground uppercase">ضريبة' فرع</label>
                   <Input value={branchNumber} onChange={(e) => setBranchNumber(e.target.value)} className="h-10 text-center" />
                 </div>
                 <div className="space-y-1">
-                  <label className="text-[10px] font-bold text-muted-foreground uppercase">מס' חשבון</label>
+                  <label className="text-[10px] font-bold text-muted-foreground uppercase">ضريبة' فاتورة</label>
                   <Input value={accountNumber} onChange={(e) => setAccountNumber(e.target.value)} className="h-10 text-center" />
                 </div>
               </div>
@@ -632,11 +632,11 @@ export default function EditTransactionPage() {
           )}
 
           <div className="space-y-2">
-            <label className="text-xs font-bold text-muted-foreground uppercase tracking-widest">הערות</label>
+            <label className="text-xs font-bold text-muted-foreground uppercase tracking-widest">ملاحظات</label>
             <textarea
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
-              placeholder="פרטים נוספים..."
+              placeholder="مزيد من التفاصيل..."
               className="w-full h-32 p-4 rounded-2xl border-2 bg-background focus:border-primary outline-none resize-none shadow-inner"
             />
           </div>
@@ -645,14 +645,14 @@ export default function EditTransactionPage() {
           {(type === "expense" || paymentMethod !== "cash") && (
             <div className="space-y-2">
               <label className="text-xs font-bold text-muted-foreground flex items-center gap-1 uppercase tracking-widest">
-                <Camera className="h-3 w-3" /> {type === "expense" ? "צילום קבלה" : "אסמכתא / צילום"}
+                <Camera className="h-3 w-3" /> {type === "expense" ? "صورة الاستلام" : "مرجع / التصوير الفوتوغرافي"}
               </label>
               <label className={cn(
                 "flex flex-col items-center justify-center w-full h-32 rounded-2xl border-2 border-dashed transition-all cursor-pointer",
                 fileName ? "bg-green-50 border-green-300 text-green-700" : "bg-muted/20 hover:bg-muted/40 text-muted-foreground"
               )}>
                 {fileName ? <Check className="h-8 w-8 mb-2" /> : <Upload className="h-8 w-8 mb-2" />}
-                <span className="font-bold text-sm">{fileName || "לחצי להעלאת קובץ או צילום"}</span>
+                <span className="font-bold text-sm">{fileName || "انقر لتحميل ملف أو صورة"}</span>
                 <input type="file" accept="image/*,application/pdf" capture="environment" onChange={handleFileChange} className="hidden" />
               </label>
             </div>
@@ -669,7 +669,7 @@ export default function EditTransactionPage() {
             className="flex-1 h-14 rounded-2xl text-lg font-bold border-2"
             onClick={() => router.back()}
           >
-            ביטול
+            إلغاء
           </Button>
           <Button
             className={cn(
@@ -679,7 +679,7 @@ export default function EditTransactionPage() {
             onClick={handleSubmit}
             disabled={saving}
           >
-            {saving ? "מעדכן..." : "שמרי שינויים 🎉"}
+            {saving ? "تحديث..." : "حفظ التغييرات 🎉"}
           </Button>
         </div>
       </div >

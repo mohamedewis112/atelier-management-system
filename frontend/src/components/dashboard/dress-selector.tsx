@@ -35,9 +35,9 @@ interface DressSelectorProps {
 }
 
 function getIntendedUseLabel(value: string | null | undefined) {
-  if (value === "sale") return "למכירה";
-  if (value === "rental") return "להשכרה";
-  return "ללא ייעוד";
+  if (value === "sale") return "للبيع";
+  if (value === "rental") return "للإيجار";
+  return "بدون تسمية";
 }
 
 type IntendedUseFilter = "all" | "rental" | "sale";
@@ -59,7 +59,7 @@ export function DressSelector({
   dresses,
   selectedId,
   onSelect,
-  placeholder = "בחרי שמלה מהמלאי...",
+  placeholder = "اختر قطعةًا من المخزون...",
   itemType,
 }: DressSelectorProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -88,10 +88,10 @@ export function DressSelector({
 
   const intendedUseFilterLabel =
     intendedUseFilter === "sale"
-      ? "מכירה"
+      ? "بيع"
       : intendedUseFilter === "rental"
-        ? "השכרה"
-        : "הכל";
+        ? "إيجار"
+        : "الكل";
 
   return (
     <div className="w-full">
@@ -125,7 +125,7 @@ export function DressSelector({
             </div>
             {selectedDress && (
               <div className="text-[10px] font-bold text-primary/60 uppercase mt-1">
-                מק״ט: {selectedDress.id} • {getIntendedUseLabel(selectedDress.intended_use)} • {formatCurrency(selectedDress.base_price || 0)}
+                رمز التخزين التعريفي: {selectedDress.id} • {getIntendedUseLabel(selectedDress.intended_use)} • {formatCurrency(selectedDress.base_price || 0)}
               </div>
             )}
           </div>
@@ -151,9 +151,9 @@ export function DressSelector({
                   <Sparkles className="h-6 w-6" />
                 </div>
                 <div>
-                  <h2 className="font-black text-xl">בחירת שמלה מהמלאי</h2>
+                  <h2 className="font-black text-xl">اختيار قطعة من المخزون</h2>
                   <p className="text-xs font-bold text-muted-foreground uppercase">
-                    {dressesByIntendedUse.length} שמלות לבחירה • סינון: {intendedUseFilterLabel}
+                    {dressesByIntendedUse.length} قطع للاختيار من بينها • تصفية: {intendedUseFilterLabel}
                   </p>
                 </div>
               </div>
@@ -169,7 +169,7 @@ export function DressSelector({
                   <Search className="absolute right-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                   <Input
                     autoFocus
-                    placeholder="חפשי לפי שם או מק״ט..."
+                    placeholder="البحث بالاسم أو SKU..."
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                     className="h-12 pr-12 rounded-2xl border-none shadow-sm text-lg bg-white"
@@ -185,7 +185,7 @@ export function DressSelector({
                     )}
                   >
                     <List className="h-3.5 w-3.5" />
-                    רשימה
+                    قائمة
                   </button>
                   <button
                     type="button"
@@ -196,7 +196,7 @@ export function DressSelector({
                     )}
                   >
                     <LayoutGrid className="h-3.5 w-3.5" />
-                    תמונות
+                    صور
                   </button>
                 </div>
                 <div className="inline-flex rounded-xl border bg-white p-1">
@@ -208,7 +208,7 @@ export function DressSelector({
                       intendedUseFilter === "rental" ? "bg-primary text-white shadow" : "text-muted-foreground hover:bg-muted/60"
                     )}
                   >
-                    להשכרה
+                    للإيجار
                   </button>
                   <button
                     type="button"
@@ -218,7 +218,7 @@ export function DressSelector({
                       intendedUseFilter === "sale" ? "bg-primary text-white shadow" : "text-muted-foreground hover:bg-muted/60"
                     )}
                   >
-                    למכירה
+                    للبيع
                   </button>
                   <button
                     type="button"
@@ -228,7 +228,7 @@ export function DressSelector({
                       intendedUseFilter === "all" ? "bg-primary text-white shadow" : "text-muted-foreground hover:bg-muted/60"
                     )}
                   >
-                    הכל
+                    الكل
                   </button>
                 </div>
               </div>
@@ -267,7 +267,7 @@ export function DressSelector({
                         <div className="order-2 min-w-0 flex-1 text-right">
                           <div className="font-bold text-sm leading-snug truncate">{dress.name}</div>
                           <div className="text-[10px] font-bold text-muted-foreground mt-1">
-                            מק״ט {dress.id} • {getIntendedUseLabel(dress.intended_use)} • {formatCurrency(dress.base_price || 0)}
+                            رمز التخزين التعريفي {dress.id} • {getIntendedUseLabel(dress.intended_use)} • {formatCurrency(dress.base_price || 0)}
                           </div>
                         </div>
                         <span className={cn(
@@ -307,7 +307,7 @@ export function DressSelector({
                         ) : (
                           <div className="w-full h-full flex flex-col items-center justify-center text-primary/20 gap-2">
                             <ShoppingBag className="h-10 w-10" />
-                            <span className="text-[10px] font-black uppercase tracking-widest">ללא תמונה</span>
+                            <span className="text-[10px] font-black uppercase tracking-widest">لا توجد صورة</span>
                           </div>
                         )}
 
@@ -347,7 +347,7 @@ export function DressSelector({
               {filteredDresses.length === 0 && (
                 <div className="text-center py-12">
                   <ShoppingBag className="h-12 w-12 mx-auto text-muted-foreground/20 mb-3" />
-                  <p className="font-bold text-muted-foreground">לא נמצאו שמלות תואמות</p>
+                  <p className="font-bold text-muted-foreground">لم يتم العثور على قطع مطابقة</p>
                 </div>
               )}
             </CardContent>

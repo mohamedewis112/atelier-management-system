@@ -97,7 +97,7 @@ interface Attachment {
 const getItemTypeLabel = (type: string) => {
   const types: Record<string, string> = {
     'rental': 'إيجار',
-    'sewing_for_rental': 'تفصيل שנשארת בإيجار',
+    'sewing_for_rental': 'تفصيل الذي بقيت فيهإيجار',
     'sewing': 'تفصيل',
     'sale': 'بيع',
   };
@@ -188,7 +188,7 @@ export default function OrdersPage() {
     setSavingMerge(true);
     try {
       await ordersApi.merge(mergeTargetId, sourceId, mergeFormData);
-      toast({ title: "تم بنجاح", description: "حجوزات אוחדו בتم بنجاح" });
+      toast({ title: "تم بنجاح", description: "حجوزات متحدون بتم بنجاح" });
       setShowMergeDialog(false);
       setSelectedIds([]);
       setIsSelectionMode(false);
@@ -196,7 +196,7 @@ export default function OrdersPage() {
     } catch (error) {
       toast({
         title: "خطأ",
-        description: error instanceof Error ? error.message : "خطأ בدمج",
+        description: error instanceof Error ? error.message : "خطأ نصدمج",
         variant: "destructive",
       });
     } finally {
@@ -240,7 +240,7 @@ export default function OrdersPage() {
       await ordersApi.updateStatus(orderId, status);
       toast({ title: "تم بنجاح", description: "تم تحديث الحالة" });
     } catch (error) {
-      toast({ title: "خطأ", description: "خطأ בעדכון", variant: "destructive" });
+      toast({ title: "خطأ", description: "خطأ في التحديث", variant: "destructive" });
     } finally {
       mutate();
     }
@@ -260,7 +260,7 @@ export default function OrdersPage() {
       await ordersApi.delete(order.id);
       toast({ title: "تم بنجاح", description: "تم إلغاء الحجز" });
     } catch (error) {
-      toast({ title: "خطأ", description: "خطأ בإلغاء", variant: "destructive" });
+      toast({ title: "خطأ", description: "خطأ نصإلغاء", variant: "destructive" });
     } finally {
       mutate();
     }
@@ -309,7 +309,7 @@ export default function OrdersPage() {
       toast({ title: "تم بنجاح", description: `${prepared.length} ملفات تم رفعها` });
       fetchAttachments(viewingOrderData.order.id);
     } catch (error) {
-      toast({ title: "خطأ", description: error instanceof Error ? error.message : "خطأ בהעלאה", variant: "destructive" });
+      toast({ title: "خطأ", description: error instanceof Error ? error.message : "خطأ تحميل", variant: "destructive" });
     } finally {
       setUploadingFiles(false);
     }
@@ -322,7 +322,7 @@ export default function OrdersPage() {
       setAttachments(prev => prev.filter(a => a.id !== attachmentId));
       toast({ title: "تم بنجاح", description: "تم حذف الملف" });
     } catch {
-      toast({ title: "خطأ", description: "خطأ בحذف", variant: "destructive" });
+      toast({ title: "خطأ", description: "خطأ نصحذف", variant: "destructive" });
     }
   };
 
@@ -333,7 +333,7 @@ export default function OrdersPage() {
       setAttachments(prev => prev.map(a => a.id === attachmentId ? { ...a, description: editingDescText } : a));
       setEditingDescId(null);
     } catch {
-      toast({ title: "خطأ", description: "خطأ בעדכון תיאור", variant: "destructive" });
+      toast({ title: "خطأ", description: "خطأ في تحديث الوصف", variant: "destructive" });
     }
   };
 
@@ -558,7 +558,7 @@ export default function OrdersPage() {
         {orders.length === 0 ? (
           <div className="text-center py-20 bg-white rounded-[3rem] shadow-inner">
             <ShoppingBag className="h-16 w-16 mx-auto text-muted-foreground/20 mb-4" />
-            <h3 className="text-xl font-bold text-muted-foreground">לא נמצאו حجوزات</h3>
+            <h3 className="text-xl font-bold text-muted-foreground">لم يتم العثور على حجوزات</h3>
           </div>
         ) : (
           orders.map((order) => {
@@ -596,7 +596,7 @@ export default function OrdersPage() {
                         <div>
                           <div className="flex items-center justify-between mb-2">
                             <div className="flex items-center gap-2">
-                              <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">הזמנה #{order.id}</span>
+                              <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">حجز #{order.id}</span>
                               <span className={cn("px-2 py-0.5 rounded-full text-[10px] font-black uppercase", getStatusColor(computeOrderDisplayStatus(order)))}>
                                 {getStatusLabel(computeOrderDisplayStatus(order))}
                               </span>
@@ -677,7 +677,7 @@ export default function OrdersPage() {
                               {formatCurrency(totalWithCharges)}
                               {(order.total_customer_charge > 0) && (
                                 <span className="text-[9px] font-bold text-orange-600 mt-0.5">
-                                  (כולל {formatCurrency(order.total_customer_charge)})
+                                  (مشتمل {formatCurrency(order.total_customer_charge)})
                                 </span>
                               )}
                             </div>
@@ -724,7 +724,7 @@ export default function OrdersPage() {
             className="h-14 px-8 rounded-full shadow-2xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-lg gap-2"
           >
             <Link2 className="h-5 w-5" />
-            دمج 2 حجوزات שנבחרו
+            دمج 2 حجوزات اختيار
           </Button>
         </div>
       )}
@@ -734,14 +734,14 @@ export default function OrdersPage() {
         <div className="fixed inset-0 bg-black/50 z-[100] flex items-center justify-center p-4 backdrop-blur-sm">
           <Card className="w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-[2rem]">
             <div className="p-6 border-b flex justify-between items-center bg-white sticky top-0 z-10">
-              <h2 className="text-2xl font-black text-purple-700">איחוד حجوزات</h2>
+              <h2 className="text-2xl font-black text-purple-700">الاتحاد حجوزات</h2>
               <Button variant="ghost" size="icon" onClick={() => setShowMergeDialog(false)}>
                 <X className="h-6 w-6" />
               </Button>
             </div>
             <CardContent className="p-6 space-y-6">
               <div className="bg-purple-50 p-4 rounded-xl text-purple-800 text-sm font-medium">
-                שימי לב: פעולה זו תאחד את כל הقطع, התשלומים וההיסטוריה של שתי الحجوزات להזמנה אחת. ההזמנה השנייה תימחק.
+                انتبه: هذا العمل سوف يوحد كلقطع, المدفوعات وتاريخ اثنين الحجوزات لأمر واحد. سيتم حذف الطلب الثاني.
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -767,10 +767,10 @@ export default function OrdersPage() {
                     >
                       {isTarget && (
                         <div className="absolute top-0 right-0 bg-purple-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-bl-xl">
-                          ההזמנה הראשית (תישמר)
+                          النظام الرئيسي (يتم حفظها)
                         </div>
                       )}
-                      <h3 className="font-bold text-lg mb-1">הזמנה #{o.id}</h3>
+                      <h3 className="font-bold text-lg mb-1">حجز #{o.id}</h3>
                       <p className="text-sm font-bold">{o.customer_name}</p>
                       <p className="text-sm text-muted-foreground">{o.event_date ? formatDateShort(o.event_date) : "بدون تاريخ"}</p>
                       <p className="text-xs text-muted-foreground mt-1">{formatCurrency(o.total_price)}</p>
@@ -943,7 +943,7 @@ export default function OrdersPage() {
 
                   <div className="space-y-2">
                     <div className="flex justify-between text-sm">
-                      <span className="text-muted-foreground">סך قطع:</span>
+                      <span className="text-muted-foreground">كمية قطع:</span>
                       <span className="font-bold">{formatCurrency(Number(viewingOrderData.order.total_price || 0))}</span>
                     </div>
                     {Number(viewingOrderData.order.total_customer_charge || 0) > 0 && (
@@ -994,7 +994,7 @@ export default function OrdersPage() {
                       className="w-full h-10 px-2 text-[10px] sm:text-xs font-bold bg-green-600 hover:bg-green-700"
                     >
                       <FileText className="h-3 w-3 sm:h-4 sm:w-4 ml-1.5" />
-                      צפיה בחתימה
+                      عرض التوقيع
                     </Button>
                   ) : (
                     <>
@@ -1006,7 +1006,7 @@ export default function OrdersPage() {
                           className="w-full h-10 px-2 text-[10px] sm:text-xs font-bold"
                         >
                           <FileText className="h-3 w-3 sm:h-4 sm:w-4 ml-1.5" />
-                          צפיה בחתימה
+                          عرض التوقيع
                         </Button>
                       )}
                       <div className="flex flex-row items-center gap-2">
@@ -1026,7 +1026,7 @@ export default function OrdersPage() {
                           className="flex-1 h-10 px-2 text-[10px] sm:text-xs font-bold"
                         >
                           <FileSignature className="h-3 w-3 sm:h-4 sm:w-4 ml-1.5" />
-                          חתימה
+                          توقيع
                         </Button>
                         <Button
                           onClick={() => handleCreateSignLinkForViewedOrder({ openWhatsapp: true })}
@@ -1034,7 +1034,7 @@ export default function OrdersPage() {
                           className="flex-1 bg-green-600 hover:bg-green-700 h-10 px-2 text-[10px] sm:text-xs font-bold"
                         >
                           <MessageCircle className="h-3 w-3 sm:h-4 sm:w-4 ml-1.5" />
-                          الخاصة بيחה בווצאפ
+                          الخاصة بيهههه على الواتساب
                         </Button>
                       </div>
                     </>
@@ -1064,7 +1064,7 @@ export default function OrdersPage() {
                   {loadingAttachments ? (
                     <p className="text-center text-xs text-muted-foreground py-4">جاري تحميل الملفات...</p>
                   ) : attachments.length === 0 ? (
-                    <p className="text-center text-xs text-muted-foreground py-4 italic">אין المرفقات להזמנה זו</p>
+                    <p className="text-center text-xs text-muted-foreground py-4 italic">لا شئ المرفقات لهذا الطلب</p>
                   ) : (
                     <div className="grid grid-cols-1 gap-2">
                       {attachments.map((att) => (
@@ -1134,14 +1134,14 @@ export default function OrdersPage() {
                 className="h-14 rounded-2xl font-black text-lg shadow-lg shadow-green-600/20 bg-green-600 hover:bg-green-700"
                 onClick={() => router.push(`/dashboard/orders/${viewingOrderData.order.id}/edit`)}
               >
-                <Edit className="h-5 w-5 ml-2" /> تعديل מלאה
+                <Edit className="h-5 w-5 ml-2" /> تعديل ممتلىء
               </Button>
               <Button
                 variant="outline"
                 className="h-14 rounded-2xl font-black text-lg border-2 bg-white"
                 onClick={() => router.push(`/dashboard/transactions/new?type=income&order_id=${viewingOrderData.order.id}&customer_id=${viewingOrderData.order.customer_id}&amount=${Number(viewingOrderData.order.total_price || 0) + Number(viewingOrderData.order.total_customer_charge || 0) - Number(viewingOrderData.order.paid_amount || 0)}`)}
               >
-                <Plus className="h-5 w-5 ml-2" /> הוספת תשלום
+                <Plus className="h-5 w-5 ml-2" /> إضافة الدفع
               </Button>
             </div>
           </Card>

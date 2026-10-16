@@ -213,12 +213,12 @@ export default function TransactionsPage() {
 
     try {
       await transactionsApi.delete(transaction.id);
-      toast({ title: "تم بنجاح", description: "עסקה נמחקה בتم بنجاح" });
+      toast({ title: "تم بنجاح", description: "تم حذف المعاملة بتم بنجاح" });
       mutate();
     } catch (error) {
       toast({
         title: "خطأ",
-        description: error instanceof Error ? error.message : "خطأ במחיקת עסקה",
+        description: error instanceof Error ? error.message : "خطأ في حذف المعاملة",
         variant: "destructive",
       });
     }
@@ -238,7 +238,7 @@ export default function TransactionsPage() {
         <div>
           <h1 className="text-3xl font-bold flex items-center gap-2">
             <Wallet className="h-8 w-8" />
-            תזרים מזומנים
+            التدفق النقدي
           </h1>
           <p className="text-muted-foreground">{transactions.length} حركات</p>
         </div>
@@ -403,7 +403,7 @@ export default function TransactionsPage() {
                   onClick={() => setSelectedCategories([])}
                   className="px-2 py-1.5 text-xs font-bold text-destructive hover:underline"
                 >
-                  ניקוי
+                  تنظيف
                 </button>
               )}
             </div>
@@ -495,7 +495,7 @@ export default function TransactionsPage() {
                           </span>
                           {isPartial && (
                             <span className="text-[9px] text-muted-foreground">
-                              מתוך {formatCurrency(transaction.amount)}
+                              ل {formatCurrency(transaction.amount)}
                             </span>
                           )}
                         </div>
@@ -544,10 +544,10 @@ export default function TransactionsPage() {
             disabled={currentPage === 1}
             className="gap-1"
           >
-            <ChevronRight className="h-4 w-4" /> הקודם
+            <ChevronRight className="h-4 w-4" /> السابق
           </Button>
           <div className="text-sm text-muted-foreground font-medium">
-            עמוד {currentPage} מתוך {totalPages}
+            عمود {currentPage} ل {totalPages}
           </div>
           <Button
             variant="outline"
@@ -556,7 +556,7 @@ export default function TransactionsPage() {
             disabled={currentPage === totalPages}
             className="gap-1"
           >
-            הבא <ChevronLeft className="h-4 w-4" />
+            التالي <ChevronLeft className="h-4 w-4" />
           </Button>
         </div>
       )}
@@ -565,7 +565,7 @@ export default function TransactionsPage() {
         transactions.length === 0 && !loading && (
           <div className="text-center py-12">
             <Wallet className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-            <p className="text-muted-foreground">אין حركات להצגה</p>
+            <p className="text-muted-foreground">لا شئ حركات للعرض</p>
           </div>
         )
       }

@@ -51,14 +51,14 @@ const EXPENSE_CATEGORIES = ['materials', 'overhead', 'tax', 'equipment', 'salary
 
 // Category display names in Hebrew
 const CATEGORY_DISPLAY_NAMES = {
-  order: 'הזמנה',
-  repair: 'תיקונים',
-  other: 'אחר',
-  materials: 'חומרים',
-  overhead: 'תקורה',
-  tax: 'מיסוי',
-  equipment: 'ציוד',
-  salary: 'משכורות',
+  order: 'حجز',
+  repair: 'التصحيحات',
+  other: 'آخر',
+  materials: 'مواد',
+  overhead: 'النفقات العامة',
+  tax: 'الضرائب',
+  equipment: 'معدات',
+  salary: 'الرواتب',
 };
 
 function getCategoryDisplayName(category) {
@@ -301,7 +301,7 @@ router.get('/:id', (req, res, next) => {
     );
 
     if (!transaction) {
-      throw new ApiError(404, 'עסקה לא נמצאה');
+      throw new ApiError(404, 'لم يتم العثور على صفقة');
     }
 
     res.json({
@@ -343,25 +343,25 @@ router.post('/', async (req, res, next) => {
     } = req.body;
 
     if (!date) {
-      throw new ApiError(400, 'נא להזין תאריך');
+      throw new ApiError(400, 'الرجاء إدخال التاريخ');
     }
     if (!type || !['income', 'expense'].includes(type)) {
-      throw new ApiError(400, 'נא לבחור סוג עסקה (הכנסה/הוצאה)');
+      throw new ApiError(400, 'الرجاء تحديد نوع المعاملة (إيراد/مصروف)');
     }
     if (!category) {
-      throw new ApiError(400, 'נא לבחור קטגוריה');
+      throw new ApiError(400, 'الرجاء تحديد فئة');
     }
     if (!amount || parseFloat(amount) === 0) {
-      throw new ApiError(400, 'נא להזין סכום');
+      throw new ApiError(400, 'الرجاء إدخال المبلغ');
     }
 
     if (type === 'income' && !customer_id && !req.body.new_customer) {
-      throw new ApiError(400, 'נא לבחור לקוחה או להזין פרטי לקוחה חדשה עבור הכנסה');
+      throw new ApiError(400, 'يرجى تحديد عميل أو إدخال تفاصيل العميل الجديد للحصول على الدخل');
     }
 
     const validCategories = type === 'income' ? INCOME_CATEGORIES : EXPENSE_CATEGORIES;
     if (!validCategories.includes(category)) {
-      throw new ApiError(400, 'קטגוריה לא תקינה');
+      throw new ApiError(400, 'فئة غير صالحة');
     }
 
     let finalCustomerId = customer_id;
@@ -372,7 +372,7 @@ router.post('/', async (req, res, next) => {
       const normalizedCustomerName = normalizeTextForSave(name);
       const normalizedPhone = normalizePhoneNumber(phone);
       if (!normalizedCustomerName) {
-        throw new ApiError(400, 'שם לקוחה חובה עבור לקוחה חדשה');
+        throw new ApiError(400, 'اسم العميل مطلوب لعميل جديد');
       }
 
       const existingCustomer = normalizedPhone
@@ -478,7 +478,7 @@ router.post('/', async (req, res, next) => {
     // 🌟 FAST RESPONSE: Send 201 Created immediately to unblock the UI!
     res.status(201).json({
       success: true,
-      message: type === 'income' ? 'הכנסה נוספה בהצלחה' : 'הוצאה נוספה בהצלחה',
+      message: type === 'income' ? 'تمت إضافة الدخل بنجاح' : 'تمت إضافة المصاريف بنجاح',
       data: { transaction: newTransaction, emailSent: isEmailEnabled() }
     });
 
@@ -636,24 +636,24 @@ router.put('/:id', (req, res, next) => {
 
     const existing = get('SELECT * FROM transactions WHERE id = ?', [id]);
     if (!existing) {
-      throw new ApiError(404, 'עסקה לא נמצאה');
+      throw new ApiError(404, 'لم يتم العثور على صفقة');
     }
 
     if (!date) {
-      throw new ApiError(400, 'נא להזין תאריך');
+      throw new ApiError(400, 'الرجاء إدخال التاريخ');
     }
     if (!type || !['income', 'expense'].includes(type)) {
-      throw new ApiError(400, 'נא לבחור סוג עסקה');
+      throw new ApiError(400, 'الرجاء تحديد نوع المعاملة');
     }
     if (!category) {
-      throw new ApiError(400, 'נא לבחור קטגוריה');
+      throw new ApiError(400, 'الرجاء تحديد فئة');
     }
     if (!amount || parseFloat(amount) === 0) {
-      throw new ApiError(400, 'נא להזין סכום');
+      throw new ApiError(400, 'الرجاء إدخال المبلغ');
     }
 
     if (type === 'income' && !customer_id && !customer_name) {
-      throw new ApiError(400, 'נא לבחור לקוחה עבור הכנסה');
+      throw new ApiError(400, 'الرجاء اختيار عميل للدخل');
     }
 
     const sanitizedPayment = sanitizePaymentDetails({
@@ -737,7 +737,7 @@ router.put('/:id', (req, res, next) => {
     // 🌟 FAST RESPONSE: Return early
     res.json({
       success: true,
-      message: 'עסקה עודכנה בהצלחה',
+      message: 'تم تحديث المعاملة بنجاح',
       data: { transaction: updatedTransaction }
     });
 
@@ -782,15 +782,15 @@ router.put('/:id', (req, res, next) => {
               const oldDateObj = new Date(oldDate);
               const oldYear = oldDateObj.getFullYear();
               const newYear = new Date(newDate).getFullYear();
-              const oldFolder = `${oldYear}/הוצאות/הוצאות מוכרות ${oldYear}`;
-              const newFolder = `${newYear}/הוצאות/הוצאות מוכרות ${newYear}`;
+              const oldFolder = `${oldYear}/مصروفات/النفقات المعروفة ${oldYear}`;
+              const newFolder = `${newYear}/مصروفات/النفقات المعروفة ${newYear}`;
 
               const formatFileName = (d, s, a, ext = '.jpg') => {
                 const dt = new Date(d);
                 const pyy = dt.getFullYear().toString().slice(-2);
                 const pmm = (dt.getMonth() + 1).toString().padStart(2, '0');
                 const pdd = dt.getDate().toString().padStart(2, '0');
-                return `${pyy}${pmm}${pdd} ${s || 'ספק_לא_ידוע'} ${a}₪${ext}`;
+                return `${pyy}${pmm}${pdd} ${s || 'مزود_لا_معروف'} ${a}₪${ext}`;
               };
 
               const exts = ['jpg', 'png', 'pdf'];
@@ -846,7 +846,7 @@ router.put('/:id', (req, res, next) => {
             }
 
             await sendDetailedIncomeNotification({
-              customerName: updatedTransaction.customer_name || finalCustomerName || 'לקוח_כלשהו',
+              customerName: updatedTransaction.customer_name || finalCustomerName || 'عميل_أي',
               customerPhone,
               customerEmail,
               amount: updatedTransaction.amount,
@@ -883,7 +883,7 @@ router.delete('/:id', (req, res, next) => {
 
     const existing = get('SELECT * FROM transactions WHERE id = ?', [id]);
     if (!existing) {
-      throw new ApiError(404, 'עסקה לא נמצאה');
+      throw new ApiError(404, 'لم يتم العثور على صفقة');
     }
 
     run('DELETE FROM transactions WHERE id = ?', [id]);
@@ -894,7 +894,7 @@ router.delete('/:id', (req, res, next) => {
 
     res.json({
       success: true,
-      message: 'עסקה נמחקה בהצלחה'
+      message: 'تم حذف المعاملة بنجاح'
     });
 
   } catch (error) {
@@ -911,9 +911,9 @@ router.get('/categories/income', (req, res) => {
     success: true,
     data: {
       categories: [
-        { value: 'order', label: 'הזמנה' },
-        { value: 'repair', label: 'תיקונים' },
-        { value: 'other', label: 'אחר' }
+        { value: 'order', label: 'حجز' },
+        { value: 'repair', label: 'التصحيحات' },
+        { value: 'other', label: 'آخر' }
       ]
     }
   });
@@ -928,12 +928,12 @@ router.get('/categories/expense', (req, res) => {
     success: true,
     data: {
       categories: [
-        { value: 'materials', label: 'חומרים' },
-        { value: 'overhead', label: 'תקורה' },
-        { value: 'tax', label: 'מיסוי' },
-        { value: 'equipment', label: 'ציוד' },
-        { value: 'salary', label: 'משכורות' },
-        { value: 'other', label: 'אחר' }
+        { value: 'materials', label: 'مواد' },
+        { value: 'overhead', label: 'النفقات العامة' },
+        { value: 'tax', label: 'الضرائب' },
+        { value: 'equipment', label: 'معدات' },
+        { value: 'salary', label: 'الرواتب' },
+        { value: 'other', label: 'آخر' }
       ]
     }
   });

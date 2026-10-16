@@ -126,7 +126,7 @@ app.use('/uploads', (req, res, next) => {
   if (!token) {
     return res.status(401).json({
       success: false,
-      message: 'נדרשת התחברות לצפייה בקבצים'
+      message: 'مطلوب تسجيل الدخول لعرض الملفات'
     });
   }
 
@@ -138,7 +138,7 @@ app.use('/uploads', (req, res, next) => {
   } catch (err) {
     return res.status(401).json({
       success: false,
-      message: 'פג תוקף ההתחברות - נא להתחבר מחדש'
+      message: 'انتهت صلاحية تسجيل الدخول - يرجى إعادة الاتصال'
     });
   }
 }, express.static(uploadConfig.uploadsDir));
@@ -201,7 +201,7 @@ const loginRateLimiter = rateLimit({
   legacyHeaders: false,       // disable X-RateLimit-* headers
   message: {
     success: false,
-    message: 'יותר מדי ניסיונות התחברות. נסה שוב בעוד 15 דקות.',
+    message: 'عدد كبير جدًا من محاولات تسجيل الدخول. حاول مرة أخرى بعد فترة 15 دقة.',
   },
 });
 

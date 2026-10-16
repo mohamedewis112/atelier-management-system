@@ -99,18 +99,18 @@ class ApiClient {
         // Non-JSON response — likely a proxy/gateway error
         if (!response.ok) {
           if (response.status === 413) {
-            throw new Error('הבקשה גדולה מדי. נסי להקטין את הקובץ המצורף.');
+            throw new Error('الطلب كبير جدًا. حاول أن تجعل المرفق أصغر.');
           }
           if (response.status === 502 || response.status === 504) {
-            throw new Error('השרת לא זמין כרגע. נסי שוב בעוד רגע.');
+            throw new Error('الخادم غير متوفر حاليا. حاول مرة أخرى بعد قليل.');
           }
-          throw new Error(`שגיאת שרת (${response.status}). נסי שוב.`);
+          throw new Error(`خطأ في الخادم (${response.status}). حاول ثانية.`);
         }
         // If response.ok but not JSON, try to parse anyway
         try {
           data = await response.json();
         } catch {
-          throw new Error('תשובה לא צפויה מהשרת. נסי שוב.');
+          throw new Error('استجابة غير متوقعة من الخادم. حاول ثانية.');
         }
       }
 
@@ -122,14 +122,14 @@ class ApiClient {
             window.location.href = '/login';
           }
         }
-        throw new Error(data.message || 'שגיאה בבקשה');
+        throw new Error(data.message || 'خطأ من فضلك');
       }
 
       return data;
     } catch (error) {
       if (error instanceof Error) {
         // Only report unexpected errors, not standard API errors (which we threw intentionally above)
-        if (!error.message.includes('API') && !error.message.includes('שגיאה') && !error.message.includes('התחברות')) {
+        if (!error.message.includes('API') && !error.message.includes('خطأ') && !error.message.includes('اتصال')) {
           reportClientError({
             message: error.message,
             stack: error.stack,
@@ -140,7 +140,7 @@ class ApiClient {
         throw error;
       }
       
-      const genericMsg = 'שגיאת רשת - בדקי את החיבור לאינטרנט.';
+      const genericMsg = 'خطأ في الشبكة - تحقق من اتصالك بالإنترنت.';
       reportClientError({
         message: genericMsg,
         component: 'ApiClient',
@@ -439,7 +439,7 @@ export const ordersApi = {
    */
   uploadAttachment: async (orderId: number, files: File[]) => {
     if (!files || files.length === 0) {
-      return { success: true, message: 'אין קבצים', data: { attachments: [] } } as any;
+      return { success: true, message: 'لا توجد ملفات', data: { attachments: [] } } as any;
     }
 
     // Generous safety margin under Vercel's ~4.5MB proxy body cap. The number
@@ -474,7 +474,7 @@ export const ordersApi = {
     }
     return {
       success: true,
-      message: lastMessage || `${aggregated.length} קבצים הועלו בהצלחה`,
+      message: lastMessage || `${aggregated.length} تم تحميل الملفات بنجاح`,
       data: { attachments: aggregated },
     } as any;
   },
@@ -547,11 +547,11 @@ async function downloadCsvFile(endpoint: string): Promise<{ blob: Blob; fileName
     if (typeof window !== 'undefined' && !window.location.pathname.startsWith('/login')) {
       window.location.href = '/login';
     }
-    throw new Error('פג תוקף ההתחברות - נא להתחבר מחדש');
+    throw new Error('انتهت صلاحية تسجيل الدخول - يرجى إعادة الاتصال');
   }
 
   if (!response.ok) {
-    let message = 'שגיאה בייצוא נתונים';
+    let message = 'حدث خطأ أثناء تصدير البيانات';
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const payload = await response.json() as any;

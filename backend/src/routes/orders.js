@@ -35,12 +35,12 @@ function getMimeTypeFromFileName(fileName = '') {
 
 function getItemTypeLabel(type) {
   const labels = {
-    rental: 'השכרה',
-    sewing_for_rental: 'תפירה שנשארת בהשכרה',
-    sewing: 'תפירה',
-    sale: 'מכירה'
+    rental: 'إيجار',
+    sewing_for_rental: 'الخياطة التي تبقى في الإيجار',
+    sewing: 'تفصيل',
+    sale: 'بيع'
   };
-  return labels[type] || type || 'פריט';
+  return labels[type] || type || 'قطعة';
 }
 
 function syncDressSaleStatus(dressId) {
@@ -281,7 +281,7 @@ router.get('/:id', (req, res, next) => {
     );
 
     if (!order) {
-      throw new ApiError(404, 'הזמנה לא נמצאה');
+      throw new ApiError(404, 'لم يتم العثور على الطلب');
     }
 
     const items = all(
@@ -336,13 +336,13 @@ router.post('/', async (req, res, next) => {
     } = req.body;
 
     if (!customer_id && !new_customer) {
-      throw new ApiError(400, 'נא לבחור לקוחה או להזין פרטי לקוחה חדשה');
+      throw new ApiError(400, 'الرجاء اختيار عميل أو إدخال تفاصيل عميل جديد');
     }
     if (total_price == null || total_price === '' || isNaN(parseFloat(total_price)) || parseFloat(total_price) < 0) {
-      throw new ApiError(400, 'נא להזין מחיר (0 או יותר)');
+      throw new ApiError(400, 'الرجاء إدخال السعر (0 أو أكثر)');
     }
     if (!event_date) {
-      throw new ApiError(400, 'נא להזין תאריך אירוע');
+      throw new ApiError(400, 'الرجاء إدخال تاريخ الحدث');
     }
 
     let finalCustomerId = customer_id;
@@ -351,7 +351,7 @@ router.post('/', async (req, res, next) => {
     if (!customer_id && new_customer) {
       const normalizedNewCustomerName = normalizeTextForSave(new_customer.name);
       if (!normalizedNewCustomerName) {
-        throw new ApiError(400, 'נא להזין שם לקוחה');
+        throw new ApiError(400, 'الرجاء إدخال اسم العميل');
       }
 
       const normalizedNewCustomerPhone = normalizePhoneNumber(new_customer.phone);
@@ -390,7 +390,7 @@ router.post('/', async (req, res, next) => {
     } else {
       customerData = get('SELECT id, name, phone, email FROM customers WHERE id = ?', [customer_id]);
       if (!customerData) {
-        throw new ApiError(404, 'לקוחה לא נמצאה');
+        throw new ApiError(404, 'لم يتم العثور على العميل');
       }
     }
 
@@ -403,7 +403,7 @@ router.post('/', async (req, res, next) => {
       });
       orderSummary = itemSummaries.join(', ');
     } else {
-      orderSummary = 'הזמנה';
+      orderSummary = 'حجز';
     }
 
     const depositAmt = Math.round(parseFloat(deposit_amount)) || 0;
@@ -512,7 +512,7 @@ router.post('/', async (req, res, next) => {
 
           normalizedDepositPayments.push({
             amount: pAmt,
-            method: paymentMethod || payment.payment_method || 'לא צוין',
+            method: paymentMethod || payment.payment_method || 'غير محدد',
             confirmationNumber: confirmationNumber || null,
             lastFourDigits: lastFourDigits || null,
             checkNumber: checkNumber || null,
@@ -531,7 +531,7 @@ router.post('/', async (req, res, next) => {
               finalCustomerId,
               customerData.name,
               pAmt,
-              paymentMethod || 'לא צוין',
+              paymentMethod || 'غير محدد',
               orderId,
               payment.notes || null,
               confirmationNumber || null,
@@ -557,7 +557,7 @@ router.post('/', async (req, res, next) => {
     // 🌟 FAST RESPONSE: Send 201 Created immediately to unblock the UI!
     res.status(201).json({
       success: true,
-      message: 'הזמנה נוצרה בהצלחה',
+      message: 'تم إنشاء الطلب بنجاح',
       data: { order: newOrder }
     });
 
@@ -581,7 +581,7 @@ router.post('/', async (req, res, next) => {
               if (aiData) {
                 aiUpdatedAny = true;
 
-                if (aiData.paymentMethod && (!payment.method || payment.method === 'לא צוין')) payment.method = aiData.paymentMethod;
+                if (aiData.paymentMethod && (!payment.method || payment.method === 'غير محدد')) payment.method = aiData.paymentMethod;
                 if (aiData.confirmationNumber && !payment.confirmationNumber) payment.confirmationNumber = aiData.confirmationNumber;
                 if (aiData.lastFourDigits && !payment.lastFourDigits) payment.lastFourDigits = aiData.lastFourDigits;
                 if (aiData.checkNumber && !payment.checkNumber) payment.checkNumber = aiData.checkNumber;
@@ -637,7 +637,7 @@ router.post('/', async (req, res, next) => {
             const extra = parseFloat(item.additional_payments) || 0;
             const finalPrice = parseFloat(item.final_price) || (basePrice + extra);
             return {
-              name: item.dress_name || item.wearer_name || 'פריט',
+              name: item.dress_name || item.wearer_name || 'قطعة',
               price: finalPrice,
               itemType: item.item_type || 'rental',
               itemTypeLabel: getItemTypeLabel(item.item_type || 'rental')
@@ -687,7 +687,7 @@ router.put('/:id', (req, res, next) => {
 
     const existing = get('SELECT * FROM orders WHERE id = ?', [id]);
     if (!existing) {
-      throw new ApiError(404, 'הזמנה לא נמצאה');
+      throw new ApiError(404, 'لم يتم العثور على الطلب');
     }
 
     transaction(() => {
@@ -749,7 +749,7 @@ router.put('/:id', (req, res, next) => {
           const finalPrice = Math.round(parseFloat(item.final_price)) || (basePrice + additionalPayments);
           const resolvedItemType = item.item_type || 'rental';
 
-          const normalizedDressName = normalizeTextForSave(item.dress_name) || 'פריט';
+          const normalizedDressName = normalizeTextForSave(item.dress_name) || 'قطعة';
           const normalizedWearerName = normalizeTextForSave(item.wearer_name) || null;
 
           run(
@@ -768,7 +768,7 @@ router.put('/:id', (req, res, next) => {
             ]
           );
 
-          itemSummaries.push(`${getItemTypeLabel(resolvedItemType)} ${normalizedDressName !== 'פריט' ? normalizedDressName : ''}`.trim());
+          itemSummaries.push(`${getItemTypeLabel(resolvedItemType)} ${normalizedDressName !== 'قطعة' ? normalizedDressName : ''}`.trim());
 
           if (item.dress_id && resolvedItemType === 'sale') {
             saleDressIdsToSync.add(item.dress_id);
@@ -783,7 +783,7 @@ router.put('/:id', (req, res, next) => {
         if (itemSummaries.length > 0) {
           run('UPDATE orders SET order_summary = ? WHERE id = ?', [itemSummaries.join(', '), id]);
         } else {
-          run('UPDATE orders SET order_summary = ? WHERE id = ?', ['הזמנה', id]);
+          run('UPDATE orders SET order_summary = ? WHERE id = ?', ['حجز', id]);
         }
 
         // 3. Sync dress_history with the new items (skip for cancelled orders
@@ -839,7 +839,7 @@ router.put('/:id', (req, res, next) => {
 
     res.json({
       success: true,
-      message: 'הזמנה עודכנה בהצלחה',
+      message: 'تم تحديث الطلب بنجاح',
       data: { order: updatedOrder }
     });
 
@@ -852,7 +852,7 @@ router.put('/:id', (req, res, next) => {
         const oldCustomerData = existing.customer_id ? get('SELECT name FROM customers WHERE id = ?', [existing.customer_id]) : null;
         const newCustomerData = updatedOrder.customer_id ? get('SELECT name FROM customers WHERE id = ?', [updatedOrder.customer_id]) : null;
 
-        const oldCustomerName = oldCustomerData ? oldCustomerData.name : 'לקוח_לא_ידוע';
+        const oldCustomerName = oldCustomerData ? oldCustomerData.name : 'عميل_لا_معروف';
         const newCustomerName = newCustomerData ? newCustomerData.name : oldCustomerName;
 
         const oldDate = existing.event_date;
@@ -888,7 +888,7 @@ router.delete('/:id', (req, res, next) => {
     const { id } = req.params;
     const order = get('SELECT * FROM orders WHERE id = ?', [id]);
     if (!order) {
-      throw new ApiError(404, 'הזמנה לא נמצאה');
+      throw new ApiError(404, 'لم يتم العثور على الطلب');
     }
 
     // Remove this order's contribution from dress history and recompute
@@ -913,7 +913,7 @@ router.delete('/:id', (req, res, next) => {
 
     res.json({
       success: true,
-      message: 'הזמנה בוטלה בהצלחה'
+      message: 'تم إلغاء الطلب بنجاح'
     });
 
   } catch (error) {
@@ -932,11 +932,11 @@ router.post('/merge', (req, res, next) => {
     const { targetOrderId, sourceOrderId, updatedOrderData } = req.body;
 
     if (!targetOrderId || !sourceOrderId) {
-      throw new ApiError(400, 'חובה לציין מזהה הזמנה למיזוג ומזהה הזמנה יעד');
+      throw new ApiError(400, 'يجب عليك تحديد معرف أمر الدمج ومعرف الطلب المستهدف');
     }
 
     if (parseInt(targetOrderId) === parseInt(sourceOrderId)) {
-      throw new ApiError(400, 'לא ניתן למזג הזמנה עם עצמה');
+      throw new ApiError(400, 'لا يمكن دمج الطلب مع نفسه');
     }
 
     // Start transaction
@@ -946,7 +946,7 @@ router.post('/merge', (req, res, next) => {
       const source = get('SELECT * FROM orders WHERE id = ?', [sourceOrderId]);
 
       if (!target || !source) {
-        throw new ApiError(404, 'אחת ההזמנות לא נמצאה');
+        throw new ApiError(404, 'لم يتم العثور على أحد الطلبات');
       }
 
       // 2. Update target order details if provided
@@ -1013,7 +1013,7 @@ router.post('/merge', (req, res, next) => {
         });
         orderSummary = itemSummaries.join(', ');
       } else {
-        orderSummary = 'הזמנה';
+        orderSummary = 'حجز';
       }
 
       run('UPDATE orders SET order_summary = ? WHERE id = ?', [orderSummary, targetOrderId]);
@@ -1024,7 +1024,7 @@ router.post('/merge', (req, res, next) => {
 
     res.json({
       success: true,
-      message: 'הזמנות אוחדו בהצלחה'
+      message: 'تم دمج الطلبات بنجاح'
     });
 
   } catch (error) {

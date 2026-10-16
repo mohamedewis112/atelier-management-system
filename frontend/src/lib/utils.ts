@@ -125,7 +125,7 @@ export function getHebrewDayName(date: string | Date): string {
 }
 
 /**
- * Get relative time description (e.g., "היום", "מחר", "בעוד 3 ימים")
+ * Get relative time description (e.g., "اليوم", "غداً", "بينما 3 أيام")
  */
 export function getRelativeDate(date: string | Date): string {
   const d = typeof date === 'string' ? new Date(date) : date;
@@ -202,7 +202,7 @@ export function getStatusColor(status: string): string {
  * Compute the user-facing order display status from raw order data.
  *
  * DB stores only 'active' | 'cancelled'.  The UI presents 'active' orders as
- * either 'open' (פתוחה) or 'completed' (הושלמה) based on two conditions:
+ * either 'open' (مفتوح) or 'completed' (مكتمل) based on two conditions:
  *   - completed = event_date has passed (or is today) AND balance = 0
  *   - open      = everything else that is not cancelled
  *

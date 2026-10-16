@@ -45,7 +45,7 @@ export function requireAuth(req, res, next) {
       clearAuthCookie(res);
       return res.status(401).json({
         success: false,
-        message: 'אין הרשאה - נדרשת התחברות'
+        message: 'لا يوجد إذن - مطلوب تسجيل الدخول'
       });
     }
     
@@ -64,7 +64,7 @@ export function requireAuth(req, res, next) {
       clearAuthCookie(res);
       return res.status(401).json({
         success: false,
-        message: 'משתמש לא נמצא'
+        message: 'لم يتم العثور على المستخدم'
       });
     }
     
@@ -72,7 +72,7 @@ export function requireAuth(req, res, next) {
       clearAuthCookie(res);
       return res.status(401).json({
         success: false,
-        message: 'חשבון לא פעיל'
+        message: 'حساب غير نشط'
       });
     }
     
@@ -86,21 +86,21 @@ export function requireAuth(req, res, next) {
     if (error.name === 'TokenExpiredError') {
       return res.status(401).json({
         success: false,
-        message: 'פג תוקף ההתחברות - נא להתחבר מחדש'
+        message: 'انتهت صلاحية تسجيل الدخول - يرجى إعادة الاتصال'
       });
     }
     
     if (error.name === 'JsonWebTokenError') {
       return res.status(401).json({
         success: false,
-        message: 'טוקן לא תקין'
+        message: 'رمز مميز غير صالح'
       });
     }
     
     console.error('Auth middleware error:', error);
     return res.status(500).json({
       success: false,
-      message: 'שגיאת אימות'
+      message: 'خطأ في المصادقة'
     });
   }
 }
@@ -142,14 +142,14 @@ export function requireAdmin(req, res, next) {
   if (!req.user) {
     return res.status(401).json({
       success: false,
-      message: 'נדרשת התחברות'
+      message: 'مطلوب تسجيل الدخول'
     });
   }
   
   if (req.user.role !== 'admin') {
     return res.status(403).json({
       success: false,
-      message: 'אין הרשאות מנהל'
+      message: 'لا توجد امتيازات المسؤول'
     });
   }
   

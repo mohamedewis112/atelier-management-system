@@ -58,7 +58,7 @@ export default function ExportPage() {
     } catch (error) {
       toast({
         title: "خطأ",
-        description: error instanceof Error ? error.message : "خطأ בטעינת נתוני ייצוא",
+        description: error instanceof Error ? error.message : "خطأ في تحميل بيانات التصدير",
         variant: "destructive",
       });
     } finally {
@@ -127,7 +127,7 @@ export default function ExportPage() {
     } catch (error) {
       toast({
         title: "خطأ",
-        description: error instanceof Error ? error.message : "خطأ בייצוא הקובץ",
+        description: error instanceof Error ? error.message : "خطأ عند تصدير الملف",
         variant: "destructive",
       });
     } finally {
@@ -149,12 +149,12 @@ export default function ExportPage() {
 
       toast({
         title: "تم التصدير",
-        description: `יוצאו ${datasets.length} ملفات CSV`,
+        description: `خرج ${datasets.length} ملفات CSV`,
       });
     } catch (error) {
       toast({
         title: "خطأ",
-        description: error instanceof Error ? error.message : "خطأ בייצוא כל הנתונים",
+        description: error instanceof Error ? error.message : "خطأ في تصدير كافة البيانات",
         variant: "destructive",
       });
     } finally {
@@ -232,7 +232,7 @@ export default function ExportPage() {
         <div>
           <h1 className="text-3xl font-bold flex items-center gap-2">
             <Database className="h-7 w-7" />
-            ייצוא נתונים
+            تصدير البيانات
           </h1>
           <p className="text-muted-foreground">تصدير CSV كامل مع فلاتر حسب نوع البيانات</p>
         </div>
@@ -243,7 +243,7 @@ export default function ExportPage() {
           className="gap-2"
         >
           {exportingAll ? <Loader2 className="h-4 w-4 animate-spin" /> : <Files className="h-4 w-4" />}
-          ייצוא כל הדאטה
+          تصدير كافة البيانات
         </Button>
       </div>
 
@@ -260,7 +260,7 @@ export default function ExportPage() {
           >
             {datasets.map((dataset) => (
               <option key={dataset.id} value={dataset.id}>
-                {dataset.label} ({dataset.totalRows.toLocaleString()} רשומות)
+                {dataset.label} ({dataset.totalRows.toLocaleString()} السجلات)
               </option>
             ))}
           </select>
@@ -300,14 +300,14 @@ export default function ExportPage() {
                 className="gap-2"
               >
                 {exporting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Download className="h-4 w-4" />}
-                ייצוא CSV
+                يصدّر CSV
               </Button>
               <Button
                 variant="outline"
                 onClick={clearSelectedFilters}
                 disabled={exporting || exportingAll}
               >
-                איפוס מסננים
+                إعادة تعيين المرشحات
               </Button>
             </div>
           </CardContent>

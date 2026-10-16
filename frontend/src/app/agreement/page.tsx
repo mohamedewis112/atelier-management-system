@@ -45,14 +45,14 @@ interface PrefillData {
 }
 
 const ITEM_TYPE_LABELS: Record<string, string> = {
-  rental: "השכרה",
-  sewing_for_rental: "תפירה שנשארת בהשכרה",
-  sewing: "תפירה",
-  sale: "מכירה",
+  rental: "إيجار",
+  sewing_for_rental: "الخياطة التي تبقى في الإيجار",
+  sewing: "تفصيل",
+  sale: "بيع",
 };
 
 function getItemTypeLabel(type: string) {
-  return ITEM_TYPE_LABELS[type] || type || "פריט";
+  return ITEM_TYPE_LABELS[type] || type || "قطعة";
 }
 
 export default function AgreementPage() {
@@ -105,7 +105,7 @@ export default function AgreementPage() {
       try {
         const response = await agreementsApi.prefill(token);
         if (!response.success || !response.data) {
-          throw new Error(response.message || "לא ניתן לטעון פרטי הזמנה לחתימה");
+          throw new Error(response.message || "لا يمكن تحميل تفاصيل الطلب للتوقيع");
         }
 
         const data = response.data as PrefillData;
@@ -118,10 +118,10 @@ export default function AgreementPage() {
           setIsRental(data.hasRentalItems);
         }
       } catch (error) {
-        const message = error instanceof Error ? error.message : "קישור חתימה לא תקין";
+        const message = error instanceof Error ? error.message : "رابط التوقيع غير صالح";
         setPrefillError(message);
         toast({
-          title: "שגיאה",
+          title: "خطأ",
           description: message,
           variant: "destructive",
         });
@@ -215,8 +215,8 @@ export default function AgreementPage() {
 
     if (!fullName.trim() || !phone.trim()) {
       toast({
-        title: "שגיאה",
-        description: "נא למלא את כל השדות הנדרשים",
+        title: "خطأ",
+        description: "يرجى ملء جميع الحقول المطلوبة",
         variant: "destructive",
       });
       return;
@@ -224,8 +224,8 @@ export default function AgreementPage() {
 
     if (!termsAccepted) {
       toast({
-        title: "שגיאה",
-        description: "נא לאשר את תנאי ההסכם",
+        title: "خطأ",
+        description: "يرجى تأكيد شروط الاتفاقية",
         variant: "destructive",
       });
       return;
@@ -233,8 +233,8 @@ export default function AgreementPage() {
 
     if (!hasSignature) {
       toast({
-        title: "שגיאה",
-        description: "נא לחתום על ההסכם",
+        title: "خطأ",
+        description: "الرجاء التوقيع على الاتفاقية",
         variant: "destructive",
       });
       return;
@@ -257,8 +257,8 @@ export default function AgreementPage() {
       }
     } catch (error) {
       toast({
-        title: "שגיאה",
-        description: error instanceof Error ? error.message : "שגיאה בחתימה על ההסכם",
+        title: "خطأ",
+        description: error instanceof Error ? error.message : "خطأ في توقيع الاتفاقية",
         variant: "destructive",
       });
     } finally {
@@ -274,12 +274,12 @@ export default function AgreementPage() {
             <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
               <CheckCircle className="h-8 w-8 text-green-600" />
             </div>
-            <h2 className="text-2xl font-bold mb-2">ההסכם נחתם בהצלחה!</h2>
+            <h2 className="text-2xl font-bold mb-2">تم توقيع الاتفاقية بنجاح!</h2>
             <p className="text-muted-foreground mb-4">
-              תודה, {fullName}. ההסכם נשמר במערכת.
+              شكرًا, {fullName}. يتم حفظ الاتفاقية في النظام.
             </p>
             <p className="text-sm text-muted-foreground">
-              העתק של ההסכם יישלח לאימייל שלך (אם צוין).
+              سيتم إرسال نسخة من الاتفاقية إلى بريدك الإلكتروني (إذا تم تحديدها).
             </p>
           </CardContent>
         </Card>
@@ -295,26 +295,26 @@ export default function AgreementPage() {
             <div className="mx-auto w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-4">
               <FileText className="h-8 w-8 text-white" />
             </div>
-            <CardTitle className="text-2xl">הסכם</CardTitle>
+            <CardTitle className="text-2xl">عقد</CardTitle>
             <CardDescription>
-              {terms?.businessName || "השכרת שמלות - דמו"}
+              {terms?.businessName || "تأجير القطع - دمه"}
             </CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Personal Info */}
               <div className="space-y-4">
-                <h3 className="font-medium">פרטים אישיים</h3>
+                <h3 className="font-medium">التفاصيل الشخصية</h3>
                 <div>
-                  <label className="text-sm font-medium">שם מלא *</label>
+                  <label className="text-sm font-medium">الاسم الكامل *</label>
                   <Input
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
-                    placeholder="שם פרטי ומשפחה"
+                    placeholder="الاسم الأول واسم العائلة"
                   />
                 </div>
                 <div>
-                  <label className="text-sm font-medium">טלפון *</label>
+                  <label className="text-sm font-medium">الهاتف *</label>
                   <Input
                     value={phone}
                     onChange={(e) => setPhone(normalizePhoneInput(e.target.value))}
@@ -323,7 +323,7 @@ export default function AgreementPage() {
                   />
                 </div>
                 <div>
-                  <label className="text-sm font-medium">אימייל</label>
+                  <label className="text-sm font-medium">البريد الإلكتروني</label>
                   <Input
                     type="email"
                     value={email}
@@ -333,7 +333,7 @@ export default function AgreementPage() {
                   />
                 </div>
                 <div>
-                  <label className="text-sm font-medium">תאריך האירוע</label>
+                  <label className="text-sm font-medium">تاريخ الحدث</label>
                   <Input
                     type="date"
                     value={eventDate}
@@ -346,11 +346,11 @@ export default function AgreementPage() {
               {/* Order Summary (read-only for customer) */}
               {orderDetails && (
                 <div className="space-y-4 border-t pt-6">
-                  <h3 className="font-medium">פרטי ההזמנה</h3>
+                  <h3 className="font-medium">تفاصيل الطلب</h3>
                   <div className="rounded-lg border bg-muted/30 p-4 space-y-3">
                     {orderDetails.items.length > 0 && (
                       <div>
-                        <p className="text-sm font-semibold mb-1">סיכום קצר</p>
+                        <p className="text-sm font-semibold mb-1">ملخص مختصر</p>
                         <p className="text-sm text-muted-foreground">
                           {orderDetails.items
                             .map((item) => {
@@ -370,7 +370,7 @@ export default function AgreementPage() {
                             {item.wearerName ? ` - ${item.wearerName}` : ""}
                           </p>
                           <p className="text-muted-foreground">
-                            מחיר: ₪{(item.finalPrice || 0).toLocaleString("he-IL")}
+                            السعر: ₪{(item.finalPrice || 0).toLocaleString("he-IL")}
                           </p>
                         </div>
                       ))}
@@ -382,7 +382,7 @@ export default function AgreementPage() {
               {/* Terms */}
               {terms && (
                 <div className="space-y-4 border-t pt-6">
-                  <h3 className="font-medium">תנאים</h3>
+                  <h3 className="font-medium">شروط</h3>
                   <div className="bg-muted/50 rounded-lg p-4 max-h-60 overflow-y-auto text-sm space-y-2">
                     <ol className="list-decimal list-inside space-y-2">
                       {(isRental ? terms.terms : terms.nonRentalTerms).map((term, index) => (
@@ -390,7 +390,7 @@ export default function AgreementPage() {
                       ))}
                     </ol>
                     <div className="mt-4 pt-4 border-t">
-                      <p className="font-medium mb-2">מדיניות ביטול עסקה:</p>
+                      <p className="font-medium mb-2">سياسة إلغاء المعاملات:</p>
                       <ol className="list-decimal list-inside space-y-2">
                         {terms.cancellationPolicy.map((policy, index) => (
                           <li key={index}>{policy}</li>
@@ -406,7 +406,7 @@ export default function AgreementPage() {
                       className="mt-1"
                     />
                     <span className="text-sm">
-                      קרמנהל את התנאים לעיל ואני מסכימה להם
+                      يدير كرمان الشروط المذكورة أعلاه وأنا أوافق عليها
                     </span>
                   </label>
                 </div>
@@ -415,7 +415,7 @@ export default function AgreementPage() {
               {/* Signature */}
               <div className="space-y-4 border-t pt-6">
                 <div className="flex items-center justify-between">
-                  <h3 className="font-medium">חתימה</h3>
+                  <h3 className="font-medium">توقيع</h3>
                   {hasSignature && (
                     <Button
                       type="button"
@@ -425,7 +425,7 @@ export default function AgreementPage() {
                       className="gap-1"
                     >
                       <Eraser className="h-4 w-4" />
-                      נקה
+                      مسح
                     </Button>
                   )}
                 </div>
@@ -445,7 +445,7 @@ export default function AgreementPage() {
                   />
                 </div>
                 <p className="text-sm text-muted-foreground text-center">
-                  חתמי כאן באמצעות העכבר או האצבע
+                  قم بالتوقيع هنا باستخدام الفأرة أو الإصبع
                 </p>
               </div>
 
@@ -456,10 +456,10 @@ export default function AgreementPage() {
                 size="lg"
                 disabled={loading || prefillLoading || Boolean(prefillError) || !termsAccepted || !hasSignature}
               >
-                {loading ? "שולחת..." : "חתמי על ההסכם"}
+                {loading ? "إرسال..." : "قم بالتوقيع على الاتفاقية"}
               </Button>
               {prefillLoading && (
-                <p className="text-xs text-muted-foreground text-center">טוען פרטי הזמנה...</p>
+                <p className="text-xs text-muted-foreground text-center">جارٍ تحميل تفاصيل الطلب...</p>
               )}
               {prefillError && (
                 <p className="text-xs text-destructive text-center">{prefillError}</p>

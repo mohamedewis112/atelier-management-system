@@ -50,13 +50,13 @@ function uploadFilesWithFriendlyErrors(req, res, next) {
             if (err.code === 'LIMIT_FILE_SIZE') {
                 return res.status(413).json({
                     success: false,
-                    message: `הקובץ גדול מדי. הגודל המקסימלי הוא ${Math.round(PER_FILE_LIMIT_BYTES / (1024 * 1024))}MB לקובץ.`
+                    message: `الملف كبير جدًا. الحد الأقصى للحجم هو ${Math.round(PER_FILE_LIMIT_BYTES / (1024 * 1024))}MB إلى الملف.`
                 });
             }
             if (err.code === 'LIMIT_FILE_COUNT') {
                 return res.status(413).json({
                     success: false,
-                    message: 'יותר מדי קבצים בהעלאה אחת. עד 20 קבצים בכל פעם.'
+                    message: 'عدد كبير جدًا من الملفات في عملية تحميل واحدة. ل 20 الملفات في وقت واحد.'
                 });
             }
         }
@@ -89,7 +89,7 @@ function ensureOrderDir(orderId) {
 function assertOrderExists(orderId) {
     const order = get('SELECT id FROM orders WHERE id = ?', [orderId]);
     if (!order) {
-        throw new ApiError(404, 'הזמנה לא נמצאה');
+        throw new ApiError(404, 'لم يتم العثور على الطلب');
     }
 }
 
@@ -131,7 +131,7 @@ router.post('/', uploadFilesWithFriendlyErrors, (req, res, next) => {
         assertOrderExists(orderId);
 
         if (!req.files || req.files.length === 0) {
-            throw new ApiError(400, 'לא הועלו קבצים');
+            throw new ApiError(400, 'لم يتم تحميل أي ملفات');
         }
 
         const dir = ensureOrderDir(orderId);
@@ -167,7 +167,7 @@ router.post('/', uploadFilesWithFriendlyErrors, (req, res, next) => {
 
         res.status(201).json({
             success: true,
-            message: `${saved.length} קבצים הועלו בהצלחה`,
+            message: `${saved.length} تم تحميل الملفات بنجاح`,
             data: { attachments: saved },
         });
     } catch (error) {
@@ -188,7 +188,7 @@ router.patch('/:attachmentId', (req, res, next) => {
             [attachmentId, orderId]
         );
         if (!attachment) {
-            throw new ApiError(404, 'קובץ לא נמצא');
+            throw new ApiError(404, 'لم يتم العثور على الملف');
         }
 
         run(
@@ -198,7 +198,7 @@ router.patch('/:attachmentId', (req, res, next) => {
 
         res.json({
             success: true,
-            message: 'תיאור הקובץ עודכן',
+            message: 'تم تحديث وصف الملف',
             data: { ...attachment, description: description ?? null },
         });
     } catch (error) {
@@ -218,7 +218,7 @@ router.delete('/:attachmentId', (req, res, next) => {
             [attachmentId, orderId]
         );
         if (!attachment) {
-            throw new ApiError(404, 'קובץ לא נמצא');
+            throw new ApiError(404, 'لم يتم العثور على الملف');
         }
 
         // Remove from disk (best effort)
@@ -230,7 +230,7 @@ router.delete('/:attachmentId', (req, res, next) => {
         // Remove DB row
         run('DELETE FROM order_attachments WHERE id = ?', [attachmentId]);
 
-        res.json({ success: true, message: 'קובץ נמחק בהצלחה' });
+        res.json({ success: true, message: 'تم حذف الملف بنجاح' });
     } catch (error) {
         next(error);
     }
@@ -248,12 +248,12 @@ router.get('/:attachmentId/download', (req, res, next) => {
             [attachmentId, orderId]
         );
         if (!attachment) {
-            throw new ApiError(404, 'קובץ לא נמצא');
+            throw new ApiError(404, 'لم يتم العثور على الملف');
         }
 
         const filePath = join(uploadConfig.orderAttachmentsDir, String(orderId), attachment.stored_name);
         if (!existsSync(filePath)) {
-            throw new ApiError(404, 'הקובץ לא נמצא בדיסק');
+            throw new ApiError(404, 'لم يتم العثور على الملف على القرص');
         }
 
         const stat = statSync(filePath);

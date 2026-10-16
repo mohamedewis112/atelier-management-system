@@ -41,9 +41,9 @@ function sanitize(value, fallback = '-') {
 }
 
 function formatDateHebrew(dateStr) {
-  if (!dateStr) return 'לא צוין';
+  if (!dateStr) return 'غير محدد';
   const date = new Date(dateStr);
-  if (Number.isNaN(date.getTime())) return 'לא צוין';
+  if (Number.isNaN(date.getTime())) return 'غير محدد';
   return date.toLocaleDateString('he-IL', {
     year: 'numeric',
     month: 'long',
@@ -60,12 +60,12 @@ function formatCurrency(amount) {
 function translateItemType(type) {
   const normalized = String(type || '').trim().toLowerCase();
   const map = {
-    rental: 'השכרה',
-    sewing_for_rental: 'תפירה שנשארת בהשכרה',
-    sewing: 'תפירה',
-    sale: 'מכירה',
+    rental: 'إيجار',
+    sewing_for_rental: 'الخياطة التي تبقى في الإيجار',
+    sewing: 'تفصيل',
+    sale: 'بيع',
   };
-  return map[normalized] || sanitize(type, 'פריט');
+  return map[normalized] || sanitize(type, 'قطعة');
 }
 
 function resolveChromePath() {
@@ -115,7 +115,7 @@ function buildAgreementHtml(agreementData) {
   const items = Array.isArray(agreementData.orderItems) ? agreementData.orderItems : [];
   const itemRows = items.slice(0, 6).map((item) => {
     const type = translateItemType(item.itemType || item.item_type);
-    const wearer = sanitize(item.wearerName || item.wearer_name, 'ללא שם');
+    const wearer = sanitize(item.wearerName || item.wearer_name, 'لا اسم');
     const price = formatCurrency(item.finalPrice || item.final_price);
     return `
       <tr>
@@ -317,66 +317,66 @@ function buildAgreementHtml(agreementData) {
     <div class="sheet">
       <div class="header">
         <div class="header-main">
-          <div class="brand">${escapeHtml(sanitize(businessConfig.name, 'ישראל ישראלי'))}</div>
-          <div class="title">הסכם דיגיטלי</div>
+          <div class="brand">${escapeHtml(sanitize(businessConfig.name, 'إسرائيل إسرائيلية'))}</div>
+          <div class="title">الاتفاقية الرقمية</div>
           <div class="meta">
-            תאריך חתימה: ${escapeHtml(formatDateHebrew(signedDate))}
-            ${signedTime ? ` | שעה: ${escapeHtml(signedTime)}` : ''}
+            تاريخ التوقيع: ${escapeHtml(formatDateHebrew(signedDate))}
+            ${signedTime ? ` | وقت: ${escapeHtml(signedTime)}` : ''}
           </div>
         </div>
-        <div class="logo-wrap">${logoDataUrl ? `<img src="${logoDataUrl}" alt="לוגו העסק" />` : ''}</div>
+        <div class="logo-wrap">${logoDataUrl ? `<img src="${logoDataUrl}" alt="الشعار التجاري" />` : ''}</div>
       </div>
 
       <div class="grid">
         <section class="card">
-          <h3>פרטי לקוחה</h3>
-          <div class="line">שם מלא: ${escapeHtml(sanitize(agreementData.customerName))}</div>
-          <div class="line">טלפון: ${escapeHtml(sanitize(agreementData.customerPhone))}</div>
-          <div class="line">אימייל: ${escapeHtml(sanitize(agreementData.customerEmail, 'לא צוין'))}</div>
+          <h3>تفاصيل العميل</h3>
+          <div class="line">الاسم الكامل: ${escapeHtml(sanitize(agreementData.customerName))}</div>
+          <div class="line">الهاتف: ${escapeHtml(sanitize(agreementData.customerPhone))}</div>
+          <div class="line">البريد الإلكتروني: ${escapeHtml(sanitize(agreementData.customerEmail, 'غير محدد'))}</div>
         </section>
 
         <section class="card">
-          <h3>פרטי אירוע</h3>
-          <div class="line">תאריך אירוע: ${escapeHtml(formatDateHebrew(agreementData.eventDate))}</div>
+          <h3>تفاصيل الحدث</h3>
+          <div class="line">تاريخ الحدث: ${escapeHtml(formatDateHebrew(agreementData.eventDate))}</div>
         </section>
       </div>
 
       <section class="summary">
-        <h3 style="margin:0 0 2mm;font-size:14px;">פריטים וסכומים</h3>
+        <h3 style="margin:0 0 2mm;font-size:14px;">العناصر والكميات</h3>
         <table>
           <thead>
             <tr>
-              <th>סוג</th>
-              <th>לובשת</th>
-              <th>סכום</th>
+              <th>يكتب</th>
+              <th>يرتدي</th>
+              <th>المبلغ</th>
             </tr>
           </thead>
           <tbody>
-            ${itemRows || '<tr><td colspan="3">לא הוזנו פריטים</td></tr>'}
+            ${itemRows || '<tr><td colspan="3">لم يتم إدخال أية عناصر</td></tr>'}
           </tbody>
         </table>
       </section>
 
       <section class="terms">
-        <h3>תנאי ההסכם המלאים</h3>
+        <h3>الشروط الكاملة للاتفاقية</h3>
         <div class="terms-grid">
           <div class="terms-block">
             <h4>${escapeHtml(termsHeading)}</h4>
             <ol>${fullTermsItems}</ol>
           </div>
           <div class="terms-block">
-            <h4>מדיניות ביטול עסקה</h4>
+            <h4>سياسة إلغاء المعاملات</h4>
             <ol>${cancellationItems}</ol>
           </div>
         </div>
       </section>
 
       <div class="signature-wrap">
-        <div class="declaration">אני מאשרת שקרמנהל את תנאי ההסכם ומסכימה להם.</div>
+        <div class="declaration">أؤكد أن كير يدير شروط الاتفاقية ويوافق عليها.</div>
         <div class="signature-box">
-          <div class="signature-label">חתימה דיגיטלית</div>
+          <div class="signature-label">التوقيع الرقمي</div>
           <div class="signature-image">
-            ${safeSignature ? `<img src="${safeSignature}" alt="חתימה" />` : '<span>ללא חתימה</span>'}
+            ${safeSignature ? `<img src="${safeSignature}" alt="توقيع" />` : '<span>بدون توقيع</span>'}
           </div>
         </div>
       </div>

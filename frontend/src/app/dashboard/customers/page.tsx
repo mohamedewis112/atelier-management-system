@@ -131,7 +131,7 @@ export default function CustomersPage() {
             message: error instanceof Error ? error.message : String(error),
             stack: error instanceof Error ? error.stack : undefined,
             component: 'CustomersList',
-            action: `טעינת פרטי לקוח (ID: ${editId})`
+            action: `جارٍ تحميل تفاصيل العميل (ID: ${editId})`
           });
         }
       })();
@@ -169,13 +169,13 @@ export default function CustomersPage() {
     setSaving(true);
     try {
       await customersApi.merge(mergeTargetId, sourceId, formData);
-      toast({ title: "تم بنجاح", description: "عملاء אוחדו בتم بنجاح" });
+      toast({ title: "تم بنجاح", description: "عملاء متحدون بتم بنجاح" });
       setShowMergeDialog(false);
       setSelectedIds([]);
       setIsSelectionMode(false);
       mutate();
     } catch (error) {
-      const message = error instanceof Error ? error.message : "خطأ בدمج";
+      const message = error instanceof Error ? error.message : "خطأ نصدمج";
       toast({
         title: "خطأ",
         description: message,
@@ -219,14 +219,14 @@ export default function CustomersPage() {
     try {
       if (editingCustomer) {
         await customersApi.update(editingCustomer.id, formData);
-        toast({ title: "تم بنجاح", description: "عميل עודכנה בتم بنجاح" });
+        toast({ title: "تم بنجاح", description: "عميل تم التحديث فيتم بنجاح" });
       } else {
         await customersApi.create(formData);
-        toast({ title: "تم بنجاح", description: "عميل נוספה בتم بنجاح" });
+        toast({ title: "تم بنجاح", description: "عميل وأضاف بتم بنجاح" });
       }
       resetForm();
     } catch (error) {
-      const message = error instanceof Error ? error.message : "خطأ בשמירת לקוח";
+      const message = error instanceof Error ? error.message : "خطأ في الاحتفاظ بالعملاء";
       toast({
         title: "خطأ",
         description: message,
@@ -398,7 +398,7 @@ export default function CustomersPage() {
                 <div className="flex items-center justify-between border-t pt-4">
                   <div className="flex gap-2">
                     <span className="text-[10px] font-bold text-muted-foreground bg-gray-100 px-2 py-1 rounded-lg uppercase">
-                      נוספה: {formatDateShort(customer.created_at)}
+                      وأضاف: {formatDateShort(customer.created_at)}
                     </span>
                     {customer.source && (
                       <span className="text-[10px] font-bold text-primary/60 bg-primary/5 px-2 py-1 rounded-lg uppercase">
@@ -428,7 +428,7 @@ export default function CustomersPage() {
             className="h-14 px-8 rounded-full shadow-2xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-lg gap-2"
           >
             <Users className="h-5 w-5" />
-            دمج 2 عملاء שנבחרו
+            دمج 2 عملاء اختيار
           </Button>
         </div>
       )}
@@ -436,7 +436,7 @@ export default function CustomersPage() {
       {customers.length === 0 && !loading && (
         <div className="text-center py-24 bg-white rounded-[3rem] shadow-inner">
           <UserPlus className="h-16 w-16 mx-auto text-muted-foreground/30 mb-4" />
-          <h3 className="text-xl font-bold text-gray-900">לא נמצאו عملاء</h3>
+          <h3 className="text-xl font-bold text-gray-900">لم يتم العثور على عملاء</h3>
           <p className="text-muted-foreground">غيّر البحث أو أضف عميلاً جديدًا</p>
         </div>
       )}
@@ -453,7 +453,7 @@ export default function CustomersPage() {
             </div>
             <CardContent className="p-6 space-y-6">
               <div className="bg-purple-50 p-4 rounded-xl text-purple-800 text-sm font-medium">
-                שימי לב: פעולה זו תאחד את כל ההזמנות, התשלומים וההיסטוריה של שתי הعملاء לعميل אחת. הعميل השנייה תימחק.
+                انتبه: سيؤدي هذا إلى توحيد جميع الطلبات, المدفوعات وتاريخ كل منعملاء نصعميل واحد. نصعميل سيتم حذف الثاني.
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -481,7 +481,7 @@ export default function CustomersPage() {
                     >
                       {isTarget && (
                         <div className="absolute top-0 right-0 bg-purple-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-bl-xl">
-                          הعميل הראשית (תישמר)
+                          نصعميل الرئيسي (يتم حفظها)
                         </div>
                       )}
                       <h3 className="font-bold text-lg mb-1">{c.name}</h3>
@@ -613,7 +613,7 @@ export default function CustomersPage() {
                     value={formData.notes}
                     onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
                     className="w-full h-32 p-4 border-b-2 border-input bg-transparent focus:border-primary transition-all outline-none resize-none"
-                    placeholder="ملاحظات אישיות, העדפות וכו'..."
+                    placeholder="ملاحظات شخصية, التفضيلات الخ'..."
                   />
                 </div>
 

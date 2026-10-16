@@ -26,7 +26,7 @@ export class ApiError extends Error {
  * Not found handler - for unmatched routes
  */
 export function notFoundHandler(req, res, next) {
-  const error = new ApiError(404, 'הדף המבוקש לא נמצא');
+  const error = new ApiError(404, 'لم يتم العثور على الصفحة المطلوبة');
   next(error);
 }
 
@@ -46,7 +46,7 @@ export function errorHandler(err, req, res, next) {
   
   // Determine status code
   let statusCode = err.statusCode || 500;
-  let message = err.message || 'שגיאה פנימית בשרת';
+  let message = err.message || 'خطأ في الخادم الداخلي';
   let details = err.details || null;
 
   // Clear auth cookie on 401 Unauthorized to prevent client-server auth loops
@@ -62,18 +62,18 @@ export function errorHandler(err, req, res, next) {
   // Handle specific error types
   if (err.name === 'ValidationError') {
     statusCode = 400;
-    message = 'שגיאה בנתונים שהוזנו';
+    message = 'خطأ في البيانات المدخلة';
   } else if (err.code === 'SQLITE_CONSTRAINT') {
     statusCode = 409;
-    message = 'נתונים כפולים או הפרת אילוץ';
+    message = 'تكرار البيانات أو انتهاك القيد';
   } else if (err.code === 'SQLITE_CONSTRAINT_UNIQUE') {
     statusCode = 409;
-    message = 'הערך כבר קיים במערכת';
+    message = 'القيمة موجودة بالفعل في النظام';
   }
   
   // Don't expose internal errors in production
   if (process.env.NODE_ENV === 'production' && statusCode === 500) {
-    message = 'שגיאה פנימית בשרת';
+    message = 'خطأ في الخادم الداخلي';
     details = null;
   }
   

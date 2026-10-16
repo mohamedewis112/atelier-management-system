@@ -42,10 +42,10 @@ export default function NewDressPage() {
                             thumbnail_url: res.data!.thumbnailUrl,
                         }));
                         clearSharedUploadPayload();
-                        toast({ title: "תמונה התקבלה", description: "תמונת השמלה הועלתה בהצלחה לטופס" });
+                        toast({ title: "تم استلام الصورة", description: "تم تحميل صورة القطعة بنجاح إلى النموذج" });
                     }
                 } catch (error) {
-                    toast({ title: "שגיאה", description: "טעינת התמונה מהשיתוף נכשלה", variant: "destructive" });
+                    toast({ title: "خطأ", description: "فشل تحميل الصورة من المشاركة", variant: "destructive" });
                 } finally {
                     setSaving(false);
                 }
@@ -72,12 +72,12 @@ export default function NewDressPage() {
         }
 
         if (!mimeType.startsWith("image/")) {
-            toast({ title: "שגיאה", description: "ניתן להעלות רק קובצי תמונה", variant: "destructive" });
+            toast({ title: "خطأ", description: "يمكن تحميل ملفات الصور فقط", variant: "destructive" });
             return;
         }
 
         if (file.size > 10 * 1024 * 1024) {
-            toast({ title: "שגיאה", description: "הקובץ גדול מדי (מקסימום 10MB)", variant: "destructive" });
+            toast({ title: "خطأ", description: "الملف كبير جدًا (الحد الأقصى 10MB)", variant: "destructive" });
             return;
         }
 
@@ -95,15 +95,15 @@ export default function NewDressPage() {
                     photo_url: res.data!.imageUrl,
                     thumbnail_url: res.data!.thumbnailUrl
                 }));
-                toast({ title: "הצלחה", description: "התמונה הועלתה בהצלחה" });
+                toast({ title: "تم بنجاح", description: "تم تحميل الصورة بنجاح" });
             }
         } catch (error) {
-            toast({ title: "שגיאה", description: "העלאת תמונה נכשלה", variant: "destructive" });
+            toast({ title: "خطأ", description: "فشل تحميل الصورة", variant: "destructive" });
             reportClientError({
                 message: error instanceof Error ? error.message : String(error),
                 stack: error instanceof Error ? error.stack : undefined,
                 component: 'NewDress',
-                action: 'העלאת תמונת שמלה'
+                action: 'تحميل صورة القطعة'
             });
         } finally {
             setSaving(false);
@@ -113,7 +113,7 @@ export default function NewDressPage() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!formData.name.trim()) {
-            toast({ title: "שגיאה", description: "נא להזין שם שמלה", variant: "destructive" });
+            toast({ title: "خطأ", description: "الرجاء إدخال اسم اللباس", variant: "destructive" });
             return;
         }
         setSaving(true);
@@ -129,12 +129,12 @@ export default function NewDressPage() {
             };
 
             await dressesApi.create(data);
-            toast({ title: "הצלחה", description: "שמלה נוספה בהצלחה" });
+            toast({ title: "تم بنجاح", description: "تمت إضافة القطعة بنجاح" });
             router.push("/dashboard/dresses");
         } catch (error) {
-            const message = error instanceof Error ? error.message : "שגיאה בשמירת שמלה";
+            const message = error instanceof Error ? error.message : "حدث خطأ أثناء حفظ القطعة";
             toast({
-                title: "שגיאה",
+                title: "خطأ",
                 description: message,
                 variant: "destructive",
             });
@@ -142,7 +142,7 @@ export default function NewDressPage() {
                 message,
                 stack: error instanceof Error ? error.stack : undefined,
                 component: 'NewDress',
-                action: 'שמירת שמלה חדשה'
+                action: 'إنقاذ ثوب جديد'
             });
             setSaving(false);
         }
@@ -159,25 +159,25 @@ export default function NewDressPage() {
                 >
                     <ArrowRight className="h-5 w-5" />
                 </Button>
-                <h1 className="text-2xl font-black">הוספת שמלה חדשה</h1>
+                <h1 className="text-2xl font-black">وأضاف قطعة جديد</h1>
             </div>
 
             <Card className="rounded-[2rem] border-none shadow-xl bg-white overflow-hidden">
                 <CardContent className="p-6 md:p-8">
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <div className="space-y-2">
-                            <label className="text-sm font-bold text-gray-700">שם השמלה *</label>
+                            <label className="text-sm font-bold text-gray-700">اسم القطعة *</label>
                             <Input
                                 value={formData.name}
                                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                                 className="h-14 rounded-2xl bg-muted/30 border-transparent focus:bg-white transition-all text-lg"
-                                placeholder="לדוגמה: שמלת זהב נוצצת"
+                                placeholder="على سبيل المثال: قطعة ذهبي لامع"
                             />
                         </div>
 
                         <div className="grid grid-cols-2 gap-4">
                             <div className="space-y-2">
-                                <label className="text-sm font-bold text-gray-700">מחיר בסיס</label>
+                                <label className="text-sm font-bold text-gray-700">السعر الأساسي</label>
                                 <Input
                                     type="number"
                                     step="1"
@@ -191,41 +191,41 @@ export default function NewDressPage() {
                                 />
                             </div>
                             <div className="space-y-2">
-                                <label className="text-sm font-bold text-gray-700">סטטוס</label>
+                                <label className="text-sm font-bold text-gray-700">الحالة</label>
                                 <select
                                     value={formData.status}
                                     onChange={(e) => setFormData({ ...formData, status: e.target.value })}
                                     className="w-full h-14 px-4 rounded-2xl bg-muted/30 border-none outline-none text-sm font-bold"
                                 >
-                                    <option value="available">פנויה</option>
-                                    <option value="sold">נמכרה</option>
-                                    <option value="retired">הוצאה מהמלאי</option>
-                                    <option value="custom_sewing">תפירה אישית</option>
+                                    <option value="available">حر</option>
+                                    <option value="sold">مُباع</option>
+                                    <option value="retired">إنتهى من المخزن</option>
+                                    <option value="custom_sewing">الخياطة الشخصية</option>
                                 </select>
                             </div>
                         </div>
 
                         <div className="space-y-2">
-                            <label className="text-sm font-bold text-gray-700">ייעוד שמלה</label>
+                            <label className="text-sm font-bold text-gray-700">تسمية اللباس</label>
                             <select
                                 value={formData.intended_use}
                                 onChange={(e) => setFormData({ ...formData, intended_use: e.target.value as "" | "rental" | "sale" })}
                                 className="w-full h-14 px-4 rounded-2xl bg-muted/30 border-none outline-none text-sm font-bold"
                             >
-                                <option value="">ללא ייעוד</option>
-                                <option value="rental">מיועדת להשכרה</option>
-                                <option value="sale">מיועדת למכירה</option>
+                                <option value="">بدون تسمية</option>
+                                <option value="rental">مخصصة للإيجار</option>
+                                <option value="sale">مخصصة للبيع</option>
                             </select>
                         </div>
 
                         <div className="space-y-2">
-                            <label className="text-sm font-bold text-gray-700">תמונת השמלה</label>
+                            <label className="text-sm font-bold text-gray-700">صورة القطعة</label>
                             <div className="flex flex-col gap-4">
                                 {formData.photo_url ? (
                                     <div className="relative h-64 w-full rounded-2xl overflow-hidden border-2 border-primary/20 bg-muted/30 group">
                                         <img
                                             src={formData.photo_url || ""}
-                                            alt="תצוגה מקדימה"
+                                            alt="معاينة"
                                             className="w-full h-full object-contain"
                                         />
                                         <button
@@ -241,8 +241,8 @@ export default function NewDressPage() {
                                         <div className="h-12 w-12 bg-primary/10 rounded-full flex items-center justify-center text-primary">
                                             <Plus className="h-6 w-6" />
                                         </div>
-                                        <span className="text-sm font-bold text-muted-foreground">לחצי להעלאת תמונה</span>
-                                        <span className="text-[10px] text-muted-foreground/60 uppercase font-black">JPG, PNG, WEBP (מקס' 10MB)</span>
+                                        <span className="text-sm font-bold text-muted-foreground">انقر لتحميل الصورة</span>
+                                        <span className="text-[10px] text-muted-foreground/60 uppercase font-black">JPG, PNG, WEBP (الأعلى' 10MB)</span>
                                         <input
                                             type="file"
                                             className="hidden"
@@ -257,21 +257,21 @@ export default function NewDressPage() {
                         </div>
 
                         <div className="space-y-2">
-                            <label className="text-sm font-bold text-gray-700">הערות</label>
+                            <label className="text-sm font-bold text-gray-700">ملاحظات</label>
                             <textarea
                                 value={formData.notes}
                                 onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
                                 className="w-full h-32 p-4 rounded-2xl bg-muted/30 border-none focus:ring-2 focus:ring-primary/20 outline-none resize-none shadow-inner"
-                                placeholder="מידות, סוג בד, דגשים מיוחדים..."
+                                placeholder="أبعاد, نوع القماش, أبرز الخاصة..."
                             />
                         </div>
 
                         <div className="flex gap-4 pt-4 pb-8">
                             <Button type="button" variant="outline" onClick={() => router.push("/dashboard/dresses")} className="flex-1 h-14 rounded-2xl font-bold">
-                                ביטול
+                                إلغاء
                             </Button>
                             <Button type="submit" disabled={saving} className="flex-1 h-14 rounded-2xl font-bold shadow-lg shadow-primary/20">
-                                {saving ? "טוען..." : "שמור שמלה"}
+                                {saving ? "جاري التحميل..." : "حفظ اللباس"}
                             </Button>
                         </div>
                     </form>

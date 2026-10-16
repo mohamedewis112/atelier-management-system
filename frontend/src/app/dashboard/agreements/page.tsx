@@ -68,7 +68,7 @@ export default function AgreementsPage() {
     if (!url) {
       toast({
         title: "الملف غير موجود",
-        description: `אין ${label} עבור ההסכם הזה`,
+        description: `لا شئ ${label} لهذه الاتفاقية`,
         variant: "destructive",
       });
       return;
@@ -90,7 +90,7 @@ export default function AgreementsPage() {
         <div>
           <h1 className="text-3xl font-bold flex items-center gap-2">
             <FileSignature className="h-7 w-7" />
-            הסכמים חתומים
+            الاتفاقيات الموقعة
           </h1>
           <p className="text-muted-foreground">كل العقود والتوقيعات والملفات المرتبطة بها</p>
         </div>
@@ -139,10 +139,10 @@ export default function AgreementsPage() {
                     <div className="space-y-1">
                       <div className="font-semibold">{agreement.customer_name}</div>
                       <div className="text-sm text-muted-foreground">
-                        הזמנה: {agreement.order_id || "بدون"} | נחתם: {agreement.agreed_at ? formatDateTime(agreement.agreed_at) : "-"}
+                        حجز: {agreement.order_id || "بدون"} | تم التوقيع: {agreement.agreed_at ? formatDateTime(agreement.agreed_at) : "-"}
                       </div>
                       <div className="text-sm text-muted-foreground">
-                        אירוע: {agreement.event_date || "-"} | الهاتف: {agreement.customer_phone || "-"}
+                        حدث: {agreement.event_date || "-"} | الهاتف: {agreement.customer_phone || "-"}
                       </div>
                     </div>
 
@@ -154,7 +154,7 @@ export default function AgreementsPage() {
                         disabled={!signatureUrl}
                       >
                         <PenLine className="h-4 w-4 ms-1" />
-                        צפייה בالتوقيع
+                        عرض فيالتوقيع
                       </Button>
                       <Button
                         size="sm"
@@ -163,7 +163,7 @@ export default function AgreementsPage() {
                         disabled={!pdfUrl}
                       >
                         <FileText className="h-4 w-4 ms-1" />
-                        צפייה ב-PDF
+                        عرض في-PDF
                       </Button>
                       {agreement.order_id && (
                         <Button
@@ -172,7 +172,7 @@ export default function AgreementsPage() {
                           className="bg-green-600 hover:bg-green-700 text-white"
                         >
                           <ShoppingBag className="h-4 w-4 ms-1" />
-                          פתיחת הזמנה
+                          فتح أمر
                         </Button>
                       )}
                     </div>

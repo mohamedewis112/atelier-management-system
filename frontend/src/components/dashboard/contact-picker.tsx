@@ -32,7 +32,7 @@ export function ContactPicker({
   onContactSelect, 
   variant = "outline", 
   className = "",
-  label = "ייבוא מאנשי קשר",
+  label = "استيراد من جهات الاتصال",
   icon
 }: ContactPickerProps) {
   const [isSupported, setIsSupported] = useState(false);
@@ -72,8 +72,8 @@ export function ContactPicker({
         onContactSelect({ name, phone, email });
         
         toast({
-          title: "ייבוא הושלם",
-          description: `הפרטים של ${name} הוכנסו בהצלחה (ללא אימייל)`,
+          title: "اكتمل الاستيراد",
+          description: `تفاصيل ${name} تم الدخول بنجاح (لا يوجد بريد إلكتروني)`,
         });
       }
     } catch (err) {
@@ -81,8 +81,8 @@ export function ContactPicker({
       // Don't show toast for user cancellations (AbortError)
       if (err instanceof Error && err.name !== 'AbortError') {
         toast({
-          title: "שגיאה",
-          description: "לא ניתן לגשת לאנשי הקשר",
+          title: "خطأ",
+          description: "غير قادر على الوصول إلى جهات الاتصال",
           variant: "destructive",
         });
       }

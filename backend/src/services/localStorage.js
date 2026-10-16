@@ -5,8 +5,8 @@
  * sync with Google Drive. Used for agreements, expenses, and documents.
  * 
  * Folder Structure:
- * - Expenses: /הוצאות והכנסות עסק/[YEAR]/[CATEGORY]/
- * - Agreements: /הסכמי השכרה/[CUSTOMER_NAME - DATE]/
+ * - Expenses: /النفقات التجارية والدخل/[YEAR]/[CATEGORY]/
+ * - Agreements: /اتفاقيات الإيجار/[CUSTOMER_NAME - DATE]/
  */
 
 import { writeFileSync, mkdirSync, existsSync, readdirSync } from 'fs';
@@ -105,7 +105,7 @@ function formatDateYYMMDD(date = new Date()) {
  * Folder structure: expenses/[YEAR]/[category]/
  *
  * @param {Buffer|string} receiptData  - Receipt file data (buffer or base64)
- * @param {string}        category     - Expense category (folder name, e.g. 'חומרים')
+ * @param {string}        category     - Expense category (folder name, e.g. 'مواد')
  * @param {string}        description  - Description of the expense
  * @param {string}        supplier     - Supplier / store name (may be empty string)
  * @param {number}        amount       - Expense amount in ILS
@@ -175,7 +175,7 @@ export function saveAgreementPdf(pdfBuffer, customerName, agreementDate = new Da
     const dateStr = formatDateForFolder(agreementDate);
     const cleanName = cleanForFilename(customerName);
 
-    // Create folder name: "שם לקוחה - תאריך" or "שם לקוחה - תאריך - מספר הזמנה"
+    // Create folder name: "اسم العميل - التاريخ" or "اسم العميل - التاريخ - رقم الطلب"
     let folderName = `${cleanName} - ${dateStr}`;
     if (orderId) {
       folderName += ` - ${orderId}`;
@@ -185,7 +185,7 @@ export function saveAgreementPdf(pdfBuffer, customerName, agreementDate = new Da
     ensureDirectoryExists(folderPath);
 
     // Create PDF filename
-    const pdfFilename = `הסכם השכרה - ${cleanName}.pdf`;
+    const pdfFilename = `اتفاقية الإيجار - ${cleanName}.pdf`;
     const pdfPath = join(folderPath, pdfFilename);
 
     // Save PDF
