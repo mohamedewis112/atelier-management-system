@@ -58,18 +58,18 @@ interface Transaction {
 }
 
 const INCOME_CATEGORIES = [
-  { value: "order", label: "הזמנה" },
-  { value: "repair", label: "תיקונים" },
-  { value: "other", label: "אחר" },
+  { value: "order", label: "حجز" },
+  { value: "repair", label: "إصلاحات" },
+  { value: "other", label: "أخرى" },
 ];
 
 const EXPENSE_CATEGORIES = [
-  { value: "materials", label: "חומרים" },
-  { value: "overhead", label: "תקורה" },
-  { value: "tax", label: "מיסוי" },
-  { value: "equipment", label: "ציוד" },
-  { value: "salary", label: "משכורות" },
-  { value: "other", label: "אחר" },
+  { value: "materials", label: "خامات" },
+  { value: "overhead", label: "تشغيل" },
+  { value: "tax", label: "ضرائب" },
+  { value: "equipment", label: "معدات" },
+  { value: "salary", label: "رواتب" },
+  { value: "other", label: "أخرى" },
 ];
 
 export default function TransactionsPage() {
@@ -209,16 +209,16 @@ export default function TransactionsPage() {
   );
 
   const handleDelete = async (transaction: Transaction) => {
-    if (!confirm("האם לבטל את העסקה?")) return;
+    if (!confirm("هل تريد حذف الحركة؟")) return;
 
     try {
       await transactionsApi.delete(transaction.id);
-      toast({ title: "הצלחה", description: "עסקה נמחקה בהצלחה" });
+      toast({ title: "تم بنجاح", description: "עסקה נמחקה בتم بنجاح" });
       mutate();
     } catch (error) {
       toast({
-        title: "שגיאה",
-        description: error instanceof Error ? error.message : "שגיאה במחיקת עסקה",
+        title: "خطأ",
+        description: error instanceof Error ? error.message : "خطأ במחיקת עסקה",
         variant: "destructive",
       });
     }
@@ -240,7 +240,7 @@ export default function TransactionsPage() {
             <Wallet className="h-8 w-8" />
             תזרים מזומנים
           </h1>
-          <p className="text-muted-foreground">{transactions.length} עסקאות</p>
+          <p className="text-muted-foreground">{transactions.length} حركات</p>
         </div>
         <div className="flex gap-2">
           <Button
@@ -248,7 +248,7 @@ export default function TransactionsPage() {
             className="gap-2 bg-green-600 hover:bg-green-700"
           >
             <TrendingUp className="h-4 w-4" />
-            הכנסה
+            إيراد
           </Button>
           <Button
             onClick={() => router.push('/dashboard/transactions/new?type=expense')}
@@ -256,7 +256,7 @@ export default function TransactionsPage() {
             className="gap-2"
           >
             <TrendingDown className="h-4 w-4" />
-            הוצאה
+            مصروف
           </Button>
         </div>
       </div>
@@ -266,7 +266,7 @@ export default function TransactionsPage() {
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-muted-foreground">הכנסות</p>
+                <p className="text-sm text-muted-foreground">إيرادات</p>
                 <p className="text-2xl font-bold text-green-600">
                   {formatCurrency(summary.totalIncome)}
                 </p>
@@ -279,7 +279,7 @@ export default function TransactionsPage() {
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-muted-foreground">הוצאות</p>
+                <p className="text-sm text-muted-foreground">مصروفات</p>
                 <p className="text-2xl font-bold text-red-600">
                   {formatCurrency(summary.totalExpenses)}
                 </p>
@@ -292,7 +292,7 @@ export default function TransactionsPage() {
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-muted-foreground">רווח</p>
+                <p className="text-sm text-muted-foreground">صافي الربح</p>
                 <p
                   className={`text-2xl font-bold ${summary.profit >= 0 ? "text-green-600" : "text-red-600"
                     }`}
@@ -322,7 +322,7 @@ export default function TransactionsPage() {
               <Search className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <input
                 type="text"
-                placeholder="סינון לפי לקוחה..."
+                placeholder="بحث باسم العميل..."
                 value={customerSearch}
                 onChange={(e) => {
                   setCustomerSearch(e.target.value);
@@ -368,9 +368,9 @@ export default function TransactionsPage() {
               onChange={(e) => setTypeFilter(e.target.value)}
               className="h-10 px-3 border rounded-md bg-background"
             >
-              <option value="">כל הסוגים</option>
-              <option value="income">הכנסות</option>
-              <option value="expense">הוצאות</option>
+              <option value="">كل الأنواع</option>
+              <option value="income">إيرادات</option>
+              <option value="expense">مصروفات</option>
             </select>
 
             <div className="flex flex-wrap gap-2 p-1 bg-muted/30 rounded-lg">
@@ -417,13 +417,13 @@ export default function TransactionsPage() {
             <table className="w-full">
               <thead className="bg-muted/50">
                 <tr>
-                  <th className="text-right p-3">תאריך</th>
-                  <th className="text-right p-3">סוג</th>
-                  <th className="text-right p-3">קטגוריה</th>
-                  <th className="text-right p-3">פרטים</th>
-                  <th className="text-right p-3">סכום</th>
-                  <th className="text-right p-3">תשלום</th>
-                  <th className="text-right p-3">פעולות</th>
+                  <th className="text-right p-3">التاريخ</th>
+                  <th className="text-right p-3">النوع</th>
+                  <th className="text-right p-3">التصنيف</th>
+                  <th className="text-right p-3">التفاصيل</th>
+                  <th className="text-right p-3">المبلغ</th>
+                  <th className="text-right p-3">الدفع</th>
+                  <th className="text-right p-3">الإجراءات</th>
                 </tr>
               </thead>
               <tbody>
@@ -436,9 +436,9 @@ export default function TransactionsPage() {
                       <td className="p-3">{formatDateShort(transaction.date)}</td>
                       <td className="p-3">
                         {transaction.type === "income" ? (
-                          <span className="badge badge-success">הכנסה</span>
+                          <span className="badge badge-success">إيراد</span>
                         ) : (
-                          <span className="badge badge-error">הוצאה</span>
+                          <span className="badge badge-error">مصروف</span>
                         )}
                       </td>
                       <td className="p-3">
@@ -468,7 +468,7 @@ export default function TransactionsPage() {
                             </div>
                             {transaction.order_id && (
                               <span className="text-[10px] text-muted-foreground">
-                                (הזמנה #{transaction.order_id})
+                                (حجز #{transaction.order_id})
                               </span>
                             )}
                           </div>
@@ -511,7 +511,7 @@ export default function TransactionsPage() {
                             variant="ghost"
                             size="icon"
                             onClick={() => router.push(`/dashboard/transactions/${transaction.id}/edit`)}
-                            title="עריכת תנועה"
+                            title="تعديل الحركة"
                           >
                             <Edit className="h-4 w-4" />
                           </Button>
@@ -565,7 +565,7 @@ export default function TransactionsPage() {
         transactions.length === 0 && !loading && (
           <div className="text-center py-12">
             <Wallet className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-            <p className="text-muted-foreground">אין עסקאות להצגה</p>
+            <p className="text-muted-foreground">אין حركات להצגה</p>
           </div>
         )
       }
@@ -582,7 +582,7 @@ export default function TransactionsPage() {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2 text-orange-600 font-semibold text-sm">
                 <FileText className="h-4 w-4" />
-                <span>הערה לתנועה</span>
+                <span>ملاحظة</span>
               </div>
               <button
                 onClick={() => setExpandedNote(null)}
