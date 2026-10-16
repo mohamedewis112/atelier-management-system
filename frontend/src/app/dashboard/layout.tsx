@@ -78,7 +78,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
   return (
     <div className="min-h-screen bg-transparent">
-      <div className="lg:hidden fixed top-0 left-0 right-0 h-16 px-4 flex items-center justify-between bg-white/80 backdrop-blur-md border-b z-40">
+      <div className="xl:hidden fixed top-0 left-0 right-0 h-16 px-3 sm:px-5 flex items-center justify-between bg-white/80 backdrop-blur-md border-b z-40">
         <Button
           variant="ghost"
           size="icon"
@@ -96,27 +96,27 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         </div>
       </div>
 
-      <div className="hidden lg:block fixed top-4 left-4 z-50">
+      <div className="hidden xl:block fixed top-4 left-4 z-50">
         <GlobalSearch />
       </div>
 
       <div className={`
-        ${sidebarOpen ? "translate-x-0" : "translate-x-full lg:translate-x-0"}
+        ${sidebarOpen ? "translate-x-0" : "translate-x-full xl:translate-x-0"}
         transition-transform duration-300 ease-in-out
-        fixed inset-y-0 right-0 z-50 w-72 lg:block
+        fixed inset-y-0 right-0 z-50 w-72 max-w-[86vw] xl:block
       `}>
         <Sidebar currentUser={currentUser} onItemClick={() => setSidebarOpen(false)} />
       </div>
 
       {sidebarOpen && (
         <div
-          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden"
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 xl:hidden"
           onClick={() => setSidebarOpen(false)}
         />
       )}
 
-      <main className="lg:mr-72 min-h-screen pt-20 lg:pt-6 pb-20 lg:pb-6">
-        <div className="container mx-auto px-4 md:px-6 max-w-7xl">
+      <main className="xl:mr-72 min-h-screen min-w-0 overflow-x-hidden pt-20 sm:pt-24 xl:pt-6 pb-20 xl:pb-6">
+        <div className="mx-auto w-full max-w-7xl px-3 sm:px-5 md:px-6 xl:px-8">
           {children}
         </div>
       </main>
