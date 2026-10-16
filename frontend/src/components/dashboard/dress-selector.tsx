@@ -37,7 +37,7 @@ interface DressSelectorProps {
 function getIntendedUseLabel(value: string | null | undefined) {
   if (value === "sale") return "للبيع";
   if (value === "rental") return "للإيجار";
-  return "بدون تسمية";
+  return "غير محدد";
 }
 
 type IntendedUseFilter = "all" | "rental" | "sale";
@@ -59,7 +59,7 @@ export function DressSelector({
   dresses,
   selectedId,
   onSelect,
-  placeholder = "اختر قطعةًا من المخزون...",
+  placeholder = "اختر قطعة من المخزون...",
   itemType,
 }: DressSelectorProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -169,7 +169,7 @@ export function DressSelector({
                   <Search className="absolute right-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                   <Input
                     autoFocus
-                    placeholder="البحث بالاسم أو SKU..."
+                    placeholder="ابحث بالاسم أو رقم القطعة..."
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                     className="h-12 pr-12 rounded-2xl border-none shadow-sm text-lg bg-white"
