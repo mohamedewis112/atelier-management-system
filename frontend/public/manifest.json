@@ -1,7 +1,7 @@
 {
   "name": "Dress Rental Business Management",
   "short_name": "Business Mgmt",
-  "description": "نظام إدارة الأعمال لتأجير وخياطة قطع السهرة",
+  "description": "نظام متكامل لإدارة الأتيليه والحجوزات والعملاء والقطع والحسابات",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
