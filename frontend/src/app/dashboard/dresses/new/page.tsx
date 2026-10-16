@@ -187,7 +187,7 @@ export default function NewDressPage() {
                                         if (e.key === '.' || e.key === '-') e.preventDefault();
                                     }}
                                     className="h-14 rounded-2xl bg-muted/30 border-transparent"
-                                    placeholder="₪"
+                                    placeholder="ج.م"
                                 />
                             </div>
                             <div className="space-y-2">

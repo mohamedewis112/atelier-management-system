@@ -52,7 +52,7 @@ const PAYMENT_METHODS = [
   { value: "paybox", label: "صندوق الدفع" },
   { value: "credit", label: "بطاقة" },
   { value: "transfer", label: "نقل" },
-  { value: "check", label: "نص'نص" },
+  { value: "check", label: "شيك" },
 ];
 
 export default function EditTransactionPage() {
@@ -302,7 +302,7 @@ export default function EditTransactionPage() {
 
         {/* Amount Input */}
         <div className="text-center py-4">
-          <label className="text-xs text-muted-foreground font-bold uppercase tracking-widest mb-2 block">المبلغ بالشيكل</label>
+          <label className="text-xs text-muted-foreground font-bold uppercase tracking-widest mb-2 block">المبلغ بالجنيه المصري</label>
           <div className="relative inline-block w-full max-w-[240px]">
             <input
               type="number"
@@ -315,7 +315,7 @@ export default function EditTransactionPage() {
               }}
               className="text-6xl font-black text-center bg-transparent border-none focus:outline-none w-full placeholder:text-muted/20"
             />
-            <span className="absolute -right-6 top-2 text-3xl text-muted-foreground font-light">₪</span>
+            <span className="absolute -right-6 top-2 text-3xl text-muted-foreground font-light">ج.م</span>
           </div>
         </div>
 
@@ -594,15 +594,15 @@ export default function EditTransactionPage() {
           {type === "income" && paymentMethod === "transfer" && (
             <div className="grid grid-cols-3 gap-2 animate-in fade-in slide-in-from-top-2">
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-muted-foreground uppercase">ضريبة' بنك</label>
+                <label className="text-[10px] font-bold text-muted-foreground uppercase">رقم البنك</label>
                 <Input value={bankNumber} onChange={(e) => setBankNumber(e.target.value)} className="h-10 text-center" />
               </div>
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-muted-foreground uppercase">ضريبة' فرع</label>
+                <label className="text-[10px] font-bold text-muted-foreground uppercase">رقم الفرع</label>
                 <Input value={branchNumber} onChange={(e) => setBranchNumber(e.target.value)} className="h-10 text-center" />
               </div>
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-muted-foreground uppercase">ضريبة' فاتورة</label>
+                <label className="text-[10px] font-bold text-muted-foreground uppercase">رقم الحساب</label>
                 <Input value={accountNumber} onChange={(e) => setAccountNumber(e.target.value)} className="h-10 text-center" />
               </div>
             </div>
@@ -611,20 +611,20 @@ export default function EditTransactionPage() {
           {type === "income" && paymentMethod === "check" && (
             <div className="space-y-2 animate-in fade-in slide-in-from-top-2">
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-muted-foreground uppercase">رقم ج'نص</label>
+                <label className="text-[10px] font-bold text-muted-foreground uppercase">رقم شيك</label>
                 <Input value={checkNumber} onChange={(e) => setCheckNumber(e.target.value)} className="h-10" />
               </div>
               <div className="grid grid-cols-3 gap-2">
                 <div className="space-y-1">
-                  <label className="text-[10px] font-bold text-muted-foreground uppercase">ضريبة' بنك</label>
+                  <label className="text-[10px] font-bold text-muted-foreground uppercase">رقم البنك</label>
                   <Input value={bankNumber} onChange={(e) => setBankNumber(e.target.value)} className="h-10 text-center" />
                 </div>
                 <div className="space-y-1">
-                  <label className="text-[10px] font-bold text-muted-foreground uppercase">ضريبة' فرع</label>
+                  <label className="text-[10px] font-bold text-muted-foreground uppercase">رقم الفرع</label>
                   <Input value={branchNumber} onChange={(e) => setBranchNumber(e.target.value)} className="h-10 text-center" />
                 </div>
                 <div className="space-y-1">
-                  <label className="text-[10px] font-bold text-muted-foreground uppercase">ضريبة' فاتورة</label>
+                  <label className="text-[10px] font-bold text-muted-foreground uppercase">رقم الحساب</label>
                   <Input value={accountNumber} onChange={(e) => setAccountNumber(e.target.value)} className="h-10 text-center" />
                 </div>
               </div>

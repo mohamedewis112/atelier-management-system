@@ -69,7 +69,7 @@ export function getHebrewDate(date, includeYear = false) {
     }
     
     // Format: "25 في كسلو" or "25 في كيسلو تشافو"
-    let result = `${day} نص${month}`;
+    let result = `${day} ${month}`;
     if (includeYear && year) {
       result += ` ${year}`;
     }

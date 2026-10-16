@@ -54,7 +54,7 @@ function formatDateHebrew(dateStr) {
 
 function formatCurrency(amount) {
   const value = Number(amount) || 0;
-  return `${value.toLocaleString('he-IL')} ₪`;
+  return `${value.toLocaleString('he-IL')} ج.م`;
 }
 
 function translateItemType(type) {

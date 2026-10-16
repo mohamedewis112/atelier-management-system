@@ -57,7 +57,7 @@ const PAYMENT_METHODS = [
   { value: "paybox", label: "صندوق الدفع" },
   { value: "credit", label: "بطاقة" },
   { value: "transfer", label: "نقل" },
-  { value: "check", label: "نص'نص" },
+  { value: "check", label: "شيك" },
 ];
 
 export default function NewTransactionPage() {
@@ -334,7 +334,7 @@ export default function NewTransactionPage() {
 
         {/* Amount Input */}
         <div className="text-center py-1">
-          <label className="text-xs text-muted-foreground font-bold uppercase tracking-widest mb-0.5 block">المبلغ بالشيكل</label>
+          <label className="text-xs text-muted-foreground font-bold uppercase tracking-widest mb-0.5 block">المبلغ بالجنيه المصري</label>
           <div className="relative inline-block w-full max-w-[240px]">
             <input
               type="number"
@@ -348,7 +348,7 @@ export default function NewTransactionPage() {
               className="text-5xl font-black text-center bg-transparent border-none focus:outline-none w-full placeholder:text-muted/20"
               autoFocus
             />
-            <span className="absolute -right-5 top-1 text-2xl text-muted-foreground font-light">₪</span>
+            <span className="absolute -right-5 top-1 text-2xl text-muted-foreground font-light">ج.م</span>
           </div>
         </div>
 
@@ -416,7 +416,7 @@ export default function NewTransactionPage() {
                       <div className="flex justify-between items-center mt-2">
                         <span className="text-xs text-muted-foreground">{order.order_summary || 'حجز'}</span>
                         <span className="text-xs font-bold text-green-600">
-                          توازن: ₪{(order.total_price || 0) + (order.total_customer_charge || 0) - (order.paid_amount || 0)}
+                          توازن: ج.م{(order.total_price || 0) + (order.total_customer_charge || 0) - (order.paid_amount || 0)}
                         </span>
                       </div>
                     </button>
@@ -440,7 +440,7 @@ export default function NewTransactionPage() {
                       const balance = (order.total_price || 0) + (order.total_customer_charge || 0) - (order.paid_amount || 0);
                       return (
                         <p className="text-xs font-bold text-green-700 mt-1 flex items-center gap-1">
-                          <Wallet className="h-3 w-3" /> الديون الحالية على النظام: ₪{balance}
+                          <Wallet className="h-3 w-3" /> الديون الحالية على النظام: ج.م{balance}
                         </p>
                       );
                     })()}
@@ -649,7 +649,7 @@ export default function NewTransactionPage() {
                         </div>
                         <div className="text-left flex flex-col items-end">
                           <span className="text-xs font-bold text-red-700 bg-red-50 px-2 py-0.5 rounded-md">
-                            ₪{(o.total_price || 0) + (o.total_customer_charge || 0) - (o.paid_amount || 0)} قصير
+                            ج.م{(o.total_price || 0) + (o.total_customer_charge || 0) - (o.paid_amount || 0)} قصير
                           </span>
                         </div>
                       </button>
@@ -666,7 +666,7 @@ export default function NewTransactionPage() {
                         const balance = (order.total_price || 0) + (order.total_customer_charge || 0) - (order.paid_amount || 0);
                         return (
                           <p className="text-[10px] font-bold text-red-700 mt-1 flex items-center gap-1">
-                            <Wallet className="h-3 w-3" /> الديون الحالية: ₪{balance}
+                            <Wallet className="h-3 w-3" /> الديون الحالية: ج.م{balance}
                           </p>
                         );
                       })()}
@@ -715,7 +715,7 @@ export default function NewTransactionPage() {
             <div className="space-y-1">
               {paymentMethod === "cash" ? null : paymentMethod === "check" ? (
                 <>
-                  <label className="text-[11px] font-bold text-muted-foreground uppercase">رقم ج'نص</label>
+                  <label className="text-[11px] font-bold text-muted-foreground uppercase">رقم شيك</label>
                   <Input value={checkNumber} onChange={(e) => setCheckNumber(e.target.value)} className="h-10" />
                 </>
               ) : (
@@ -756,15 +756,15 @@ export default function NewTransactionPage() {
           {(paymentMethod === "transfer" || paymentMethod === "check") && (
             <div className="grid grid-cols-3 gap-2 animate-in fade-in slide-in-from-top-2">
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-muted-foreground uppercase">ضريبة' بنك</label>
+                <label className="text-[10px] font-bold text-muted-foreground uppercase">رقم البنك</label>
                 <Input value={bankNumber} onChange={(e) => setBankNumber(e.target.value)} className="h-9 text-center" />
               </div>
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-muted-foreground uppercase">ضريبة' فرع</label>
+                <label className="text-[10px] font-bold text-muted-foreground uppercase">رقم الفرع</label>
                 <Input value={branchNumber} onChange={(e) => setBranchNumber(e.target.value)} className="h-9 text-center" />
               </div>
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-muted-foreground uppercase">ضريبة' فاتورة</label>
+                <label className="text-[10px] font-bold text-muted-foreground uppercase">رقم الحساب</label>
                 <Input value={accountNumber} onChange={(e) => setAccountNumber(e.target.value)} className="h-9 text-center" />
               </div>
             </div>

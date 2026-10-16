@@ -196,7 +196,7 @@ export default function OrdersPage() {
     } catch (error) {
       toast({
         title: "خطأ",
-        description: error instanceof Error ? error.message : "خطأ نصدمج",
+        description: error instanceof Error ? error.message : "خطأ في الدمج",
         variant: "destructive",
       });
     } finally {
@@ -260,7 +260,7 @@ export default function OrdersPage() {
       await ordersApi.delete(order.id);
       toast({ title: "تم بنجاح", description: "تم إلغاء الحجز" });
     } catch (error) {
-      toast({ title: "خطأ", description: "خطأ نصإلغاء", variant: "destructive" });
+      toast({ title: "خطأ", description: "خطأ في الإلغاء", variant: "destructive" });
     } finally {
       mutate();
     }
@@ -322,7 +322,7 @@ export default function OrdersPage() {
       setAttachments(prev => prev.filter(a => a.id !== attachmentId));
       toast({ title: "تم بنجاح", description: "تم حذف الملف" });
     } catch {
-      toast({ title: "خطأ", description: "خطأ نصحذف", variant: "destructive" });
+      toast({ title: "خطأ", description: "خطأ في الحذف", variant: "destructive" });
     }
   };
 

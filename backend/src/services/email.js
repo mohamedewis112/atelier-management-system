@@ -360,14 +360,14 @@ export async function sendNewIncomeNotification({
 }) {
   const formattedDate = transactionDate ? formatDateHebrew(transactionDate) : formatDateHebrew(new Date());
 
-  const subject = `دخل جديد: ₪${amount} - ${customerName || category}`;
+  const subject = `دخل جديد: ج.م${amount} - ${customerName || category}`;
 
   const htmlBody = `
     <div dir="rtl" style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; text-align: right;">
       <h2 style="color: #28a745; text-align: center;">${ICON.money} دخل جديد</h2>
       
       <div style="background-color: #f9f9f9; padding: 20px; border-radius: 8px; margin: 20px 0;">
-        <p>${ICON.money} <strong>المبلغ:</strong> <span style="font-size: 1.2em; font-weight: bold;">₪${amount}</span></p>
+        <p>${ICON.money} <strong>المبلغ:</strong> <span style="font-size: 1.2em; font-weight: bold;">ج.م${amount}</span></p>
         <p>${ICON.tag} <strong>فئة:</strong> ${category}</p>
         ${customerName ? `<p>${ICON.person} <strong>عميل:</strong> ${customerName}</p>` : ''}
         ${dressName ? `<p>${ICON.dress} <strong>قطعة:</strong> ${dressName}</p>` : ''}
@@ -422,14 +422,14 @@ export async function sendNewExpenseNotification({
 }) {
   const formattedDate = transactionDate ? formatDateHebrew(transactionDate) : formatDateHebrew(new Date());
 
-  const subject = `إصدار جديد: ₪${amount} - ${supplier || category}`;
+  const subject = `إصدار جديد: ج.م${amount} - ${supplier || category}`;
 
   const htmlBody = `
     <div dir="rtl" style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; text-align: right;">
       <h2 style="color: #dc3545; text-align: center;">${ICON.expense} إصدار جديد</h2>
       
       <div style="background-color: #f9f9f9; padding: 20px; border-radius: 8px; margin: 20px 0;">
-        <p>${ICON.expense} <strong>المبلغ:</strong> <span style="font-size: 1.2em; font-weight: bold;">₪${amount}</span></p>
+        <p>${ICON.expense} <strong>المبلغ:</strong> <span style="font-size: 1.2em; font-weight: bold;">ج.م${amount}</span></p>
         <p>${ICON.tag} <strong>فئة:</strong> ${category}</p>
         ${supplier ? `<p>${ICON.shop} <strong>مزود:</strong> ${supplier}</p>` : ''}
         ${product ? `<p>${ICON.box} <strong>منتج/خدمة:</strong> ${product}</p>` : ''}
@@ -501,11 +501,11 @@ export async function sendNewOrderNotification({
 
   // Build dresses list
   const dressesText = dresses && dresses.length > 0
-    ? dresses.map(d => `${d.itemTypeLabel || typeLabelMap[d.itemType] || ''} ${d.name} - ₪${d.price}`.trim()).join('\n')
+    ? dresses.map(d => `${d.itemTypeLabel || typeLabelMap[d.itemType] || ''} ${d.name} - ج.م${d.price}`.trim()).join('\n')
     : 'لم يتم تحديد القطع';
 
   const dressesHtml = dresses && dresses.length > 0
-    ? dresses.map(d => `<li>${d.itemTypeLabel || typeLabelMap[d.itemType] || 'قطعة'}: ${d.name} - ₪${d.price}</li>`).join('')
+    ? dresses.map(d => `<li>${d.itemTypeLabel || typeLabelMap[d.itemType] || 'قطعة'}: ${d.name} - ج.م${d.price}</li>`).join('')
     : '<li>لم يتم تحديد القطع</li>';
 
   // Build deposit details string if available
@@ -513,7 +513,7 @@ export async function sendNewOrderNotification({
   if (depositPayments && depositPayments.length > 0) {
     depositDetailsText = '\nتفاصيل التقدم:\n' + depositPayments.map(p => {
       const confirmStr = p.confirmationNumber ? ` (مرجع: ${p.confirmationNumber})` : '';
-      return `- ₪${p.amount} نص${p.method}${confirmStr}`;
+      return `- ج.م${p.amount} - ${p.method}${confirmStr}`;
     }).join('\n');
   }
 
@@ -533,9 +533,9 @@ export async function sendNewOrderNotification({
 قطع:
 ${dressesText}
 
-السعر الإجمالي: ₪${totalPrice}
-يتقدم: ₪${deposit || 0}${depositDetailsText}
-الرصيد المستحق: ₪${remaining}
+السعر الإجمالي: ج.م${totalPrice}
+يتقدم: ج.م${deposit || 0}${depositDetailsText}
+الرصيد المستحق: ج.م${remaining}
 
 ${computedOrderSummary ? `ما أغلق: ${computedOrderSummary}` : ''}
 ${customerEmail ? `البريد الإلكتروني: ${customerEmail}` : ''}
@@ -548,7 +548,7 @@ ${notes ? `ملاحظات: ${notes}` : ''}
     const items = depositPayments.map(p => {
       const confirmStr = p.confirmationNumber ? ` <span style="font-size:0.9em; color:#666;">(مرجع: ${p.confirmationNumber})</span>` : '';
       const fileStr = p.hasFile ? ' &#10004;' : '';
-      return `<li>₪${p.amount} نص${p.method}${confirmStr}${fileStr}</li>`;
+      return `<li>ج.م${p.amount} - ${p.method}${confirmStr}${fileStr}</li>`;
     }).join('');
     depositHtml = `<ul style="margin: 5px 0;">${items}</ul>`;
   }
@@ -574,10 +574,10 @@ ${notes ? `ملاحظات: ${notes}` : ''}
       </div>
       
       <div style="background-color: #d4edda; padding: 15px; border-radius: 8px; margin: 20px 0; border: 1px solid #c3e6cb;">
-        <p>${ICON.money} <strong>السعر الإجمالي:</strong> ₪${totalPrice}</p>
-        <p>${ICON.card} <strong>يتقدم:</strong> ₪${deposit || 0}</p>
+        <p>${ICON.money} <strong>السعر الإجمالي:</strong> ج.م${totalPrice}</p>
+        <p>${ICON.card} <strong>يتقدم:</strong> ج.م${deposit || 0}</p>
         ${depositHtml ? `<div style="margin-top:5px; padding-top:5px; border-top:1px dashed #ccc;"><strong>التفاصيل:</strong>${depositHtml}</div>` : ''}
-        <p style="font-weight: bold; color: #155724;">${ICON.money} <strong>الرصيد المستحق:</strong> ₪${remaining}</p>
+        <p style="font-weight: bold; color: #155724;">${ICON.money} <strong>الرصيد المستحق:</strong> ج.م${remaining}</p>
       </div>
       
       ${notes ? `<p>${ICON.note} <strong>ملاحظات:</strong> ${notes}</p>` : ''}
@@ -716,7 +716,7 @@ export async function sendTaskToGoogle({ listName = 'العملاء', title, due
 /**
  * Send file upload request to Google Drive via Apps Script
  * 
- * @param {string} fileName - Target file name (e.g., "260203 محل 150₪.jpg")
+ * @param {string} fileName - Target file name (e.g., "260203 محل 150 ج.م.jpg")
  * @param {string} folder - Folder path (e.g., "2026/مصروفات/النفقات المعروفة 2026")
  * @param {Buffer} fileBuffer - File content as Buffer
  */

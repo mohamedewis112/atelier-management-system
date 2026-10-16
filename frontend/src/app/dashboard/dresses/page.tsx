@@ -225,7 +225,7 @@ export default function DressesPage() {
     } catch (error) {
       toast({
         title: "خطأ",
-        description: error instanceof Error ? error.message : "خطأ نصدمج",
+        description: error instanceof Error ? error.message : "خطأ في الدمج",
         variant: "destructive",
       });
     } finally {
@@ -402,7 +402,7 @@ export default function DressesPage() {
               <div className="order-2 flex-1 min-w-0 text-right">
                 <div className="font-bold text-base leading-snug break-words">{dress.name}</div>
                 <div className="text-[11px] font-bold text-muted-foreground mt-0.5">
-                  ماك&quot;نص: {dress.id} • {dress.rental_count} إيجارات • {getIntendedUseShortLabel(dress.intended_use)}
+                  كود: {dress.id} • {dress.rental_count} إيجارات • {getIntendedUseShortLabel(dress.intended_use)}
                 </div>
                 <div className="text-[11px] font-bold text-muted-foreground mt-0.5">
                   السعر: {formatCurrency(dress.base_price)} • إيرادات: {formatCurrency(dress.total_income)}
@@ -471,7 +471,7 @@ export default function DressesPage() {
                   <div>
                     <h3 className="font-black text-xl text-gray-900 leading-snug break-words whitespace-normal">{dress.name}</h3>
                     <p className="text-xs font-bold text-muted-foreground uppercase mt-1">
-                      ماك&quot;نص: {dress.id} • {dress.rental_count} إيجارات • {getIntendedUseLabel(dress.intended_use)}
+                      كود: {dress.id} • {dress.rental_count} إيجارات • {getIntendedUseLabel(dress.intended_use)}
                     </p>
                   </div>
                   <div className="flex gap-2">
@@ -575,7 +575,7 @@ export default function DressesPage() {
                           <img src={d.thumbnail_url || d.photo_url || ""} alt={d.name} className="w-full h-28 object-cover rounded-lg mb-2" />
                         )}
                         <h3 className="font-bold text-base leading-snug">{d.name}</h3>
-                        <p className="text-xs text-muted-foreground">ماك&quot;نص {d.id} • {d.rental_count} إيجارات</p>
+                        <p className="text-xs text-muted-foreground">كود {d.id} • {d.rental_count} إيجارات</p>
                       </div>
                     );
                   })}

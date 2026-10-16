@@ -127,7 +127,7 @@ export async function extractReceiptDetails(fileBuffer, mimeType, expectedPaymen
       Extract the following fields if visible:
       - confirmation_number (مرجع / تأكيد / رقم الإجراء) - REMOVE HYPHENS/DASHES if present.
       - last_four_digits (4 الأرقام الأخيرة من بطاقة الائتمان)
-      - check_number (رقم ج'نص)
+      - check_number (رقم شيك)
       - installments (عدد الدفعات - default to 1 if not specified or if it's a single payment)
       - bank_details: Extract bank number, branch number, and account number separately if present.
       

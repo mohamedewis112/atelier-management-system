@@ -370,7 +370,7 @@ export default function AgreementPage() {
                             {item.wearerName ? ` - ${item.wearerName}` : ""}
                           </p>
                           <p className="text-muted-foreground">
-                            السعر: ₪{(item.finalPrice || 0).toLocaleString("he-IL")}
+                            السعر: ج.م{(item.finalPrice || 0).toLocaleString("he-IL")}
                           </p>
                         </div>
                       ))}

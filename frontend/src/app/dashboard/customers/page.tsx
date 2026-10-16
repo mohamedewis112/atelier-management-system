@@ -175,7 +175,7 @@ export default function CustomersPage() {
       setIsSelectionMode(false);
       mutate();
     } catch (error) {
-      const message = error instanceof Error ? error.message : "خطأ نصدمج";
+      const message = error instanceof Error ? error.message : "خطأ في الدمج";
       toast({
         title: "خطأ",
         description: message,
@@ -453,7 +453,7 @@ export default function CustomersPage() {
             </div>
             <CardContent className="p-6 space-y-6">
               <div className="bg-purple-50 p-4 rounded-xl text-purple-800 text-sm font-medium">
-                انتبه: سيؤدي هذا إلى توحيد جميع الطلبات, المدفوعات وتاريخ كل منعملاء نصعميل واحد. نصعميل سيتم حذف الثاني.
+                انتبه: سيؤدي هذا إلى توحيد جميع الطلبات, المدفوعات وتاريخ كل العميلين في عميل واحد. وسيتم حذف العميل الثاني.
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -481,7 +481,7 @@ export default function CustomersPage() {
                     >
                       {isTarget && (
                         <div className="absolute top-0 right-0 bg-purple-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-bl-xl">
-                          نصعميل الرئيسي (يتم حفظها)
+                          العميل الرئيسي (يتم حفظها)
                         </div>
                       )}
                       <h3 className="font-bold text-lg mb-1">{c.name}</h3>

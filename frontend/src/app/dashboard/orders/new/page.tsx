@@ -1141,7 +1141,7 @@ export default function NewOrderPage() {
                   {payment.method === "transfer" && (
                     <div className="sm:col-span-4 grid grid-cols-3 gap-2">
                       <Input
-                        placeholder="ضريبة' بنك"
+                        placeholder="رقم البنك"
                         className="h-10 text-center focus:border-green-600"
                         value={payment.bank_details?.bank || ""}
                         onChange={(e) => {
@@ -1152,7 +1152,7 @@ export default function NewOrderPage() {
                         }}
                       />
                       <Input
-                        placeholder="ضريبة' فرع"
+                        placeholder="رقم الفرع"
                         className="h-10 text-center focus:border-green-600"
                         value={payment.bank_details?.branch || ""}
                         onChange={(e) => {
@@ -1163,7 +1163,7 @@ export default function NewOrderPage() {
                         }}
                       />
                       <Input
-                        placeholder="ضريبة' فاتورة"
+                        placeholder="رقم الحساب"
                         className="h-10 text-center focus:border-green-600"
                         value={payment.bank_details?.account || ""}
                         onChange={(e) => {
@@ -1180,7 +1180,7 @@ export default function NewOrderPage() {
                   {payment.method === "check" && (
                     <div className="sm:col-span-4 grid grid-cols-4 gap-2">
                       <Input
-                        placeholder="ضريبة' نص'نص"
+                        placeholder="رقم شيك"
                         className="h-10 text-center focus:border-green-600"
                         value={payment.check_number || ""}
                         onChange={(e) => {
@@ -1190,7 +1190,7 @@ export default function NewOrderPage() {
                         }}
                       />
                       <Input
-                        placeholder="ضريبة' بنك"
+                        placeholder="رقم البنك"
                         className="h-10 text-center focus:border-green-600"
                         value={payment.bank_details?.bank || ""}
                         onChange={(e) => {
@@ -1201,7 +1201,7 @@ export default function NewOrderPage() {
                         }}
                       />
                       <Input
-                        placeholder="ضريبة' فرع"
+                        placeholder="رقم الفرع"
                         className="h-10 text-center focus:border-green-600"
                         value={payment.bank_details?.branch || ""}
                         onChange={(e) => {
@@ -1212,7 +1212,7 @@ export default function NewOrderPage() {
                         }}
                       />
                       <Input
-                        placeholder="ضريبة' فاتورة"
+                        placeholder="رقم الحساب"
                         className="h-10 text-center focus:border-green-600"
                         value={payment.bank_details?.account || ""}
                         onChange={(e) => {

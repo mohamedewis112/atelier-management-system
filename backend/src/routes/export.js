@@ -65,7 +65,7 @@ const PAYMENT_METHOD_OPTIONS = [
   { value: 'paybox', label: 'صندوق الدفع' },
   { value: 'credit', label: 'بطاقة' },
   { value: 'transfer', label: 'تحويل بنكي' },
-  { value: 'check', label: "نص'نص" },
+  { value: 'check', label: "شيك" },
 ];
 
 const RENTAL_TYPE_OPTIONS = [

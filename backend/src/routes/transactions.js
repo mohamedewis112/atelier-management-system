@@ -790,7 +790,7 @@ router.put('/:id', (req, res, next) => {
                 const pyy = dt.getFullYear().toString().slice(-2);
                 const pmm = (dt.getMonth() + 1).toString().padStart(2, '0');
                 const pdd = dt.getDate().toString().padStart(2, '0');
-                return `${pyy}${pmm}${pdd} ${s || 'مزود_لا_معروف'} ${a}₪${ext}`;
+                return `${pyy}${pmm}${pdd} ${s || 'مزود_لا_معروف'} ${a}ج.م${ext}`;
               };
 
               const exts = ['jpg', 'png', 'pdf'];

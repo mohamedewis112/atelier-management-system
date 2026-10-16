@@ -11,7 +11,7 @@ const METHOD_SYNONYMS = {
   paybox: ['paybox', 'صندوق الدفع', 'pay box'],
   credit: ['credit', 'card', 'بطاقة', 'بطاقة'],
   transfer: ['transfer', 'bank transfer', 'نقل', 'مصرفي'],
-  check: ['check', 'cheque', "نص'نص", 'يفحص', 'شيك']
+  check: ['check', 'cheque', "شيك", 'يفحص', 'شيك']
 };
 
 function normalizeText(value) {

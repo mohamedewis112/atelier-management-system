@@ -101,7 +101,7 @@ function formatDateYYMMDD(date = new Date()) {
 /**
  * Save expense receipt to the synced folder.
  *
- * Filename format: "[YYMMDD] [supplier] [description] [amount]₪.[ext]"
+ * Filename format: "[YYMMDD] [supplier] [description] [amount]ج.م.[ext]"
  * Folder structure: expenses/[YEAR]/[category]/
  *
  * @param {Buffer|string} receiptData  - Receipt file data (buffer or base64)
@@ -119,12 +119,12 @@ export function saveExpenseReceipt(receiptData, category, description, supplier,
     const folderPath = join(localStorageConfig.expensesFolder, year.toString(), cleanForFilename(category));
     ensureDirectoryExists(folderPath);
 
-    // Build filename: "[YYMMDD] [supplier] [description] [amount]₪.ext"
+    // Build filename: "[YYMMDD] [supplier] [description] [amount]ج.م.ext"
     const dateStr = formatDateYYMMDD(expenseDate);
     const parts = [dateStr];
     if (supplier && supplier.trim()) parts.push(cleanForFilename(supplier.trim()));
     if (description && description.trim()) parts.push(cleanForFilename(description.trim()));
-    if (amount != null) parts.push(`${amount}₪`);
+    if (amount != null) parts.push(`${amount}ج.م`);
     const filename = `${parts.join(' ')}.${extension}`;
     const filePath = join(folderPath, filename);
 
@@ -311,7 +311,7 @@ export async function renameExpenseReceipt(
     const oldParts = [oldDateStr];
     if (oldSupplier && oldSupplier.trim()) oldParts.push(cleanForFilename(oldSupplier.trim()));
     if (oldDesc && oldDesc.trim()) oldParts.push(cleanForFilename(oldDesc.trim()));
-    if (oldAmount != null) oldParts.push(`${oldAmount}₪`);
+    if (oldAmount != null) oldParts.push(`${oldAmount}ج.م`);
     const oldFilename = `${oldParts.join(' ')}.${extension}`;
     const oldFilePath = join(oldFolderPath, oldFilename);
 
@@ -329,7 +329,7 @@ export async function renameExpenseReceipt(
     const newParts = [newDateStr];
     if (newSupplier && newSupplier.trim()) newParts.push(cleanForFilename(newSupplier.trim()));
     if (newDesc && newDesc.trim()) newParts.push(cleanForFilename(newDesc.trim()));
-    if (newAmount != null) newParts.push(`${newAmount}₪`);
+    if (newAmount != null) newParts.push(`${newAmount}ج.م`);
     const newFilename = `${newParts.join(' ')}.${extension}`;
     const newFilePath = join(newFolderPath, newFilename);
 
