@@ -219,14 +219,14 @@ export default function CustomersPage() {
     try {
       if (editingCustomer) {
         await customersApi.update(editingCustomer.id, formData);
-        toast({ title: "تم بنجاح", description: "عميل تم التحديث فيتم بنجاح" });
+        toast({ title: "تم بنجاح", description: "تم تحديث بيانات العميل بنجاح" });
       } else {
         await customersApi.create(formData);
-        toast({ title: "تم بنجاح", description: "عميل وأضاف بتم بنجاح" });
+        toast({ title: "تم بنجاح", description: "تمت إضافة العميل بنجاح" });
       }
       resetForm();
     } catch (error) {
-      const message = error instanceof Error ? error.message : "خطأ في الاحتفاظ بالعملاء";
+      const message = error instanceof Error ? error.message : "تعذر حفظ بيانات العميل";
       toast({
         title: "خطأ",
         description: message,
@@ -262,13 +262,13 @@ export default function CustomersPage() {
           <div>
             <div className="flex items-center gap-2 text-primary mb-1">
               <Sparkles className="h-4 w-4" />
-              <span className="text-xs font-bold uppercase tracking-wider">عملائي</span>
+              <span className="text-xs font-bold uppercase tracking-wider">قاعدة العملاء</span>
             </div>
-            <h1 className="text-3xl font-black">إدارة <span className="text-primary">العملاء</span></h1>
+            <h1 className="text-3xl font-black">إدارة العملاء</h1>
             <p className="text-muted-foreground text-sm font-medium">
               {sourceFilter
                 ? `${customers.filter(c => c.source === sourceFilter).length} من ${customers.length} عملاء`
-                : `${customers.length} عميل مسجل بالنظام`}
+                : `${customers.length} عميل مسجل`}
             </p>
           </div>
           <div className="flex gap-2">
@@ -284,7 +284,7 @@ export default function CustomersPage() {
             </Button>
             <Button onClick={() => setShowForm(true)} className="rounded-2xl h-12 px-6 shadow-lg shadow-primary/20">
               <Plus className="h-5 w-5 ml-2" />
-              عميل
+              إضافة عميل
             </Button>
           </div>
         </div>
@@ -312,7 +312,7 @@ export default function CustomersPage() {
           >
             <option value="last_active_date-desc">آخر نشاط</option>
             <option value="name-asc">الاسم</option>
-            <option value="created_at-desc">الأحدث إضافة</option>
+            <option value="created_at-desc">الأحدث تسجيلًا</option>
           </select>
 
           <select
@@ -398,7 +398,7 @@ export default function CustomersPage() {
                 <div className="flex items-center justify-between border-t pt-4">
                   <div className="flex gap-2">
                     <span className="text-[10px] font-bold text-muted-foreground bg-gray-100 px-2 py-1 rounded-lg uppercase">
-                      وأضاف: {formatDateShort(customer.created_at)}
+                      أضيف: {formatDateShort(customer.created_at)}
                     </span>
                     {customer.source && (
                       <span className="text-[10px] font-bold text-primary/60 bg-primary/5 px-2 py-1 rounded-lg uppercase">
@@ -428,7 +428,7 @@ export default function CustomersPage() {
             className="h-14 px-8 rounded-full shadow-2xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-lg gap-2"
           >
             <Users className="h-5 w-5" />
-            دمج 2 عملاء اختيار
+            دمج العميلين المحددين
           </Button>
         </div>
       )}
@@ -436,8 +436,8 @@ export default function CustomersPage() {
       {customers.length === 0 && !loading && (
         <div className="text-center py-24 bg-white rounded-[3rem] shadow-inner">
           <UserPlus className="h-16 w-16 mx-auto text-muted-foreground/30 mb-4" />
-          <h3 className="text-xl font-bold text-gray-900">لم يتم العثور على عملاء</h3>
-          <p className="text-muted-foreground">غيّر البحث أو أضف عميلاً جديدًا</p>
+          <h3 className="text-xl font-bold text-gray-900">لا توجد نتائج مطابقة</h3>
+          <p className="text-muted-foreground">جرّب تعديل البحث أو أضف عميلًا جديدًا.</p>
         </div>
       )}
 
@@ -453,7 +453,7 @@ export default function CustomersPage() {
             </div>
             <CardContent className="p-6 space-y-6">
               <div className="bg-purple-50 p-4 rounded-xl text-purple-800 text-sm font-medium">
-                انتبه: سيؤدي هذا إلى توحيد جميع الطلبات, المدفوعات وتاريخ كل العميلين في عميل واحد. وسيتم حذف العميل الثاني.
+                سيتم دمج الحجوزات والمدفوعات والسجل المرتبط بالعميلين في ملف واحد، ثم حذف الملف المكرر. اختر العميل الأساسي بعناية.
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -481,7 +481,7 @@ export default function CustomersPage() {
                     >
                       {isTarget && (
                         <div className="absolute top-0 right-0 bg-purple-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-bl-xl">
-                          العميل الرئيسي (يتم حفظها)
+                          العميل الأساسي (سيتم الاحتفاظ به)
                         </div>
                       )}
                       <h3 className="font-bold text-lg mb-1">{c.name}</h3>
