@@ -251,11 +251,11 @@ export default function DressesPage() {
           <div>
             <div className="flex items-center gap-2 text-primary mb-1">
               <Sparkles className="h-4 w-4" />
-              <span className="text-xs font-bold uppercase tracking-wider">المجموعة</span>
+              <span className="text-xs font-bold uppercase tracking-wider">المخزون</span>
             </div>
-            <h1 className="text-3xl font-black">المخزون <span className="text-primary">القطع</span></h1>
+            <h1 className="text-3xl font-black">إدارة القطع</h1>
             <p className="text-muted-foreground text-sm font-medium">
-              {dresses.length} القطع في النظام • {bookableCount} النشاط بالمخزون
+              {dresses.length} قطعة مسجلة • {bookableCount} قطعة متاحة للحجز
             </p>
           </div>
           <div className="flex gap-2">
@@ -268,7 +268,7 @@ export default function DressesPage() {
             </Button>
             <Button onClick={() => router.push("/dashboard/dresses/new")} className="rounded-2xl h-12 px-6 shadow-lg shadow-primary/20">
               <Plus className="h-5 w-5 ml-2" />
-              قطعة
+              إضافة قطعة
             </Button>
           </div>
         </div>
@@ -293,7 +293,7 @@ export default function DressesPage() {
               <option value="">كل الحالات</option>
               <option value="available">متاحة</option>
               <option value="sold">مباعة</option>
-              <option value="retired">انفق ماذاالمخزون</option>
+              <option value="retired">خارج الخدمة</option>
               <option value="custom_sewing">تفصيل خاص</option>
             </select>
             <select
@@ -322,8 +322,8 @@ export default function DressesPage() {
             >
               <option value="last_active_date-desc">آخر نشاط</option>
               <option value="name-asc">الاسم</option>
-              <option value="rental_count-desc">ترتيب: مرات الإيجار</option>
-              <option value="total_income-desc">ترتيب: الإيراد</option>
+              <option value="rental_count-desc">الأكثر إيجارًا</option>
+              <option value="total_income-desc">الأعلى إيرادًا</option>
             </select>
           </div>
 
@@ -402,10 +402,10 @@ export default function DressesPage() {
               <div className="order-2 flex-1 min-w-0 text-right">
                 <div className="font-bold text-base leading-snug break-words">{dress.name}</div>
                 <div className="text-[11px] font-bold text-muted-foreground mt-0.5">
-                  كود: {dress.id} • {dress.rental_count} إيجارات • {getIntendedUseShortLabel(dress.intended_use)}
+                  رقم القطعة: {dress.id} • {dress.rental_count} مرات إيجار • {getIntendedUseShortLabel(dress.intended_use)}
                 </div>
                 <div className="text-[11px] font-bold text-muted-foreground mt-0.5">
-                  السعر: {formatCurrency(dress.base_price)} • إيرادات: {formatCurrency(dress.total_income)}
+                  السعر الأساسي: {formatCurrency(dress.base_price)} • إجمالي الإيراد: {formatCurrency(dress.total_income)}
                 </div>
               </div>
 
@@ -471,7 +471,7 @@ export default function DressesPage() {
                   <div>
                     <h3 className="font-black text-xl text-gray-900 leading-snug break-words whitespace-normal">{dress.name}</h3>
                     <p className="text-xs font-bold text-muted-foreground uppercase mt-1">
-                      كود: {dress.id} • {dress.rental_count} إيجارات • {getIntendedUseLabel(dress.intended_use)}
+                      رقم القطعة: {dress.id} • {dress.rental_count} مرات إيجار • {getIntendedUseLabel(dress.intended_use)}
                     </p>
                   </div>
                   <div className="flex gap-2">
