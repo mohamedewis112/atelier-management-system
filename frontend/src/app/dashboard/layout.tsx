@@ -55,7 +55,7 @@ export default function DashboardLayout({
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
-          <p className="mt-4 text-muted-foreground">טוען...</p>
+          <p className="mt-4 text-muted-foreground">جاري التحميل...</p>
         </div>
       </div>
     );
@@ -74,7 +74,7 @@ export default function DashboardLayout({
           {sidebarOpen ? <X className="h-6 w-6 text-primary" /> : <Menu className="h-6 w-6 text-primary" />}
         </Button>
         <div className="flex items-center gap-2">
-          <span className="font-bold text-sm">ניהול עסק שמלות</span>
+          <span className="font-bold text-sm">إدارة الأتيليه</span>
           <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white text-sm">👗</div>
         </div>
       </div>
