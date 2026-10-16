@@ -47,13 +47,13 @@ export function resolveFileUrl(pathOrUrl: string | null | undefined): string | n
 
 
 /**
- * Format a number as Israeli Shekel currency
+ * Format a number as Egyptian Pound currency
  */
 export function formatCurrency(amount: number | null | undefined): string {
-  if (amount == null) return '₪0';
-  return new Intl.NumberFormat('he-IL', {
+  if (amount == null) return '٠ ج.م';
+  return new Intl.NumberFormat('ar-EG', {
     style: 'currency',
-    currency: 'ILS',
+    currency: 'EGP',
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   }).format(amount);
@@ -65,7 +65,7 @@ export function formatCurrency(amount: number | null | undefined): string {
 export function formatDate(date: string | Date | null | undefined): string {
   if (!date) return '-';
   const d = typeof date === 'string' ? new Date(date) : date;
-  return d.toLocaleDateString('he-IL', {
+  return d.toLocaleDateString('ar-EG', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
@@ -100,7 +100,7 @@ export function formatDateInput(date: string | Date | null | undefined): string 
 export function formatTime(date: string | Date | null | undefined): string {
   if (!date) return '-';
   const d = typeof date === 'string' ? new Date(date) : date;
-  return d.toLocaleTimeString('he-IL', {
+  return d.toLocaleTimeString('ar-EG', {
     hour: '2-digit',
     minute: '2-digit',
     hour12: false,
@@ -117,7 +117,7 @@ export function formatDateTime(date: string | Date | null | undefined): string {
 }
 
 /**
- * Get Hebrew day name
+ * Get Arabic day name
  */
 export function getHebrewDayName(date: string | Date): string {
   const d = typeof date === 'string' ? new Date(date) : date;
@@ -136,11 +136,11 @@ export function getRelativeDate(date: string | Date): string {
 
   const diffDays = Math.ceil((targetDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
 
-  if (diffDays === 0) return 'היום';
-  if (diffDays === 1) return 'מחר';
-  if (diffDays === -1) return 'אתמול';
-  if (diffDays > 1 && diffDays <= 7) return `בעוד ${diffDays} ימים`;
-  if (diffDays < -1 && diffDays >= -7) return `לפני ${Math.abs(diffDays)} ימים`;
+  if (diffDays === 0) return 'اليوم';
+  if (diffDays === 1) return 'غدًا';
+  if (diffDays === -1) return 'أمس';
+  if (diffDays > 1 && diffDays <= 7) return `بعد ${diffDays} أيام`;
+  if (diffDays < -1 && diffDays >= -7) return `منذ ${Math.abs(diffDays)} أيام`;
 
   return formatDateShort(d);
 }
@@ -150,22 +150,22 @@ export function getRelativeDate(date: string | Date): string {
  */
 export const statusLabels: Record<string, string> = {
   // Order DB statuses (stored values — kept as fallback)
-  active: 'פעילה',
-  cancelled: 'בוטלה',
+  active: 'نشط',
+  cancelled: 'ملغي',
 
   // Computed order display statuses (derived from event_date + balance in the UI)
-  open: 'פתוחה',
-  completed: 'הושלמה',
+  open: 'مفتوح',
+  completed: 'مكتمل',
 
   // Dress statuses
-  available: 'פנויה',
-  sold: 'נמכרה',
-  retired: 'הוצאה מהמלאי',
-  custom_sewing: 'תפירה אישית',
+  available: 'متاح',
+  sold: 'مباع',
+  retired: 'خارج الخدمة',
+  custom_sewing: 'تفصيل خاص',
 
   // Appointment statuses
-  scheduled: 'מתוזמן',
-  no_show: 'לא הגיע',
+  scheduled: 'مجدول',
+  no_show: 'لم يحضر',
 };
 
 /**
@@ -244,16 +244,16 @@ export function computeOrderDisplayStatus(order: {
  */
 export const categoryLabels: Record<string, string> = {
   // Income categories
-  order: 'הזמנה',
-  repair: 'תיקונים',
-  other: 'אחר',
+  order: 'حجز',
+  repair: 'إصلاحات',
+  other: 'أخرى',
 
   // Expense categories
-  materials: 'חומרים',
-  overhead: 'תקורה',
-  tax: 'מיסוי',
-  equipment: 'ציוד',
-  salary: 'משכורות',
+  materials: 'خامات',
+  overhead: 'مصاريف تشغيل',
+  tax: 'ضرائب',
+  equipment: 'معدات',
+  salary: 'رواتب',
 };
 
 /**
@@ -267,12 +267,12 @@ export function getCategoryLabel(category: string): string {
  * Payment method labels
  */
 export const paymentMethodLabels: Record<string, string> = {
-  cash: 'מזומן',
-  credit: 'אשראי',
-  bit: 'ביט',
-  paybox: 'פייבוקס',
-  transfer: 'העברה בנקאית',
-  check: 'צ\'ק',
+  cash: 'نقدي',
+  credit: 'بطاقة',
+  bit: 'محفظة',
+  paybox: 'محفظة',
+  transfer: 'تحويل بنكي',
+  check: 'شيك',
 };
 
 /**
