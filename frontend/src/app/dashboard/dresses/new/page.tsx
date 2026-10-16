@@ -241,8 +241,8 @@ export default function NewDressPage() {
                                         <div className="h-12 w-12 bg-primary/10 rounded-full flex items-center justify-center text-primary">
                                             <Plus className="h-6 w-6" />
                                         </div>
-                                        <span className="text-sm font-bold text-muted-foreground">انقر لتحميل الصورة</span>
-                                        <span className="text-[10px] text-muted-foreground/60 uppercase font-black"JPG أو PNG أو WEBP — الحد الأقصى' 10MB)</span>
+                                        <span className="text-sm font-bold text-muted-foreground">اضغط لرفع صورة القطعة</span>
+                                        <span className="text-[10px] text-muted-foreground/60 uppercase font-black">JPG أو PNG أو WEBP — الحد الأقصى 10MB</span>
                                         <input
                                             type="file"
                                             className="hidden"
