@@ -42,10 +42,10 @@ export default function NewDressPage() {
                             thumbnail_url: res.data!.thumbnailUrl,
                         }));
                         clearSharedUploadPayload();
-                        toast({ title: "تم استلام الصورة", description: "تم تحميل صورة القطعة بنجاح إلى النموذج" });
+                        toast({ title: "تم استلام الصورة", description: "تم إرفاق صورة القطعة" });
                     }
                 } catch (error) {
-                    toast({ title: "خطأ", description: "فشل تحميل الصورة من المشاركة", variant: "destructive" });
+                    toast({ title: "خطأ", description: "تعذر تحميل الصورة المشتركة", variant: "destructive" });
                 } finally {
                     setSaving(false);
                 }
@@ -98,7 +98,7 @@ export default function NewDressPage() {
                 toast({ title: "تم بنجاح", description: "تم تحميل الصورة بنجاح" });
             }
         } catch (error) {
-            toast({ title: "خطأ", description: "فشل تحميل الصورة", variant: "destructive" });
+            toast({ title: "خطأ", description: "تعذر تحميل الصورة", variant: "destructive" });
             reportClientError({
                 message: error instanceof Error ? error.message : String(error),
                 stack: error instanceof Error ? error.stack : undefined,
@@ -113,7 +113,7 @@ export default function NewDressPage() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!formData.name.trim()) {
-            toast({ title: "خطأ", description: "الرجاء إدخال اسم اللباس", variant: "destructive" });
+            toast({ title: "خطأ", description: "أدخل اسم القطعة", variant: "destructive" });
             return;
         }
         setSaving(true);
@@ -142,7 +142,7 @@ export default function NewDressPage() {
                 message,
                 stack: error instanceof Error ? error.stack : undefined,
                 component: 'NewDress',
-                action: 'إنقاذ ثوب جديد'
+                action: 'حفظ قطعة جديدة'
             });
             setSaving(false);
         }
@@ -171,7 +171,7 @@ export default function NewDressPage() {
                                 value={formData.name}
                                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                                 className="h-14 rounded-2xl bg-muted/30 border-transparent focus:bg-white transition-all text-lg"
-                                placeholder="على سبيل المثال: قطعة ذهبي لامع"
+                                placeholder="مثال: فستان سواريه ذهبي"
                             />
                         </div>
 
@@ -242,7 +242,7 @@ export default function NewDressPage() {
                                             <Plus className="h-6 w-6" />
                                         </div>
                                         <span className="text-sm font-bold text-muted-foreground">انقر لتحميل الصورة</span>
-                                        <span className="text-[10px] text-muted-foreground/60 uppercase font-black">JPG, PNG, WEBP (الأعلى' 10MB)</span>
+                                        <span className="text-[10px] text-muted-foreground/60 uppercase font-black"JPG أو PNG أو WEBP — الحد الأقصى' 10MB)</span>
                                         <input
                                             type="file"
                                             className="hidden"
@@ -262,7 +262,7 @@ export default function NewDressPage() {
                                 value={formData.notes}
                                 onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
                                 className="w-full h-32 p-4 rounded-2xl bg-muted/30 border-none focus:ring-2 focus:ring-primary/20 outline-none resize-none shadow-inner"
-                                placeholder="أبعاد, نوع القماش, أبرز الخاصة..."
+                                placeholder="المقاس، نوع القماش، اللون، وأي ملاحظات مهمة..."
                             />
                         </div>
 
@@ -271,7 +271,7 @@ export default function NewDressPage() {
                                 إلغاء
                             </Button>
                             <Button type="submit" disabled={saving} className="flex-1 h-14 rounded-2xl font-bold shadow-lg shadow-primary/20">
-                                {saving ? "جاري التحميل..." : "حفظ اللباس"}
+                                {saving ? "جاري التحميل..." : "حفظ القطعة"}
                             </Button>
                         </div>
                     </form>
