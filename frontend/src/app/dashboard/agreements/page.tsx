@@ -68,7 +68,7 @@ export default function AgreementsPage() {
     if (!url) {
       toast({
         title: "الملف غير موجود",
-        description: `لا شئ ${label} لهذه الاتفاقية`,
+        description: `لا يوجد ${label} محفوظ لهذا العقد`,
         variant: "destructive",
       });
       return;
@@ -90,9 +90,9 @@ export default function AgreementsPage() {
         <div>
           <h1 className="text-3xl font-bold flex items-center gap-2">
             <FileSignature className="h-7 w-7" />
-            الاتفاقيات الموقعة
+            العقود
           </h1>
-          <p className="text-muted-foreground">كل العقود والتوقيعات والملفات المرتبطة بها</p>
+          <p className="text-muted-foreground">إدارة العقود الموقعة والتوقيعات والملفات المرتبطة بالحجوزات.</p>
         </div>
         <Button variant="outline" onClick={loadAgreements}>تحديث</Button>
       </div>
@@ -106,13 +106,13 @@ export default function AgreementsPage() {
         </Card>
         <Card>
           <CardContent className="pt-6">
-            <p className="text-sm text-muted-foreground">بتوقيع رقمي</p>
+            <p className="text-sm text-muted-foreground">عقود موقعة</p>
             <p className="text-3xl font-bold">{stats.withSignature}</p>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="pt-6">
-            <p className="text-sm text-muted-foreground">بملف PDF</p>
+            <p className="text-sm text-muted-foreground">ملفات PDF محفوظة</p>
             <p className="text-3xl font-bold">{stats.withPdf}</p>
           </CardContent>
         </Card>
@@ -120,7 +120,7 @@ export default function AgreementsPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle>قائمة العقود</CardTitle>
+          <CardTitle>سجل العقود</CardTitle>
         </CardHeader>
         <CardContent>
           {agreements.length === 0 ? (
@@ -139,10 +139,10 @@ export default function AgreementsPage() {
                     <div className="space-y-1">
                       <div className="font-semibold">{agreement.customer_name}</div>
                       <div className="text-sm text-muted-foreground">
-                        حجز: {agreement.order_id || "بدون"} | تم التوقيع: {agreement.agreed_at ? formatDateTime(agreement.agreed_at) : "-"}
+                        رقم الحجز: {agreement.order_id || "-"} | تاريخ التوقيع: {agreement.agreed_at ? formatDateTime(agreement.agreed_at) : "-"}
                       </div>
                       <div className="text-sm text-muted-foreground">
-                        حدث: {agreement.event_date || "-"} | الهاتف: {agreement.customer_phone || "-"}
+                        تاريخ المناسبة: {agreement.event_date || "-"} | الهاتف: {agreement.customer_phone || "-"}
                       </div>
                     </div>
 
@@ -154,7 +154,7 @@ export default function AgreementsPage() {
                         disabled={!signatureUrl}
                       >
                         <PenLine className="h-4 w-4 ms-1" />
-                        عرض فيالتوقيع
+                        عرض التوقيع
                       </Button>
                       <Button
                         size="sm"
@@ -163,7 +163,7 @@ export default function AgreementsPage() {
                         disabled={!pdfUrl}
                       >
                         <FileText className="h-4 w-4 ms-1" />
-                        عرض في-PDF
+                        فتح PDF
                       </Button>
                       {agreement.order_id && (
                         <Button
@@ -172,7 +172,7 @@ export default function AgreementsPage() {
                           className="bg-green-600 hover:bg-green-700 text-white"
                         >
                           <ShoppingBag className="h-4 w-4 ms-1" />
-                          فتح أمر
+                          فتح الحجز
                         </Button>
                       )}
                     </div>
