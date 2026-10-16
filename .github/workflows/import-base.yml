@@ -23,161 +23,29 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-
           rm -rf /tmp/atelier-upstream
           git clone --depth 1 https://github.com/moyshiginzburg/dress-rental-business-management.git /tmp/atelier-upstream
-
           mkdir -p docs
           cp /tmp/atelier-upstream/README.md docs/UPSTREAM_README.md
           git -C /tmp/atelier-upstream rev-parse HEAD > UPSTREAM_COMMIT.txt
-
-          rsync -a --delete \
-            --exclude='.git/' \
-            --exclude='.github/' \
-            --exclude='README.md' \
-            --exclude='UPSTREAM_COMMIT.txt' \
-            /tmp/atelier-upstream/ ./
-
-          cp /tmp/atelier-upstream/LICENSE LICENSE
-
-          cat > NOTICE.md <<'EOF'
-# Attribution Notice
-
-This repository started from the MIT-licensed project:
-**Dress Rental Business Management System** by Moyshi Ginzburg.
-
-Upstream:
-https://github.com/moyshiginzburg/dress-rental-business-management
-
-The original MIT copyright and permission notice are preserved in `LICENSE`.
-
-Smart Media / Mohamed Mahmoud's work in this repository is the adaptation,
-localization, atelier-specific workflow redesign, Windows/offline-first work,
-and subsequent custom development.
-EOF
-
-          cat > README.md <<'EOF'
-# Atelier Management System
-
-A custom atelier rental and operations management system being developed by
-**Smart Media** for real-world bridal and formalwear workflows.
-
-> Status: work in progress. This public repository is also used as a technical
-> portfolio. Do not use it with real customer data until the production hardening
-> and offline synchronization work is complete.
-
-## Target workflow
-
-- Bridal, kids, men, and retail-product sections
-- Unique coding for every rentable item
-- Customer and item records
-- Availability and booking conflict prevention
-- Configurable one-day buffer before and after bookings
-- Booking extensions with conflict re-checking
-- Default rental prices with controlled overrides
-- Deposit, security deposit, installments, and balance tracking
-- Admin, supervisor, sales, and preparation roles
-- Sales assignment during booking
-- Preparation, handover, return, cleaning, and maintenance states
-- Daily closing, income, expenses, and profit/loss visibility
-- Search and operational filters
-- Audit trail for important operations
-- Real-time updates while connected
-- Windows-first offline operation with later cloud synchronization
-
-## Current technical baseline
-
-The imported open-source base already provides dress-rental business concepts
-including customers, dresses, orders, transactions, expenses, dashboards,
-SQLite storage, authentication, PDF generation, and reporting.
-
-The atelier-specific workflows above are the development roadmap. In particular,
-Windows offline-first operation and cloud synchronization are **not claimed as
-finished yet**.
-
-## Technology baseline
-
-- Next.js / React
-- Node.js / Express
-- SQLite
-- JWT authentication
-- PDF generation
-- Image processing
-- Business reporting
-
-## Open-source attribution
-
-This project began from the MIT-licensed project:
-https://github.com/moyshiginzburg/dress-rental-business-management
-
-The original license is preserved in `LICENSE`. Additional attribution is in
-`NOTICE.md`, and the upstream README is preserved in
-`docs/UPSTREAM_README.md`.
-
-## Security
-
-Never commit production secrets, passwords, API keys, real customer data,
-production database files, private receipts, or customer images to this public
-repository.
-EOF
-
-          cat > docs/ATELIER_WORKFLOW_AR.md <<'EOF'
-# نطاق نظام إدارة الأتيليه
-
-## الأقسام الأساسية
-- زفاف
-- أطفال
-- رجالي
-- منتجات بيع
-
-## القطع
-لكل قطعة كود فريد واسم وتصنيف ومقاس ولون وصور وسعر افتراضي وحالة تشغيل.
-
-## الحجز
-عند حجز قطعة ليوم معين تُحجز آليًا فترة حماية تشمل اليوم السابق ويوم الحجز واليوم التالي.
-تمديد الحجز يعيد فحص التعارض قبل اعتماده.
-
-## المدفوعات
-الحجز يحتفظ بسجل حركات مستقل للعربون والتأمين والدفعات الجزئية وأي استكمال لاحق،
-مع إظهار الإجمالي والمدفوع والمتبقي.
-
-## الصلاحيات
-- الأدمن: إدارة كاملة، تكويد، أسعار، تقارير، أرباح وخسائر وسجل العمليات.
-- المشرف: حجوزات، تحصيلات، تشغيل يومي، تجهيز وتقفيل اليومية.
-- السيلز: مشاهدة المتاح والمحجوز، البحث والتصفية، وتنفيذ العمليات المسموحة.
-- التجهيز: استلام طلبات التجهيز وتحديث حالتها حتى الجاهزية.
-
-## دورة القطعة
-متاح ← محجوز ← انتظار تجهيز ← جاري التجهيز ← جاهز ← تم التسليم ←
-تم الاستلام ← فحص/تنظيف/صيانة ← متاح.
-
-## التشغيل
-الهدف أن يعمل النظام على كمبيوتر الأتيليه حتى عند انقطاع الإنترنت، مع مزامنة سحابية
-عند عودة الاتصال وفق سياسة تمنع تعارض الحجوزات.
-EOF
-
-          {
-            echo
-            echo "# Atelier public-repo safeguards"
-            echo "local_data/"
-            echo "*.db"
-            echo "*.sqlite"
-            echo "*.sqlite3"
-            echo ".env"
-            echo ".env.*"
-            echo "!.env.example"
-            echo "customer-data/"
-            echo "private-uploads/"
-          } >> .gitignore
-
+          rsync -a --delete --exclude='.git/' --exclude='.github/' --exclude='README.md' /tmp/atelier-upstream/ ./
+          echo "" >> .gitignore
+          echo "# Atelier public-repo safeguards" >> .gitignore
+          echo "local_data/" >> .gitignore
+          echo "*.db" >> .gitignore
+          echo "*.sqlite" >> .gitignore
+          echo "*.sqlite3" >> .gitignore
+          echo ".env" >> .gitignore
+          echo ".env.*" >> .gitignore
+          echo "!.env.example" >> .gitignore
+          echo "customer-data/" >> .gitignore
+          echo "private-uploads/" >> .gitignore
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
-
           if git diff --cached --quiet; then
             echo "Nothing to import."
             exit 0
           fi
-
-          git commit -m "chore: import MIT dress-rental base and atelier roadmap"
+          git commit -m "chore: import MIT dress-rental base"
           git push origin HEAD:main
