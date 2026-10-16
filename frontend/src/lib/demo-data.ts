@@ -260,11 +260,14 @@ export function handleDemoRequest(endpoint: string, options: RequestInit = {}, t
   if (path === "/auth/change-password") return ok({}, "تغيير كلمة المرور غير مفعّل في النسخة التجريبية");
 
   if (path.startsWith("/users")) {
-    if (!canAccess(currentUser.role, "users")) return fail("هذه الصفحة متاحة لمدير النظام فقط");
-
     if (path === "/users" && method === "GET") {
+      if (currentUser.role === "sales") {
+        return ok({ users: db.users.filter((user) => user.id === currentUser.id) });
+      }
       return ok({ users: db.users });
     }
+
+    if (!canAccess(currentUser.role, "users")) return fail("تعديل المستخدمين متاح لمدير النظام فقط");
 
     if (path === "/users" && method === "POST") {
       if (!body.name || !body.email || !body.role) return fail("الاسم والبريد والدور مطلوبة");
