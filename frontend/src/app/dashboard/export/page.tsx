@@ -45,7 +45,7 @@ export default function ExportPage() {
     try {
       const response = await exportApi.datasets();
       if (!response.success || !response.data) {
-        throw new Error("לא ניתן לטעון את רשימת הייצוא");
+        throw new Error("تعذر تحميل قائمة التصدير");
       }
 
       const payload = response.data as { datasets: ExportDataset[] };
@@ -57,8 +57,8 @@ export default function ExportPage() {
       }
     } catch (error) {
       toast({
-        title: "שגיאה",
-        description: error instanceof Error ? error.message : "שגיאה בטעינת נתוני ייצוא",
+        title: "خطأ",
+        description: error instanceof Error ? error.message : "خطأ בטעינת נתוני ייצוא",
         variant: "destructive",
       });
     } finally {
@@ -121,13 +121,13 @@ export default function ExportPage() {
     try {
       await exportOneDataset(selectedDataset);
       toast({
-        title: "ייצוא הושלם",
-        description: `הקובץ של "${selectedDataset.label}" הורד בהצלחה`,
+        title: "تم التصدير",
+        description: `ملف "${selectedDataset.label}" تم تنزيله`,
       });
     } catch (error) {
       toast({
-        title: "שגיאה",
-        description: error instanceof Error ? error.message : "שגיאה בייצוא הקובץ",
+        title: "خطأ",
+        description: error instanceof Error ? error.message : "خطأ בייצוא הקובץ",
         variant: "destructive",
       });
     } finally {
@@ -148,13 +148,13 @@ export default function ExportPage() {
       }
 
       toast({
-        title: "ייצוא הושלם",
-        description: `יוצאו ${datasets.length} קבצי CSV`,
+        title: "تم التصدير",
+        description: `יוצאו ${datasets.length} ملفات CSV`,
       });
     } catch (error) {
       toast({
-        title: "שגיאה",
-        description: error instanceof Error ? error.message : "שגיאה בייצוא כל הנתונים",
+        title: "خطأ",
+        description: error instanceof Error ? error.message : "خطأ בייצוא כל הנתונים",
         variant: "destructive",
       });
     } finally {
@@ -184,7 +184,7 @@ export default function ExportPage() {
           onChange={(e) => updateFilter(filter.key, e.target.value)}
           className="w-full h-10 rounded-md border border-input bg-background px-3 text-sm"
         >
-          <option value="">הכל</option>
+          <option value="">الكل</option>
           {filter.options.map((option) => (
             <option key={option.value} value={option.value}>
               {option.label}
@@ -203,7 +203,7 @@ export default function ExportPage() {
             onChange={(e) => updateFilter(filter.key, e.target.checked ? "true" : "false")}
             className="h-4 w-4"
           />
-          <span className="text-sm text-muted-foreground">כן</span>
+          <span className="text-sm text-muted-foreground">نعم</span>
         </label>
       );
     }
@@ -234,7 +234,7 @@ export default function ExportPage() {
             <Database className="h-7 w-7" />
             ייצוא נתונים
           </h1>
-          <p className="text-muted-foreground">ייצוא CSV מלא מהדאטה בייס עם סינון לפי סוג הנתון</p>
+          <p className="text-muted-foreground">تصدير CSV كامل مع فلاتر حسب نوع البيانات</p>
         </div>
         <Button
           variant="outline"
@@ -249,8 +249,8 @@ export default function ExportPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle>בחירת dataset</CardTitle>
-          <CardDescription>בחרי אילו נתונים להוציא, ואז הגדירי סינון לפני ההורדה</CardDescription>
+          <CardTitle>اختيار البيانات</CardTitle>
+          <CardDescription>اختر البيانات المطلوبة ثم حدد الفلاتر قبل التنزيل</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <select
@@ -276,12 +276,12 @@ export default function ExportPage() {
       {selectedDataset && (
         <Card>
           <CardHeader>
-            <CardTitle>סינונים לייצוא</CardTitle>
-            <CardDescription>המסננים נבחרו לפי מבנה הנתונים והזרימות העסקיות בפועל</CardDescription>
+            <CardTitle>فلاتر التصدير</CardTitle>
+            <CardDescription>الفلاتر مبنية على هيكل البيانات الفعلي</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             {selectedDataset.filters.length === 0 ? (
-              <p className="text-sm text-muted-foreground">ל-dataset זה אין מסננים ייעודיים.</p>
+              <p className="text-sm text-muted-foreground">لا توجد فلاتر مخصصة لهذا النوع.</p>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {selectedDataset.filters.map((filter) => (
