@@ -129,3 +129,12 @@
 ::-webkit-scrollbar-thumb {
   @apply bg-muted rounded-full;
 }
+
+
+/* Keep native form controls readable even when the operating system uses dark mode. */
+select,
+select option {
+  color-scheme: light;
+  background-color: #ffffff;
+  color: #111827;
+}
