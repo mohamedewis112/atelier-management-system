@@ -96,10 +96,10 @@ interface Attachment {
 // Helper to translate item type to Hebrew
 const getItemTypeLabel = (type: string) => {
   const types: Record<string, string> = {
-    'rental': 'השכרה',
-    'sewing_for_rental': 'תפירה שנשארת בהשכרה',
-    'sewing': 'תפירה',
-    'sale': 'מכירה',
+    'rental': 'إيجار',
+    'sewing_for_rental': 'تفصيل שנשארת בإيجار',
+    'sewing': 'تفصيل',
+    'sale': 'بيع',
   };
   return types[type] || type;
 };
@@ -188,15 +188,15 @@ export default function OrdersPage() {
     setSavingMerge(true);
     try {
       await ordersApi.merge(mergeTargetId, sourceId, mergeFormData);
-      toast({ title: "הצלחה", description: "הזמנות אוחדו בהצלחה" });
+      toast({ title: "تم بنجاح", description: "حجوزات אוחדו בتم بنجاح" });
       setShowMergeDialog(false);
       setSelectedIds([]);
       setIsSelectionMode(false);
       mutate();
     } catch (error) {
       toast({
-        title: "שגיאה",
-        description: error instanceof Error ? error.message : "שגיאה במיזוג",
+        title: "خطأ",
+        description: error instanceof Error ? error.message : "خطأ בدمج",
         variant: "destructive",
       });
     } finally {
@@ -238,16 +238,16 @@ export default function OrdersPage() {
     );
     try {
       await ordersApi.updateStatus(orderId, status);
-      toast({ title: "הצלחה", description: "סטטוס עודכן" });
+      toast({ title: "تم بنجاح", description: "تم تحديث الحالة" });
     } catch (error) {
-      toast({ title: "שגיאה", description: "שגיאה בעדכון", variant: "destructive" });
+      toast({ title: "خطأ", description: "خطأ בעדכון", variant: "destructive" });
     } finally {
       mutate();
     }
   };
 
   const handleDelete = async (order: Order) => {
-    if (!confirm("האם לבטל את ההזמנה?")) return;
+    if (!confirm("هل تريد إلغاء الحجز؟")) return;
     mutate(
       async (currentData: any) => {
         const list = currentData?.data?.orders || [];
@@ -258,9 +258,9 @@ export default function OrdersPage() {
     );
     try {
       await ordersApi.delete(order.id);
-      toast({ title: "הצלחה", description: "הזמנה בוטלה" });
+      toast({ title: "تم بنجاح", description: "تم إلغاء الحجز" });
     } catch (error) {
-      toast({ title: "שגיאה", description: "שגיאה בביטול", variant: "destructive" });
+      toast({ title: "خطأ", description: "خطأ בإلغاء", variant: "destructive" });
     } finally {
       mutate();
     }
@@ -276,7 +276,7 @@ export default function OrdersPage() {
         fetchAttachments((response.data as OrderDetailData).order.id);
       }
     } catch (error) {
-      toast({ title: "שגיאה", description: "לא ניתן לטעון פרטים", variant: "destructive" });
+      toast({ title: "خطأ", description: "تعذر تحميل البيانات", variant: "destructive" });
     } finally {
       setLoadingOrderDetails(false);
     }
@@ -306,23 +306,23 @@ export default function OrdersPage() {
       // through untouched.
       const prepared = await prepareAttachmentsForUpload(files);
       await ordersApi.uploadAttachment(viewingOrderData.order.id, prepared);
-      toast({ title: "הצלחה", description: `${prepared.length} קבצים הועלו` });
+      toast({ title: "تم بنجاح", description: `${prepared.length} ملفات تم رفعها` });
       fetchAttachments(viewingOrderData.order.id);
     } catch (error) {
-      toast({ title: "שגיאה", description: error instanceof Error ? error.message : "שגיאה בהעלאה", variant: "destructive" });
+      toast({ title: "خطأ", description: error instanceof Error ? error.message : "خطأ בהעלאה", variant: "destructive" });
     } finally {
       setUploadingFiles(false);
     }
   };
 
   const handleDeleteAttachment = async (attachmentId: number) => {
-    if (!viewingOrderData || !confirm("למחוק קובץ זה?")) return;
+    if (!viewingOrderData || !confirm("هل تريد حذف الملف؟")) return;
     try {
       await ordersApi.deleteAttachment(viewingOrderData.order.id, attachmentId);
       setAttachments(prev => prev.filter(a => a.id !== attachmentId));
-      toast({ title: "הצלחה", description: "קובץ נמחק" });
+      toast({ title: "تم بنجاح", description: "تم حذف الملف" });
     } catch {
-      toast({ title: "שגיאה", description: "שגיאה במחיקה", variant: "destructive" });
+      toast({ title: "خطأ", description: "خطأ בحذف", variant: "destructive" });
     }
   };
 
@@ -333,7 +333,7 @@ export default function OrdersPage() {
       setAttachments(prev => prev.map(a => a.id === attachmentId ? { ...a, description: editingDescText } : a));
       setEditingDescId(null);
     } catch {
-      toast({ title: "שגיאה", description: "שגיאה בעדכון תיאור", variant: "destructive" });
+      toast({ title: "خطأ", description: "خطأ בעדכון תיאור", variant: "destructive" });
     }
   };
 
@@ -357,7 +357,7 @@ export default function OrdersPage() {
     try {
       const response = await agreementsApi.createSignLink(orderId);
       if (!response.success || !response.data) {
-        throw new Error(response.message || "לא ניתן ליצור קישור חתימה");
+        throw new Error(response.message || "تعذر إنشاء رابط التوقيع");
       }
 
       const data = response.data as { link: string; whatsappLink?: string | null };
@@ -366,9 +366,9 @@ export default function OrdersPage() {
       if (shouldCopyToClipboard) {
         try {
           await navigator.clipboard.writeText(data.link);
-          toast({ title: "קישור חתימה מוכן", description: "הקישור הועתק ללוח." });
+          toast({ title: "رابط التوقيع جاهز", description: "تم نسخ الرابط." });
         } catch {
-          toast({ title: "קישור חתימה מוכן", description: data.link });
+          toast({ title: "رابط التوقيع جاهز", description: data.link });
         }
       }
 
@@ -378,8 +378,8 @@ export default function OrdersPage() {
       return data.link;
     } catch (error) {
       toast({
-        title: "שגיאה",
-        description: error instanceof Error ? error.message : "לא ניתן ליצור קישור חתימה",
+        title: "خطأ",
+        description: error instanceof Error ? error.message : "تعذر إنشاء رابط التوقيع",
         variant: "destructive",
       });
       return null;
@@ -436,8 +436,8 @@ export default function OrdersPage() {
       {/* Header Section */}
       <div className="flex flex-row items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl sm:text-4xl font-black">ההזמנות <span className="text-green-600">שלי</span></h1>
-          <p className="text-xs sm:text-sm text-muted-foreground font-medium mt-1">מרכז הבקרה על ההשכרות</p>
+          <h1 className="text-2xl sm:text-4xl font-black">الحجوزات <span className="text-green-600">الخاصة بي</span></h1>
+          <p className="text-xs sm:text-sm text-muted-foreground font-medium mt-1">إدارة الحجوزات والتأجير</p>
         </div>
         <div className="flex gap-2">
           <Button
@@ -449,7 +449,7 @@ export default function OrdersPage() {
             size="sm"
             className="h-10 px-3 rounded-xl border-2 font-bold text-xs sm:text-sm"
           >
-            {isSelectionMode ? "ביטול" : "מיזוג"}
+            {isSelectionMode ? "إلغاء" : "دمج"}
           </Button>
           <Button
             onClick={() => router.push('/dashboard/orders/new')}
@@ -457,7 +457,7 @@ export default function OrdersPage() {
             className="h-10 px-4 rounded-xl shadow-md bg-green-600 hover:bg-green-700 text-xs sm:text-sm font-bold gap-1"
           >
             <Plus className="h-4 w-4" />
-            <span>הזמנה חדשה</span>
+            <span>حجز جديد</span>
           </Button>
         </div>
       </div>
@@ -467,7 +467,7 @@ export default function OrdersPage() {
         <Card className="rounded-2xl border-none shadow-sm bg-white overflow-hidden">
           <div className="h-1 w-full bg-primary" />
           <CardContent className="p-3 sm:p-5">
-            <p className="text-[10px] sm:text-xs font-bold text-muted-foreground uppercase mb-1">הזמנות</p>
+            <p className="text-[10px] sm:text-xs font-bold text-muted-foreground uppercase mb-1">حجوزات</p>
             <div className="flex items-baseline gap-1 sm:gap-2">
               <span className="text-lg sm:text-2xl font-black">{ordersCount}</span>
             </div>
@@ -477,7 +477,7 @@ export default function OrdersPage() {
         <Card className="rounded-2xl border-none shadow-sm bg-white overflow-hidden">
           <div className="h-1 w-full bg-green-500" />
           <CardContent className="p-3 sm:p-5">
-            <p className="text-[10px] sm:text-xs font-bold text-muted-foreground uppercase mb-1">סה&quot;כ הכנסות</p>
+            <p className="text-[10px] sm:text-xs font-bold text-muted-foreground uppercase mb-1">إجمالي الإيرادات</p>
             <div className="text-lg sm:text-2xl font-black text-green-600">{formatCurrency(ordersSummary.totalPaid)}</div>
           </CardContent>
         </Card>
@@ -485,7 +485,7 @@ export default function OrdersPage() {
         <Card className="rounded-2xl border-none shadow-sm bg-white overflow-hidden">
           <div className="h-1 w-full bg-orange-500" />
           <CardContent className="p-3 sm:p-5">
-            <p className="text-[10px] sm:text-xs font-bold text-muted-foreground uppercase mb-1">חובות לקוחות</p>
+            <p className="text-[10px] sm:text-xs font-bold text-muted-foreground uppercase mb-1">مبالغ متبقية</p>
             <div className="text-lg sm:text-2xl font-black text-orange-600">{formatCurrency(ordersSummary.totalDebt)}</div>
           </CardContent>
         </Card>
@@ -493,7 +493,7 @@ export default function OrdersPage() {
         <Card className="rounded-2xl border-none shadow-sm bg-white overflow-hidden">
           <div className="h-1 w-full bg-blue-500" />
           <CardContent className="p-3 sm:p-5">
-            <p className="text-[10px] sm:text-xs font-bold text-muted-foreground uppercase mb-1">יתרות זכות</p>
+            <p className="text-[10px] sm:text-xs font-bold text-muted-foreground uppercase mb-1">أرصدة دائنة</p>
             <div className="text-lg sm:text-2xl font-black text-blue-600">{formatCurrency(ordersSummary.totalCredit)}</div>
           </CardContent>
         </Card>
@@ -503,7 +503,7 @@ export default function OrdersPage() {
       <div className="relative">
         <Search className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
         <Input
-          placeholder="חיפוש לקוחה או הזמנה..."
+          placeholder="ابحث باسم العميل أو رقم الحجز..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="h-12 pr-10 rounded-xl bg-white border-none shadow-sm text-sm sm:text-base"
@@ -531,10 +531,10 @@ export default function OrdersPage() {
                 }}
                 className="w-full h-10 px-2 sm:px-4 rounded-xl border-2 bg-background font-bold text-xs sm:text-sm"
               >
-                <option value="event_date-desc">קרובים תחילה</option>
-                <option value="event_date-asc">רחוקים תחילה</option>
-                <option value="customer_name-asc">שם הלקוחה</option>
-                <option value="last_active_date-desc">פעילות אחרונה</option>
+                <option value="event_date-desc">الأقرب أولاً</option>
+                <option value="event_date-asc">الأبعد أولاً</option>
+                <option value="customer_name-asc">اسم العميل</option>
+                <option value="last_active_date-desc">آخر نشاط</option>
               </select>
             </div>
             <div className="flex-1 min-w-0">
@@ -543,10 +543,10 @@ export default function OrdersPage() {
                 onChange={(e) => setStatusFilter(e.target.value)}
                 className="w-full h-10 px-2 sm:px-4 rounded-xl border-2 bg-background font-bold text-xs sm:text-sm"
               >
-                <option value="">כל הסטטוסים</option>
-                <option value="open">פתוחה</option>
-                <option value="completed">הושלמה</option>
-                <option value="cancelled">בוטלה</option>
+                <option value="">كل الحالات</option>
+                <option value="open">مفتوح</option>
+                <option value="completed">مكتمل</option>
+                <option value="cancelled">ملغي</option>
               </select>
             </div>
           </div>
@@ -558,7 +558,7 @@ export default function OrdersPage() {
         {orders.length === 0 ? (
           <div className="text-center py-20 bg-white rounded-[3rem] shadow-inner">
             <ShoppingBag className="h-16 w-16 mx-auto text-muted-foreground/20 mb-4" />
-            <h3 className="text-xl font-bold text-muted-foreground">לא נמצאו הזמנות</h3>
+            <h3 className="text-xl font-bold text-muted-foreground">לא נמצאו حجوزات</h3>
           </div>
         ) : (
           orders.map((order) => {
@@ -609,7 +609,7 @@ export default function OrdersPage() {
                                   size="icon"
                                   className="h-8 w-8 text-muted-foreground hover:text-primary"
                                   onClick={(e) => { e.stopPropagation(); router.push(`/dashboard/orders/${order.id}/edit`); }}
-                                  title="עריכה"
+                                  title="تعديل"
                                 >
                                   <Edit className="h-4 w-4" />
                                 </Button>
@@ -619,7 +619,7 @@ export default function OrdersPage() {
                                     size="icon"
                                     className="h-8 w-8 text-muted-foreground hover:text-destructive"
                                     onClick={(e) => { e.stopPropagation(); handleDelete(order); }}
-                                    title="ביטול"
+                                    title="إلغاء"
                                   >
                                     <Trash2 className="h-4 w-4" />
                                   </Button>
@@ -644,7 +644,7 @@ export default function OrdersPage() {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="h-6 w-6 bg-green-500 hover:bg-green-600 justify-center text-white rounded-full flex items-center transition-colors shadow-sm"
-                                title="שלחי הודעת וואטסאפ"
+                                title="إرسال واتساب"
                                 onClick={(e) => e.stopPropagation()}
                               >
                                 <MessageCircle className="h-3 w-3" />
@@ -672,7 +672,7 @@ export default function OrdersPage() {
                       <div className="p-4 md:p-5 md:w-1/2 flex flex-row justify-between items-center bg-muted/5 md:border-r border-t md:border-t-0">
                         <div className="grid grid-cols-2 gap-4">
                           <div className="space-y-0.5">
-                            <p className="text-[10px] font-bold text-muted-foreground uppercase">סה&quot;כ לתשלום</p>
+                            <p className="text-[10px] font-bold text-muted-foreground uppercase">إجمالي المطلوب</p>
                             <div className="text-sm sm:text-base font-black flex flex-col">
                               {formatCurrency(totalWithCharges)}
                               {(order.total_customer_charge > 0) && (
@@ -683,7 +683,7 @@ export default function OrdersPage() {
                             </div>
                           </div>
                           <div className="space-y-0.5">
-                            <p className="text-[10px] font-bold text-muted-foreground uppercase">שולם בפועל</p>
+                            <p className="text-[10px] font-bold text-muted-foreground uppercase">المدفوع</p>
                             <div className="text-sm sm:text-base font-black text-green-600">{formatCurrency(order.paid_amount)}</div>
                           </div>
                         </div>
@@ -696,7 +696,7 @@ export default function OrdersPage() {
                         )}>
                           <div>
                             <p className="text-[9px] font-black uppercase opacity-60">
-                              {isFullyPaid ? "שולם במלואו" : hasDebt ? "יתרת חוב" : "יתרת זכות"}
+                              {isFullyPaid ? "مدفوع بالكامل" : hasDebt ? "المتبقي" : "رصيد دائن"}
                             </p>
                             <p className={cn(
                               "text-sm sm:text-lg font-black",
@@ -724,7 +724,7 @@ export default function OrdersPage() {
             className="h-14 px-8 rounded-full shadow-2xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-lg gap-2"
           >
             <Link2 className="h-5 w-5" />
-            מיזוג 2 הזמנות שנבחרו
+            دمج 2 حجوزات שנבחרו
           </Button>
         </div>
       )}
@@ -734,14 +734,14 @@ export default function OrdersPage() {
         <div className="fixed inset-0 bg-black/50 z-[100] flex items-center justify-center p-4 backdrop-blur-sm">
           <Card className="w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-[2rem]">
             <div className="p-6 border-b flex justify-between items-center bg-white sticky top-0 z-10">
-              <h2 className="text-2xl font-black text-purple-700">איחוד הזמנות</h2>
+              <h2 className="text-2xl font-black text-purple-700">איחוד حجوزات</h2>
               <Button variant="ghost" size="icon" onClick={() => setShowMergeDialog(false)}>
                 <X className="h-6 w-6" />
               </Button>
             </div>
             <CardContent className="p-6 space-y-6">
               <div className="bg-purple-50 p-4 rounded-xl text-purple-800 text-sm font-medium">
-                שימי לב: פעולה זו תאחד את כל הפריטים, התשלומים וההיסטוריה של שתי ההזמנות להזמנה אחת. ההזמנה השנייה תימחק.
+                שימי לב: פעולה זו תאחד את כל הقطع, התשלומים וההיסטוריה של שתי الحجوزات להזמנה אחת. ההזמנה השנייה תימחק.
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -772,7 +772,7 @@ export default function OrdersPage() {
                       )}
                       <h3 className="font-bold text-lg mb-1">הזמנה #{o.id}</h3>
                       <p className="text-sm font-bold">{o.customer_name}</p>
-                      <p className="text-sm text-muted-foreground">{o.event_date ? formatDateShort(o.event_date) : "ללא תאריך"}</p>
+                      <p className="text-sm text-muted-foreground">{o.event_date ? formatDateShort(o.event_date) : "بدون تاريخ"}</p>
                       <p className="text-xs text-muted-foreground mt-1">{formatCurrency(o.total_price)}</p>
                     </div>
                   );
@@ -780,10 +780,10 @@ export default function OrdersPage() {
               </div>
 
               <div className="border-t pt-4">
-                <h3 className="font-bold mb-4">עריכת פרטים סופיים להזמנה המאוחדת:</h3>
+                <h3 className="font-bold mb-4">بيانات الحجز بعد الدمج:</h3>
                 <div className="space-y-4">
                   <div className="space-y-2">
-                    <label className="text-sm font-bold">תאריך אירוע</label>
+                    <label className="text-sm font-bold">تاريخ المناسبة</label>
                     <input
                       type="date"
                       className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
@@ -792,18 +792,18 @@ export default function OrdersPage() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-bold">סטטוס</label>
+                    <label className="text-sm font-bold">الحالة</label>
                     <select
                       className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                       value={mergeFormData.status}
                       onChange={e => setMergeFormData({ ...mergeFormData, status: e.target.value })}
                     >
-                      <option value="active">פעילה</option>
-                      <option value="cancelled">בוטלה</option>
+                      <option value="active">نشط</option>
+                      <option value="cancelled">ملغي</option>
                     </select>
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-bold">הערות (יחליף את הקיים)</label>
+                    <label className="text-sm font-bold">ملاحظات</label>
                     <textarea
                       className="w-full h-24 p-3 border rounded-xl"
                       value={mergeFormData.notes}
@@ -814,13 +814,13 @@ export default function OrdersPage() {
               </div>
 
               <div className="flex gap-4 pt-4">
-                <Button variant="outline" className="flex-1 h-12" onClick={() => setShowMergeDialog(false)}>ביטול</Button>
+                <Button variant="outline" className="flex-1 h-12" onClick={() => setShowMergeDialog(false)}>إلغاء</Button>
                 <Button
                   className="flex-1 h-12 bg-purple-600 hover:bg-purple-700 font-bold"
                   onClick={executeMerge}
                   disabled={savingMerge}
                 >
-                  {savingMerge ? "מאחד..." : "אשרי וסיימי איחוד"}
+                  {savingMerge ? "جاري الدمج..." : "تأكيد الدمج"}
                 </Button>
               </div>
             </CardContent>
@@ -838,8 +838,8 @@ export default function OrdersPage() {
                   <Eye className="h-6 w-6" />
                 </div>
                 <div>
-                  <h2 className="font-black text-xl">פרטי הזמנה #{viewingOrderData.order.id}</h2>
-                  <p className="text-xs text-muted-foreground">תאריך יצירה: {formatDateShort(viewingOrderData.order.created_at)}</p>
+                  <h2 className="font-black text-xl">تفاصيل الحجز #{viewingOrderData.order.id}</h2>
+                  <p className="text-xs text-muted-foreground">تاريخ الإنشاء: {formatDateShort(viewingOrderData.order.created_at)}</p>
                 </div>
               </div>
               <Button variant="ghost" size="icon" onClick={() => setViewingOrderData(null)} className="rounded-full h-10 w-10">
@@ -858,14 +858,14 @@ export default function OrdersPage() {
                       router.push(`/dashboard/customers?editId=${viewingOrderData.order.customer_id}`);
                     }}
                   >
-                    <h4 className="text-[10px] font-black text-green-600 uppercase tracking-widest mb-3">פרטי לקוחה</h4>
+                    <h4 className="text-[10px] font-black text-green-600 uppercase tracking-widest mb-3">بيانات العميل</h4>
                     <p className="font-black text-xl mb-1">{viewingOrderData.order.customer_name}</p>
                     <p className="text-sm font-medium mb-1">{formatPhoneNumber(viewingOrderData.order.customer_phone)}</p>
                   </div>
                   <div className="p-5 bg-muted/30 rounded-[1.5rem] border-2 border-muted">
-                    <h4 className="text-[10px] font-black text-green-600 uppercase tracking-widest mb-3">פרטי אירוע</h4>
+                    <h4 className="text-[10px] font-black text-green-600 uppercase tracking-widest mb-3">بيانات المناسبة</h4>
                     <div className="flex items-center justify-between">
-                      <p className="font-black text-xl">{viewingOrderData.order.event_date ? formatDateShort(viewingOrderData.order.event_date) : "לא הוזן"}</p>
+                      <p className="font-black text-xl">{viewingOrderData.order.event_date ? formatDateShort(viewingOrderData.order.event_date) : "غير مسجل"}</p>
                       <span className={cn("px-3 py-1 rounded-full text-[10px] font-black uppercase", getStatusColor(computeOrderDisplayStatus(viewingOrderData.order)))}>
                         {getStatusLabel(computeOrderDisplayStatus(viewingOrderData.order))}
                       </span>
@@ -880,7 +880,7 @@ export default function OrdersPage() {
                       </div>
                     )}
                     {!viewingOrderData.order.order_summary && !viewingOrderData.order.notes && (
-                      <p className="text-xs text-muted-foreground mt-2">אין טקסט חופשי</p>
+                      <p className="text-xs text-muted-foreground mt-2">لا توجد ملاحظات</p>
                     )}
                   </div>
                 </div>
@@ -888,8 +888,8 @@ export default function OrdersPage() {
                 {/* Items List */}
                 <div className="space-y-3">
                   <div className="flex items-center justify-between px-2">
-                    <h4 className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">פירוט פריטים</h4>
-                    <span className="text-[10px] font-bold bg-muted px-2 py-0.5 rounded-full">{viewingOrderData.items.length} פריטים</span>
+                    <h4 className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">تفاصيل القطع</h4>
+                    <span className="text-[10px] font-bold bg-muted px-2 py-0.5 rounded-full">{viewingOrderData.items.length} قطع</span>
                   </div>
                   <div className="space-y-2">
                     {viewingOrderData.items.map((it, idx) => (
@@ -919,7 +919,7 @@ export default function OrdersPage() {
                           <div className="text-right">
                             <p className="font-black text-primary">{formatCurrency(it.final_price || 0)}</p>
                             {(it.additional_payments > 0) && (
-                              <p className="text-[9px] font-bold text-muted-foreground">בסיס: {formatCurrency(it.base_price || 0)} + {formatCurrency(it.additional_payments || 0)}</p>
+                              <p className="text-[9px] font-bold text-muted-foreground">أساسي: {formatCurrency(it.base_price || 0)} + {formatCurrency(it.additional_payments || 0)}</p>
                             )}
                           </div>
                         </div>
@@ -939,25 +939,25 @@ export default function OrdersPage() {
                     router.push(`/dashboard/transactions?customerId=${viewingOrderData.order.customer_id}&customerName=${encodeURIComponent(viewingOrderData.order.customer_name)}`);
                   }}
                 >
-                  <h4 className="text-[10px] font-black text-green-600 uppercase tracking-widest text-center">סיכום כספי מפורט</h4>
+                  <h4 className="text-[10px] font-black text-green-600 uppercase tracking-widest text-center">الملخص المالي</h4>
 
                   <div className="space-y-2">
                     <div className="flex justify-between text-sm">
-                      <span className="text-muted-foreground">סך פריטים:</span>
+                      <span className="text-muted-foreground">סך قطع:</span>
                       <span className="font-bold">{formatCurrency(Number(viewingOrderData.order.total_price || 0))}</span>
                     </div>
                     {Number(viewingOrderData.order.total_customer_charge || 0) > 0 && (
                       <div className="flex justify-between text-sm">
-                        <span className="text-orange-600 font-medium">הוצאות על חשבון לקוחה:</span>
+                        <span className="text-orange-600 font-medium">مصروفات على العميل:</span>
                         <span className="font-bold text-orange-600">+{formatCurrency(Number(viewingOrderData.order.total_customer_charge || 0))}</span>
                       </div>
                     )}
                     <div className="pt-2 border-t flex justify-between items-center">
-                      <span className="font-black">סה&quot;כ לתשלום:</span>
+                      <span className="font-black">إجمالي المطلوب:</span>
                       <span className="font-black text-xl text-green-600">{formatCurrency(Number(viewingOrderData.order.total_price || 0) + Number(viewingOrderData.order.total_customer_charge || 0))}</span>
                     </div>
                     <div className="flex justify-between text-sm text-green-600 pt-1">
-                      <span className="font-medium">שולם עד כה:</span>
+                      <span className="font-medium">المدفوع حتى الآن:</span>
                       <span className="font-bold">-{formatCurrency(Number(viewingOrderData.order.paid_amount || 0))}</span>
                     </div>
                   </div>
@@ -967,7 +967,7 @@ export default function OrdersPage() {
                     (Number(viewingOrderData.order.total_price || 0) + Number(viewingOrderData.order.total_customer_charge || 0) - Number(viewingOrderData.order.paid_amount || 0)) <= 0 ? "bg-green-500 text-white shadow-lg shadow-green-500/20" : "bg-orange-500 text-white shadow-lg shadow-orange-500/20"
                   )}>
                     <p className="text-[10px] font-black uppercase opacity-80">
-                      {(Number(viewingOrderData.order.total_price || 0) + Number(viewingOrderData.order.total_customer_charge || 0) - Number(viewingOrderData.order.paid_amount || 0)) <= 0 ? "הזמנה סגורה" : "יתרה לתשלום"}
+                      {(Number(viewingOrderData.order.total_price || 0) + Number(viewingOrderData.order.total_customer_charge || 0) - Number(viewingOrderData.order.paid_amount || 0)) <= 0 ? "الحجز مغلق" : "المتبقي للدفع"}
                     </p>
                     <p className="text-3xl font-black">
                       {formatCurrency(Math.abs(Number(viewingOrderData.order.total_price || 0) + Number(viewingOrderData.order.total_customer_charge || 0) - Number(viewingOrderData.order.paid_amount || 0)))}
@@ -978,7 +978,7 @@ export default function OrdersPage() {
                 <div className="p-5 bg-muted/20 rounded-[1.5rem] border-2 border-muted space-y-3">
                   <div className="flex items-center gap-2 text-green-700">
                     <Link2 className="h-4 w-4" />
-                    <h4 className="text-[10px] font-black uppercase tracking-widest">חתימה דיגיטלית ללקוחה</h4>
+                    <h4 className="text-[10px] font-black uppercase tracking-widest">توقيع العميل</h4>
                   </div>
                   {viewSignLink?.link && !isViewedOrderCurrentlySigned && (
                     <p className="text-xs break-all bg-white border rounded-lg p-2">{viewSignLink.link}</p>
@@ -1017,7 +1017,7 @@ export default function OrdersPage() {
                           className="flex-1 h-10 px-2 text-[10px] sm:text-xs font-bold"
                         >
                           <Copy className="h-3 w-3 sm:h-4 sm:w-4 ml-1.5" />
-                          {creatingSignLinkForOrderId === viewingOrderData.order.id ? "יוצר קישור..." : "העתקת קישור"}
+                          {creatingSignLinkForOrderId === viewingOrderData.order.id ? "جاري إنشاء الرابط..." : "نسخ الرابط"}
                         </Button>
                         <Button
                           variant="secondary"
@@ -1034,7 +1034,7 @@ export default function OrdersPage() {
                           className="flex-1 bg-green-600 hover:bg-green-700 h-10 px-2 text-[10px] sm:text-xs font-bold"
                         >
                           <MessageCircle className="h-3 w-3 sm:h-4 sm:w-4 ml-1.5" />
-                          שליחה בווצאפ
+                          الخاصة بيחה בווצאפ
                         </Button>
                       </div>
                     </>
@@ -1046,7 +1046,7 @@ export default function OrdersPage() {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2 text-green-700">
                       <Paperclip className="h-4 w-4" />
-                      <h4 className="text-[10px] font-black uppercase tracking-widest">קבצים מצורפים</h4>
+                      <h4 className="text-[10px] font-black uppercase tracking-widest">المرفقات</h4>
                       {attachments.length > 0 && (
                         <span className="text-[10px] font-bold bg-green-100 text-green-700 px-2 py-0.5 rounded-full">{attachments.length}</span>
                       )}
@@ -1056,15 +1056,15 @@ export default function OrdersPage() {
                       uploadingFiles ? "opacity-50 cursor-wait" : "border-green-600 text-green-600 hover:bg-green-50"
                     )}>
                       <Plus className="h-3.5 w-3.5" />
-                      {uploadingFiles ? "מעלה..." : "הוסף קובץ"}
+                      {uploadingFiles ? "جاري الرفع..." : "إضافة ملف"}
                       <input type="file" multiple className="hidden" onChange={handleFileUpload} disabled={uploadingFiles} />
                     </label>
                   </div>
 
                   {loadingAttachments ? (
-                    <p className="text-center text-xs text-muted-foreground py-4">טוען קבצים...</p>
+                    <p className="text-center text-xs text-muted-foreground py-4">جاري تحميل الملفات...</p>
                   ) : attachments.length === 0 ? (
-                    <p className="text-center text-xs text-muted-foreground py-4 italic">אין קבצים מצורפים להזמנה זו</p>
+                    <p className="text-center text-xs text-muted-foreground py-4 italic">אין المرفقات להזמנה זו</p>
                   ) : (
                     <div className="grid grid-cols-1 gap-2">
                       {attachments.map((att) => (
@@ -1090,7 +1090,7 @@ export default function OrdersPage() {
                                   onChange={(e) => setEditingDescText(e.target.value)}
                                   onKeyDown={(e) => { if (e.key === "Enter") handleSaveDescription(att.id); if (e.key === "Escape") setEditingDescId(null); }}
                                   className="flex-1 h-8 px-2 text-sm border rounded-lg"
-                                  placeholder="תיאור הקובץ..."
+                                  placeholder="وصف الملف..."
                                 />
                                 <Button size="icon" variant="ghost" className="h-7 w-7" onClick={() => handleSaveDescription(att.id)}><Check className="h-3.5 w-3.5" /></Button>
                                 <Button size="icon" variant="ghost" className="h-7 w-7" onClick={() => setEditingDescId(null)}><X className="h-3.5 w-3.5" /></Button>
@@ -1098,7 +1098,7 @@ export default function OrdersPage() {
                             ) : (
                               <p
                                 className="font-bold text-sm truncate cursor-pointer hover:text-green-600 transition-colors"
-                                title="לחצי לעריכת תיאור"
+                                title="اضغط لتعديل الوصف"
                                 onClick={() => { setEditingDescId(att.id); setEditingDescText(att.description || att.original_name); }}
                               >
                                 {att.description || att.original_name}
@@ -1113,11 +1113,11 @@ export default function OrdersPage() {
                               href={ordersApi.attachmentDownloadUrl(viewingOrderData.order.id, att.id)}
                               download
                               className="h-8 w-8 rounded-lg border flex items-center justify-center text-muted-foreground hover:text-green-600 hover:border-green-300 transition-colors"
-                              title="הורדה"
+                              title="تنزيل"
                             >
                               <Download className="h-4 w-4" />
                             </a>
-                            <Button size="icon" variant="ghost" className="h-8 w-8 rounded-lg text-red-400 hover:text-red-600 hover:bg-red-50" onClick={() => handleDeleteAttachment(att.id)} title="מחיקה">
+                            <Button size="icon" variant="ghost" className="h-8 w-8 rounded-lg text-red-400 hover:text-red-600 hover:bg-red-50" onClick={() => handleDeleteAttachment(att.id)} title="حذف">
                               <Trash2 className="h-4 w-4" />
                             </Button>
                           </div>
@@ -1134,7 +1134,7 @@ export default function OrdersPage() {
                 className="h-14 rounded-2xl font-black text-lg shadow-lg shadow-green-600/20 bg-green-600 hover:bg-green-700"
                 onClick={() => router.push(`/dashboard/orders/${viewingOrderData.order.id}/edit`)}
               >
-                <Edit className="h-5 w-5 ml-2" /> עריכה מלאה
+                <Edit className="h-5 w-5 ml-2" /> تعديل מלאה
               </Button>
               <Button
                 variant="outline"
