@@ -126,7 +126,7 @@ export default function CustomersPage() {
             handleEdit((res.data as any).customer as Customer);
           }
         } catch (error) {
-          toast({ title: "שגיאה", description: "לא ניתן לטעון פרטי לקוחה", variant: "destructive" });
+          toast({ title: "خطأ", description: "تعذر تحميل بيانات العميل", variant: "destructive" });
           reportClientError({
             message: error instanceof Error ? error.message : String(error),
             stack: error instanceof Error ? error.stack : undefined,
@@ -169,15 +169,15 @@ export default function CustomersPage() {
     setSaving(true);
     try {
       await customersApi.merge(mergeTargetId, sourceId, formData);
-      toast({ title: "הצלחה", description: "לקוחות אוחדו בהצלחה" });
+      toast({ title: "تم بنجاح", description: "عملاء אוחדו בتم بنجاح" });
       setShowMergeDialog(false);
       setSelectedIds([]);
       setIsSelectionMode(false);
       mutate();
     } catch (error) {
-      const message = error instanceof Error ? error.message : "שגיאה במיזוג";
+      const message = error instanceof Error ? error.message : "خطأ בدمج";
       toast({
-        title: "שגיאה",
+        title: "خطأ",
         description: message,
         variant: "destructive",
       });
@@ -185,7 +185,7 @@ export default function CustomersPage() {
         message,
         stack: error instanceof Error ? error.stack : undefined,
         component: 'CustomersList',
-        action: `מיזוג לקוחות (${mergeTargetId} + ${sourceId})`
+        action: `دمج عملاء (${mergeTargetId} + ${sourceId})`
       });
     } finally {
       setSaving(false);
@@ -195,7 +195,7 @@ export default function CustomersPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name.trim()) {
-      toast({ title: "שגיאה", description: "נא להזין שם לקוח", variant: "destructive" });
+      toast({ title: "خطأ", description: "اكتب اسم العميل", variant: "destructive" });
       return;
     }
 
@@ -219,16 +219,16 @@ export default function CustomersPage() {
     try {
       if (editingCustomer) {
         await customersApi.update(editingCustomer.id, formData);
-        toast({ title: "הצלחה", description: "לקוחה עודכנה בהצלחה" });
+        toast({ title: "تم بنجاح", description: "عميل עודכנה בتم بنجاح" });
       } else {
         await customersApi.create(formData);
-        toast({ title: "הצלחה", description: "לקוחה נוספה בהצלחה" });
+        toast({ title: "تم بنجاح", description: "عميل נוספה בتم بنجاح" });
       }
       resetForm();
     } catch (error) {
-      const message = error instanceof Error ? error.message : "שגיאה בשמירת לקוח";
+      const message = error instanceof Error ? error.message : "خطأ בשמירת לקוח";
       toast({
-        title: "שגיאה",
+        title: "خطأ",
         description: message,
         variant: "destructive",
       });
@@ -236,7 +236,7 @@ export default function CustomersPage() {
         message,
         stack: error instanceof Error ? error.stack : undefined,
         component: 'CustomersList',
-        action: editingCustomer ? 'עדכון לקוח' : 'יצירת לקוח'
+        action: editingCustomer ? 'تحديث العميل' : 'إضافة عميل'
       });
     } finally {
       setSaving(false);
@@ -262,13 +262,13 @@ export default function CustomersPage() {
           <div>
             <div className="flex items-center gap-2 text-primary mb-1">
               <Sparkles className="h-4 w-4" />
-              <span className="text-xs font-bold uppercase tracking-wider">הלקוחות שלי</span>
+              <span className="text-xs font-bold uppercase tracking-wider">عملائي</span>
             </div>
-            <h1 className="text-3xl font-black">קהל <span className="text-primary">היעד</span></h1>
+            <h1 className="text-3xl font-black">إدارة <span className="text-primary">العملاء</span></h1>
             <p className="text-muted-foreground text-sm font-medium">
               {sourceFilter
-                ? `${customers.filter(c => c.source === sourceFilter).length} מתוך ${customers.length} לקוחות`
-                : `${customers.length} לקוחות רשומות במערכת`}
+                ? `${customers.filter(c => c.source === sourceFilter).length} من ${customers.length} عملاء`
+                : `${customers.length} عميل مسجل بالنظام`}
             </p>
           </div>
           <div className="flex gap-2">
@@ -280,11 +280,11 @@ export default function CustomersPage() {
               }}
               className="rounded-2xl h-12 px-4 border-2"
             >
-              {isSelectionMode ? "ביטול" : "מיזוג"}
+              {isSelectionMode ? "إلغاء" : "دمج"}
             </Button>
             <Button onClick={() => setShowForm(true)} className="rounded-2xl h-12 px-6 shadow-lg shadow-primary/20">
               <Plus className="h-5 w-5 ml-2" />
-              לקוחה
+              عميل
             </Button>
           </div>
         </div>
@@ -294,7 +294,7 @@ export default function CustomersPage() {
           <div className="relative flex-1">
             <Search className="absolute right-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
             <Input
-              placeholder="חפשי לפי שם או טלפון..."
+              placeholder="ابحث بالاسم أو رقم الهاتف..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="h-14 pr-12 rounded-2xl bg-white border-none shadow-sm text-lg"
@@ -310,9 +310,9 @@ export default function CustomersPage() {
             }}
             className="h-14 px-4 rounded-2xl bg-white border-none shadow-sm font-bold text-sm"
           >
-            <option value="last_active_date-desc">פעילות אחרונה</option>
-            <option value="name-asc">שם (א' - ת')</option>
-            <option value="created_at-desc">נוספו לאחרונה</option>
+            <option value="last_active_date-desc">آخر نشاط</option>
+            <option value="name-asc">الاسم</option>
+            <option value="created_at-desc">الأحدث إضافة</option>
           </select>
 
           <select
@@ -320,7 +320,7 @@ export default function CustomersPage() {
             onChange={(e) => setSourceFilter(e.target.value)}
             className="h-14 px-4 rounded-2xl bg-white border-none shadow-sm font-bold text-sm"
           >
-            <option value="">כל המקורות</option>
+            <option value="">كل المصادر</option>
             {Array.from(new Set(customers.map(c => c.source).filter(Boolean))).sort().map(src => (
               <option key={src} value={src!}>{src}</option>
             ))}
@@ -367,7 +367,7 @@ export default function CustomersPage() {
                     <div>
                       <h3 className="font-bold text-lg text-gray-900 leading-none">{customer.name}</h3>
                       <p className="text-xs font-medium text-muted-foreground mt-1">
-                        {customer.phone ? formatPhoneNumber(customer.phone) : "ללא טלפון"}
+                        {customer.phone ? formatPhoneNumber(customer.phone) : "بدون هاتف"}
                       </p>
                     </div>
                   </div>
@@ -428,7 +428,7 @@ export default function CustomersPage() {
             className="h-14 px-8 rounded-full shadow-2xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-lg gap-2"
           >
             <Users className="h-5 w-5" />
-            מיזוג 2 לקוחות שנבחרו
+            دمج 2 عملاء שנבחרו
           </Button>
         </div>
       )}
@@ -436,8 +436,8 @@ export default function CustomersPage() {
       {customers.length === 0 && !loading && (
         <div className="text-center py-24 bg-white rounded-[3rem] shadow-inner">
           <UserPlus className="h-16 w-16 mx-auto text-muted-foreground/30 mb-4" />
-          <h3 className="text-xl font-bold text-gray-900">לא נמצאו לקוחות</h3>
-          <p className="text-muted-foreground">נסי לשנות את החיפוש או להוסיף לקוחה חדשה</p>
+          <h3 className="text-xl font-bold text-gray-900">לא נמצאו عملاء</h3>
+          <p className="text-muted-foreground">غيّر البحث أو أضف عميلاً جديدًا</p>
         </div>
       )}
 
@@ -446,14 +446,14 @@ export default function CustomersPage() {
         <div className="fixed inset-0 bg-black/50 z-[100] flex items-center justify-center p-4 backdrop-blur-sm">
           <Card className="w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-[2rem]">
             <div className="p-6 border-b flex justify-between items-center bg-white sticky top-0 z-10">
-              <h2 className="text-2xl font-black text-purple-700">איחוד כרטיסי לקוחה</h2>
+              <h2 className="text-2xl font-black text-purple-700">دمج بيانات العملاء</h2>
               <Button variant="ghost" size="icon" onClick={() => setShowMergeDialog(false)}>
                 <X className="h-6 w-6" />
               </Button>
             </div>
             <CardContent className="p-6 space-y-6">
               <div className="bg-purple-50 p-4 rounded-xl text-purple-800 text-sm font-medium">
-                שימי לב: פעולה זו תאחד את כל ההזמנות, התשלומים וההיסטוריה של שתי הלקוחות ללקוחה אחת. הלקוחה השנייה תימחק.
+                שימי לב: פעולה זו תאחד את כל ההזמנות, התשלומים וההיסטוריה של שתי הعملاء לعميل אחת. הعميل השנייה תימחק.
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -481,7 +481,7 @@ export default function CustomersPage() {
                     >
                       {isTarget && (
                         <div className="absolute top-0 right-0 bg-purple-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-bl-xl">
-                          הלקוחה הראשית (תישמר)
+                          הعميل הראשית (תישמר)
                         </div>
                       )}
                       <h3 className="font-bold text-lg mb-1">{c.name}</h3>
@@ -493,24 +493,24 @@ export default function CustomersPage() {
               </div>
 
               <div className="border-t pt-4">
-                <h3 className="font-bold mb-4">עריכת פרטים סופיים ללקוחה המאוחדת:</h3>
+                <h3 className="font-bold mb-4">بيانات العميل بعد الدمج:</h3>
                 <div className="space-y-4">
                   <div className="space-y-2">
-                    <label className="text-sm font-bold">שם מלא</label>
+                    <label className="text-sm font-bold">الاسم بالكامل</label>
                     <Input value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} />
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <label className="text-sm font-bold">טלפון</label>
+                      <label className="text-sm font-bold">الهاتف</label>
                       <Input value={formData.phone} onChange={e => setFormData({ ...formData, phone: e.target.value })} dir="ltr" />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-sm font-bold">אימייל</label>
+                      <label className="text-sm font-bold">البريد الإلكتروني</label>
                       <Input value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} dir="ltr" />
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-bold">הערות (יחליף את הקיים)</label>
+                    <label className="text-sm font-bold">ملاحظات</label>
                     <textarea
                       className="w-full h-24 p-3 border rounded-xl"
                       value={formData.notes}
@@ -521,13 +521,13 @@ export default function CustomersPage() {
               </div>
 
               <div className="flex gap-4 pt-4">
-                <Button variant="outline" className="flex-1 h-12" onClick={() => setShowMergeDialog(false)}>ביטול</Button>
+                <Button variant="outline" className="flex-1 h-12" onClick={() => setShowMergeDialog(false)}>إلغاء</Button>
                 <Button
                   className="flex-1 h-12 bg-purple-600 hover:bg-purple-700 font-bold"
                   onClick={executeMerge}
                   disabled={saving}
                 >
-                  {saving ? "מאחד..." : "אשרי וסיימי איחוד"}
+                  {saving ? "جاري الدمج..." : "تأكيد الدمج"}
                 </Button>
               </div>
             </CardContent>
@@ -540,7 +540,7 @@ export default function CustomersPage() {
         <div className="fixed inset-0 bg-background z-[100] overflow-y-auto lg:bg-black/50 lg:flex lg:items-center lg:justify-center p-0 lg:p-4">
           <Card className="w-full h-full lg:h-auto lg:max-w-lg rounded-none lg:rounded-[2rem] border-none">
             <div className="sticky top-0 bg-white/80 backdrop-blur-md px-6 py-4 flex items-center justify-between border-b z-10 lg:rounded-t-[2rem]">
-              <h2 className="font-black text-xl">{editingCustomer ? "עריכת לקוחה" : "לקוחה חדשה"}</h2>
+              <h2 className="font-black text-xl">{editingCustomer ? "تعديل العميل" : "عميل جديد"}</h2>
               <Button variant="ghost" size="icon" onClick={resetForm} className="rounded-full">
                 <X className="h-6 w-6" />
               </Button>
@@ -564,18 +564,18 @@ export default function CustomersPage() {
                   </div>
                 )}
                 <div className="space-y-2">
-                  <label className="text-sm font-bold text-gray-700">שם הלקוחה *</label>
+                  <label className="text-sm font-bold text-gray-700">اسم العميل *</label>
                   <Input
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     className="focus:border-primary"
-                    placeholder="שם מלא"
+                    placeholder="الاسم بالكامل"
                   />
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <label className="text-sm font-bold text-gray-700">טלפון</label>
+                    <label className="text-sm font-bold text-gray-700">الهاتف</label>
                     <Input
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: normalizePhoneInput(e.target.value) })}
@@ -585,7 +585,7 @@ export default function CustomersPage() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-bold text-gray-700">אימייל</label>
+                    <label className="text-sm font-bold text-gray-700">البريد الإلكتروني</label>
                     <Input
                       type="email"
                       value={formData.email}
@@ -598,31 +598,31 @@ export default function CustomersPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-bold text-gray-700">מקור הגעה</label>
+                  <label className="text-sm font-bold text-gray-700">مصدر العميل</label>
                   <Input
                     value={formData.source}
                     onChange={(e) => setFormData({ ...formData, source: e.target.value })}
                     className="focus:border-primary"
-                    placeholder="איך היא הגיעה אליך?"
+                    placeholder="كيف وصل إليك؟"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-bold text-gray-700">הערות</label>
+                  <label className="text-sm font-bold text-gray-700">ملاحظات</label>
                   <textarea
                     value={formData.notes}
                     onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
                     className="w-full h-32 p-4 border-b-2 border-input bg-transparent focus:border-primary transition-all outline-none resize-none"
-                    placeholder="הערות אישיות, העדפות וכו'..."
+                    placeholder="ملاحظات אישיות, העדפות וכו'..."
                   />
                 </div>
 
                 <div className="flex gap-4 pt-4 lg:pb-0 pb-12">
                   <Button type="button" variant="outline" onClick={resetForm} className="flex-1 h-14 rounded-2xl font-bold">
-                    ביטול
+                    إلغاء
                   </Button>
                   <Button type="submit" disabled={saving} className="flex-1 h-14 rounded-2xl font-bold shadow-lg shadow-primary/20">
-                    {saving ? "שומר..." : editingCustomer ? "עדכן לקוחה" : "שמור לקוחה"}
+                    {saving ? "جاري الحفظ..." : editingCustomer ? "تحديث العميل" : "حفظ العميل"}
                   </Button>
                 </div>
               </form>
