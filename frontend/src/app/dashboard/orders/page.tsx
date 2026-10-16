@@ -309,7 +309,7 @@ export default function OrdersPage() {
       toast({ title: "تم بنجاح", description: `${prepared.length} ملفات تم رفعها` });
       fetchAttachments(viewingOrderData.order.id);
     } catch (error) {
-      toast({ title: "خطأ", description: error instanceof Error ? error.message : "خطأ تحميل", variant: "destructive" });
+      toast({ title: "خطأ", description: error instanceof Error ? error.message : "تعذر رفع الملفات", variant: "destructive" });
     } finally {
       setUploadingFiles(false);
     }
@@ -436,8 +436,8 @@ export default function OrdersPage() {
       {/* Header Section */}
       <div className="flex flex-row items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl sm:text-4xl font-black">الحجوزات <span className="text-green-600">الخاصة بي</span></h1>
-          <p className="text-xs sm:text-sm text-muted-foreground font-medium mt-1">إدارة الحجوزات والتأجير</p>
+          <h1 className="text-2xl sm:text-4xl font-black">إدارة الحجوزات</h1>
+          <p className="text-xs sm:text-sm text-muted-foreground font-medium mt-1">متابعة الحجوزات والمدفوعات ومواعيد التسليم والاستلام.</p>
         </div>
         <div className="flex gap-2">
           <Button
@@ -467,7 +467,7 @@ export default function OrdersPage() {
         <Card className="rounded-2xl border-none shadow-sm bg-white overflow-hidden">
           <div className="h-1 w-full bg-primary" />
           <CardContent className="p-3 sm:p-5">
-            <p className="text-[10px] sm:text-xs font-bold text-muted-foreground uppercase mb-1">حجوزات</p>
+            <p className="text-[10px] sm:text-xs font-bold text-muted-foreground uppercase mb-1">عدد الحجوزات</p>
             <div className="flex items-baseline gap-1 sm:gap-2">
               <span className="text-lg sm:text-2xl font-black">{ordersCount}</span>
             </div>
@@ -477,7 +477,7 @@ export default function OrdersPage() {
         <Card className="rounded-2xl border-none shadow-sm bg-white overflow-hidden">
           <div className="h-1 w-full bg-green-500" />
           <CardContent className="p-3 sm:p-5">
-            <p className="text-[10px] sm:text-xs font-bold text-muted-foreground uppercase mb-1">إجمالي الإيرادات</p>
+            <p className="text-[10px] sm:text-xs font-bold text-muted-foreground uppercase mb-1">إجمالي المدفوع</p>
             <div className="text-lg sm:text-2xl font-black text-green-600">{formatCurrency(ordersSummary.totalPaid)}</div>
           </CardContent>
         </Card>
@@ -485,7 +485,7 @@ export default function OrdersPage() {
         <Card className="rounded-2xl border-none shadow-sm bg-white overflow-hidden">
           <div className="h-1 w-full bg-orange-500" />
           <CardContent className="p-3 sm:p-5">
-            <p className="text-[10px] sm:text-xs font-bold text-muted-foreground uppercase mb-1">مبالغ متبقية</p>
+            <p className="text-[10px] sm:text-xs font-bold text-muted-foreground uppercase mb-1">إجمالي المتبقي</p>
             <div className="text-lg sm:text-2xl font-black text-orange-600">{formatCurrency(ordersSummary.totalDebt)}</div>
           </CardContent>
         </Card>
@@ -493,7 +493,7 @@ export default function OrdersPage() {
         <Card className="rounded-2xl border-none shadow-sm bg-white overflow-hidden">
           <div className="h-1 w-full bg-blue-500" />
           <CardContent className="p-3 sm:p-5">
-            <p className="text-[10px] sm:text-xs font-bold text-muted-foreground uppercase mb-1">أرصدة دائنة</p>
+            <p className="text-[10px] sm:text-xs font-bold text-muted-foreground uppercase mb-1">مدفوعات زائدة</p>
             <div className="text-lg sm:text-2xl font-black text-blue-600">{formatCurrency(ordersSummary.totalCredit)}</div>
           </CardContent>
         </Card>
@@ -724,7 +724,7 @@ export default function OrdersPage() {
             className="h-14 px-8 rounded-full shadow-2xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-lg gap-2"
           >
             <Link2 className="h-5 w-5" />
-            دمج 2 حجوزات اختيار
+            دمج الحجزين المحددين
           </Button>
         </div>
       )}
@@ -734,14 +734,14 @@ export default function OrdersPage() {
         <div className="fixed inset-0 bg-black/50 z-[100] flex items-center justify-center p-4 backdrop-blur-sm">
           <Card className="w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-[2rem]">
             <div className="p-6 border-b flex justify-between items-center bg-white sticky top-0 z-10">
-              <h2 className="text-2xl font-black text-purple-700">الاتحاد حجوزات</h2>
+              <h2 className="text-2xl font-black text-purple-700">دمج الحجوزات</h2>
               <Button variant="ghost" size="icon" onClick={() => setShowMergeDialog(false)}>
                 <X className="h-6 w-6" />
               </Button>
             </div>
             <CardContent className="p-6 space-y-6">
               <div className="bg-purple-50 p-4 rounded-xl text-purple-800 text-sm font-medium">
-                انتبه: هذا العمل سوف يوحد كلقطع, المدفوعات وتاريخ اثنين الحجوزات لأمر واحد. سيتم حذف الطلب الثاني.
+                سيتم دمج القطع والمدفوعات والسجل المرتبط بالحجزين في حجز واحد، ثم حذف الحجز المكرر. اختر الحجز الأساسي بعناية.
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -767,7 +767,7 @@ export default function OrdersPage() {
                     >
                       {isTarget && (
                         <div className="absolute top-0 right-0 bg-purple-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-bl-xl">
-                          النظام الرئيسي (يتم حفظها)
+                          الحجز الأساسي (سيتم الاحتفاظ به)
                         </div>
                       )}
                       <h3 className="font-bold text-lg mb-1">حجز #{o.id}</h3>
