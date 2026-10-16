@@ -44,6 +44,10 @@ import { base64ToFile, clearSharedUploadPayload, getSharedUploadPayload, type Sh
 
 interface Dress {
   id: number;
+  code?: string;
+  category?: string;
+  size?: string;
+  color?: string;
   name: string;
   base_price: number;
   total_income: number;
@@ -111,6 +115,7 @@ export default function DressesPage() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("");
   const [intendedUseFilter, setIntendedUseFilter] = useState<string>("");
+  const [categoryFilter, setCategoryFilter] = useState<string>("");
   const [sortBy, setSortBy] = useState<string>("last_active_date");
   const [sortOrder, setSortOrder] = useState<string>("desc");
   // View mode: "list" (default, compact rows) or "grid" (original card tiles)
@@ -163,7 +168,8 @@ export default function DressesPage() {
     })
   );
 
-  const dresses = dressesRes?.success && dressesRes.data ? (dressesRes.data as any).dresses as Dress[] : [];
+  const allDresses = dressesRes?.success && dressesRes.data ? (dressesRes.data as any).dresses as Dress[] : [];
+  const dresses = allDresses.filter((dress) => !categoryFilter || dress.category === categoryFilter);
 
   const viewDress = async (id: number) => {
     setLoadingDetails(true);
@@ -217,7 +223,7 @@ export default function DressesPage() {
         thumbnail_url: mergeThumbnailUrl,
         notes: mergeNotes,
       });
-      toast({ title: "تم بنجاح", description: "القطع متحدون بتم بنجاح" });
+      toast({ title: "تم بنجاح", description: "تم دمج القطعتين بنجاح" });
       setShowMergeDialog(false);
       setSelectedIds([]);
       setIsSelectionMode(false);
@@ -278,13 +284,24 @@ export default function DressesPage() {
           <div className="relative">
             <Search className="absolute right-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
             <Input
-              placeholder="ابحث باسم القطعة أو العميل..."
+              placeholder="ابحث باسم القطعة أو الكود..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="h-12 pr-12 rounded-2xl bg-white border-none shadow-sm text-lg"
             />
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            <select
+              value={categoryFilter}
+              onChange={(e) => setCategoryFilter(e.target.value)}
+              className="h-12 px-3 rounded-2xl bg-white border-none shadow-sm font-bold text-sm focus:ring-2 focus:ring-primary/20 outline-none min-w-0"
+            >
+              <option value="">كل الأقسام</option>
+              <option value="زفاف">زفاف</option>
+              <option value="أطفال">أطفال</option>
+              <option value="رجالي">رجالي</option>
+              <option value="منتجات بيع">منتجات بيع</option>
+            </select>
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
@@ -318,7 +335,7 @@ export default function DressesPage() {
                 setSortBy(col);
                 setSortOrder(dir);
               }}
-              className="h-12 px-3 rounded-2xl bg-white border-none shadow-sm font-bold text-sm focus:ring-2 focus:ring-primary/20 outline-none appearance-none col-span-2 sm:col-span-1 min-w-0"
+              className="h-12 px-3 rounded-2xl bg-white border-none shadow-sm font-bold text-sm focus:ring-2 focus:ring-primary/20 outline-none appearance-none min-w-0"
             >
               <option value="last_active_date-desc">آخر نشاط</option>
               <option value="name-asc">الاسم</option>
@@ -402,7 +419,7 @@ export default function DressesPage() {
               <div className="order-2 flex-1 min-w-0 text-right">
                 <div className="font-bold text-base leading-snug break-words">{dress.name}</div>
                 <div className="text-[11px] font-bold text-muted-foreground mt-0.5">
-                  رقم القطعة: {dress.id} • {dress.rental_count} مرات إيجار • {getIntendedUseShortLabel(dress.intended_use)}
+                  الكود: {dress.code || dress.id} • {dress.category || "غير مصنف"} • {dress.rental_count} مرات إيجار • {getIntendedUseShortLabel(dress.intended_use)}
                 </div>
                 <div className="text-[11px] font-bold text-muted-foreground mt-0.5">
                   السعر الأساسي: {formatCurrency(dress.base_price)} • إجمالي الإيراد: {formatCurrency(dress.total_income)}
@@ -471,7 +488,7 @@ export default function DressesPage() {
                   <div>
                     <h3 className="font-black text-xl text-gray-900 leading-snug break-words whitespace-normal">{dress.name}</h3>
                     <p className="text-xs font-bold text-muted-foreground uppercase mt-1">
-                      رقم القطعة: {dress.id} • {dress.rental_count} مرات إيجار • {getIntendedUseLabel(dress.intended_use)}
+                      الكود: {dress.code || dress.id} • {dress.rental_count} مرات إيجار • {getIntendedUseLabel(dress.intended_use)}
                     </p>
                   </div>
                   <div className="flex gap-2">
