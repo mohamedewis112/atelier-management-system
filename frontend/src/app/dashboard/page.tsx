@@ -81,9 +81,9 @@ export default function DashboardPage() {
         <div>
           <div className="flex items-center gap-2 text-green-600 mb-1">
             <Sparkles className="h-4 w-4" />
-            <span className="text-xs font-bold uppercase tracking-wider">لوحة التحكم</span>
+            <span className="text-xs font-bold uppercase tracking-wider">نظرة عامة</span>
           </div>
-          <h1 className="text-3xl font-black tracking-tight">أهلاً، <span className="text-green-600">مدير الأتيليه</span></h1>
+          <h1 className="text-3xl font-black tracking-tight">مرحبًا بك في <span className="text-green-600">نظام إدارة الأتيليه</span></h1>
         </div>
       </div>
 
@@ -102,7 +102,7 @@ export default function DashboardPage() {
             </div>
             <div>
               <h3 className="text-xl font-bold text-white">حجز جديد</h3>
-              <p className="text-white/80 text-sm">إضافة حجز أو عملية جديدة</p>
+              <p className="text-white/80 text-sm">إنشاء حجز جديد وتسجيل بيانات العميل والقطعة</p>
             </div>
           </div>
         </Link>
@@ -116,8 +116,8 @@ export default function DashboardPage() {
               <TrendingUp className="h-6 w-6 text-white" />
             </div>
             <div>
-              <h3 className="text-lg font-bold text-white">إيراد</h3>
-              <p className="text-white/70 text-xs">تسجيل دفعة</p>
+              <h3 className="text-lg font-bold text-white">تسجيل إيراد</h3>
+              <p className="text-white/70 text-xs">إضافة دفعة أو تحصيل جديد</p>
             </div>
           </Link>
 
@@ -129,8 +129,8 @@ export default function DashboardPage() {
               <TrendingDown className="h-6 w-6 text-white" />
             </div>
             <div>
-              <h3 className="text-lg font-bold text-white">مصروف</h3>
-              <p className="text-white/70 text-xs">التوثيق مصروف</p>
+              <h3 className="text-lg font-bold text-white">تسجيل مصروف</h3>
+              <p className="text-white/70 text-xs">إضافة مصروف جديد</p>
             </div>
           </Link>
         </div>
@@ -144,7 +144,7 @@ export default function DashboardPage() {
           className="rounded-[1.5rem] border-none shadow-sm bg-white/50 block transition-all active:scale-[0.97] hover:shadow-md hover:bg-white/80"
         >
           <CardContent className="p-5">
-            <p className="text-xs font-bold text-muted-foreground mb-1 uppercase">إيرادات الشهر</p>
+            <p className="text-xs font-bold text-muted-foreground mb-1 uppercase">إيرادات الشهر الحالي</p>
             <div className="text-xl font-black text-green-600">
               {formatCurrency(data.financials.monthly.income)}
             </div>
