@@ -35,16 +35,20 @@ class ApiClient {
     if (typeof window !== 'undefined') {
       if (token) {
         localStorage.setItem('auth_token', token);
+
+        // Demo mode has no backend to create the HttpOnly auth cookie.
+        // The Next.js middleware protects /dashboard by checking for the
+        // existence of auth_token, so create a same-site demo cookie here.
+        if (token === DEMO_TOKEN) {
+          document.cookie = `auth_token=${encodeURIComponent(token)}; path=/; max-age=604800; samesite=lax; secure`;
+        }
       } else {
         localStorage.removeItem('auth_token');
-        // Clear the auth cookie on logout.
-        // The actual HttpOnly cookie is set by the server and cannot be
-        // read by JS, but we can expire it by setting maxAge to 0.
-        document.cookie = 'auth_token=; path=/; max-age=0; samesite=lax';
+        // Clear either the demo cookie or the real backend cookie on logout.
+        document.cookie = 'auth_token=; path=/; max-age=0; samesite=lax; secure';
 
-        // Also call the server-side logout endpoint to clear the HttpOnly cookie.
-        // This is done as a background fire-and-forget call because setToken
-        // is synchronous and might be called during critical rendering phases.
+        // Also call the server-side logout endpoint to clear the HttpOnly cookie
+        // when the real backend is enabled.
         fetch('/api/auth/logout', { method: 'POST', credentials: 'include' })
           .catch((err) => console.error('Failed to clear server-side auth cookie:', err));
       }
