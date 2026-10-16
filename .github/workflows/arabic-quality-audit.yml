@@ -1,0 +1,43 @@
+name: Arabic Quality Audit
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/arabic-quality-audit.yml"
+permissions:
+  contents: write
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - name: Audit placeholders and Hebrew
+        run: |
+          python - <<'PY'
+          import json, pathlib, re
+          roots=[pathlib.Path("frontend/src"),pathlib.Path("frontend/public"),pathlib.Path("backend/src")]
+          exts={".ts",".tsx",".js",".jsx",".json",".css",".md",".html"}
+          heb=re.compile(r"[\u0590-\u05FF]")
+          placeholders=[]
+          hebrew=[]
+          for root in roots:
+            if not root.exists(): continue
+            for p in root.rglob("*"):
+              if not p.is_file() or p.suffix.lower() not in exts: continue
+              try: lines=p.read_text(encoding="utf-8").splitlines()
+              except: continue
+              for n,line in enumerate(lines,1):
+                if "نص" in line: placeholders.append({"file":str(p),"line":n,"text":line.strip()})
+                if heb.search(line): hebrew.append({"file":str(p),"line":n,"text":line.strip()})
+          pathlib.Path("docs").mkdir(exist_ok=True)
+          pathlib.Path("docs/ARABIC_QUALITY_AUDIT.json").write_text(json.dumps({"placeholder_lines":placeholders,"hebrew_lines":hebrew},ensure_ascii=False,indent=2),encoding="utf-8")
+          print("placeholders",len(placeholders),"hebrew",len(hebrew))
+          PY
+      - name: Commit audit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/ARABIC_QUALITY_AUDIT.json
+          git commit -m "chore: audit Arabic translation quality" || exit 0
+          git push
