@@ -88,16 +88,16 @@ interface DressDetailData {
 }
 
 function getIntendedUseLabel(intendedUse: "rental" | "sale" | null | undefined) {
-  if (intendedUse === "sale") return "מיועדת למכירה";
-  if (intendedUse === "rental") return "מיועדת להשכרה";
-  return "ללא ייעוד";
+  if (intendedUse === "sale") return "للبيع";
+  if (intendedUse === "rental") return "للإيجار";
+  return "غير محدد";
 }
 
-/** Short label used in list-view rows — no "מיועדת" prefix. */
+/** Short label used in list-view rows — no "مخصصة" prefix. */
 function getIntendedUseShortLabel(intendedUse: "rental" | "sale" | null | undefined) {
-  if (intendedUse === "sale") return "למכירה";
-  if (intendedUse === "rental") return "להשכרה";
-  return "ללא ייעוד";
+  if (intendedUse === "sale") return "للبيع";
+  if (intendedUse === "rental") return "للإيجار";
+  return "غير محدد";
 }
 
 function isDressBookable(status: string) {
@@ -138,8 +138,8 @@ export default function DressesPage() {
       router.push("/dashboard/dresses/new");
     } else if (mode === "dress_edit") {
       toast({
-        title: "בחרי שמלה לעדכון",
-        description: "לחצי על שמלה כדי לפתוח מסך עריכה ולעדכן לה תמונה.",
+        title: "اختر قطعة للتعديل",
+        description: "اضغط على القطعة لفتح شاشة التعديل وتحديث الصورة.",
       });
     }
   }, [searchParams, router, toast]);
@@ -173,7 +173,7 @@ export default function DressesPage() {
         setViewingDress(res.data as DressDetailData);
       }
     } catch (e) {
-      toast({ title: "שגיאה", description: "לא ניתן לטעון פרטי שמלה", variant: "destructive" });
+      toast({ title: "خطأ", description: "تعذر تحميل بيانات القطعة", variant: "destructive" });
     } finally {
       setLoadingDetails(false);
     }
@@ -217,15 +217,15 @@ export default function DressesPage() {
         thumbnail_url: mergeThumbnailUrl,
         notes: mergeNotes,
       });
-      toast({ title: "הצלחה", description: "שמלות אוחדו בהצלחה" });
+      toast({ title: "تم بنجاح", description: "القطع אוחדו בتم بنجاح" });
       setShowMergeDialog(false);
       setSelectedIds([]);
       setIsSelectionMode(false);
       mutate();
     } catch (error) {
       toast({
-        title: "שגיאה",
-        description: error instanceof Error ? error.message : "שגיאה במיזוג",
+        title: "خطأ",
+        description: error instanceof Error ? error.message : "خطأ בدمج",
         variant: "destructive",
       });
     } finally {
@@ -251,11 +251,11 @@ export default function DressesPage() {
           <div>
             <div className="flex items-center gap-2 text-primary mb-1">
               <Sparkles className="h-4 w-4" />
-              <span className="text-xs font-bold uppercase tracking-wider">קולקציה</span>
+              <span className="text-xs font-bold uppercase tracking-wider">المجموعة</span>
             </div>
-            <h1 className="text-3xl font-black">מלאי <span className="text-primary">שמלות</span></h1>
+            <h1 className="text-3xl font-black">المخزون <span className="text-primary">القطع</span></h1>
             <p className="text-muted-foreground text-sm font-medium">
-              {dresses.length} שמלות במערכת • {bookableCount} פעילות במלאי
+              {dresses.length} القطع במערכת • {bookableCount} פעילות בالمخزون
             </p>
           </div>
           <div className="flex gap-2">
@@ -264,7 +264,7 @@ export default function DressesPage() {
               onClick={() => { setIsSelectionMode(!isSelectionMode); setSelectedIds([]); }}
               className="rounded-2xl h-12 px-4 border-2"
             >
-              {isSelectionMode ? "ביטול" : "מיזוג"}
+              {isSelectionMode ? "إلغاء" : "دمج"}
             </Button>
             <Button onClick={() => router.push("/dashboard/dresses/new")} className="rounded-2xl h-12 px-6 shadow-lg shadow-primary/20">
               <Plus className="h-5 w-5 ml-2" />
@@ -278,7 +278,7 @@ export default function DressesPage() {
           <div className="relative">
             <Search className="absolute right-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
             <Input
-              placeholder="חיפוש לפי שם שמלה או לובשת..."
+              placeholder="ابحث باسم القطعة أو العميل..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="h-12 pr-12 rounded-2xl bg-white border-none shadow-sm text-lg"
@@ -290,21 +290,21 @@ export default function DressesPage() {
               onChange={(e) => setStatusFilter(e.target.value)}
               className="h-12 px-3 rounded-2xl bg-white border-none shadow-sm font-bold text-sm focus:ring-2 focus:ring-primary/20 outline-none appearance-none min-w-0"
             >
-              <option value="">כל הסטטוסים</option>
-              <option value="available">פנויה</option>
-              <option value="sold">נמכרה</option>
-              <option value="retired">הוצאה מהמלאי</option>
-              <option value="custom_sewing">תפירה אישית</option>
+              <option value="">كل الحالات</option>
+              <option value="available">متاحة</option>
+              <option value="sold">مباعة</option>
+              <option value="retired">הוצאה מהالمخزون</option>
+              <option value="custom_sewing">تفصيل خاص</option>
             </select>
             <select
               value={intendedUseFilter}
               onChange={(e) => setIntendedUseFilter(e.target.value)}
               className="h-12 px-3 rounded-2xl bg-white border-none shadow-sm font-bold text-sm focus:ring-2 focus:ring-primary/20 outline-none appearance-none min-w-0"
             >
-              <option value="">כל הייעודים</option>
-              <option value="rental">להשכרה</option>
-              <option value="sale">למכירה</option>
-              <option value="__empty__">ללא ייעוד</option>
+              <option value="">كل الأنواع</option>
+              <option value="rental">للإيجار</option>
+              <option value="sale">للبيع</option>
+              <option value="__empty__">غير محدد</option>
             </select>
             <select
               value={`${sortBy}-${sortOrder}`}
@@ -320,10 +320,10 @@ export default function DressesPage() {
               }}
               className="h-12 px-3 rounded-2xl bg-white border-none shadow-sm font-bold text-sm focus:ring-2 focus:ring-primary/20 outline-none appearance-none col-span-2 sm:col-span-1 min-w-0"
             >
-              <option value="last_active_date-desc">פעילות אחרונה</option>
-              <option value="name-asc">שם (א' - ת')</option>
-              <option value="rental_count-desc">מיון: השכרות</option>
-              <option value="total_income-desc">מיון: הכנסה</option>
+              <option value="last_active_date-desc">آخر نشاط</option>
+              <option value="name-asc">الاسم</option>
+              <option value="rental_count-desc">ترتيب: مرات الإيجار</option>
+              <option value="total_income-desc">ترتيب: الإيراد</option>
             </select>
           </div>
 
@@ -402,7 +402,7 @@ export default function DressesPage() {
               <div className="order-2 flex-1 min-w-0 text-right">
                 <div className="font-bold text-base leading-snug break-words">{dress.name}</div>
                 <div className="text-[11px] font-bold text-muted-foreground mt-0.5">
-                  מק&quot;ט: {dress.id} • {dress.rental_count} השכרות • {getIntendedUseShortLabel(dress.intended_use)}
+                  מק&quot;ט: {dress.id} • {dress.rental_count} إيجارات • {getIntendedUseShortLabel(dress.intended_use)}
                 </div>
                 <div className="text-[11px] font-bold text-muted-foreground mt-0.5">
                   מחיר: {formatCurrency(dress.base_price)} • הכנסות: {formatCurrency(dress.total_income)}
@@ -451,7 +451,7 @@ export default function DressesPage() {
                 ) : (
                   <div className="w-full h-full flex flex-col items-center justify-center text-primary/20 gap-2 bg-gradient-to-br from-primary/5 to-primary/10">
                     <ShoppingBag className="h-16 w-16" />
-                    <span className="text-xs font-bold uppercase tracking-widest">ללא תמונה</span>
+                    <span className="text-xs font-bold uppercase tracking-widest">بدون صورة</span>
                   </div>
                 )}
                 <div className="absolute top-4 right-4">
@@ -471,7 +471,7 @@ export default function DressesPage() {
                   <div>
                     <h3 className="font-black text-xl text-gray-900 leading-snug break-words whitespace-normal">{dress.name}</h3>
                     <p className="text-xs font-bold text-muted-foreground uppercase mt-1">
-                      מק&quot;ט: {dress.id} • {dress.rental_count} השכרות • {getIntendedUseLabel(dress.intended_use)}
+                      מק&quot;ט: {dress.id} • {dress.rental_count} إيجارات • {getIntendedUseLabel(dress.intended_use)}
                     </p>
                   </div>
                   <div className="flex gap-2">
@@ -493,11 +493,11 @@ export default function DressesPage() {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div className="bg-gray-50 p-3 rounded-2xl">
-                    <span className="block text-[10px] font-bold text-muted-foreground uppercase mb-1">מחיר בסיס</span>
+                    <span className="block text-[10px] font-bold text-muted-foreground uppercase mb-1">السعر الأساسي</span>
                     <span className="font-black text-lg">{formatCurrency(dress.base_price)}</span>
                   </div>
                   <div className="bg-primary/5 p-3 rounded-2xl">
-                    <span className="block text-[10px] font-bold text-primary/60 uppercase mb-1">סה&quot;כ הכנסות</span>
+                    <span className="block text-[10px] font-bold text-primary/60 uppercase mb-1">إجمالي الإيرادات</span>
                     <span className="font-black text-lg text-primary">{formatCurrency(dress.total_income)}</span>
                   </div>
                 </div>
@@ -510,8 +510,8 @@ export default function DressesPage() {
       {dresses.length === 0 && !loading && (
         <div className="text-center py-24 bg-white rounded-[3rem] shadow-inner">
           <ShoppingBag className="h-16 w-16 mx-auto text-muted-foreground/30 mb-4" />
-          <h3 className="text-xl font-bold text-gray-900">לא נמצאו שמלות</h3>
-          <p className="text-muted-foreground">נסי לשנות את החיפוש או להוסיף שמלה חדשה</p>
+          <h3 className="text-xl font-bold text-gray-900">לא נמצאו القطع</h3>
+          <p className="text-muted-foreground">غيّر البحث أو أضف قطعة جديدة</p>
         </div>
       )}
 
@@ -523,7 +523,7 @@ export default function DressesPage() {
             className="h-14 px-8 rounded-full shadow-2xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-lg gap-2"
           >
             <Users className="h-5 w-5" />
-            מיזוג 2 שמלות שנבחרו
+            دمج 2 القطع שנבחרו
           </Button>
         </div>
       )}
@@ -536,14 +536,14 @@ export default function DressesPage() {
           <div className="fixed inset-0 bg-black/50 z-[100] flex items-center justify-center p-4 backdrop-blur-sm">
             <Card className="w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-[2rem]">
               <div className="p-6 border-b flex justify-between items-center bg-white sticky top-0 z-10">
-                <h2 className="text-2xl font-black text-purple-700">איחוד שמלות</h2>
+                <h2 className="text-2xl font-black text-purple-700">איחוד القطع</h2>
                 <Button variant="ghost" size="icon" onClick={() => setShowMergeDialog(false)}>
                   <X className="h-6 w-6" />
                 </Button>
               </div>
               <CardContent className="p-6 space-y-6">
                 <div className="bg-purple-50 p-4 rounded-xl text-purple-800 text-sm font-medium">
-                  שימי לב: פעולה זו תאחד את כל ההיסטוריה של שתי השמלות לשמלה אחת. השמלה השנייה תימחק לצמיתות.
+                  שימי לב: פעולה זו תאחד את כל ההיסטוריה של שתי הالقطع לשמלה אחת. השמלה השנייה תימחק לצמיתות.
                 </div>
 
                 {/* Pick primary dress */}
@@ -575,7 +575,7 @@ export default function DressesPage() {
                           <img src={d.thumbnail_url || d.photo_url || ""} alt={d.name} className="w-full h-28 object-cover rounded-lg mb-2" />
                         )}
                         <h3 className="font-bold text-base leading-snug">{d.name}</h3>
-                        <p className="text-xs text-muted-foreground">מק&quot;ט {d.id} • {d.rental_count} השכרות</p>
+                        <p className="text-xs text-muted-foreground">מק&quot;ט {d.id} • {d.rental_count} إيجارات</p>
                       </div>
                     );
                   })}
@@ -583,13 +583,13 @@ export default function DressesPage() {
 
                 {/* Edit merged dress details */}
                 <div className="border-t pt-4 space-y-4">
-                  <h3 className="font-bold">פרטי השמלה המאוחדת:</h3>
+                  <h3 className="font-bold">بيانات القطعة بعد الدمج:</h3>
                   <div className="space-y-2">
-                    <label className="text-sm font-bold">שם השמלה</label>
+                    <label className="text-sm font-bold">اسم القطعة</label>
                     <Input value={mergeName} onChange={e => setMergeName(e.target.value)} />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-bold">תמונה (URL)</label>
+                    <label className="text-sm font-bold">رابط الصورة</label>
                     <Input
                       value={mergePhotoUrl ?? ""}
                       onChange={e => setMergePhotoUrl(e.target.value || null)}
@@ -597,11 +597,11 @@ export default function DressesPage() {
                       placeholder="/uploads/dresses/..."
                     />
                     {(mergePhotoUrl || mergeThumbnailUrl) && (
-                      <img src={mergeThumbnailUrl || mergePhotoUrl || ""} alt="תצוגה מקדימה" className="h-28 w-auto rounded-lg object-cover" />
+                      <img src={mergeThumbnailUrl || mergePhotoUrl || ""} alt="معاينة" className="h-28 w-auto rounded-lg object-cover" />
                     )}
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-bold">הערות</label>
+                    <label className="text-sm font-bold">ملاحظات</label>
                     <textarea
                       className="w-full h-20 p-3 border rounded-xl"
                       value={mergeNotes}
@@ -611,13 +611,13 @@ export default function DressesPage() {
                 </div>
 
                 <div className="flex gap-4 pt-2">
-                  <Button variant="outline" className="flex-1 h-12" onClick={() => setShowMergeDialog(false)}>ביטול</Button>
+                  <Button variant="outline" className="flex-1 h-12" onClick={() => setShowMergeDialog(false)}>إلغاء</Button>
                   <Button
                     className="flex-1 h-12 bg-purple-600 hover:bg-purple-700 font-bold"
                     onClick={executeMerge}
                     disabled={savingMerge || !mergeName.trim()}
                   >
-                    {savingMerge ? "מאחד..." : "אשרי וסיימי איחוד"}
+                    {savingMerge ? "جاري الدمج..." : "تأكيد الدمج"}
                   </Button>
                 </div>
               </CardContent>
@@ -654,7 +654,7 @@ export default function DressesPage() {
                   <div className="relative h-48 w-full rounded-3xl overflow-hidden mb-6">
                     <img src={viewingDress.dress.photo_url || ""} className="w-full h-full object-cover" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
-                      <span className="text-white font-bold">{viewingDress.dress.notes || "אין הערות מיוחדות"}</span>
+                      <span className="text-white font-bold">{viewingDress.dress.notes || "אין ملاحظات מיוחדות"}</span>
                     </div>
                   </div>
                 )}
@@ -663,22 +663,22 @@ export default function DressesPage() {
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                   <div className="p-4 bg-muted/30 rounded-2xl text-center">
                     <TrendingUp className="h-5 w-5 mx-auto mb-2 text-green-600" />
-                    <p className="text-[10px] font-black text-muted-foreground uppercase">הכנסה כוללת</p>
+                    <p className="text-[10px] font-black text-muted-foreground uppercase">إجمالي الإيراد</p>
                     <p className="text-lg font-black text-green-600">{formatCurrency(viewingDress.stats.totalIncome)}</p>
                   </div>
                   <div className="p-4 bg-muted/30 rounded-2xl text-center">
                     <History className="h-5 w-5 mx-auto mb-2 text-primary" />
-                    <p className="text-[10px] font-black text-muted-foreground uppercase">השכרות</p>
+                    <p className="text-[10px] font-black text-muted-foreground uppercase">إيجارات</p>
                     <p className="text-lg font-black text-primary">{viewingDress.stats.rentalCount}</p>
                   </div>
                   <div className="p-4 bg-muted/30 rounded-2xl text-center">
                     <Sparkles className="h-5 w-5 mx-auto mb-2 text-amber-500" />
-                    <p className="text-[10px] font-black text-muted-foreground uppercase">הכנסה ממוצעת</p>
+                    <p className="text-[10px] font-black text-muted-foreground uppercase">متوسط الإيراد</p>
                     <p className="text-lg font-black text-amber-600">{formatCurrency(viewingDress.stats.averagePrice)}</p>
                   </div>
                   <div className="p-4 bg-muted/30 rounded-2xl text-center">
                     <Tag className="h-5 w-5 mx-auto mb-2 text-gray-500" />
-                    <p className="text-[10px] font-black text-muted-foreground uppercase">מחיר בסיס</p>
+                    <p className="text-[10px] font-black text-muted-foreground uppercase">السعر الأساسي</p>
                     <p className="text-lg font-black text-gray-700">{formatCurrency(viewingDress.dress.base_price)}</p>
                   </div>
                 </div>
@@ -705,8 +705,8 @@ export default function DressesPage() {
                             {formatDateShort(booking.event_date)} • הזמנה #{booking.order_id}
                           </p>
                           <p className="text-xs font-bold text-muted-foreground uppercase">
-                            {booking.wearer_name ? `לובשת: ${booking.wearer_name}` : booking.customer_name || "לקוחה לא ידועה"}
-                            {booking.customer_name && booking.wearer_name && booking.customer_name !== booking.wearer_name ? ` • לקוחה: ${booking.customer_name}` : ""}
+                            {booking.wearer_name ? `לובשת: ${booking.wearer_name}` : booking.customer_name || "عميل غير معروف"}
+                            {booking.customer_name && booking.wearer_name && booking.customer_name !== booking.wearer_name ? ` • العميل: ${booking.customer_name}` : ""}
                           </p>
                         </button>
                       ))}
@@ -722,7 +722,7 @@ export default function DressesPage() {
                   </h4>
                   <div className="space-y-3">
                     {viewingDress.rentals.length === 0 ? (
-                      <p className="text-center py-8 text-muted-foreground bg-muted/10 rounded-2xl italic">טרם בוצעו השכרות לשמלה זו</p>
+                      <p className="text-center py-8 text-muted-foreground bg-muted/10 rounded-2xl italic">טרם בוצעו إيجارات לשמלה זו</p>
                     ) : (
                       viewingDress.rentals.map((rental, idx) => (
                         <div
@@ -731,7 +731,7 @@ export default function DressesPage() {
                             if (rental.order_id) {
                               router.push(`/dashboard/orders?id=${rental.order_id}`);
                             } else {
-                              toast({ title: "מידע חסר", description: "לא נמצא מזהה הזמנה עבור רשומה ישנה זו" });
+                              toast({ title: "بيانات ناقصة", description: "لم يتم العثور على رقم الحجز" });
                             }
                           }}
                           className={cn(
@@ -741,20 +741,20 @@ export default function DressesPage() {
                         >
                           <div>
                             <p className="font-black text-gray-900">
-                              {rental.wearer_name || rental.customer_name || rental.customer_full_name || "לקוחה לא ידועה"} (לובשת)
+                              {rental.wearer_name || rental.customer_name || rental.customer_full_name || "عميل غير معروف"} (לובשת)
                             </p>
                             <p className="text-xs font-bold text-muted-foreground uppercase">
                               {formatDateShort(rental.event_date)} • {
-                                !rental.order_id ? "סוג פעולה לא ידוע" :
-                                  (rental.rental_type === 'sale' ? 'מכירה' :
-                                    rental.rental_type === 'sewing_for_rental' ? 'תפירה שנשארת בהשכרה' : 'השכרה')
+                                !rental.order_id ? "نوع العملية غير معروف" :
+                                  (rental.rental_type === 'sale' ? 'بيع' :
+                                    rental.rental_type === 'sewing_for_rental' ? 'تفصيل للإيجار' : 'إيجار')
                               }
-                              {rental.customer_full_name && rental.customer_full_name !== rental.wearer_name && ` • לקוחה: ${rental.customer_full_name}`}
+                              {rental.customer_full_name && rental.customer_full_name !== rental.wearer_name && ` • العميل: ${rental.customer_full_name}`}
                             </p>
                           </div>
                           <div className="text-right">
                             <p className="font-black text-primary text-lg">{formatCurrency(rental.amount)}</p>
-                            {rental.order_id && <p className="text-[10px] font-bold text-muted-foreground uppercase">צפי בהזמנה #{rental.order_id}</p>}
+                            {rental.order_id && <p className="text-[10px] font-bold text-muted-foreground uppercase">عرض الحجز #{rental.order_id}</p>}
                           </div>
                         </div>
                       ))
