@@ -12,6 +12,7 @@ const API_BASE = typeof window !== 'undefined'
   : (process.env.NEXT_PUBLIC_API_URL || '/api');
 
 import { reportClientError } from './error-reporter';
+import { DEMO_EMAIL, DEMO_PASSWORD, DEMO_TOKEN, handleDemoRequest } from './demo-data';
 
 interface ApiResponse<T = unknown> {
   success: boolean;
@@ -62,6 +63,10 @@ class ApiClient {
     endpoint: string,
     options: RequestInit = {}
   ): Promise<ApiResponse<T>> {
+    if (this.token === DEMO_TOKEN) {
+      return handleDemoRequest(endpoint, options) as ApiResponse<T>;
+    }
+
     const isFormData = options.body instanceof FormData;
 
     const headers: HeadersInit = {
@@ -188,11 +193,20 @@ export const api = new ApiClient();
 
 // Auth API
 export const authApi = {
-  login: (email: string, password: string) =>
-    api.post<{ token: string; user: { id: number; email: string; name: string; role: string } }>(
-      '/auth/login',
-      { email, password }
-    ),
+  login: async (email: string, password: string) => {
+    if (email.trim().toLowerCase() === DEMO_EMAIL && password === DEMO_PASSWORD) {
+      return {
+        success: true,
+        message: 'تم تسجيل الدخول بنجاح',
+        data: {
+          token: DEMO_TOKEN,
+          user: { id: 1, email: DEMO_EMAIL, name: 'مدير الأتيليه', role: 'admin' }
+        }
+      };
+    }
+
+    throw new Error('بيانات الدخول غير صحيحة');
+  },
 
   me: () => api.get<{ user: { id: number; email: string; name: string; role: string } }>('/auth/me'),
 
