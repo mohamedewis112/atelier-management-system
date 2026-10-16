@@ -8,7 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { authApi, api } from "@/lib/api";
 import { useToast } from "@/components/ui/use-toast";
 import { DEMO_EMAIL, DEMO_PASSWORD } from "@/lib/demo-data";
-import { KeyRound, Mail, Sparkles } from "lucide-react";
+import { KeyRound, Mail } from "lucide-react";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -67,13 +67,10 @@ export default function LoginPage() {
           <div>
             <CardTitle className="text-2xl font-black">نظام إدارة الأتيليه</CardTitle>
             <CardDescription className="mt-2">
-              إدارة الحجوزات والقطع والعملاء والمدفوعات
+              إدارة الحجوزات والعملاء والقطع والحسابات من مكان واحد
             </CardDescription>
           </div>
-          <div className="inline-flex items-center justify-center gap-2 text-xs font-bold text-emerald-700 bg-emerald-50 rounded-full px-3 py-2 mx-auto">
-            <Sparkles className="h-4 w-4" />
-            نسخة تجريبية من Smart Media
-          </div>
+          <div className="text-xs font-medium text-muted-foreground">دخول تجريبي للنظام</div>
         </CardHeader>
 
         <CardContent>
@@ -123,7 +120,7 @@ export default function LoginPage() {
               onClick={fillDemo}
               className="w-full rounded-xl border border-dashed p-3 text-sm text-muted-foreground hover:bg-muted/50 transition-colors"
             >
-              <span className="font-bold text-foreground">بيانات التجربة:</span>
+              <span className="font-bold text-foreground">حساب التجربة:</span>
               <span className="block mt-1" dir="ltr">{DEMO_EMAIL}</span>
               <span className="block" dir="ltr">{DEMO_PASSWORD}</span>
             </button>
