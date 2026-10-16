@@ -13,8 +13,8 @@ import { ErrorBoundary } from '@/components/error-boundary';
 import { GlobalErrorReporter } from '@/components/global-error-reporter';
 
 export const metadata: Metadata = {
-  title: 'نظام إدارة الأتيليه - Smart Media',
-  description: 'نظام عربي لإدارة الأتيليه والحجوزات والعملاء والمدفوعات',
+  title: 'نظام إدارة الأتيليه',
+  description: 'نظام متكامل لإدارة الأتيليه والحجوزات والعملاء والقطع والحسابات',
   manifest: '/manifest.json',
   icons: {
     icon: '/icon.png',
