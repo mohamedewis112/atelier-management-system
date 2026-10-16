@@ -233,7 +233,7 @@ export function GlobalSearch() {
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
                         onKeyDown={handleKeyDown}
-                        placeholder="بحث العملاء, قطع, حجوزات..."
+                        placeholder="ابحث في العملاء والقطع والحجوزات..."
                         className="border-0 focus-visible:ring-0 text-lg"
                     />
                     <Button
