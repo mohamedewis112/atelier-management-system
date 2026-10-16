@@ -57,21 +57,21 @@ export function Sidebar({ onItemClick, currentUser }: SidebarProps) {
   };
 
   return (
-    <aside className="fixed right-0 top-0 z-40 h-screen w-72 bg-white/95 backdrop-blur-md border-l shadow-2xl">
+    <aside className="fixed right-0 top-0 z-40 h-[100dvh] w-full bg-white/95 backdrop-blur-md border-l shadow-2xl">
       <div className="flex h-full flex-col">
-        <div className="flex h-24 flex-col justify-center gap-1 px-8 border-b bg-primary/5">
+        <div className="flex h-20 sm:h-24 flex-col justify-center gap-1 px-5 sm:px-7 border-b bg-primary/5">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-primary rounded-2xl flex items-center justify-center shadow-lg shadow-primary/20 rotate-3">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary rounded-2xl flex items-center justify-center shadow-lg shadow-primary/20 rotate-3">
               <span className="text-2xl text-white">👗</span>
             </div>
             <div className="min-w-0">
-              <h1 className="font-bold text-xl tracking-tight text-primary">نظام إدارة الأتيليه</h1>
+              <h1 className="font-bold text-base sm:text-lg tracking-tight text-primary">نظام إدارة الأتيليه</h1>
               <p className="text-xs font-medium text-muted-foreground">الحجوزات والمخزون والحسابات</p>
             </div>
           </div>
         </div>
 
-        <nav className="flex-1 space-y-2 px-4 py-6 overflow-y-auto">
+        <nav className="flex-1 space-y-1.5 px-3 sm:px-4 py-4 sm:py-6 overflow-y-auto">
           {visibleItems.map((item) => {
             const isActive = pathname === item.href ||
               (item.href !== "/dashboard" && pathname.startsWith(item.href));
@@ -82,7 +82,7 @@ export function Sidebar({ onItemClick, currentUser }: SidebarProps) {
                 href={item.href}
                 onClick={onItemClick}
                 className={cn(
-                  "flex items-center gap-4 rounded-2xl px-4 py-3 text-sm font-semibold transition-all duration-200",
+                  "flex items-center gap-3 rounded-xl sm:rounded-2xl px-3 sm:px-4 py-2.5 sm:py-3 text-sm font-semibold transition-all duration-200",
                   isActive
                     ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20 scale-[1.02]"
                     : "text-muted-foreground hover:bg-primary/5 hover:text-primary"
