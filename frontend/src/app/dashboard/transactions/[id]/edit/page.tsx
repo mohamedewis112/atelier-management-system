@@ -33,25 +33,25 @@ import { reportClientError } from "@/lib/error-reporter";
 
 const FORM_INCOME_CATEGORIES = [
   { value: "existing_order", label: "حجز" },
-  { value: "repair", label: "التصحيحات" },
-  { value: "other", label: "آخر" },
+  { value: "repair", label: "إصلاحات" },
+  { value: "other", label: "أخرى" },
 ];
 
 const EXPENSE_CATEGORIES = [
-  { value: "materials", label: "مواد" },
-  { value: "overhead", label: "النفقات العامة" },
+  { value: "materials", label: "خامات" },
+  { value: "overhead", label: "مصروفات تشغيل" },
   { value: "tax", label: "الضرائب" },
   { value: "equipment", label: "معدات" },
   { value: "salary", label: "الرواتب" },
-  { value: "other", label: "آخر" },
+  { value: "other", label: "أخرى" },
 ];
 
 const PAYMENT_METHODS = [
   { value: "cash", label: "نقدي" },
-  { value: "bit", label: "قليل" },
-  { value: "paybox", label: "صندوق الدفع" },
-  { value: "credit", label: "بطاقة" },
-  { value: "transfer", label: "نقل" },
+  { value: "bit", label: "محفظة إلكترونية" },
+  { value: "paybox", label: "محفظة إلكترونية" },
+  { value: "credit", label: "بطاقة بنكية" },
+  { value: "transfer", label: "تحويل بنكي" },
   { value: "check", label: "شيك" },
 ];
 
@@ -146,7 +146,7 @@ export default function EditTransactionPage() {
         }
       } catch (e) {
         console.error("Error loading transaction:", e);
-        toast({ title: "خطأ", description: "لا يمكن المطالبة بالمعاملة", variant: "destructive" });
+        toast({ title: "خطأ", description: "تعذر تحميل الحركة المالية", variant: "destructive" });
         router.push("/dashboard/transactions");
       } finally {
         setLoading(false);
@@ -189,7 +189,7 @@ export default function EditTransactionPage() {
     if (!file) return;
 
     if (file.size > 20 * 1024 * 1024) {
-      toast({ title: "الملف كبير جدًا", description: "الحد الأقصى للحجم هو 20MB. حاول التصوير مرة أخرى بدقة أقل.", variant: "destructive" });
+      toast({ title: "الملف كبير جدًا", description: "الحد الأقصى لحجم الملف 20MB. جرّب رفع صورة بدقة أقل.", variant: "destructive" });
       return;
     }
 
@@ -199,12 +199,12 @@ export default function EditTransactionPage() {
       setFileName(file.name);
     } catch (err) {
       console.error('File read/compress error:', err);
-      toast({ title: "خطأ في قراءة الملف", description: "لا يمكن قراءة الملف. حاول إطلاق النار مرة أخرى.", variant: "destructive" });
+      toast({ title: "خطأ في قراءة الملف", description: "تعذر قراءة الملف. جرّب رفع ملف آخر.", variant: "destructive" });
       reportClientError({
         message: err instanceof Error ? err.message : String(err),
         stack: err instanceof Error ? err.stack : undefined,
         component: 'EditTransaction',
-        action: 'قراءة ملف مرجعي'
+        action: 'قراءة المستند المرفق'
       });
     }
   };
@@ -213,19 +213,19 @@ export default function EditTransactionPage() {
     e.preventDefault();
 
     if (!amount) {
-      toast({ title: "المبلغ المفقود", description: "الرجاء إدخال مبلغ المعاملة.", variant: "destructive" });
+      toast({ title: "المبلغ مطلوب", description: "أدخل مبلغ الحركة المالية.", variant: "destructive" });
       return;
     }
     if (type === "income" && !uiCategory) {
-      toast({ title: "نوع الدخل مفقود", description: "الرجاء تحديد نوع الدخل: حجز, إصلاحات أو غير ذلك.", variant: "destructive" });
+      toast({ title: "نوع الإيراد مطلوب", description: "اختر نوع الإيراد: حجز، إصلاحات، أو أخرى.", variant: "destructive" });
       return;
     }
     if (type === "expense" && !category) {
-      toast({ title: "الفئة مفقودة", description: "الرجاء تحديد فئة للنشر (مواد, النفقات العامة الخ').", variant: "destructive" });
+      toast({ title: "التصنيف مطلوب", description: "الرجاء تحديد فئة للنشر (خامات, مصروفات تشغيل الخ').", variant: "destructive" });
       return;
     }
     if (type === "income" && !customerId) {
-      toast({ title: "في عداد المفقودين العميل", description: "الرجاء تحديد عميل حالي أو إنشاء عميل جديد.", variant: "destructive" });
+      toast({ title: "العميل مطلوب", description: "اختر عميلًا حاليًا أو أضف عميلًا جديدًا.", variant: "destructive" });
       return;
     }
 
@@ -256,18 +256,18 @@ export default function EditTransactionPage() {
       };
 
       await transactionsApi.update(parseInt(transactionId), data);
-      toast({ title: "تم بنجاح!", description: "تم تحديث المعاملة بنجاح" });
+      toast({ title: "تم بنجاح!", description: "تم تحديث الحركة المالية بنجاح" });
       router.push("/dashboard/transactions");
     } catch (error) {
       const message = error instanceof Error && error.message
         ? error.message
-        : "لا يمكن تحديث حركة المرور. تحقق من اتصالك بالإنترنت وحاول مرة أخرى.";
-      toast({ title: "حدث خطأ أثناء التحديث", description: message, variant: "destructive" });
+        : "تعذر تحديث الحركة المالية. تحقق من الاتصال وحاول مرة أخرى.";
+      toast({ title: "تعذر التحديث", description: message, variant: "destructive" });
       reportClientError({
         message,
         stack: error instanceof Error ? error.stack : undefined,
         component: 'EditTransaction',
-        action: 'تحديث المرور'
+        action: 'تحديث الحركة'
       });
     } finally {
       setSaving(false);
@@ -460,7 +460,7 @@ export default function EditTransactionPage() {
                 <Input
                   value={supplier}
                   onChange={(e) => setSupplier(e.target.value)}
-                  placeholder="أين اشتريت?"
+                  placeholder="اسم المورد"
                   className="focus:border-red-600"
                 />
               </div>
@@ -469,7 +469,7 @@ export default function EditTransactionPage() {
                 <Input
                   value={product}
                   onChange={(e) => setProduct(e.target.value)}
-                  placeholder="ماذا اشتريت?"
+                  placeholder="تفاصيل المصروف"
                   className="focus:border-red-600"
                 />
               </div>
@@ -489,9 +489,9 @@ export default function EditTransactionPage() {
 
             <div className="bg-muted p-1.5 rounded-2xl flex gap-1">
               {[
-                { id: "business", label: "عمل" },
+                { id: "business", label: "على النشاط" },
                 { id: "customer", label: "عميل" },
-                { id: "split", label: "مدمج" }
+                { id: "split", label: "مقسّم" }
               ].map(opt => (
                 <button
                   key={opt.id}
@@ -541,7 +541,7 @@ export default function EditTransactionPage() {
                     onKeyDown={(e) => {
                       if (e.key === '.' || e.key === '-') e.preventDefault();
                     }}
-                    placeholder="كم تدفع?"
+                    placeholder="المبلغ المحمّل على العميل"
                     className="h-11 rounded-xl border-2"
                   />
                 )}
@@ -559,7 +559,7 @@ export default function EditTransactionPage() {
             <div className="grid grid-cols-3 gap-2 animate-in fade-in slide-in-from-top-2">
               <div className="space-y-1">
                 <label className="text-[10px] font-bold text-muted-foreground uppercase">مرجع</label>
-                <Input value={confirmationNumber} onChange={(e) => setConfirmationNumber(e.target.value)} placeholder="تأكيد..." className="h-10 text-center" />
+                <Input value={confirmationNumber} onChange={(e) => setConfirmationNumber(e.target.value)} placeholder="مرجع..." className="h-10 text-center" />
               </div>
               <div className="space-y-1">
                 <label className="text-[10px] font-bold text-muted-foreground uppercase">4 الأدب</label>
@@ -587,7 +587,7 @@ export default function EditTransactionPage() {
           {type === "income" && (paymentMethod === "bit" || paymentMethod === "paybox" || paymentMethod === "transfer") && (
             <div className="space-y-1 animate-in fade-in slide-in-from-top-2">
               <label className="text-[10px] font-bold text-muted-foreground uppercase">مرجع</label>
-              <Input value={confirmationNumber} onChange={(e) => setConfirmationNumber(e.target.value)} placeholder="رقم التأكيد..." className="h-10" />
+              <Input value={confirmationNumber} onChange={(e) => setConfirmationNumber(e.target.value)} placeholder="رقم المرجع..." className="h-10" />
             </div>
           )}
 
@@ -636,7 +636,7 @@ export default function EditTransactionPage() {
             <textarea
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
-              placeholder="مزيد من التفاصيل..."
+              placeholder="ملاحظات إضافية..."
               className="w-full h-32 p-4 rounded-2xl border-2 bg-background focus:border-primary outline-none resize-none shadow-inner"
             />
           </div>
@@ -645,14 +645,14 @@ export default function EditTransactionPage() {
           {(type === "expense" || paymentMethod !== "cash") && (
             <div className="space-y-2">
               <label className="text-xs font-bold text-muted-foreground flex items-center gap-1 uppercase tracking-widest">
-                <Camera className="h-3 w-3" /> {type === "expense" ? "صورة الاستلام" : "مرجع / التصوير الفوتوغرافي"}
+                <Camera className="h-3 w-3" /> {type === "expense" ? "صورة الإيصال" : "إيصال أو مستند"}
               </label>
               <label className={cn(
                 "flex flex-col items-center justify-center w-full h-32 rounded-2xl border-2 border-dashed transition-all cursor-pointer",
                 fileName ? "bg-green-50 border-green-300 text-green-700" : "bg-muted/20 hover:bg-muted/40 text-muted-foreground"
               )}>
                 {fileName ? <Check className="h-8 w-8 mb-2" /> : <Upload className="h-8 w-8 mb-2" />}
-                <span className="font-bold text-sm">{fileName || "انقر لتحميل ملف أو صورة"}</span>
+                <span className="font-bold text-sm">{fileName || "اضغط لرفع صورة أو ملف"}</span>
                 <input type="file" accept="image/*,application/pdf" capture="environment" onChange={handleFileChange} className="hidden" />
               </label>
             </div>
@@ -679,7 +679,7 @@ export default function EditTransactionPage() {
             onClick={handleSubmit}
             disabled={saving}
           >
-            {saving ? "تحديث..." : "حفظ التغييرات 🎉"}
+            {saving ? "جاري التحديث..." : "حفظ التغييرات"}
           </Button>
         </div>
       </div >
