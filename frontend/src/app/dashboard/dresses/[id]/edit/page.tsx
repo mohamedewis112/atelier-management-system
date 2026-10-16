@@ -61,20 +61,20 @@ export default function EditDressPage() {
                                     thumbnail_url: uploadRes.data!.thumbnailUrl,
                                 }));
                                 clearSharedUploadPayload();
-                                toast({ title: "تم استلام الصورة", description: "تم تحميل صورة القطعة بنجاح (مطلوب صيانة)" });
+                                toast({ title: "تم استلام الصورة", description: "تم إرفاق صورة القطعة بنجاح" });
                             }
                         } catch (error) {
-                            toast({ title: "خطأ", description: "فشل تحميل الصورة من المشاركة", variant: "destructive" });
+                            toast({ title: "خطأ", description: "تعذر تحميل الصورة المشتركة", variant: "destructive" });
                         } finally {
                             setSaving(false);
                         }
                     }
                 } else {
-                    toast({ title: "خطأ", description: "لم يتم العثور على اللباس", variant: "destructive" });
+                    toast({ title: "خطأ", description: "القطعة غير موجودة", variant: "destructive" });
                     router.push("/dashboard/dresses");
                 }
             } catch (error) {
-                toast({ title: "خطأ", description: "فشل تحميل القطعة", variant: "destructive" });
+                toast({ title: "خطأ", description: "تعذر تحميل بيانات القطعة", variant: "destructive" });
                 router.push("/dashboard/dresses");
             } finally {
                 setLoading(false);
@@ -130,7 +130,7 @@ export default function EditDressPage() {
                 toast({ title: "تم بنجاح", description: "تم تحميل الصورة بنجاح إلى النموذج" });
             }
         } catch (error) {
-            toast({ title: "خطأ", description: "فشل تحميل الصورة", variant: "destructive" });
+            toast({ title: "خطأ", description: "تعذر تحميل الصورة", variant: "destructive" });
             reportClientError({
                 message: error instanceof Error ? error.message : String(error),
                 stack: error instanceof Error ? error.stack : undefined,
@@ -145,7 +145,7 @@ export default function EditDressPage() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!formData.name.trim()) {
-            toast({ title: "خطأ", description: "الرجاء إدخال اسم اللباس", variant: "destructive" });
+            toast({ title: "خطأ", description: "أدخل اسم القطعة", variant: "destructive" });
             return;
         }
         setSaving(true);
@@ -164,7 +164,7 @@ export default function EditDressPage() {
             toast({ title: "تم بنجاح", description: "تم تحديث القطعة بنجاح" });
             router.push("/dashboard/dresses");
         } catch (error) {
-            const message = error instanceof Error ? error.message : "حدث خطأ أثناء تحديث القطعة";
+            const message = error instanceof Error ? error.message : "تعذر تحديث بيانات القطعة";
             toast({
                 title: "خطأ",
                 description: message,
@@ -174,7 +174,7 @@ export default function EditDressPage() {
                 message,
                 stack: error instanceof Error ? error.stack : undefined,
                 component: 'EditDress',
-                action: 'تحديث اللباس'
+                action: 'تحديث القطعة'
             });
             setSaving(false);
         }
@@ -211,7 +211,7 @@ export default function EditDressPage() {
                                 value={formData.name}
                                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                                 className="h-14 rounded-2xl bg-muted/30 border-transparent focus:bg-white transition-all text-lg"
-                                placeholder="على سبيل المثال: قطعة ذهبي لامع"
+                                placeholder="مثال: فستان سواريه ذهبي"
                             />
                         </div>
 
@@ -282,7 +282,7 @@ export default function EditDressPage() {
                                             <Plus className="h-6 w-6" />
                                         </div>
                                         <span className="text-sm font-bold text-muted-foreground">انقر لتحميل الصورة</span>
-                                        <span className="text-[10px] text-muted-foreground/60 uppercase font-black">JPG, PNG, WEBP (الأعلى' 10MB)</span>
+                                        <span className="text-[10px] text-muted-foreground/60 uppercase font-black"JPG أو PNG أو WEBP — الحد الأقصى' 10MB)</span>
                                         <input
                                             type="file"
                                             className="hidden"
@@ -302,7 +302,7 @@ export default function EditDressPage() {
                                 value={formData.notes}
                                 onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
                                 className="w-full h-32 p-4 rounded-2xl bg-muted/30 border-none focus:ring-2 focus:ring-primary/20 outline-none resize-none shadow-inner"
-                                placeholder="أبعاد, نوع القماش, أبرز الخاصة..."
+                                placeholder="المقاس، نوع القماش، اللون، وأي ملاحظات مهمة..."
                             />
                         </div>
 
@@ -311,7 +311,7 @@ export default function EditDressPage() {
                                 إلغاء
                             </Button>
                             <Button type="submit" disabled={saving} className="flex-1 h-14 rounded-2xl font-bold shadow-lg shadow-primary/20">
-                                {saving ? "جاري التحميل..." : "تحديث اللباس"}
+                                {saving ? "جاري التحميل..." : "تحديث القطعة"}
                             </Button>
                         </div>
                     </form>
