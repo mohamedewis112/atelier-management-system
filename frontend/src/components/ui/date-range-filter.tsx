@@ -7,7 +7,7 @@
  * Used in orders and transactions pages for filtering by dates.
  * 
  * Method: Renders date inputs for from/to dates with quick preset buttons.
- * Preset options: اليوم, هذا الأسبوع, هذا الشهر, قبل شهر, ربع سنوي, الربع السابق, هذه السنة, العام الماضي, النطاق المعدل.
+ * Preset options: اليوم, هذا الأسبوع, هذا الشهر, الشهر السابق, الربع الحالي, الربع السابق, هذه السنة, العام الماضي, النطاق المعدل.
  * Calls onChange callback when dates are updated.
  *
  * Quarter logic:
@@ -206,7 +206,7 @@ export function DateRangeFilter({ onDateChange, dateFrom, dateTo }: DateRangeFil
                         onChange={(e) => onDateChange(e.target.value || null, dateTo)}
                         className="h-8 w-32 text-xs"
                         dir="ltr"
-                        placeholder="مؤرخة"
+                        placeholder="تاريخ مخصص"
                     />
                     <span className="text-xs text-muted-foreground">ل</span>
                     <Input
@@ -215,7 +215,7 @@ export function DateRangeFilter({ onDateChange, dateFrom, dateTo }: DateRangeFil
                         onChange={(e) => onDateChange(dateFrom, e.target.value || null)}
                         className="h-8 w-32 text-xs"
                         dir="ltr"
-                        placeholder="حتى الآن"
+                        placeholder="حتى تاريخ"
                     />
                 </div>
             )}
