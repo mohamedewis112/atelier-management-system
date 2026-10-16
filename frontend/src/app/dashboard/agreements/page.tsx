@@ -34,7 +34,7 @@ export default function AgreementsPage() {
     try {
       const response = await agreementsApi.list(1, 200);
       if (!response.success || !response.data) {
-        throw new Error(response.message || "לא ניתן לטעון הסכמים");
+        throw new Error(response.message || "تعذر تحميل العقود");
       }
 
       const payload = response.data as {
@@ -43,8 +43,8 @@ export default function AgreementsPage() {
       setAgreements(payload.agreements || []);
     } catch (error) {
       toast({
-        title: "שגיאה",
-        description: error instanceof Error ? error.message : "לא ניתן לטעון את ההסכמים",
+        title: "خطأ",
+        description: error instanceof Error ? error.message : "تعذر تحميل العقود",
         variant: "destructive",
       });
     } finally {
@@ -67,7 +67,7 @@ export default function AgreementsPage() {
   const openLink = (url: string | null, label: string) => {
     if (!url) {
       toast({
-        title: "לא נמצא קובץ",
+        title: "الملف غير موجود",
         description: `אין ${label} עבור ההסכם הזה`,
         variant: "destructive",
       });
@@ -92,27 +92,27 @@ export default function AgreementsPage() {
             <FileSignature className="h-7 w-7" />
             הסכמים חתומים
           </h1>
-          <p className="text-muted-foreground">רשימת כל ההסכמים והגישה ל-PDF ולחתימה הדיגיטלית</p>
+          <p className="text-muted-foreground">كل العقود والتوقيعات والملفات المرتبطة بها</p>
         </div>
-        <Button variant="outline" onClick={loadAgreements}>רענון</Button>
+        <Button variant="outline" onClick={loadAgreements}>تحديث</Button>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <Card>
           <CardContent className="pt-6">
-            <p className="text-sm text-muted-foreground">סה&quot;כ הסכמים</p>
+            <p className="text-sm text-muted-foreground">إجمالي العقود</p>
             <p className="text-3xl font-bold">{stats.total}</p>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="pt-6">
-            <p className="text-sm text-muted-foreground">עם חתימה דיגיטלית</p>
+            <p className="text-sm text-muted-foreground">بتوقيع رقمي</p>
             <p className="text-3xl font-bold">{stats.withSignature}</p>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="pt-6">
-            <p className="text-sm text-muted-foreground">עם PDF שמור</p>
+            <p className="text-sm text-muted-foreground">بملف PDF</p>
             <p className="text-3xl font-bold">{stats.withPdf}</p>
           </CardContent>
         </Card>
@@ -120,11 +120,11 @@ export default function AgreementsPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle>רשימת הסכמים</CardTitle>
+          <CardTitle>قائمة العقود</CardTitle>
         </CardHeader>
         <CardContent>
           {agreements.length === 0 ? (
-            <p className="text-sm text-muted-foreground">עדיין אין הסכמים חתומים.</p>
+            <p className="text-sm text-muted-foreground">لا توجد عقود موقعة بعد.</p>
           ) : (
             <div className="space-y-3">
               {agreements.map((agreement) => {
@@ -139,10 +139,10 @@ export default function AgreementsPage() {
                     <div className="space-y-1">
                       <div className="font-semibold">{agreement.customer_name}</div>
                       <div className="text-sm text-muted-foreground">
-                        הזמנה: {agreement.order_id || "ללא"} | נחתם: {agreement.agreed_at ? formatDateTime(agreement.agreed_at) : "-"}
+                        הזמנה: {agreement.order_id || "بدون"} | נחתם: {agreement.agreed_at ? formatDateTime(agreement.agreed_at) : "-"}
                       </div>
                       <div className="text-sm text-muted-foreground">
-                        אירוע: {agreement.event_date || "-"} | טלפון: {agreement.customer_phone || "-"}
+                        אירוע: {agreement.event_date || "-"} | الهاتف: {agreement.customer_phone || "-"}
                       </div>
                     </div>
 
@@ -150,11 +150,11 @@ export default function AgreementsPage() {
                       <Button
                         size="sm"
                         variant="outline"
-                        onClick={() => openLink(signatureUrl, "חתימה")}
+                        onClick={() => openLink(signatureUrl, "التوقيع")}
                         disabled={!signatureUrl}
                       >
                         <PenLine className="h-4 w-4 ms-1" />
-                        צפייה בחתימה
+                        צפייה בالتوقيع
                       </Button>
                       <Button
                         size="sm"
