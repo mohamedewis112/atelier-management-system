@@ -23,7 +23,7 @@ export function MobileActions() {
           <div className="bg-red-50 p-2 rounded-2xl">
             <TrendingDown className="h-6 w-6" />
           </div>
-          <span className="text-[10px] font-bold">مصروف</span>
+          <span className="text-[10px] font-bold">تسجيل مصروف</span>
         </a>
 
         <a
@@ -41,7 +41,7 @@ export function MobileActions() {
           <div className="bg-green-50 p-2 rounded-2xl">
             <TrendingUp className="h-6 w-6" />
           </div>
-          <span className="text-[10px] font-bold">إيراد</span>
+          <span className="text-[10px] font-bold">تسجيل إيراد</span>
         </a>
       </div>
     </div>
