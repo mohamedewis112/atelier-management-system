@@ -5,7 +5,7 @@
  * Includes RTL support for Hebrew content.
  */
 
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import { ServiceWorkerRegister } from '@/components/pwa/sw-register';
@@ -22,6 +22,16 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  minimumScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  viewportFit: 'cover',
+  themeColor: '#ffffff',
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -29,7 +39,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ar" dir="rtl">
-      <body className="min-h-screen bg-background antialiased">
+      <body className="min-h-screen max-w-full overflow-x-hidden bg-background antialiased">
         <GlobalErrorReporter />
         <ServiceWorkerRegister />
         <ErrorBoundary>
