@@ -38,25 +38,25 @@ import { ContactPicker } from "@/components/dashboard/contact-picker";
 
 const FORM_INCOME_CATEGORIES = [
   { value: "existing_order", label: "حجز" },
-  { value: "repair", label: "التصحيحات" },
-  { value: "other", label: "آخر" },
+  { value: "repair", label: "إصلاحات" },
+  { value: "other", label: "أخرى" },
 ];
 
 const EXPENSE_CATEGORIES = [
-  { value: "materials", label: "مواد" },
-  { value: "overhead", label: "النفقات العامة" },
+  { value: "materials", label: "خامات" },
+  { value: "overhead", label: "مصروفات تشغيل" },
   { value: "tax", label: "الضرائب" },
   { value: "equipment", label: "معدات" },
   { value: "salary", label: "الرواتب" },
-  { value: "other", label: "آخر" },
+  { value: "other", label: "أخرى" },
 ];
 
 const PAYMENT_METHODS = [
   { value: "cash", label: "نقدي" },
-  { value: "bit", label: "قليل" },
-  { value: "paybox", label: "صندوق الدفع" },
-  { value: "credit", label: "بطاقة" },
-  { value: "transfer", label: "نقل" },
+  { value: "bit", label: "محفظة إلكترونية" },
+  { value: "paybox", label: "محفظة إلكترونية" },
+  { value: "credit", label: "بطاقة بنكية" },
+  { value: "transfer", label: "تحويل بنكي" },
   { value: "check", label: "شيك" },
 ];
 
@@ -142,7 +142,7 @@ export default function NewTransactionPage() {
 
     clearSharedUploadPayload();
     sharedAppliedRef.current = true;
-    toast({ title: "تم تحميل ملف الشريك", description: "تم إرفاق المرجع بالنموذج الحالي." });
+    toast({ title: "تم إرفاق الملف", description: "تم إرفاق المستند بالحركة الحالية." });
   }, [searchParams, toast]);
 
   useEffect(() => {
@@ -181,7 +181,7 @@ export default function NewTransactionPage() {
     // Raw file size check — PDFs are passed through as-is; images are compressed
     // via canvas below, so only block truly huge files (>20MB raw).
     if (file.size > 20 * 1024 * 1024) {
-      toast({ title: "الملف كبير جدًا", description: "الحد الأقصى للحجم هو 20MB. حاول التصوير مرة أخرى بدقة أقل.", variant: "destructive" });
+      toast({ title: "الملف كبير جدًا", description: "الحد الأقصى لحجم الملف 20MB. جرّب رفع صورة بدقة أقل.", variant: "destructive" });
       return;
     }
 
@@ -194,12 +194,12 @@ export default function NewTransactionPage() {
       setFileName(file.name);
     } catch (err) {
       console.error('File read/compress error:', err);
-      toast({ title: "خطأ في قراءة الملف", description: "لا يمكن قراءة الملف. حاول إطلاق النار مرة أخرى.", variant: "destructive" });
+      toast({ title: "خطأ في قراءة الملف", description: "تعذر قراءة الملف. جرّب رفع ملف آخر.", variant: "destructive" });
       reportClientError({
         message: err instanceof Error ? err.message : String(err),
         stack: err instanceof Error ? err.stack : undefined,
         component: 'NewTransaction',
-        action: 'قراءة ملف مرجعي'
+        action: 'قراءة المستند المرفق'
       });
     }
   };
@@ -209,23 +209,23 @@ export default function NewTransactionPage() {
 
     // --- Specific validation with distinct error messages ---
     if (!amount) {
-      toast({ title: "المبلغ المفقود", description: "الرجاء إدخال مبلغ المعاملة.", variant: "destructive" });
+      toast({ title: "المبلغ مطلوب", description: "أدخل مبلغ الحركة المالية.", variant: "destructive" });
       return;
     }
     if (!paymentMethod) {
-      toast({ title: "لا توجد طريقة الدفع", description: "الرجاء تحديد طريقة الدفع للحركة.", variant: "destructive" });
+      toast({ title: "طريقة الدفع مطلوبة", description: "اختر طريقة الدفع.", variant: "destructive" });
       return;
     }
     if (type === "income" && !uiCategory) {
-      toast({ title: "نوع الدخل مفقود", description: "الرجاء تحديد نوع الدخل: حجز, إصلاحات أو غير ذلك.", variant: "destructive" });
+      toast({ title: "نوع الإيراد مطلوب", description: "اختر نوع الإيراد: حجز، إصلاحات، أو أخرى.", variant: "destructive" });
       return;
     }
     if (type === "expense" && !category) {
-      toast({ title: "الفئة مفقودة", description: "الرجاء تحديد فئة للنشر (مواد, النفقات العامة الخ').", variant: "destructive" });
+      toast({ title: "التصنيف مطلوب", description: "الرجاء تحديد فئة للنشر (خامات, مصروفات تشغيل الخ').", variant: "destructive" });
       return;
     }
     if (type === "income" && !customerId && !isNewCustomer) {
-      toast({ title: "في عداد المفقودين العميل", description: "الرجاء البحث واختيار العملاء الحاليين, أو إنشاء عميل جديد.", variant: "destructive" });
+      toast({ title: "العميل مطلوب", description: "ابحث عن عميل حالي واختره، أو أضف عميلًا جديدًا.", variant: "destructive" });
       return;
     }
 
@@ -257,7 +257,7 @@ export default function NewTransactionPage() {
 
       if (isNewCustomer) {
         if (!newCustomerDetails.name.trim()) {
-          toast({ title: "اسم العميل مفقود", description: "برجاء إدخال الاسم الكامل للعميل الجديد.", variant: "destructive" });
+          toast({ title: "اسم العميل مطلوب", description: "أدخل اسم العميل الجديد.", variant: "destructive" });
           setSaving(false);
           return;
         }
@@ -266,20 +266,20 @@ export default function NewTransactionPage() {
       }
 
       await transactionsApi.create(data);
-      toast({ title: "تم بنجاح!", description: "تم تسجيل العملية بنجاح" });
+      toast({ title: "تم بنجاح!", description: "تم تسجيل الحركة المالية بنجاح" });
       router.push("/dashboard/transactions");
     } catch (error) {
       // Show the server's specific error message when available,
       // or a generic fallback if no message is present.
       const message = error instanceof Error && error.message
         ? error.message
-        : "لا يمكن حفظ حركة المرور. تحقق من اتصالك بالإنترنت وحاول مرة أخرى.";
-      toast({ title: "حدث خطأ أثناء الحفظ", description: message, variant: "destructive" });
+        : "تعذر حفظ الحركة المالية. تحقق من الاتصال وحاول مرة أخرى.";
+      toast({ title: "تعذر الحفظ", description: message, variant: "destructive" });
       reportClientError({
         message,
         stack: error instanceof Error ? error.stack : undefined,
         component: 'NewTransaction',
-        action: 'إنقاذ حركة المرور'
+        action: 'حفظ الحركة'
       });
     } finally {
       setSaving(false);
@@ -584,7 +584,7 @@ export default function NewTransactionPage() {
                 <Input
                   value={supplier}
                   onChange={(e) => setSupplier(e.target.value)}
-                  placeholder="أين اشتريت?"
+                  placeholder="اسم المورد"
                   className="focus:border-red-600"
                 />
               </div>
@@ -593,7 +593,7 @@ export default function NewTransactionPage() {
                 <Input
                   value={product}
                   onChange={(e) => setProduct(e.target.value)}
-                  placeholder="ماذا اشتريت?"
+                  placeholder="تفاصيل المصروف"
                   className="focus:border-red-600"
                 />
               </div>
@@ -613,9 +613,9 @@ export default function NewTransactionPage() {
 
             <div className="bg-muted p-1 rounded-2xl flex gap-1">
               {[
-                { id: "business", label: "عمل" },
+                { id: "business", label: "على النشاط" },
                 { id: "customer", label: "عميل" },
-                { id: "split", label: "مدمج" }
+                { id: "split", label: "مقسّم" }
               ].map(opt => (
                 <button
                   key={opt.id}
@@ -682,7 +682,7 @@ export default function NewTransactionPage() {
                     onKeyDown={(e) => {
                       if (e.key === '.' || e.key === '-') e.preventDefault();
                     }}
-                    placeholder="كم تدفع?"
+                    placeholder="المبلغ المحمّل على العميل"
                     className="h-11 rounded-xl border-2"
                   />
                 )}
@@ -721,7 +721,7 @@ export default function NewTransactionPage() {
               ) : (
                 <>
                   <label className="text-[11px] font-bold text-muted-foreground uppercase">مرجع</label>
-                  <Input value={confirmationNumber} onChange={(e) => setConfirmationNumber(e.target.value)} placeholder="رقم التأكيد..." className="h-10" />
+                  <Input value={confirmationNumber} onChange={(e) => setConfirmationNumber(e.target.value)} placeholder="رقم المرجع..." className="h-10" />
                 </>
               )}
             </div>
@@ -775,7 +775,7 @@ export default function NewTransactionPage() {
             <textarea
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
-              placeholder="مزيد من التفاصيل..."
+              placeholder="ملاحظات إضافية..."
               className="w-full h-20 p-3 rounded-2xl border-2 bg-background focus:border-primary outline-none resize-none shadow-inner"
             />
           </div>
@@ -784,14 +784,14 @@ export default function NewTransactionPage() {
           {(type === "expense" || paymentMethod !== "cash") && (
             <div className="space-y-1">
               <label className="text-xs font-bold text-muted-foreground flex items-center gap-1 uppercase tracking-widest">
-                <Camera className="h-3 w-3" /> {type === "expense" ? "صورة الاستلام" : "مرجع / التصوير الفوتوغرافي"}
+                <Camera className="h-3 w-3" /> {type === "expense" ? "صورة الإيصال" : "إيصال أو مستند"}
               </label>
               <label className={cn(
                 "flex flex-col items-center justify-center w-full h-24 rounded-2xl border-2 border-dashed transition-all cursor-pointer",
                 fileName ? "bg-green-50 border-green-300 text-green-700" : "bg-muted/20 hover:bg-muted/40 text-muted-foreground"
               )}>
                 {fileName ? <Check className="h-6 w-6 mb-1" /> : <Upload className="h-6 w-6 mb-1" />}
-                <span className="font-bold text-sm">{fileName || "انقر لتحميل ملف أو صورة"}</span>
+                <span className="font-bold text-sm">{fileName || "اضغط لرفع صورة أو ملف"}</span>
                 <input type="file" accept="image/*,application/pdf" capture="environment" onChange={handleFileChange} className="hidden" />
               </label>
             </div>
@@ -818,7 +818,7 @@ export default function NewTransactionPage() {
             onClick={handleSubmit}
             disabled={saving}
           >
-            {saving ? "يحمي..." : "استمر في التحرك 🎉"}
+            {saving ? "جاري الحفظ..." : "حفظ الحركة"}
           </Button>
         </div>
       </div>
