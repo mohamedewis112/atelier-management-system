@@ -58,14 +58,14 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-emerald-50 via-white to-slate-100 p-4" dir="rtl">
-      <Card className="w-full max-w-md border-0 shadow-2xl">
+    <div className="min-h-[100dvh] flex items-center justify-center bg-gradient-to-br from-emerald-50 via-white to-slate-100 p-3 sm:p-6" dir="rtl">
+      <Card className="w-full max-w-md border-0 shadow-2xl overflow-hidden">
         <CardHeader className="text-center space-y-3">
-          <div className="mx-auto w-16 h-16 bg-emerald-600 rounded-2xl flex items-center justify-center shadow-lg shadow-emerald-600/20">
-            <span className="text-3xl">👗</span>
+          <div className="mx-auto w-14 h-14 sm:w-16 sm:h-16 bg-emerald-600 rounded-2xl flex items-center justify-center shadow-lg shadow-emerald-600/20">
+            <span className="text-2xl sm:text-3xl">👗</span>
           </div>
           <div>
-            <CardTitle className="text-2xl font-black">نظام إدارة الأتيليه</CardTitle>
+            <CardTitle className="text-xl sm:text-2xl font-black">نظام إدارة الأتيليه</CardTitle>
             <CardDescription className="mt-2">
               إدارة الحجوزات والعملاء والقطع والحسابات من مكان واحد
             </CardDescription>
