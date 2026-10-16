@@ -213,12 +213,12 @@ export default function TransactionsPage() {
 
     try {
       await transactionsApi.delete(transaction.id);
-      toast({ title: "تم بنجاح", description: "تم حذف المعاملة بتم بنجاح" });
+      toast({ title: "تم بنجاح", description: "تم حذف الحركة المالية بنجاح" });
       mutate();
     } catch (error) {
       toast({
         title: "خطأ",
-        description: error instanceof Error ? error.message : "خطأ في حذف المعاملة",
+        description: error instanceof Error ? error.message : "تعذر حذف الحركة المالية",
         variant: "destructive",
       });
     }
@@ -238,9 +238,9 @@ export default function TransactionsPage() {
         <div>
           <h1 className="text-3xl font-bold flex items-center gap-2">
             <Wallet className="h-8 w-8" />
-            التدفق النقدي
+            الحركات المالية
           </h1>
-          <p className="text-muted-foreground">{transactions.length} حركات</p>
+          <p className="text-muted-foreground">{transactions.length} حركة مسجلة</p>
         </div>
         <div className="flex gap-2">
           <Button
@@ -403,7 +403,7 @@ export default function TransactionsPage() {
                   onClick={() => setSelectedCategories([])}
                   className="px-2 py-1.5 text-xs font-bold text-destructive hover:underline"
                 >
-                  تنظيف
+                  مسح التصنيفات
                 </button>
               )}
             </div>
@@ -436,9 +436,9 @@ export default function TransactionsPage() {
                       <td className="p-3">{formatDateShort(transaction.date)}</td>
                       <td className="p-3">
                         {transaction.type === "income" ? (
-                          <span className="badge badge-success">إيراد</span>
+                          <span className="badge badge-success">تسجيل إيراد</span>
                         ) : (
-                          <span className="badge badge-error">مصروف</span>
+                          <span className="badge badge-error">تسجيل مصروف</span>
                         )}
                       </td>
                       <td className="p-3">
@@ -495,7 +495,7 @@ export default function TransactionsPage() {
                           </span>
                           {isPartial && (
                             <span className="text-[9px] text-muted-foreground">
-                              ل {formatCurrency(transaction.amount)}
+                              من أصل {formatCurrency(transaction.amount)}
                             </span>
                           )}
                         </div>
@@ -547,7 +547,7 @@ export default function TransactionsPage() {
             <ChevronRight className="h-4 w-4" /> السابق
           </Button>
           <div className="text-sm text-muted-foreground font-medium">
-            عمود {currentPage} ل {totalPages}
+            صفحة {currentPage} من {totalPages}
           </div>
           <Button
             variant="outline"
@@ -565,7 +565,7 @@ export default function TransactionsPage() {
         transactions.length === 0 && !loading && (
           <div className="text-center py-12">
             <Wallet className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-            <p className="text-muted-foreground">لا شئ حركات للعرض</p>
+            <p className="text-muted-foreground">لا توجد حركات مالية لعرضها.</p>
           </div>
         )
       }
