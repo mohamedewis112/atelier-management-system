@@ -14,8 +14,9 @@
  */
 
 import useSWR from "swr";
+import { useEffect, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
-import { dashboardApi } from "@/lib/api";
+import { authApi, dashboardApi } from "@/lib/api";
 import { formatCurrency } from "@/lib/utils";
 import {
   ShoppingBag,
@@ -48,6 +49,14 @@ interface DashboardData {
 }
 
 export default function DashboardPage() {
+  const [role, setRole] = useState<string>("admin");
+
+  useEffect(() => {
+    authApi.me()
+      .then((response) => setRole(response.data?.user?.role || "sales"))
+      .catch(() => setRole("sales"));
+  }, []);
+
   const { data: summaryRes, error, isLoading: loading } = useSWR(
     "/dashboard/summary",
     () => dashboardApi.summary()
@@ -107,49 +116,52 @@ export default function DashboardPage() {
           </div>
         </Link>
 
-        <div className="grid grid-cols-2 gap-4">
-          <Link
-            href="/dashboard/transactions/new?type=income"
-            className="bg-green-600 p-5 rounded-[2rem] shadow-lg shadow-green-600/20 flex flex-col gap-3 active:scale-[0.98] transition-all"
-          >
-            <div className="bg-white/20 w-fit p-2 rounded-xl">
-              <TrendingUp className="h-6 w-6 text-white" />
-            </div>
-            <div>
-              <h3 className="text-lg font-bold text-white">تسجيل إيراد</h3>
-              <p className="text-white/70 text-xs">إضافة دفعة أو تحصيل جديد</p>
-            </div>
-          </Link>
+        {role !== "sales" && (
+          <div className="grid grid-cols-2 gap-4">
+            <Link
+              href="/dashboard/transactions/new?type=income"
+              className="bg-green-600 p-5 rounded-[2rem] shadow-lg shadow-green-600/20 flex flex-col gap-3 active:scale-[0.98] transition-all"
+            >
+              <div className="bg-white/20 w-fit p-2 rounded-xl">
+                <TrendingUp className="h-6 w-6 text-white" />
+              </div>
+              <div>
+                <h3 className="text-lg font-bold text-white">تسجيل إيراد</h3>
+                <p className="text-white/70 text-xs">إضافة دفعة أو تحصيل جديد</p>
+              </div>
+            </Link>
 
-          <Link
-            href="/dashboard/transactions/new?type=expense"
-            className="bg-red-600 p-5 rounded-[2rem] shadow-lg shadow-red-600/20 flex flex-col gap-3 active:scale-[0.98] transition-all"
-          >
-            <div className="bg-white/20 w-fit p-2 rounded-xl">
-              <TrendingDown className="h-6 w-6 text-white" />
-            </div>
-            <div>
-              <h3 className="text-lg font-bold text-white">تسجيل مصروف</h3>
-              <p className="text-white/70 text-xs">إضافة مصروف جديد</p>
-            </div>
-          </Link>
-        </div>
+            <Link
+              href="/dashboard/transactions/new?type=expense"
+              className="bg-red-600 p-5 rounded-[2rem] shadow-lg shadow-red-600/20 flex flex-col gap-3 active:scale-[0.98] transition-all"
+            >
+              <div className="bg-white/20 w-fit p-2 rounded-xl">
+                <TrendingDown className="h-6 w-6 text-white" />
+              </div>
+              <div>
+                <h3 className="text-lg font-bold text-white">تسجيل مصروف</h3>
+                <p className="text-white/70 text-xs">إضافة مصروف جديد</p>
+              </div>
+            </Link>
+          </div>
+        )}
       </div>
 
       {/* Stats Summary — each card is a navigation link */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {/* Monthly income → Transactions page filtered by current month (no type filter) */}
-        <Link
-          href={`/dashboard/transactions?dateFrom=${getCurrentMonthRange().dateFrom}&dateTo=${getCurrentMonthRange().dateTo}`}
-          className="rounded-[1.5rem] border-none shadow-sm bg-white/50 block transition-all active:scale-[0.97] hover:shadow-md hover:bg-white/80"
-        >
-          <CardContent className="p-5">
-            <p className="text-xs font-bold text-muted-foreground mb-1 uppercase">إيرادات الشهر الحالي</p>
-            <div className="text-xl font-black text-green-600">
-              {formatCurrency(data.financials.monthly.income)}
-            </div>
-          </CardContent>
-        </Link>
+        {role !== "sales" && (
+          <Link
+            href={`/dashboard/transactions?dateFrom=${getCurrentMonthRange().dateFrom}&dateTo=${getCurrentMonthRange().dateTo}`}
+            className="rounded-[1.5rem] border-none shadow-sm bg-white/50 block transition-all active:scale-[0.97] hover:shadow-md hover:bg-white/80"
+          >
+            <CardContent className="p-5">
+              <p className="text-xs font-bold text-muted-foreground mb-1 uppercase">إيرادات الشهر الحالي</p>
+              <div className="text-xl font-black text-green-600">
+                {formatCurrency(data.financials.monthly.income)}
+              </div>
+            </CardContent>
+          </Link>
+        )}
 
         {/* Open orders → Orders page */}
         <Link
