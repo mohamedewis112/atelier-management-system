@@ -1,5 +1,7 @@
 # Atelier Management System
 
+> **About the founder:** [Mohamed Mahmoud Ewis — Portfolio & selected projects](PORTFOLIO.md)
+
 A custom atelier rental and operations management system being developed by **Smart Media** for bridal, formalwear, and clothing-rental businesses.
 
 This repository is public as a development portfolio and technical showcase. The project is being adapted from an MIT-licensed dress-rental ERP base into a workflow designed around real atelier operations.
